@@ -2,7 +2,7 @@
 title: "A Proposed Model for Partial Identification of SARS-CoV2 Infection Rates Given Observed Tests and Cases"
 author: "Robert Kubinec"
 date: "2020-03-28T15:00:00"
-output: html_document
+output: blogdown::html_page
 bibliography: BibTexDatabase.bib
 header:
   title: "A Proposed Model for Partial Identification of SARS-CoV2 Infection Rates Given Observed Tests and Cases"
@@ -48,7 +48,7 @@ Furthermore, by employing insights from SIR models and epidemiologists, we can f
 
 In addition, the model shows that US states that declared states of emergencies earlier than other states have lower infection rates than if they had declared states of emergencies later. However, declaring an early state of emergency has not yet flattened the recent increase spike in infection rates (i.e. flattened the curve), only reduced the overall total of infected people. In other words, if these states had declared states of emergencies later than they did, they might be even worse off than they are now. With these results, the model reveals how we can model suppression policies aimed at the virus with observed data if we make important adjustments to the counts of observed tests and cases. 
 
-The intention of posting this early draft is to share the model with the wider research community as well as to invite feedback on the model. I and several collaborators are collecting data on government responses to the COVID-19 pandemic via the [CoronaNet project](https://lumesserschmidt.github.io/CoronaNet/), and we want to employ this model to see which government responses are most effective. In the absence of academic conferences, I am hoping that posting online will permit me to receive necessary feedback on the model's validity and how to improve it.
+The intention of posting this early draft is to share the model with the wider research community as well as to invite feedback on the model. I and several collaborators are collecting data on government responses to the COVID-19 pandemic via the [CoronaNet project](https://lumesserschmidt.github.io/CoronaNet/), and we want to employ this model to see which government responses are most effective. In the absence of academic conferences, I am hoping that posting online will permit me to recieve necessary feedback on the model's validity and how to improve it.
 
 To reproduce the model and to access the underlying Stan code, please see my [Github page](https://github.com/saudiwin/corona_tscs).
 
