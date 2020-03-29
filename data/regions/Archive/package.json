@@ -1,0 +1,29 @@
+{
+  "name": "country-region-data",
+  "version": "1.4.5",
+  "description": "List of countries, regions, and their shortcodes.",
+  "main": "data.json",
+  "scripts": {
+    "test": "grunt validate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benkeen/country-region-data.git"
+  },
+  "keywords": [
+    "country",
+    "region",
+    "data"
+  ],
+  "author": "Ben Keen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benkeen/country-region-data/issues"
+  },
+  "homepage": "https://github.com/benkeen/country-region-data",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "libumd": "^0.7.0",
+    "underscore": "^1.8.3"
+  }
+}

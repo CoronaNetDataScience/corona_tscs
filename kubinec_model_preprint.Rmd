@@ -1,0 +1,818 @@
+---
+title: "Partial Identification of SARS-CoV2 Infection Rates Given Observed Tests and Cases"
+author: "Robert Kubinec"
+date: "2020-03-28T15:00:00"
+output: pdf_document
+bibliography: BibTexDatabase.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(dplyr)
+require(tidyr)
+require(ggplot2)
+require(rstan)
+require(stringr)
+require(lubridate)
+require(bayesplot)
+require(historydata)
+require(readr)
+require(datasets)
+require(extraDistr)
+
+set.seed(662817)
+
+rstan_options(auto_write=T)
+
+knitr::opts_chunk$set(warning=F,message=F)
+
+# whether to run model (it will take a few hours) or load saved model from disk
+
+run_model <- F
+
+```
+
+
+# Introduction
+
+In recent days as more and more data is available on observed case counts of the SARS-CoV2 coronavirus there are also increasing attempts to infer infection rates from these case counts. Furthermore, policy makers like Deborah Bix have begun to question whether the predictions of epidemiological models are far worse than the observed data.^[See article available at https://www.realclearpolitics.com/video/2020/03/26/dr_birx_coronavirus_data_d] By contrast, in this paper I show that it is impossible to infer the true number of infected people from observed tests and cases alone, although it is possible to infer the effect of suppression policies on the *relative* rates of infectious growth. As a result, the susceptible-infected-recovered (SIR)/susceptible-exposed-infected-recovered (SEIR) approach  [@peak2020;@riou2020;@verity2020;@perkins2020;@lourenco2020;@li2020;@ferguson2020] is the only approach that can provide bounds on the the true number of infected given reasonable assumptions. The intention of this paper is to offer a more limited approach based on modeling empirical data, particularly observed tests and cases, that allows researchers to test for the effect of suppression policies and other region-level factors that is partially identified, i.e. up to an unobserved scaling factor of the true infection rate. Furthermore, by using informed priors from SIR/SEIR models, the estimates presented in this paper can be transformed to reasonable estimates of the actual number of infected persons.
+
+The aim of the much simpler model presented in this paper is to show how inter-country comparisons based on observed case counts and tests can be rank-identified, i.e., we can know how countries' infections compare relative to each other even if we do not know the true number of infected. Given the model's estimates, we can then identify the effect of suppression policies even without knowing the total number of infected by comparing the *rates* of disease progression across regions. 
+
+Furthermore, by employing insights from SIR models and epidemiologists, we can further put bounds on the infection rates to convert them to actual numbers of infected individuals by allowing that the number of tests could be as low as ten percent of the total infected [@li2020;@perkins2020]. Employing this correction, I show that the model provides external validation of the SIR models' assessment that the total number of infected is much higher than the reported number of cases given available empirical data [@li2020;@perkins2020]. In other words, policymakers' skepticism is unfounded if it is based on how many cases have been reported once we condition on the number of tests. To show this, I fit the model to observed cases and test counts among US states and territories while incorporating lower bounds from SIR/SEIR models. This model estimates that the total number of infected people is at least six-seven times higher than the current observed case count of 80,000 individuals according to the New York Times, approaching approximately 700,000 infected individuals with COVID-19 in the United States as of March 27th. Furthermore, this estimate is conservative as it relies on reported data, which necessarily has a time delay as cases and tests are reported.
+
+In addition, the model shows that US states that declared states of emergencies earlier than other states have lower infection rates than if they had declared states of emergencies later. However, declaring an early state of emergency has not yet flattened the recent increase spike in infection rates (i.e. flattened the curve), only reduced the overall total of infected people. In other words, if these states had declared states of emergencies later than they did, they might be even worse off than they are now. With these results, the model reveals how we can model suppression policies aimed at the virus with observed data if we make important adjustments to the counts of observed tests and cases. 
+
+The intention of posting this early draft is to share the model with the wider research community as well as to invite feedback on the model. I and several collaborators are collecting data on government responses to the COVID-19 pandemic via the [CoronaNet project](https://lumesserschmidt.github.io/CoronaNet/), and we want to employ this model to see which government responses are most effective. In the absence of academic conferences, I am hoping that posting online will permit me to recieve necessary feedback on the model's validity and how to improve it.
+
+To reproduce the model and to access the underlying Stan code, please see my [Github page](https://github.com/saudiwin/corona_tscs).
+
+## Model of Empirical COVID-19 Data
+
+In this document I put forward a model for the rate of infected people $I_{ct} \in (0,1)$ in a given country/region $c$ given the the number of cases $a_{ct}$ and the number of tests $q_{ct}$ for all outbreak time periods $t \in T$. The outcome is here defined as the tests and cases reported on a given day rather than the cumulative total for ease of modeling purposes (i.e., the lagged difference of the cumulative total). I assume that $I_{ct}$ is an unobserved Beta-distributed variable with a 3-order polynomial time trend of the number of post-outbreak time periods $T_O < T_A$, where an outbreak begins at the first reported case in a given area. By using a single time function, the model assumes that the coronavirus follows a similar pattern of infection across countries, as appears to be the case (i.e., the virus has not mutated across countries).
+
+The unobserved infection rate $I_{ct}$ is a function of the following parameters:
+
+$$\begin{align}
+Pr(I_{ct}|T=t) \sim Beta(&\alpha_1 + \alpha_c + \beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct'}>0) \forall t' \in t'<t + \textbf{1}\beta_{S1} + \\
+                        &\beta_{I1}t_o + \beta_{I2}t_o^2 + \beta_{I3}t_o^3 + \textbf{1}\beta_{S2},\phi)
+\end{align}$$
+
+Where $g(\cdot)$ is the inverse logit function, $\alpha_c$ are country-level intercepts (less one for identification), $\beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct_a-1}>0) \forall t' \in t'<t$ is the sum of countries with at least one case of infection in the world at any previous time point, and the three $\beta_{Ii}$ are polynomial coefficients of post-outbreak time points $t_o$. The sum of countries parameter measures the spread of the virus due to travel across state borders, and as such will increase rapidly as more states are infected. By contrast, the polynomial time trends represent possible within-state transmission of the virus, which can cause exponentially growing case counts compared to the linear sum of infected countries parameter. Finally, the parameter $\phi$ is a dispersion parameter governing how precise the infection rate estimate is. 
+
+Given these two primary ways that the infection rate can increase, there are two ways that possible suppression measures targeted at the virus can enter the model. The first is a constant factor, $\textbf{1}\beta_{S1}$, which is an indicator function that is equal to **1** if a country has taken suppression measures and **0** otherwise. This constant parameter is meant to capture the ability of countries or regions to stop the spread of transmission due to foreign travelers arriving in the country/region, which occurs at a roughly constant level over time. 
+
+The second way suppression measures enter the model is through $\textbf{1}\beta_{S2}$, which can increase over time as the virus increases. This parameter reflects possible social distancing measures which will grow more effective as domestic transmission of the virus increases (i.e. as the polynomial time trend takes off). As such, it is assumed that any deviation from the common domestic virus transmission pattern is due to these time-varying suppression measures.
+
+Once the outbreak has started in country $c$, which is indicated by a positive case count in time $t-1$, a time counter $t_O=1$ starts for that country and increases by 1 for each following time point until $T$.
+
+Given this specification of the infection rate process, we can then move to the generation of the observed data, tests $q_{ct_a}$ and cases $a_{ct_a}$. The infection rate is assumed to influence both of these numbers. First, an increasing number of infections is associated with more tests as countries try to identify who may have the virus. Furthermore, a rising infection rate is associated with a higher ratio of positive results (reported cases) conditional on the number of tests. I model both of these observed indicators, tests and cases, jointly to simultaneously adjust for the infection rate's influence on both factors.
+
+To model the number of tests, I assume that each country has an unobserved level of testing parameter, $\beta_{cq}>0$, indicating how strongly each country is willing and able to perform tests as a factor of the unobserved infection rate. The number of observed tests $q_{ct}$ for a given time point $t$ and country $c$ is distributed as a Binomial proportion of the countries' population $c_{p}$: 
+
+$$
+q_{ct} \sim B(c_{p},g(\alpha_2 + \beta_{cq}I_{ct}))
+$$
+
+The parameter $\beta_{cq}$ serves to scale the infection rate $I_{ct}$ so that an increasing infection rate has heterogeneous effects on the number of tests by country. The intercept $\alpha_2$ indicates how many tests would be performed in a country with an infection rate of zero. It is assumed that this number is quite low, though not necessarily zero. 
+
+Given the parameter $\beta_{cq}$, a country could test almost no one or test far more than are actually infected depending on their willingness to impose tests. However, the number of tests is increasing in $I_{ct}$ conditional on a country's willingness to test people. That is, regardless of how much a country wants to test people, as the outbreak grows the number of tests will increase though at very different rates.
+
+Given the number of observed tests $q_{ct}$, I can then generate the number of observed cases $a_{ct}$ as a binomial proportion of the number of tests $q_{ct}$:
+
+$$
+a_{ct} \sim B(q_{ct},g(\alpha_3 + \beta_a I_{ct_a})))
+$$
+where $g(\cdot)$ is again the inverse logit function, $\alpha_3$ is an intercept that indicates how many cases would test positive with an infection rate of zero (equal to the false positive rate of the test), and $\beta_a>0$ is a parameter that determines how hard it is to find the infected people and test them as opposed to people who are not actually infected. The multiplication of this parameter and the infection rate determines the observed number of cases $a_{ct}$ as a proportion of the number of observed tests $q_{ct}$. 
+
+To summarize the model, infection rates determine how many tests a country is likely to undertake and also the number of positive tests they receive conditional on a certain number of tests. This simultaneous adjustment helps takes care of mis-interpreting the observed data by not taking into account varying testing rates, which is likely why some policy makers argue that the epidemiological models are wrong.
+
+Because sampling from a model with a hierarchical Beta parameter can be difficult, we can simplify the final likelihood by combining the beta distribution and the binomial counts into a beta-binomial model for tests:
+
+$$
+q_{ct_a} \sim BB(c_p,g(\alpha_2 + \beta_qI_{ct_a}),\phi_q)
+$$
+
+and cases:
+
+$$
+a_{ct_a} \sim BB(q_{ct},g(\alpha_3 + \beta_a I_{ct_a})),\phi_a)
+$$
+
+For estimation purposes, the infection rates $I_{ct}$ are put in to the beta-binomial model on the logit scale instead of transforming them to (0,1), but they can be transformed to proportions post-estimation with the inverse logit function.
+
+# Identification
+
+This model contains an unobserved latent process $I_{ct_a}$, and as such there are further constraints necessary in order to have a unique scale and rotation of the latent variable. First, sign restrictions are put on the suppression measure parameters $\beta_{S1}$ and $\beta_{S2}$ so that they are strictly negative. Second, positivity constraints are put on the parameters $\beta_a$ and $\beta_q$ that govern the relationship between the infection rate and test and case counts. It is assumed that infection rates will increase both the number of tests and the number of cases relative to the number of tests, though at necessarily different rates.
+
+The other important restriction is to fix the intercept for the cases model $\alpha_3$ to a fixed value of 0.1, or -2.2 on the logit scale. The reason for this restriction is because the intercept necessarily equals the false positive rate of a COVID-19 test. While there is still ongoing research as to the false positive rate, it is clear that it is likely in the area of 1 in 10 false positives for rapid tests.^[For a discussion, see https://www.realclearpolitics.com/articles/2020/03/18/the_perils_of_mass_coronavirus_testing_142693.html.] As such, by pinning this value, we can lower-bound the number of cases we are likely to see given an infection rate of zero, providing a helpful lower-bound for the estimate.
+
+As I will show, no other identification restrictions are necessary to estimate the model beyond weakly informative priors assigned to parameters. These are:
+
+$$\begin{align}
+\beta_a &\sim E(.1)\\
+\beta_{qc} &\sim E(\sigma_q)\\
+\sigma_q &\sim E(.1)\\
+\beta_{Si} &\sim N(0,2)\\
+\alpha_c &\sim N(0,3)\\
+\beta_{Ii} &\sim N(0,10)\\
+\alpha_1 &\sim N(0,10)\\
+\alpha_2 &\sim N(0,10)
+\end{align}$$
+
+The one prior to note is that a hierarchical regularizing prior is put on the varying testing adjustment parameters $\beta_{qc}$ for regularization purposes due to the limited data available to inform the parameter.
+
+Other than these weakly informative priors, the model is identified, as I show in the next section. However, it is important to emphasize that there is no information in the model that identifies the *true* number of infected people. Rather, the infection rate is a latent process, and as such it is not known exactly what scale to assign to it without further information. However, both the relative growth in infection rates are identified, along with the effect of suppression measures, so *the model is useful without being fully identified*. Furthermore, by incorporating insights from SIR/SEIR models I can also identify the latent scale with reasonable informative priors, as I show in the data analysis section. The SIR/SEIR models are not "doomsday" predictions but rather rigorous models of the underlying infection process.
+
+# Simulation
+
+Because this model is fully generative, we can simulate it using Monte Carlo methods. The simulation is very important as it is the only way to demonstrate that the model is globally identified and can in fact capture unobserved parameters like suppression effects and relative infection rates. The following R code generates data from the model and plots the resulted unobserved infection rate and observed values for tests and cases:
+
+```{r onset,fig.width=7,fig.height=6}
+
+# simulation parameters
+num_country <- 100
+# unobserved country-level heterogeneity for outbreak onset
+country_int <- c(0,sort(rnorm(num_country-1,0,.25)))
+time_points <- 100
+# allows for linear growth that later becomes explosive
+polynomials <- c(.03,0.007,-0.0001)
+
+# factor that determines how many people a country is willing/able to test
+
+country_test <- rnorm(num_country,5,0.25)
+
+# size of countries
+
+country_pop <- rpois(num_country,10000)
+
+# assumt t=1 is unmodeled = exogenous start of the infection
+  
+t1 <- c(1,rep(0,num_country-1))
+
+# create a suppression coefficient
+# first is for preventing domestic transmission from occuring
+# second is for preventing further domestic transmission once it starts
+
+suppress1 <- -0.8
+suppress2 <- -0.05
+
+# high value of phi = high over-time stability
+phi <- c(300,300)
+
+# countries that suppress or don't suppress
+
+suppress_measures <- as.numeric(runif(num_country)>0.5)
+
+# parameter governing how hard it is to find infected people and test them
+# strictly positive
+
+finding <- 1.5
+
+# recursive function to generate time-series data by country
+
+out_poly <- function(time_pt,end_pt,time_counts,tested,case_count,rate_infected,pr_domestic) {
+  
+  if(time_pt==1) {
+    time_counts <- as.matrix(c(1,rep(0,num_country-1)))
+    rate_infected <- as.matrix(c(.0001,rep(0,num_country-1)))
+    tested <- as.matrix(rep(0,num_country))
+    case_count <- as.matrix(c(1,rep(0,num_country-1)))
+  }
+  
+  # if at time = t infected, start time tracker at t
+  # need to know how many countries have reported at least one case = infection start
+  
+  world_count <- sum(case_count[,time_pt]>0)
+  
+  
+  if(time_pt==1) {
+    
+    rate_infected_new <-  plogis(-5 + time_counts[,time_pt]*polynomials[1] + 
+                                   suppress1*suppress_measures +
+                    suppress2*suppress_measures*time_counts[,time_pt] +
+                    .05*sum(world_count) +
+      (time_counts[,time_pt]^2)*polynomials[2] + 
+        (time_counts[,time_pt]^3)*polynomials[3])
+    
+    # conservative time counter that only starts when first case is recorded
+    
+    time_counts_new <- ifelse(time_counts[,time_pt]>0 | case_count[,time_pt]>0,time_counts[,time_pt]+1,time_counts[,time_pt])
+    
+  } else {
+    
+    rate_infected_new <- plogis(-5 + time_counts[,time_pt]*polynomials[1] + 
+                    suppress1*suppress_measures +
+                    suppress2*suppress_measures*time_counts[,time_pt] +
+                    .05*sum(world_count) +
+      (time_counts[,time_pt]^2)*polynomials[2] + 
+        (time_counts[,time_pt]^3)*polynomials[3])
+    
+    # conservative time counter that only starts when first case is recorded
+    
+    time_counts_new <- ifelse(time_counts[,time_pt]>0 | case_count[,time_pt]>0,time_counts[,time_pt]+1,time_counts[,time_pt])
+  }
+
+  # of these, need to calculated a set number tested
+  mu_test <- plogis(-7 + country_test*rate_infected_new)
+  tested_new <- rbbinom(num_country,country_pop,mu_test*phi,(1-mu_test)*phi)
+  
+  # determine case count as percentage number tested
+  # this is what we always observe
+  mu_case <- plogis(-2.19 + finding*rate_infected_new)
+  case_count_new <- rbbinom(num_country,tested_new,mu_case*phi,(1-mu_case)*phi)
+  
+  
+  if(time_pt<end_pt) {
+    out_poly(time_pt=time_pt+1,
+             end_pt=end_pt,
+             time_counts=cbind(time_counts,
+                               time_counts_new),
+             rate_infected=cbind(rate_infected,rate_infected_new),
+             tested=cbind(tested,tested_new),
+             case_count=cbind(case_count,case_count_new))
+  } else {
+    return(list(time_counts=time_counts,
+                tested=tested,
+                rate_infected=rate_infected,
+                case_count=case_count))
+  }
+  
+}
+
+check1 <- out_poly(1,time_points)
+
+check1 <- lapply(check1, function(c) {
+  colnames(c) <- as.numeric(1:time_points)
+  c
+})
+
+all_out <- bind_rows(list(time_counts=as_tibble(check1$time_counts),
+                          `Proportion Population\nInfected`=as_tibble(check1$rate_infected),
+                          `Number of Cases`=as_tibble(check1$case_count),
+                          `Proportion of Cases from Domestic Transmission`=as_tibble(check1$pr_domestic),
+                          `Number of Tests`=as_tibble(check1$tested)),.id="Series")
+
+all_out$country <- rep(paste0("country_",1:num_country),times=length(check1))
+all_out$suppress_measures <- factor(rep(suppress_measures,times=length(check1)),labels=c("No","Yes"))
+
+all_out %>% 
+  gather(key = "time_id",value="indicator",-Series,-country,-suppress_measures) %>% 
+  mutate(time_id=as.numeric(time_id)) %>% 
+  filter(!(Series %in% c("time_counts"))) %>% 
+  ggplot(aes(y=indicator,x=time_id)) +
+  geom_line(aes(colour=suppress_measures,group=country),alpha=0.3) +
+  xlab("Days Since Outbreak") +
+  ylab("") +
+  ggtitle("Simulation of Observed Tests and Cases Given Unobserved Infectious Process") +
+  facet_wrap(~Series,scales="free_y") +
+  theme(panel.background = element_blank(),
+        panel.grid=element_blank(),
+        strip.background = element_blank(),
+        strip.text = element_text(face="bold"),
+        legend.position = "top")
+
+ggsave("sim_infect.png")
+```
+
+
+The plots above show one line for each country's trajectory from a total of 100 countries and 100 time points. As can be seen, the green lines indicating suppression effects and the red lines indicating no suppression diverge substantially over time. However, the numbers of observed tests and cases show far more random noise due to the difficulty in inferring the true rate from the observed data. It is possible that some countries simply want to test more, and end up with more cases, or that the infection rate is in fact higher. As such, this model is able to incorporate that measurement uncertainty between the true (unobserved) rate and the observed indicators, tests and cases.
+
+The advantage of this model is that it allows for the testing of covariates that affect the true infection rate without requiring more heavy-duty approaches like SEIR/SIR. The intention is to have a more parsimonious model that can see how the effect of variables like suppression measures have on different countries/states infection numbers over time. I am currently collecting this data as part of the CoronaNet project. 
+
+The model could be further extended with more complicated initial infection processes and inter-country transmission processes, such as spatial modeling, but for the purposes of this exposition I do not look further at such extensions. 
+
+# Estimation
+
+I can then fit an empirical model using Stan, a Markov Chain Monte Carlo sampler, to model the unobserved infection rate given the simulated observed data:
+
+```{r stan_code}
+
+# all data from simulation
+# primarily case and test counts
+
+# need to make centered, ortho-normal polynomials
+
+ortho_time <- poly(scale(1:time_points),degree=3)
+
+init_vals <- function() {
+  list(phi1=100,
+       phi2=100)
+}
+
+sim_data <- list(time_all=time_points,
+                 num_country=num_country,
+                 country_pop=country_pop,
+                 cases=check1$case_count,
+                 phi_scale=1/300,
+                 ortho_time=ortho_time,
+                 tests=check1$tested,
+                 count_outbreak=as.numeric(scale(apply(check1$time_counts,2,function(c) sum(c>0)))),
+                 time_outbreak=check1$time_counts,
+                 suppress=suppress_measures)
+
+if(run_model) {
+  
+  pan_model <- stan_model("corona_tscs_betab.stan")
+
+# run model
+
+pan_model_est <- sampling(pan_model,data=sim_data,chains=2,cores=2,iter=1200,warmup=800,init=init_vals)
+
+saveRDS(pan_model_est,"data/pan_model_est.rds")
+} else {
+  pan_model_est <- readRDS("data/pan_model_est.rds")
+}
+
+```
+
+Now we can access the estimated infection rates and plot them:
+
+```{r plot_data}
+
+all_est <- as.data.frame(pan_model_est,"num_infected_high") %>% 
+  mutate(iter=1:n()) %>% 
+  gather(key="variable",value="estimate",-iter) %>% 
+  group_by(variable) %>% 
+  mutate(estimate=plogis(estimate)) %>% 
+  summarize(med_est=quantile(estimate,.5),
+            high_est=quantile(estimate,.95),
+            low_est=quantile(estimate,.05)) %>% 
+  mutate(country_num=as.numeric(str_extract(variable,"(?<=\\[)[1-9][0-9]?0?")),
+         time_point=as.numeric(str_extract(variable,"[1-9][0-9]?0?(?=\\])")))
+
+all_est <- left_join(all_est,tibble(country_num=1:num_country,
+                                    suppress_measures=factor(suppress_measures,labels=c("No","Yes"))),by="country_num")
+
+all_est %>% 
+  ggplot(aes(y=med_est,x=time_point)) +
+  geom_ribbon(aes(ymin=low_est,
+  ymax=high_est,
+  group=country_num,
+  fill=suppress_measures),alpha=0.5) +
+  theme_minimal() +
+  scale_color_brewer(type="div") +
+  ylab("Proportion of Population Infected") +
+  xlab("Days Since Outbreak Start") +
+  theme(panel.grid = element_blank(),
+        legend.position = "top") 
+
+```
+
+
+We see very good recovery of the estimates from the model given the observed data. The estimates disappear near the top of the plot as the true infected rate approaches 100% and there is little variability in the data. This plots shows the 5% - 95% high posterior density interval over time for each country. As can be seen, the suppression effect can be clearly distinguished even with residual uncertainty from not directly observing the infection rate, i.e., "flattening the curve." We also can learn what the effect of the suppression measure is:
+
+```{r suppress_effect}
+
+require(bayesplot)
+
+mcmc_hist(as.array(pan_model_est,c("suppress_effect[1]","suppress_effect[2]")))
+
+```
+
+
+We can see that despite the uncertainty in not perfectly observing the infection rate, we can still get a precise credible interval on the suppression effect. The effect is not the same as the "true" value due to the use of orthonormal polynomials for estimation purposes, but the effect is clearly distinguishable.
+
+The advantage of this model, as can be seen, is that with testing numbers and case counts, we can model the effect of country-level (or region-level) variables on the unseen infection rate up to an unknown constant. It is far simpler than existing approaches while still permitting inference on these hard-to-quantify measures. It is no substitute for infectious disease modeling--for example, it produces no estimates of the susceptible versus recovered individuals in the population, nor death rates--but rather a way to measure the effect of different suppressive and social-distancing measures on disease outcomes as well as approximate disease trajectory.
+
+There is, however, an important caveat to be made. The infection rate here is modeled as a latent variable, and as such the scale is largely determined by the priors. In this simulation we were able to know a priori what the relationship between all the coefficients and the true infection rate is, but in an applied setting, as I discuss next, we will not be able to do so without making further assumptions based on SIR/SEIR models. However, what is important is that the sign and relative rank of suppression covariates is identified *even if the true scale of the latent infection rate is unknown*. 
+
+# Estimation with Data
+
+I am currently in the process of collecting world-wide data to use with this model. To provide some initial empirical findings, in this section I model numbers of COVID-19 case counts on US states and territories provided by [The New York Times](https://github.com/nytimes/covid-19-data). I supplement these observed case counts with testing data by day from the [COVID-19 Tracking Project](https://github.com/COVID19Tracking/covid-tracking-data). The testing data only goes back to March 4th, so we will impute the testing data back in time by assuming that the average case/tests ratio stays the same to the origin of the outbreak (an assumption, of course, but for the purposes of this analysis is acceptable). Furthermore, as there are discrepancies where the reported number of tests in some states like New Jersey is less than the total number of cases, I impute the number of tests via the case/test ratio for the sample as a whole. While more sophisticated imputation strategies may yield more realistic results, along with improved data collection, this minimalist imputation strategy will suffice for this presentation as it represents what data is currently available. If anyone reading this post has more information about available data, I would appreciate if you could let me know [via email](mailto:rmk7@nyu.edu) (or if you have any other thoughts on this draft).
+
+To analyze the effect of suppression policies, I use the list of the dates that states of emergencies were declared across U.S. states and territories from [Wikipedia](https://en.wikipedia.org/wiki/U.S._state_and_local_government_response_to_the_2020_coronavirus_pandemic). The suppression covariate is then equal to a state X 1 vector of days which is mean centered and standardized.
+
+
+In this section I first fit a partially-identified model without any information about the true number of infected people to demonstrate that we can identify the sign and relative rank effect of suppression policies without this information. I then show how we can use insight from SIR/SEIR models to provide bounds on the total number of infected people. 
+
+I first load and munge the data to create the necessary time trends and data format for the model, and then fit it using the same partially-identified model as in the previous section:
+
+```{r munge_data}
+
+data(us_state_populations)
+
+state_pop <- filter(us_state_populations,year==2010) %>% 
+  select(state,population)
+
+merge_names <- tibble(state.abb,
+                      state=state.name)
+
+nyt_data <- read_csv("~/covid-19-data/us-states.csv") %>% 
+  complete(date,state,fill=list(cases=0,deaths=0,fips=0)) %>% 
+  mutate(month_day=ymd(date)) %>% 
+  group_by(state) %>% 
+    arrange(state,date) %>% 
+  mutate(Difference=cases - dplyr::lag(cases),
+         Difference=coalesce(Difference,0,0)) %>% 
+  left_join(merge_names,by="state")
+
+tests <- read_csv("~/covid-tracking-data/data/states_daily_4pm_et.csv") %>% 
+  mutate(month_day=ymd(date)) %>% 
+  arrange(state,month_day) %>% 
+  group_by(state) %>% 
+  mutate(tests_diff=total-dplyr::lag(total),
+         cases_diff=positive-dplyr::lag(positive),
+         cases_diff=coalesce(cases_diff,positive),
+         cases_diff=ifelse(cases_diff<0,0,cases_diff),
+         tests_diff=coalesce(tests_diff,total),
+         tests_diff=ifelse(tests_diff<0,0,tests_diff)) %>% 
+  select(month_day,tests="tests_diff",total,state.abb="state")
+
+# merge cases and tests
+
+combined <- left_join(nyt_data,tests,by=c("state.abb","month_day")) %>% 
+  left_join(state_pop,by="state") %>% 
+  filter(!is.na(population))
+
+# add suppression data
+
+emergency <- read_csv("data/state_emergency_wikipedia.csv") %>% 
+  mutate(day_emergency=dmy(paste0(`State of emergency declared`,"-2020")),
+         mean_day=mean(as.numeric(day_emergency),na.rm=T),
+         sd_day=sd(as.numeric(day_emergency),na.rm=T),
+         day_emergency=((as.numeric(day_emergency) - mean_day)/sd_day)) %>% 
+  select(state="State/territory",day_emergency,mean_day,sd_day) %>% 
+  mutate(state=substr(state,2,nchar(state))) %>% 
+  filter(!is.na(day_emergency))
+
+combined <- left_join(combined,emergency,by="state")
+
+# impute data
+
+combined <- group_by(combined,state) %>% 
+  mutate(test_case_ratio=sum(tests,na.rm=T)/sum(Difference,na.rm=T)) %>% 
+  ungroup %>% 
+  mutate(test_case_ratio=ifelse(test_case_ratio<1 | is.na(test_case_ratio),
+                                mean(test_case_ratio[test_case_ratio>1],na.rm=T),test_case_ratio)) %>% 
+  group_by(state) %>% 
+    mutate(tests=case_when(Difference>0 & is.na(tests)~Difference*test_case_ratio,
+                    Difference==0~0,
+                    Difference>tests~Difference*test_case_ratio,
+                    TRUE~tests)) %>% 
+  arrange(state)
+
+# create case dataset
+
+cases_matrix <- select(combined,Difference,month_day,state) %>% 
+  group_by(month_day,state) %>% 
+  summarize(Difference=as.integer(mean(Difference))) %>% 
+  spread(key = "month_day",value="Difference")
+
+cases_matrix_num <- as.matrix(select(cases_matrix,-state))
+
+# create tests dataset
+
+tests_matrix <- select(combined,tests,month_day,state) %>% 
+  group_by(month_day,state) %>% 
+  summarize(tests=as.integer(mean(tests))) %>% 
+  spread(key = "month_day",value="tests")
+
+tests_matrix_num <- as.matrix(select(tests_matrix,-state))
+
+# need the outbreak matrix
+
+outbreak_matrix <- as.matrix(lapply(1:ncol(cases_matrix_num), function(c) {
+  if(c==1) {
+    outbreak <- as.numeric(cases_matrix_num[,c]>0)
+  } else {
+    outbreak <- as.numeric(apply(cases_matrix_num[,1:c],1,function(col) any(col>0)))
+  }
+  tibble(outbreak)
+}) %>% bind_cols)
+
+colnames(outbreak_matrix) <- colnames(cases_matrix_num)
+
+time_outbreak_matrix <- t(apply(outbreak_matrix,1,cumsum))
+
+just_data <- distinct(combined,state,day_emergency,population) %>% arrange(state)
+
+# now give to Stan
+
+ortho_time <- poly(scale(1:ncol(cases_matrix_num)),degree=3)
+
+real_data <- list(time_all=ncol(cases_matrix_num),
+                 num_country=nrow(cases_matrix_num),
+                 country_pop=floor(just_data$population/100),
+                 cases=cases_matrix_num,
+                 ortho_time=ortho_time,
+                 phi_scale=.1,
+                 count_outbreak=as.numeric(scale(apply(outbreak_matrix,2,sum))),
+                 tests=tests_matrix_num,
+                 time_outbreak=time_outbreak_matrix,
+                 suppress=just_data$day_emergency)
+
+init_vals <- function() {
+  list(phi_raw=c(10,10),
+       world_infect=0,
+       finding=1,
+       alpha=c(0,0))
+}
+
+
+if(run_model) {
+  us_fit <- sampling(pan_model,data=real_data,chains=3,cores=3,iter=1500,warmup=1000,control=list(adapt_delta=0.95),
+                   init=init_vals)
+  
+  saveRDS(us_fit,"data/us_fit.rds")
+} else {
+  us_fit <- readRDS("data/us_fit.rds")
+}
+
+
+```
+
+I can then extract and plot the inferred infection rates by state. It is important to note that these infection rates are on the partially-identified latent scale, as such, they cannot be converted to total numbers of infected people. The only comparison can made between states (i.e., which states have the most infected people and by what proportion relative to other states).
+
+```{r infect_by_state}
+all_est_state <- as.data.frame(us_fit,"num_infected_high") %>% 
+  mutate(iter=1:n()) %>% 
+  gather(key="variable",value="estimate",-iter) %>% 
+  group_by(variable) %>% 
+  mutate(state_num=as.numeric(str_extract(variable,"(?<=\\[)[1-9][0-9]?0?")),
+         time_point=as.numeric(str_extract(variable,"[1-9][0-9]?0?(?=\\])")),
+         time_point=ymd(min(combined$month_day)) + days(time_point-1))
+
+all_est_state <- left_join(all_est_state,tibble(state_num=1:nrow(cases_matrix),
+                                                state=cases_matrix$state,
+                                                state_pop=real_data$country_pop,
+                                    suppress_measures=real_data$suppress,by="state_num"))
+
+# merge in total case count
+
+case_count <- gather(cases_matrix,key="time_point",value="cases",-state) %>% 
+  mutate(time_point=ymd(time_point)) %>% 
+  group_by(state) %>% 
+  arrange(state,time_point) %>% 
+  mutate(cum_sum_cases=cumsum(cases)) 
+
+us_case_count <- group_by(case_count,time_point) %>% 
+  summarize(all_cum_sum=sum(cum_sum_cases))
+
+all_est_state <- left_join(all_est_state,us_case_count,by="time_point")
+
+all_est_state %>% 
+  mutate(estimate=estimate) %>% 
+  group_by(state_num,time_point,suppress_measures) %>% 
+    summarize(med_est=quantile(estimate,.5),
+            high_est=quantile(estimate,.95),
+            low_est=quantile(estimate,.05)) %>% 
+  ggplot(aes(y=med_est,x=time_point)) +
+  geom_line(aes(group=state_num,colour=suppress_measures),alpha=0.5) +
+  stat_smooth() +
+  theme_minimal() +
+  scale_color_distiller(palette="RdBu",direction=-1) +
+  ylab("Latent Infection Scale") +
+  ggtitle("Measuring Relative Infection Rates by U.S. State with Total Average",
+          subtitle="Lines Colored by When State Declared State of Emergency") +
+  labs(caption="As the total number of infected people is unknown, this chart measures the relative\ninfection rates between states.") +
+  xlab("Days Since Outbreak Start") +
+  geom_hline(yintercept = 0,linetype=3) +
+  guides(color=guide_colorbar(title="Timing of State Emergency Declaration")) +
+  theme(panel.grid = element_blank(),
+        legend.position = "top") 
+
+
+all_est_state %>% 
+  mutate(estimate=estimate) %>% 
+  group_by(state_num,time_point,suppress_measures) %>% 
+    summarize(med_est=quantile(estimate,.5),
+            high_est=quantile(estimate,.95),
+            low_est=quantile(estimate,.05)) %>% 
+  ggplot(aes(y=med_est,x=time_point)) +
+  #geom_line(aes(group=state_num,colour=suppress_measures),alpha=0.5) +
+  geom_ribbon(aes(ymin=low_est,
+  ymax=high_est,
+  group=state_num,
+  fill=suppress_measures),alpha=0.5) +
+  stat_smooth() +
+  theme_minimal() +
+  scale_color_distiller(palette="RdBu",direction=-1) +
+  ylab("Latent Infection Scale") +
+  ggtitle("Uncertainty in Relative Infection Rates by U.S. State with Total Average",
+          subtitle="5% - 95% HPD Intervals Colored by When State Declared State of Emergency") +
+  labs(caption="As the total number of infected people is unknown, this chart measures the relative\ninfection rates between states.") +
+  xlab("Days Since Outbreak Start") +
+  geom_hline(yintercept = 0,linetype=3) +
+  guides(fill=guide_colorbar(title="Timing of State Emergency Declaration")) +
+  theme(panel.grid = element_blank(),
+        legend.position = "top")
+ggsave("uncertain_state_rates.png")
+
+```
+
+We can see from this plot that the number of infected people started to increase dramatically about March 1st. It is also clear that the infection rate significantly increased before testing occurred, as the SIR models predicted. 
+
+It would appear that the rate of increase has leveled off in the last week, though that is not a supported inference as the scale is the logit scale, so it is similar to the log scale in that higher numbers are farther away than they appear visually. Because the latent scale is not identified, the model is showing how the infection rates have evolved from zero to the true but unknown top infection rate. As such, it appears to be slowing as it reaches the top of the scale, but that is simply an illusion of logarithmic growth. The infection rate continues to increase in the United States, which will be clearer when I apply a transformation in the next section.
+
+As can be expected, on the whole states with earlier declarations of states of emergency have higher infection rates, which might at first lead us to believe that the declarations are associated with more, rather than fewer, infections. However, as I included a parameter for the declarations, we can estimate what independent effect the timing of the declaration had marginal of the rate of infectious growth.  To really know what the association is between states of emergency and infection rates, we can examine the relevant parameters in the model:
+
+```{r suppress}
+mcmc_hist(us_fit,regex_pars ="suppress")
+```
+
+
+We see that there is a statistically identifiable effect of early state of emergency declarations (`suppress_effect[1]`) on reducing the infection rate with a 5% - 95% high posterior density (HPD) interval of (-3.57,-0.23). However, there does not appear to be a clear over-time effect on the curve of the epidemic (`suppress_effect[2]`), suggesting that these early containment strategies have not yet stopped domestic transmission of the virus. In essence, what the model suggests is that early states of emergencies protected these states from later feedback effects as more neighboring states were also infected by the virus. As a result, even though these states have higher total infection rates, these rates would have been still higher if not for early state of emergency declarations.
+
+It is important to note that this association is just that, an association. It could be that states of emergency declarations are correlated with better public health systems, and that it is in fact the public health system that is doing the work, not the timing of the state of emergency declaration. However, the fine-grained distinctions in terms of the exact day that the state of emergency was announced suggests it is indicative that those states which made early preparations are starting to see some of the results already.
+
+As I have said, the model adjusts observed case counts for the number of test rates reported. We can see which states seem to do more tests per infected person by examining the estimated $\beta_{cq}$ parameters in this plot:
+
+```{r tests_per_infected,fig.height=6}
+
+test_var <- as.data.frame(us_fit,"country_test_raw") %>%
+  mutate(iter=1:n()) %>%
+  gather(key="variable",value="estimate",-iter) %>%
+  mutate(state_num=as.numeric(str_extract(variable,"(?<=\\[)[1-9][0-9]?0?")))
+
+test_var <- left_join(test_var,tibble(state_num=1:nrow(cases_matrix),
+                                                state=cases_matrix$state,
+                                                state_pop=real_data$country_pop,
+                                    suppress_measures=real_data$suppress))
+
+test_var %>%
+  group_by(state) %>%
+    summarize(med_est=quantile(estimate,.5),
+            high_est=quantile(estimate,.95),
+            low_est=quantile(estimate,.05)) %>%
+  ggplot(aes(y=med_est,x=reorder(state,med_est))) +
+  geom_pointrange(aes(ymin=low_est,ymax=high_est)) +
+  theme_minimal() +
+  theme(panel.grid = element_blank()) +
+  coord_flip() +
+  xlab("") +
+  ggtitle("Comparison of States' Testing Rates Relative to Infection Rates",
+          subtitle="Based on Model of Latent COVID-19 Infection Process") +
+  labs(caption = "Only relative differences between states are identified. The raw numbers do not have a
+                  direct interpretation in terms of tests per infected individuals as the total number
+                  of infected individuals is unknown.") +
+  ylab("Proportion Tested Relative to Proportion Infected")
+
+ggsave("testing.png",scale=1.1)
+
+```
+
+This plot shows that the states that are testing way more than their infected populations are actually North Dakota, Alaska and Idaho, likely because these states have yet to see very large numbers of infections. While New York has been implementing many tests, the model does not downweight infection rates considerably even with the increase in testing, implying that the increase in cases in New York is a sign of a growing infection, not just increased tests. On the more worrying side, the model estimates that Maryland, Arizona, Georgia and Delaware may be testing far fewer than are actually infected.
+
+# Identifying the Latent Scale
+
+To show how we can further attempt to identify the scale of the latent variable, instead of only relative differences between states, I show in this section how we can add in information from SEIR/SIR modeling to identify the total number of infected persons in the model. The crucial missing piece of information in the model is the ratio between the proportion of infected persons $I_{ct}$ and the proportion of tests per state population $q_{ct}$:
+
+$$
+\frac{q_{ct}}{I_{ct}}
+$$
+
+Another way of framing the problem is to think of how much the number of tests should increase given a one-percentage increase in the infection rate. How many of these infected people will be tested? Without an idea of the true number of infected people, it is impossible to answer this question and thus identify the latent scale.
+
+However, an increasing number of SIR/SEIR papers show that it is likely that as few as 10% of the total number of infected persons are actually recorded as cases, including in the United States [@li2020;@perkins2020]. This number provides us with a conservative lower bound if we consider that the number of tests should be at least 10% of the total proportion of infected persons. In other words, we can consider adding the following information into the model:
+
+$$
+\frac{q_{ct}}{I_{ct}} >0.1
+$$
+
+Every percentage increase in the infection rate should result in at least a 0.1% increase in the total number of people tested as a percentage of the population. It is difficult to impose this constraint directly in the model; however, we can consider adding it as prior information if we can define a prior density over the ratio. First, for computational simplicity, we can consider a distribution over the log differences of the parameters:
+
+$$
+\text{log} q_{ct} - \text{log} I_{ct}
+$$
+
+By simulating from a uniform distribution of possible rates for $\text{log} q_{ct}$ and $\text{log} I_{ct}$, it is possible to tell that the a realistic distribution of log differences with 0.1 as a lower bound is in fact very close a standard normal distribution:
+
+```{r std_normal}
+
+hist(log(runif(1000,.01,.5)) - log(runif(1000,.01,.5)))
+
+```
+
+We can test whether it is a standard normal by comparing the log densities of different Normal distributions with different standard deviations:
+
+```{r test_norm}
+
+log_diff <- log(runif(1000,.01,.5)) - log(runif(1000,.01,.5))
+
+sum(dnorm(log_diff,0,1,log=T))
+sum(dnorm(log_diff,0,2,log=T))
+sum(dnorm(log_diff,0,0.5,log=T))
+sum(dnorm(log_diff,0,3,log=T))
+
+```
+
+We can see that the standard normal has the highest log density. As such, we can add the following prior to the model to bias the results to an interval between $e^-2$ and $e^2$, or  0.14 and 7.38. The prior density allows for the ratio of tests to infected individuals to be very large, suggesting that infection rates are not as high given increasing numbers of tests, but the rate is unlikely to be lower than 0.1, or 10 percent of the total number of infected. This conservative assumption allows us to use SEIR/SIR model conclusions while still permitting uncertainty over the relationship.
+
+Because the prior is essentially a way to weight the density, I do not need to do a Jacobian adjustment as I would need to if I wanted to back-transform the density.^[For more information on this principle, see Daniel Lakeland's discussion of "masking functions" http://models.street-artists.org/2019/09/04/informative-priors-from-masking/.] For these reasons, I simply add this term to the joint posterior for each time point $t$ and country $c$:
+
+$$
+\text{log} q_{ct} - \text{log} I_{ct} \sim N(0,1)
+$$
+
+I then fit a model to the same United States data with the addition of the informative prior to scale the latent variable:
+
+
+```{r run_over_id_model_scale}
+
+
+if(run_model) {
+  pan_model_scale <- stan_model("corona_tscs_betab_scale.stan")
+  
+  us_fit_scale <- sampling(pan_model_scale,data=real_data,chains=3,cores=3,iter=1500,warmup=1000,
+                           control=list(adapt_delta=0.95),
+                   init=init_vals)
+  
+  saveRDS(us_fit_scale,"data/us_fit_scale.rds")
+} else {
+  us_fit_scale <- readRDS("data/us_fit_scale.rds")
+}
+
+
+```
+
+I then calculate the total number of infected people in the United States by day given this re-scaled latent variable, and compare that to the observed number of cases from the New York Times data:
+
+```{r infect_total_scaled}
+all_est_state <- as.data.frame(us_fit_scale,"num_infected_high") %>% 
+  mutate(iter=1:n()) %>% 
+  gather(key="variable",value="estimate",-iter) %>% 
+  group_by(variable) %>% 
+  mutate(state_num=as.numeric(str_extract(variable,"(?<=\\[)[1-9][0-9]?0?")),
+         time_point=as.numeric(str_extract(variable,"[1-9][0-9]?0?(?=\\])")),
+         time_point=ymd(min(combined$month_day)) + days(time_point-1))
+
+all_est_state <- left_join(all_est_state,tibble(state_num=1:nrow(cases_matrix),
+                                                state=cases_matrix$state,
+                                                state_pop=real_data$country_pop,
+                                    suppress_measures=real_data$suppress,by="state_num"))
+
+# merge in total case count
+
+case_count <- gather(cases_matrix,key="time_point",value="cases",-state) %>% 
+  mutate(time_point=ymd(time_point)) %>% 
+  group_by(state) %>% 
+  arrange(state,time_point) %>% 
+  mutate(cum_sum_cases=cumsum(cases)) 
+
+us_case_count <- group_by(case_count,time_point) %>% 
+  summarize(all_cum_sum=sum(cum_sum_cases))
+
+all_est_state <- left_join(all_est_state,us_case_count,by="time_point")
+
+calc_sum <- all_est_state %>% 
+  ungroup %>% 
+  mutate(estimate=(plogis(estimate)/100)*(state_pop*100)) %>% 
+  group_by(state_num,iter) %>% 
+  arrange(state_num,time_point) %>% 
+  mutate(cum_est=cumsum(estimate)) %>% 
+  group_by(time_point,iter,all_cum_sum) %>% 
+  summarize(us_total=sum(cum_est)) %>% 
+  group_by(time_point,all_cum_sum) %>% 
+  summarize(med_est=quantile(us_total,.5),
+            high_est=quantile(us_total,.95),
+            low_est=quantile(us_total,.05)) 
+
+max_est <- as.integer(round(calc_sum$med_est[calc_sum$time_point==max(calc_sum$time_point)]))
+high_max_est <- as.integer(round(calc_sum$high_est[calc_sum$time_point==max(calc_sum$time_point)]))
+low_max_est <- as.integer(round(calc_sum$low_est[calc_sum$time_point==max(calc_sum$time_point)]))
+max_obs <- calc_sum$all_cum_sum[calc_sum$time_point==max(calc_sum$time_point)]
+
+options(scipen=999)
+
+calc_sum %>% 
+  ggplot(aes(y=med_est,x=time_point)) +
+  geom_ribbon(aes(ymin=low_est,
+  ymax=high_est),
+  fill="blue",
+  alpha=0.5) +
+  geom_line(aes(y=all_cum_sum)) +
+  theme_minimal() +
+  ylab("Total Number Infected/Reported") +
+  scale_y_continuous(labels=scales::comma) +
+  ggtitle("Approximate Total Number of COVID-19 Infected Individuals in the U.S.",
+          subtitle="Blue 5% - 95% HPD Intervals Show Estimated Infected and Black Line Observed Cases") +
+  labs(caption="These estimates are based on the assumption that as few as 10% of cases\nmay be reported based on SIR/SEIR models.") +
+  annotate("text",x=ymd(c("2020-03-26","2020-03-26")),
+           y=c(max_est,max_obs),
+           hjust=1,
+           vjust=0,
+           fontface="bold",
+           size=3,
+           label=c(paste0("Estimated Infected:\n",formatC(low_max_est,big.mark=",",format = "f",digits=0)," - ",
+                                                         formatC(high_max_est,big.mark=",",format = "f",digits=0)),
+                   paste0("Total Reported Cases:\n",formatC(max_obs,big.mark=",")))) +
+  xlab("Days Since Outbreak Start") +
+  theme(panel.grid = element_blank(),
+        legend.position = "top")
+
+ggsave("est_vs_obs.png")
+
+```
+
+
+
+# Conclusion
+
+This model was written to permit the identification of suppression measures targeted at the spread of COVID-19. It is not intended to replace the SIR/SEIR modeling literature, especially as this model relies on SIR/SEIR estimates for full identification. If anything, this modeling exercise shows why SIR/SEIR models are so important: without them it is literally impossible to know the total number of infected people on a given day. This model's simplicity and ability to use empirical data are its main features, and the hope is that it can be used and extended by researchers looking at government policies and other tertiary factors on the spread of the disease. 
+
+To fit the model, it is necessary to have at least an estimate of how many tests have been conducted. I am currently collecting this data and am open to any additional datasets that may be available. I am also involved in a collaboration known as [CoronaNet](https://lumesserschmidt.github.io/CoronaNet/) to collect full information on government responses to the pandemic with the intention of better understanding why governments impose certain policies and what the effect of them can be. 
+
+# Bibliography
+
+
