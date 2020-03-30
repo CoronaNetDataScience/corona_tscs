@@ -166,8 +166,8 @@ real_data <- list(time_all=ncol(cases_matrix_num),
                  suppress=just_data$day_emergency)
 
 init_vals <- function() {
-  list(phi_raw=c(10,10),
-       world_infect=0,
+  list(phi_raw=c(30,10),
+       world_infect=0.5,
        finding=1,
        alpha=c(-5,-5))
 }
@@ -177,7 +177,7 @@ if(run_model) {
   pan_model_scale <- stan_model("corona_tscs_betab_scale.stan")
   
   us_fit_scale <- sampling(pan_model_scale,data=real_data,chains=3,cores=3,iter=1500,warmup=1000,
-                           control=list(adapt_delta=0.95),
+                           control=list(adapt_delta=0.96),
                    init=init_vals)
   
   saveRDS(us_fit_scale,"data/us_fit_scale.rds")
@@ -245,7 +245,7 @@ calc_sum %>%
   scale_y_continuous(labels=scales::comma) +
   ggtitle("Approximate Cumulative Count of COVID-19 Infected Individuals in the U.S.",
           subtitle="Blue 5% - 95% HPD Intervals Show Estimated Infected and Black Line Observed Cases") +
-  labs(caption="These estimates are based on the assumption that as few as 10% of cases\nmay be reported based on SIR/SEIR models. Does not exclude people who may have recovered.") +
+  labs(caption="These estimates are based on the assumption that as few as 10% of cases\nmay be reported based on SIR/SEIR models. Does not exclude people who may have recovered or died.") +
   annotate("text",x=ymd(c("2020-03-26","2020-03-26")),
            y=c(max_est,max_obs),
            hjust=1,
@@ -303,7 +303,7 @@ calc_sum_state %>%
   ylab("Cumulative Count") +
   ggtitle("Average Cumulative Count of Infected People by U.S. State",
           "Some Lines Labeled with Uncertainty of Estimates (5% - 95% Interval)") +
-  labs(caption="These estimates are based on the assumption that as few as 10% of cases\nmay be reported based on SIR/SEIR models. Does not exclude people who may have recovered.") +
+  labs(caption="These estimates are based on the assumption that as few as 10% of cases\nmay be reported based on SIR/SEIR models. Does not exclude people who may have recovered or died.") +
   geom_text_repel(data=top_5,aes(x=time_point,y=med_est,label=label),
                   size=3,fontface="bold",segment.colour = NA) +
   scale_y_continuous(labels=scales::comma) +

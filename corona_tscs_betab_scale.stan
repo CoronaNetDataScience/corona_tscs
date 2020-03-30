@@ -54,7 +54,7 @@ transformed data {
 parameters {
   vector[3] poly; // polinomial function of time
   real<lower=0> finding; // difficulty of identifying infected cases 
-  real world_infect;// infection rate based on number of travelers
+  real<lower=0> world_infect;// infection rate based on number of travelers
   vector<upper=0>[2] suppress_effect; // suppression effect of govt. measures, cannot increase virus transmission rate
   vector<lower=0>[num_country] country_test_raw; // unobserved rate at which countries are willing to test vs. number of infected
   // we assume that as infection rates increase, more tests will be conducted
