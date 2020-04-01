@@ -17,7 +17,9 @@ This repository contains data and code to fit the model described in "A Proposed
  
  2. **corona_tscs_betab_scale.stan**: This Stan model extends the partially-identified model with the 10% lower threshold for tests to infections ratio described in the paper. This model will produce an estimate for `num_infected_high` that when converted with the inverse-logit function will represent the proportion infected in a country conditional on the model's prior concerning the tests to infections ratio.
  
- 3. **kubinec_model_draft.Rmd**: A copy of the paper draft with embedded R code. Because the fitted model objects are too large to put on Github, all Stan models must be re-fit to compile the paper. The process will take approximately 4-5 hours. 
+ 3. **kubinec_model_preprint.Rmd**: A copy of the paper draft with embedded R code. Because the fitted model objects are too large to put on Github, all Stan models must be re-fit to compile the paper. The process will take approximately 2 hours. 
+ 
+ 4. **kubinec_model_SI.Rmd**: This file contains an Rmarkdown file with embedded R code showing how to simulate the model. It is the supplementary information for the paper. See the compiled .pdf version as well.
  
  4. **data**: The data folder contains CSVs of tests and cases for US states that were used to fit the models in the paper. 
  

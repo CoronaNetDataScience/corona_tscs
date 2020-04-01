@@ -33,12 +33,14 @@ knitr::opts_chunk$set(warning=F,message=F)
 
 # whether to run model (it will take a few hours) or load saved model from disk
 
-run_model <- T
+run_model <- F
 
 # update data
 
 system2("git",args=c("-C ~/covid-tracking-data","pull"))
 system2("git",args=c("-C ~/covid-19-data","pull"))
+
+pan_model <- stan_model("corona_tscs_betab_scale.stan")
 
 ```
 
@@ -49,6 +51,29 @@ These daily updates are designed to adjust the reported cases for the United Sta
 The overall trend for the United States as of `r lubridate::today()` is in the chart below. This report is updated daily with the count of cases and tests from the previous data. The shaded region shows uncertainty in how many individuals may be infected.
 
 ```{r munge_data,include=F}
+
+# vote share
+# MIT Election Lab
+load("data/mit_1976-2016-president.rdata")
+
+vote_share <- filter(x,candidate=="Trump, Donald J.",
+                     party=="republican",
+                     writein=="FALSE") %>% 
+  mutate(trump=candidatevotes/totalvotes)
+
+# state GDP
+
+state_gdp <- readxl::read_xlsx("data/qgdpstate0120_0_bea.xlsx",sheet="Table 3") %>% 
+  mutate(gdp=(Q1 + Q2 + Q3 +Q4)/4)
+
+# health data
+
+health <- read_csv("data/2019-Annual.csv") %>% 
+  filter(`Measure Name` %in% c("Air Pollution","Cardiovascular Deaths","Dedicated Health Care Provider",
+                              "Population under 18 years", "Public Health Funding","Smoking")) %>% 
+  select(`Measure Name`,state="State Name",Value) %>% 
+  distinct %>% 
+  spread(key="Measure Name",value="Value")
 
 data(us_state_populations)
 
@@ -61,7 +86,6 @@ merge_names <- tibble(state.abb,
 nyt_data <- read_csv("~/covid-19-data/us-states.csv") %>% 
   complete(date,state,fill=list(cases=0,deaths=0,fips=0)) %>% 
   mutate(month_day=ymd(date)) %>% 
-  filter(state!="Puerto Rico") %>% 
   group_by(state) %>% 
     arrange(state,date) %>% 
   mutate(Difference=cases - dplyr::lag(cases),
@@ -70,8 +94,6 @@ nyt_data <- read_csv("~/covid-19-data/us-states.csv") %>%
 
 tests <- read_csv("~/covid-tracking-data/data/states_daily_4pm_et.csv") %>% 
   mutate(month_day=ymd(date)) %>% 
-  filter(state!="Puerto Rico") %>% 
-  complete(month_day,state) %>% 
   arrange(state,month_day) %>% 
   group_by(state) %>% 
   mutate(tests_diff=total-dplyr::lag(total),
@@ -101,6 +123,12 @@ emergency <- read_csv("data/state_emergency_wikipedia.csv") %>%
 
 combined <- left_join(combined,emergency,by="state")
 
+# add in other datasets 
+
+combined <- left_join(combined,health,by="state")
+combined <- left_join(combined,select(state_gdp,state,gdp),by="state")
+combined <- left_join(combined,select(vote_share,state,trump))
+
 # impute data
 
 combined <- group_by(combined,state) %>% 
@@ -113,7 +141,8 @@ combined <- group_by(combined,state) %>%
                     Difference==0~0,
                     Difference>tests~Difference*test_case_ratio,
                     TRUE~tests)) %>% 
-  arrange(state)
+  arrange(state) %>% 
+  filter(state!="Puerto Rico")
 
 # create case dataset
 
@@ -128,7 +157,7 @@ cases_matrix_num <- as.matrix(select(cases_matrix,-state))
 
 tests_matrix <- select(combined,tests,month_day,state) %>% 
   group_by(month_day,state) %>% 
-  summarize(tests=as.integer(mean(tests,na.rm=T))) %>% 
+  summarize(tests=as.integer(mean(tests))) %>% 
   spread(key = "month_day",value="tests")
 
 tests_matrix_num <- as.matrix(select(tests_matrix,-state))
@@ -148,7 +177,14 @@ colnames(outbreak_matrix) <- colnames(cases_matrix_num)
 
 time_outbreak_matrix <- t(apply(outbreak_matrix,1,cumsum))
 
-just_data <- distinct(combined,state,day_emergency,population) %>% arrange(state)
+just_data <- distinct(select(combined,state,day_emergency,population,trump,air="Air Pollution",
+                      heart="Cardiovascular Deaths",
+                      providers="Dedicated Health Care Provider",
+                      young="Population under 18 years",
+                      smoking="Smoking",
+                      gdp)) %>% arrange(state)
+
+covs <- scale(select(ungroup(just_data),-state,-population) %>% as.matrix)
 
 # now give to Stan
 
@@ -156,6 +192,7 @@ ortho_time <- poly(scale(1:ncol(cases_matrix_num)),degree=3)
 
 real_data <- list(time_all=ncol(cases_matrix_num),
                  num_country=nrow(cases_matrix_num),
+                 S=ncol(covs),
                  country_pop=floor(just_data$population/100),
                  cases=cases_matrix_num,
                  ortho_time=ortho_time,
@@ -163,21 +200,19 @@ real_data <- list(time_all=ncol(cases_matrix_num),
                  count_outbreak=as.numeric(scale(apply(outbreak_matrix,2,sum))),
                  tests=tests_matrix_num,
                  time_outbreak=time_outbreak_matrix,
-                 suppress=just_data$day_emergency)
+                 suppress=covs)
 
 init_vals <- function() {
   list(phi_raw=c(30,10),
        world_infect=0.5,
-       finding=1,
-       alpha=c(-5,-5))
+       finding=0.5,
+       alpha=c(0,-10))
 }
 
 
+
 if(run_model) {
-  pan_model_scale <- stan_model("corona_tscs_betab_scale.stan")
-  
-  us_fit_scale <- sampling(pan_model_scale,data=real_data,chains=3,cores=3,iter=1500,warmup=1000,
-                           control=list(adapt_delta=0.96),
+  us_fit_scale <- sampling(pan_model,data=real_data,chains=3,cores=3,iter=1500,warmup=1000,control=list(adapt_delta=0.95),
                    init=init_vals)
   
   saveRDS(us_fit_scale,"data/us_fit_scale.rds")

@@ -1,12 +1,13 @@
 ---
-title: "Supplementary Information for A Retrospective Bayesian Model for Measuring Policy Impact on Observed Disease Test and Case Counts"
+title: "Supplementary Information for A Retrospective Bayesian Model for Measuring Covariate Effects on Observed COVID-19 Test and Case Counts"
 author: "Robert Kubinec"
-date: "March 30th, 2020"
+date: "April 1st, 2020"
 output: 
   bookdown::pdf_document2:
     includes: 
       in_header:
           preamble.tex
+toc: false
 bibliography: BibTexDatabase.bib
 ---
 
@@ -36,9 +37,9 @@ run_model <- F
 
 ```
 
-## Model of Empirical COVID-19 Data
+# Model of Empirical COVID-19 Data
 
-In this document I put forward a model for the rate of infected people $I_{ct} \in (0,1)$ in a given country/region $c$ given the the number of cases $a_{ct}$ and the number of tests $q_{ct}$ for all outbreak time periods $t \in T$. The outcome is here defined as the tests and cases reported on a given day rather than the cumulative total for ease of modeling purposes (i.e., the lagged difference of the cumulative total). I assume that $I_{ct}$ is an unobserved Beta-distributed variable with a 3-order polynomial time trend of the number of post-outbreak time periods $T_O < T_A$, where an outbreak begins at the first reported case in a given area. By using a single time function, the model assumes that the coronavirus follows a similar pattern of infection across countries, as appears to be the case (i.e., the virus has not mutated across countries).
+In this document I put forward a model for the rate of infected people $I_{ct} \in (0,1)$ in a given country/region $c$ given the the number of cases $a_{ct}$ and the number of tests $q_{ct}$ for all outbreak time periods $t \in T$. The outcome is here defined as the tests and cases reported on a given day rather than the cumulative total for ease of modeling purposes (i.e., the lagged difference of the cumulative total). I assume that $I_{ct}$ is an unobserved Beta-distributed variable with a 3-order polynomial time trend of the number of post-outbreak time periods $T_O < T_A$, where an outbreak begins at the first reported case in a given area. By using a single time function, the model assumes that the coronavirus follows a similar pattern of infection across countries, as appears to be the case (i.e., all countries are infected with the same virus).
 
 The unobserved infection rate $I_{ct}$ is a function of the following parameters:
 
@@ -70,7 +71,7 @@ Given the parameter $\beta_{cq}$, a country could test almost no one or test far
 Given the number of observed tests $q_{ct}$, I can then generate the number of observed cases $a_{ct}$ as a binomial proportion of the number of tests $q_{ct}$:
 
 $$
-a_{ct} \sim B(q_{ct},g(\alpha_3 + \beta_a I_{ct_a})))
+a_{ct} \sim B(q_{ct},g(\alpha_3 + \beta_a I_{ct_a}))
 $$
 where $g(\cdot)$ is again the inverse logit function, $\alpha_3$ is an intercept that indicates how many cases would test positive with an infection rate of zero (equal to the false positive rate of the test), and $\beta_a>0$ is a parameter that determines how hard it is to find the infected people and test them as opposed to people who are not actually infected. The multiplication of this parameter and the infection rate determines the observed number of cases $a_{ct}$ as a proportion of the number of observed tests $q_{ct}$. 
 
@@ -85,7 +86,7 @@ $$
 and cases:
 
 $$
-a_{ct_a} \sim BB(q_{ct},g(\alpha_3 + \beta_a I_{ct_a})),\phi_a)
+a_{ct_a} \sim BB(q_{ct},g(\alpha_3 + \beta_a I_{ct_a}),\phi_a)
 $$
 
 For estimation purposes, the infection rates $I_{ct}$ are put in to the beta-binomial model on the logit scale instead of transforming them to (0,1), but they can be transformed to proportions post-estimation with the inverse logit function.
@@ -365,6 +366,119 @@ We can see that despite the uncertainty in not perfectly observing the infection
 The advantage of this model, as can be seen, is that with testing numbers and case counts, we can model the effect of country-level (or region-level) variables on the unseen infection rate up to an unknown constant. It is far simpler than existing approaches while still permitting inference on these hard-to-quantify measures. It is no substitute for infectious disease modeling--for example, it produces no estimates of the susceptible versus recovered individuals in the population, nor death rates--but rather a way to measure the effect of different suppressive and social-distancing measures on disease outcomes as well as approximate disease trajectory.
 
 There is, however, an important caveat to be made. The infection rate here is modeled as a latent variable, and as such the scale is largely determined by the priors. In this simulation we were able to know a priori what the relationship between all the coefficients and the true infection rate is, but in an applied setting, as I discuss next, we will not be able to do so without making further assumptions based on SIR/SEIR models. However, what is important is that the sign and relative rank of suppression covariates is identified *even if the true scale of the latent infection rate is unknown*. 
+
+# Identifying the Latent Scale
+
+To show how we can further attempt to identify the scale of the latent variable, instead of only relative differences between states, I show in this section how we can add in information from SEIR/SIR modeling to identify the total number of infected persons in the model. The crucial missing piece of information in the model is the ratio between the proportion of infected persons $I_{ct}$ and the proportion of tests per state population $q_{ct}$:
+
+$$
+\frac{q_{ct}}{I_{ct}}
+$$
+
+Another way of framing the problem is to think of how much the number of tests should increase given a one-percentage increase in the infection rate. How many of these infected people will be tested? Without an idea of the true number of infected people, it is impossible to answer this question and thus identify the latent scale.
+
+However, an increasing number of SIR/SEIR papers show that it is likely that as few as 10% of the total number of infected persons are actually recorded as cases, including in the United States [@li2020;@perkins2020]. This number provides us with a conservative lower bound if we consider that the number of tests should be at least 10% of the total proportion of infected persons. In other words, we can consider adding the following information into the model:
+
+$$
+\frac{q_{ct}}{I_{ct}} >0.1
+$$
+
+Every percentage increase in the infection rate should result in at least a 0.1% increase in the total number of people tested as a percentage of the population. It is difficult to impose this constraint directly in the model; however, we can consider adding it as prior information if we can define a prior density over the ratio. First, for computational simplicity, we can consider a distribution over the log differences of the parameters:
+
+$$
+\text{log} q_{ct} - \text{log} I_{ct}
+$$
+
+By simulating from uniform distributions of possible rates for $\text{log} q_{ct}$ and $\text{log} I_{ct}$, it is possible to tell that the a realistic distribution of log differences with 0.1 as a lower bound is in fact very close a standard normal distribution:^[I thank Luiz Max Carvalho for providing this code.]
+
+```{r genlogs}
+
+
+# this code generates a log distribution of a ratio of two probabilities.
+
+f_y <- function(y, a, b, log = FALSE){
+  lc <-  log(b-a)
+  ans <- y  - lc
+  if(!log) ans <- exp(ans)
+  return(ans)
+}
+
+#
+get_Y_var <- function(a, b){
+  EXsq <- ( b*(log(b)^2 - 2*log(b) + 2) -  a*(log(a)^2 - 2*log(a) + 2) )/(b-a)
+  EX <- (b*(log(b) - 1) - a*(log(a) - 1) ) /(b-a)
+  ans <- EXsq - (EX)^2
+  return(ans)
+}
+##
+analytic_W <- function(w, a, b){  ## assumes i.i.d.
+  c0 <- all(w > a/b, w < b/a)
+  k <- (b-a)*(b-a)
+  m <- max(a, a/w)
+  M <- min(b, b/w)
+  soln <- function(L, U) ((U *abs(U))- (L *abs(L)))/(2*k)
+  d0 <- soln(L = m, U = M)
+  dens <- c0 * d0 
+  return(dens)  
+}
+analytic_W <- Vectorize(analytic_W)
+##
+f_z <- function(z, a, b, log = FALSE){
+  ans <- log(analytic_W(exp(z), a, b)) + z
+  if(!log) ans <- exp(ans)
+  return(ans)
+}
+f_z <- Vectorize(f_z)
+###############
+
+M <- 1E6
+a <-  .01
+b <-  .5
+Y <- log(runif(M, min = a, max = b))
+
+#hist(Y, probability = TRUE)
+# curve(f_y(x, a, b), min(Y), max(Y), add = TRUE, lwd = 2)
+# abline(v = c(log(a), log(b)), lwd = 2, lty = 2)
+# integrate(function(x) f_y(x, a, b), log(a), log(b))
+
+###
+
+Y1 <- log(runif(M, min = a, max = b))
+Y2 <- log(runif(M, min = a, max = b))
+
+`Log Difference` <- Y1 - Y2
+
+# integrate(function(x) f_z(x, a, b), log(a)-log(b), log(b)-log(a))
+# integrate(function(x) x^2* f_z(x, a, b), log(a)-log(b), log(b)-log(a))
+# 
+# 2*get_Y_var(a, b)
+# var(`Log Difference`)
+
+# 
+hist(`Log Difference`, breaks = 50, probability = TRUE)
+curve(f_z(x, a, b), min(`Log Difference`), max(`Log Difference`), col = 2, add = TRUE)
+curve(dnorm(x, 0, sqrt(2*get_Y_var(a, b))), min(`Log Difference`), max(`Log Difference`), col = 3, add = TRUE)
+abline(v = c(log(a)-log(b), log(b)-log(a)), lwd = 2, lty = 2)
+
+
+
+```
+
+We can see that the standard normal provides an approximate fit to the density of two probabilities where there is limited density on values below $\text{log} -2$ or 0.14. On the other hand, the prior puts substantial mass on ratios of tests to infected that are quite high, such as $\text{log} 2$, 7.38. This informative prior, which still allows for a range of possible ratios, allows me to use SEIR/SIR model conclusions while still permitting uncertainty over the underlying relationship.
+
+For these reasons, I add this term to the joint posterior for each time point $t$ and country $c$:
+
+$$
+\text{log} q_{ct} - \text{log} I_{ct} \sim N(0,1)
+$$
+
+I also add a log Jacobian adjustment to the posterior density to reflect the fact that this prior is a non-linear function of parameters I have already assigned priors to:
+
+$$
+\text{log} (1 - q_{ct}) + \text{log} (1 - I_{ct})
+$$
+
+The Jacobian adjustment is derived as the joint derivative of the non-linear functions of the underlying parameters, which in this case are the natural log and the inverse logit function. 
 
 # Bibliography
 

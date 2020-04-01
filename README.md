@@ -31,13 +31,18 @@ data.
     country conditional on the model’s prior concerning the tests to
     infections ratio.
 
-3.  **kubinec\_model\_draft.Rmd**: A copy of the paper draft with
+3.  **kubinec\_model\_preprint.Rmd**: A copy of the paper draft with
     embedded R code. Because the fitted model objects are too large to
     put on Github, all Stan models must be re-fit to compile the paper.
-    The process will take approximately 4-5 hours.
+    The process will take approximately 2 hours.
 
-4.  **data**: The data folder contains CSVs of tests and cases for US
+4.  **kubinec\_model\_SI.Rmd**: This file contains an Rmarkdown file
+    with embedded R code showing how to simulate the model. It is the
+    supplementary information for the paper. See the compiled .pdf
+    version as well.
+
+5.  **data**: The data folder contains CSVs of tests and cases for US
     states that were used to fit the models in the paper.
 
-5.  **BibTexDatabase.bib**: This file contains the Bibtex bibliography
+6.  **BibTexDatabase.bib**: This file contains the Bibtex bibliography
     for the paper.

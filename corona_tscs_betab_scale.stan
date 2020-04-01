@@ -2,15 +2,23 @@
 // Robert Kubinec
 // New York University Abu Dhabi
 // March 20, 2020
-
+functions {
+  vector setstep(vector col_var) {
+    
+    vector[rows(col_var)] diff_var = col_var + (max(fabs(col_var)) * sqrt(0.0000007)) - col_var;
+  
+    return diff_var;
+  }
+}
 data {
     int time_all;
     int num_country;
     int cases[num_country,time_all];
     int tests[num_country,time_all];
     int time_outbreak[num_country,time_all];
+    int S; // number of suppression measures
     matrix[time_all,3] ortho_time;
-    vector[num_country] suppress;
+    matrix[num_country,S] suppress;
     vector[time_all] count_outbreak;
     int country_pop[num_country];
     real phi_scale; // prior on how much change there could be in infection rate over time
@@ -55,7 +63,7 @@ parameters {
   vector[3] poly; // polinomial function of time
   real<lower=0> finding; // difficulty of identifying infected cases 
   real<lower=0> world_infect;// infection rate based on number of travelers
-  vector<upper=0>[2] suppress_effect; // suppression effect of govt. measures, cannot increase virus transmission rate
+  row_vector[S] suppress_effect[2]; // suppression effect of govt. measures, cannot increase virus transmission rate
   vector<lower=0>[num_country] country_test_raw; // unobserved rate at which countries are willing to test vs. number of infected
   // we assume that as infection rates increase, more tests will be conducted
   vector[2] alpha; // other intercepts
@@ -75,8 +83,8 @@ transformed parameters {
       num_infected_high[,t] = alpha[2] + country_int + 
                                         time_array[t]*poly + 
                                         world_infect*count_outbreak[t] +
-                                        suppress_effect[1]*suppress + 
-                                        suppress_effect[2]*suppress .* time_outbreak_center[,t];
+                                        (suppress_effect[1]*suppress')' +
+                                        + ((suppress_effect[2]*suppress') .* time_outbreak_center[,t]')';
   }
 
   
@@ -87,9 +95,11 @@ model {
   world_infect ~ normal(0,1);
   alpha ~ normal(0,10); // this can reach extremely low values
   phi ~ exponential(phi_scale);
-  suppress_effect ~ normal(0,2);
+  for(i in 1:2)
+    suppress_effect[i] ~ normal(0,2);
   
-  finding ~ exponential(.1);
+  
+  finding ~ exponential(5);
   country_int_free ~ normal(0,3);
   sigma_test_raw ~ exponential(.1);
   country_test_raw ~ exponential(sigma_test_raw); // more likely near the middle than the ends
@@ -108,9 +118,49 @@ model {
     cases[,t] ~ beta_binomial(tests[,t],mu_cases*phi[2],(1-mu_cases)*phi[2]);
     
     log(mix_prop) - log(mu_tests) ~ std_normal();
+    
+    // jacobian adjustment
+    target += log1m(mix_prop) + log1m(mu_tests);
   
   }
 
   
 }
-
+generated quantities {
+    vector[S] suppress_margin;
+  
+  for(s in 1:S) {
+    
+    matrix[rows(suppress),cols(suppress)] suppress_high = suppress;
+    matrix[rows(suppress),cols(suppress)] suppress_low = suppress;
+    matrix[rows(suppress),rows(count_outbreak)] y_high;
+    matrix[rows(suppress),rows(count_outbreak)] y_low;
+    matrix[rows(suppress),rows(count_outbreak)] y_diff;
+    
+    
+    suppress_high[,s] = suppress[,s] + setstep(suppress[,s]);
+    suppress_low[,s] = suppress[,s] - setstep(suppress[,s]);
+    
+    
+    for(t in 1:time_all) {
+      
+        y_high[,t] =  alpha[2] + country_int + 
+                                        time_array[t]*poly + 
+                                        world_infect*count_outbreak[t] +
+                                        (suppress_effect[1]*suppress_high')' +
+                                        ((suppress_effect[2]*suppress_high') .* time_outbreak_center[,t]')';
+                                        
+        y_low[,t] = alpha[2] + country_int + 
+                                        time_array[t]*poly + 
+                                        world_infect*count_outbreak[t] +
+                                        (suppress_effect[1]*suppress_low')' +
+                                        ((suppress_effect[2]*suppress_low') .* time_outbreak_center[,t]')';
+                                        
+                                        
+        y_diff[,t] = (inv_logit(y_high[,t]) - inv_logit(y_low[,t])) ./ (suppress_high[,s] - suppress_low[,s]);
+      
+    }
+    
+    suppress_margin[s] = mean(to_vector(y_diff));
+  }
+}
