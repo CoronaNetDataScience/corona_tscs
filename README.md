@@ -6,8 +6,9 @@ Robert Kubinec
 ## About This Repository
 
 This repository contains data and code to fit the model described in “A
-Proposed Model for Partial Identification of SARS-CoV2 Infection Rates
-Given Observed Tests and Cases”, link here. The following is a brief
+Retrospective Bayesian Model for Measuring Covariate Effects on Observed
+COVID-19 Test and Case Counts”, [link
+here](https://osf.io/preprints/socarxiv/jp4wk). The following is a brief
 list of the files in the repo relevant to the paper. There are also
 other files in the repo related to the collection of government policy
 data.

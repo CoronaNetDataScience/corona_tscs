@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## About This Repository
 
-This repository contains data and code to fit the model described in "A Proposed Model for Partial Identification of SARS-CoV2 Infection Rates Given Observed Tests and Cases", link here. The following is a brief list of the files in the repo relevant to the paper. There are also other files in the repo related to the collection of government policy data.
+This repository contains data and code to fit the model described in "A Retrospective Bayesian Model for Measuring Covariate Effects on Observed COVID-19 Test and Case Counts", [link here](https://osf.io/preprints/socarxiv/jp4wk). The following is a brief list of the files in the repo relevant to the paper. There are also other files in the repo related to the collection of government policy data.
 
  1. **corona_tscs_betab.stan**: This Stan model contains a partially-identified model of COVID-19 that permits relative distinctions to be made between areas/countries/states' infection rates. The parameter `num_infected_high` indexes the infection rate by time point and country. As the latent process is on the logit scale, it must be converted via the inverse-logit function to a proportion. However, the resulting estimate should not be interpreted as the total infected in a country, but rather a relative ranking of which countries/areas are the most infected up to the current time point.
  
