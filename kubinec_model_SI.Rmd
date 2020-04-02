@@ -37,7 +37,7 @@ run_model <- F
 
 ```
 
-# Model of Empirical COVID-19 Data
+# Materials and Methods
 
 In this document I put forward a model for the rate of infected people $I_{ct} \in (0,1)$ in a given country/region $c$ given the the number of cases $a_{ct}$ and the number of tests $q_{ct}$ for all outbreak time periods $t \in T$. The outcome is here defined as the tests and cases reported on a given day rather than the cumulative total for ease of modeling purposes (i.e., the lagged difference of the cumulative total). I assume that $I_{ct}$ is an unobserved Beta-distributed variable with a 3-order polynomial time trend of the number of post-outbreak time periods $T_O < T_A$, where an outbreak begins at the first reported case in a given area. By using a single time function, the model assumes that the coronavirus follows a similar pattern of infection across countries, as appears to be the case (i.e., all countries are infected with the same virus).
 
@@ -60,9 +60,9 @@ Given this specification of the infection rate process, we can then move to the 
 
 To model the number of tests, I assume that each country has an unobserved level of testing parameter, $\beta_{cq}>0$, indicating how strongly each country is willing and able to perform tests as a factor of the unobserved infection rate. The number of observed tests $q_{ct}$ for a given time point $t$ and country $c$ is distributed as a Binomial proportion of the countries' population $c_{p}$: 
 
-$$
+\begin{equation}
 q_{ct} \sim B(c_{p},g(\alpha_2 + \beta_{cq}I_{ct}))
-$$
+\end{equation}
 
 The parameter $\beta_{cq}$ serves to scale the infection rate $I_{ct}$ so that an increasing infection rate has heterogeneous effects on the number of tests by country. The intercept $\alpha_2$ indicates how many tests would be performed in a country with an infection rate of zero. It is assumed that this number is quite low, though not necessarily zero. 
 
@@ -70,28 +70,29 @@ Given the parameter $\beta_{cq}$, a country could test almost no one or test far
 
 Given the number of observed tests $q_{ct}$, I can then generate the number of observed cases $a_{ct}$ as a binomial proportion of the number of tests $q_{ct}$:
 
-$$
+\begin{equation}
 a_{ct} \sim B(q_{ct},g(\alpha_3 + \beta_a I_{ct_a}))
-$$
+\end{equation}
+
 where $g(\cdot)$ is again the inverse logit function, $\alpha_3$ is an intercept that indicates how many cases would test positive with an infection rate of zero (equal to the false positive rate of the test), and $\beta_a>0$ is a parameter that determines how hard it is to find the infected people and test them as opposed to people who are not actually infected. The multiplication of this parameter and the infection rate determines the observed number of cases $a_{ct}$ as a proportion of the number of observed tests $q_{ct}$. 
 
 To summarize the model, infection rates determine how many tests a country is likely to undertake and also the number of positive tests they receive conditional on a certain number of tests. This simultaneous adjustment helps takes care of mis-interpreting the observed data by not taking into account varying testing rates, which is likely why some policy makers argue that the epidemiological models are wrong.
 
 Because sampling from a model with a hierarchical Beta parameter can be difficult, we can simplify the final likelihood by combining the beta distribution and the binomial counts into a beta-binomial model for tests:
 
-$$
+\begin{equation}
 q_{ct_a} \sim BB(c_p,g(\alpha_2 + \beta_qI_{ct_a}),\phi_q)
-$$
+\end{equation}
 
 and cases:
 
-$$
+\begin{equation}
 a_{ct_a} \sim BB(q_{ct},g(\alpha_3 + \beta_a I_{ct_a}),\phi_a)
-$$
+\end{equation}
 
 For estimation purposes, the infection rates $I_{ct}$ are put in to the beta-binomial model on the logit scale instead of transforming them to (0,1), but they can be transformed to proportions post-estimation with the inverse logit function.
 
-# Identification
+## Identification
 
 This model contains an unobserved latent process $I_{ct_a}$, and as such there are further constraints necessary in order to have a unique scale and rotation of the latent variable. First, sign restrictions are put on the suppression measure parameters $\beta_{S1}$ and $\beta_{S2}$ so that they are strictly negative. Second, positivity constraints are put on the parameters $\beta_a$ and $\beta_q$ that govern the relationship between the infection rate and test and case counts. It is assumed that infection rates will increase both the number of tests and the number of cases relative to the number of tests, though at necessarily different rates.
 
@@ -114,11 +115,11 @@ The one prior to note is that a hierarchical regularizing prior is put on the va
 
 Other than these weakly informative priors, the model is identified, as I show in the next section. However, it is important to emphasize that there is no information in the model that identifies the *true* number of infected people. Rather, the infection rate is a latent process, and as such it is not known exactly what scale to assign to it without further information. However, both the relative growth in infection rates are identified, along with the effect of suppression measures, so *the model is useful without being fully identified*. Furthermore, by incorporating insights from SIR/SEIR models I can also identify the latent scale with reasonable informative priors, as I show in the data analysis section. The SIR/SEIR models are not "doomsday" predictions but rather rigorous models of the underlying infection process.
 
-# Simulation
+## Simulation
 
 Because this model is fully generative, we can simulate it using Monte Carlo methods. The simulation is very important as it is the only way to demonstrate that the model is globally identified and can in fact capture unobserved parameters like suppression effects and relative infection rates. The following R code generates data from the model and plots the resulted unobserved infection rate and observed values for tests and cases:
 
-```{r onset,fig.width=7,fig.height=6}
+```{r onset,fig.width=7,fig.height=6,fig.cap="Simulation of Observed Tests and Cases Given Unobserved Infectious Process"}
 
 # simulation parameters
 num_country <- 100
@@ -254,25 +255,22 @@ all_out %>%
   geom_line(aes(colour=suppress_measures,group=country),alpha=0.3) +
   xlab("Days Since Outbreak") +
   ylab("") +
-  ggtitle("Simulation of Observed Tests and Cases Given Unobserved Infectious Process") +
   facet_wrap(~Series,scales="free_y") +
   theme(panel.background = element_blank(),
         panel.grid=element_blank(),
         strip.background = element_blank(),
         strip.text = element_text(face="bold"),
         legend.position = "top")
-
-ggsave("sim_infect.png")
 ```
 
 
-The plots above show one line for each country's trajectory from a total of 100 countries and 100 time points. As can be seen, the green lines indicating suppression effects and the red lines indicating no suppression diverge substantially over time. However, the numbers of observed tests and cases show far more random noise due to the difficulty in inferring the true rate from the observed data. It is possible that some countries simply want to test more, and end up with more cases, or that the infection rate is in fact higher. As such, this model is able to incorporate that measurement uncertainty between the true (unobserved) rate and the observed indicators, tests and cases.
+Figure \@ref(fig:onset) shows one line for each country's trajectory from a total of 100 countries and 100 time points. As can be seen, the green lines indicating suppression effects and the red lines indicating no suppression diverge substantially over time. However, the numbers of observed tests and cases show far more random noise due to the difficulty in inferring the true rate from the observed data. It is possible that some countries simply want to test more, and end up with more cases, or that the infection rate is in fact higher. As such, this model is able to incorporate that measurement uncertainty between the true (unobserved) rate and the observed indicators, tests and cases.
 
 The advantage of this model is that it allows for the testing of covariates that affect the true infection rate without requiring more heavy-duty approaches like SEIR/SIR. The intention is to have a more parsimonious model that can see how the effect of variables like suppression measures have on different countries/states infection numbers over time. I am currently collecting this data as part of the CoronaNet project. 
 
 The model could be further extended with more complicated initial infection processes and inter-country transmission processes, such as spatial modeling, but for the purposes of this exposition I do not look further at such extensions. 
 
-# Estimation
+## Estimation
 
 I can then fit an empirical model using Stan, a Markov Chain Monte Carlo sampler, to model the unobserved infection rate given the simulated observed data:
 
@@ -316,9 +314,9 @@ saveRDS(pan_model_est,"data/pan_model_est.rds")
 
 ```
 
-Now we can access the estimated infection rates and plot them:
+Now I can access the estimated infection rates and plot them:
 
-```{r plot_data}
+```{r plotdata,fig.cap="Estimated Simulated Infection Rates"}
 
 all_est <- as.data.frame(pan_model_est,"num_infected_high") %>% 
   mutate(iter=1:n()) %>% 
@@ -350,9 +348,9 @@ all_est %>%
 ```
 
 
-We see very good recovery of the estimates from the model given the observed data. The estimates disappear near the top of the plot as the true infected rate approaches 100% and there is little variability in the data. This plots shows the 5% - 95% high posterior density interval over time for each country. As can be seen, the suppression effect can be clearly distinguished even with residual uncertainty from not directly observing the infection rate, i.e., "flattening the curve." We also can learn what the effect of the suppression measure is:
+We see very good recovery of the estimates from the model given the observed data in Figure \@ref(fig:plotdata). The estimates disappear near the top of the plot as the true infected rate approaches 100% and there is little variability in the data. This plots shows the 5% - 95% high posterior density interval over time for each country. As can be seen, the suppression effect can be clearly distinguished even with residual uncertainty from not directly observing the infection rate, i.e., "flattening the curve." We also can learn what the effect of the suppression measure is:
 
-```{r suppress_effect}
+```{r suppeff,fig.cap="Recovered Simulated Virus Suppression Parameters"}
 
 require(bayesplot)
 
@@ -361,7 +359,7 @@ mcmc_hist(as.array(pan_model_est,c("suppress_effect[1]","suppress_effect[2]")))
 ```
 
 
-We can see that despite the uncertainty in not perfectly observing the infection rate, we can still get a precise credible interval on the suppression effect. The effect is not the same as the "true" value due to the use of orthonormal polynomials for estimation purposes, but the effect is clearly distinguishable.
+We can see in Figure \@ref(fig:suppeff) despite the uncertainty in not perfectly observing the infection rate, we can still get a precise credible interval on the suppression effect. The effect is not the same as the "true" value due to the use of orthonormal polynomials for estimation purposes, but the effect is clearly distinguishable.
 
 The advantage of this model, as can be seen, is that with testing numbers and case counts, we can model the effect of country-level (or region-level) variables on the unseen infection rate up to an unknown constant. It is far simpler than existing approaches while still permitting inference on these hard-to-quantify measures. It is no substitute for infectious disease modeling--for example, it produces no estimates of the susceptible versus recovered individuals in the population, nor death rates--but rather a way to measure the effect of different suppressive and social-distancing measures on disease outcomes as well as approximate disease trajectory.
 
@@ -371,27 +369,27 @@ There is, however, an important caveat to be made. The infection rate here is mo
 
 To show how we can further attempt to identify the scale of the latent variable, instead of only relative differences between states, I show in this section how we can add in information from SEIR/SIR modeling to identify the total number of infected persons in the model. The crucial missing piece of information in the model is the ratio between the proportion of infected persons $I_{ct}$ and the proportion of tests per state population $q_{ct}$:
 
-$$
+\begin{equation}
 \frac{q_{ct}}{I_{ct}}
-$$
+\end{equation}
 
 Another way of framing the problem is to think of how much the number of tests should increase given a one-percentage increase in the infection rate. How many of these infected people will be tested? Without an idea of the true number of infected people, it is impossible to answer this question and thus identify the latent scale.
 
-However, an increasing number of SIR/SEIR papers show that it is likely that as few as 10% of the total number of infected persons are actually recorded as cases, including in the United States [@li2020;@perkins2020]. This number provides us with a conservative lower bound if we consider that the number of tests should be at least 10% of the total proportion of infected persons. In other words, we can consider adding the following information into the model:
+However, an increasing number of SIR/SEIR papers show that it is likely that as few as 10% of the total number of infected persons are actually recorded as cases, including in the United States. This number provides us with a conservative lower bound if we consider that the number of tests should be at least 10% of the total proportion of infected persons. In other words, we can consider adding the following information into the model:
 
-$$
+\begin{equation}
 \frac{q_{ct}}{I_{ct}} >0.1
-$$
+\end{equation}
 
 Every percentage increase in the infection rate should result in at least a 0.1% increase in the total number of people tested as a percentage of the population. It is difficult to impose this constraint directly in the model; however, we can consider adding it as prior information if we can define a prior density over the ratio. First, for computational simplicity, we can consider a distribution over the log differences of the parameters:
 
-$$
+\begin{equation}
 \text{log} q_{ct} - \text{log} I_{ct}
-$$
+\end{equation}
 
 By simulating from uniform distributions of possible rates for $\text{log} q_{ct}$ and $\text{log} I_{ct}$, it is possible to tell that the a realistic distribution of log differences with 0.1 as a lower bound is in fact very close a standard normal distribution:^[I thank Luiz Max Carvalho for providing this code.]
 
-```{r genlogs}
+```{r genlogs,fig.cap="Distribution of Log Difference in Probabilities"}
 
 
 # this code generates a log distribution of a ratio of two probabilities.
@@ -464,22 +462,20 @@ abline(v = c(log(a)-log(b), log(b)-log(a)), lwd = 2, lty = 2)
 
 ```
 
-We can see that the standard normal provides an approximate fit to the density of two probabilities where there is limited density on values below $\text{log} -2$ or 0.14. On the other hand, the prior puts substantial mass on ratios of tests to infected that are quite high, such as $\text{log} 2$, 7.38. This informative prior, which still allows for a range of possible ratios, allows me to use SEIR/SIR model conclusions while still permitting uncertainty over the underlying relationship.
+We can see in Figure \@ref(fig:genlogs) that the standard normal provides an approximate fit to the density of two probabilities where there is limited density on values below $\text{log} -2$ or 0.14. On the other hand, the prior puts substantial mass on ratios of tests to infected that are quite high, such as $\text{log} 2$, 7.38. This informative prior, which still allows for a range of possible ratios, allows me to use SEIR/SIR model conclusions while still permitting uncertainty over the underlying relationship.
 
 For these reasons, I add this term to the joint posterior for each time point $t$ and country $c$:
 
-$$
+\begin{equation}
 \text{log} q_{ct} - \text{log} I_{ct} \sim N(0,1)
-$$
+\end{equation}
 
 I also add a log Jacobian adjustment to the posterior density to reflect the fact that this prior is a non-linear function of parameters I have already assigned priors to:
 
-$$
+\begin{equation}
 \text{log} (1 - q_{ct}) + \text{log} (1 - I_{ct})
-$$
+\end{equation}
 
 The Jacobian adjustment is derived as the joint derivative of the non-linear functions of the underlying parameters, which in this case are the natural log and the inverse logit function. 
-
-# Bibliography
 
 
