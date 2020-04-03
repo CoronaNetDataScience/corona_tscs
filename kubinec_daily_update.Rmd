@@ -33,7 +33,7 @@ knitr::opts_chunk$set(warning=F,message=F)
 
 # whether to run model (it will take a few hours) or load saved model from disk
 
-run_model <- F
+run_model <- T
 
 # update data
 

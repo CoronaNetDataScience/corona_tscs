@@ -1,0 +1,23 @@
+Qualtrics.SurveyEngine.addOnload(function()
+{
+	/*Place your JavaScript here to run when the page loads*/
+
+});
+
+  
+  Qualtrics.SurveyEngine.addOnload(function() {
+    jQuery("#"+this.questionId+" td.c4 input").flatpickr({
+           enableTime: false,
+       dateFormat: "m-d-Y",
+       minDate: "12-31-2019"
+    });
+});
+});										  
+Qualtrics.SurveyEngine.addOnUnload(function()
+{
+	/*Place your JavaScript here to run when the page is unloaded*/
+
+});
+
+
+ 

@@ -1,0 +1,36 @@
+Qualtrics.SurveyEngine.addOnload(function() {
+    /*Place your JavaScript here to run when the page loads*/
+
+
+    var questionId = this.questionId;
+    var that = this;
+    jQuery("#"+questionId+" .QuestionText").append("<br><button id='Select1'>Select All</button>");
+
+    jQuery('#Select1').click(function() {
+        for (var i = 1; i < 197; i++) {
+            that.setChoiceValue(i, true);
+        }
+    });
+	
+	   jQuery("#"+questionId+" .QuestionText").append("<br><button id='Select2'>Deselect All</button>");
+
+    jQuery('#Select2').click(function() {
+        for (var i = 1; i < 197; i++) {
+            that.setChoiceValue(i, false);
+        }
+    });
+
+});
+
+
+Qualtrics.SurveyEngine.addOnReady(function()
+{
+	/*Place your JavaScript here to run when the page is fully displayed*/
+
+});
+
+Qualtrics.SurveyEngine.addOnUnload(function()
+{
+	/*Place your JavaScript here to run when the page is unloaded*/
+
+});
