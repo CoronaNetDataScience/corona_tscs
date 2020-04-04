@@ -1,7 +1,7 @@
 # This code merges the country and region data from the geonames website together 
 # It then subsets the data to just the COW countries from the countrycode R package and adds Hong Kong and Macau 
 
-if(Sys.info['username'] == 'cindycheng'){
+if(Sys.info()['user'] == 'cindycheng'){
 	pathData = "/Users/cindycheng/Dropbox/corona-govt-response/Data"}
 
 # -----------------------------
@@ -12,7 +12,7 @@ library(tidyr)
 library(stringr)
 library(magrittr)
 library(countrycode)
-
+ 
 
 # -----------------------------
 # Clean region data
@@ -64,7 +64,8 @@ names(country)[1] = 'ISO2'
 # merge region and country data
 country_regions = merge(country, regions, by = 'ISO2', all = TRUE) 
 country_regions = country_regions[order(country_regions$Country, country_regions$region_name_clean),]
- 
+
+
 # reshape 
 country_regions = country_regions[,c('Country', 'region_number', 'region_name_clean', 'ISO2')] %>% spread(region_number, region_name_clean)
 

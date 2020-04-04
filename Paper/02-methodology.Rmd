@@ -1,4 +1,4 @@
-# Methdology
+# Methodology
 
 The collection of the dataset was crowdsourced by X research assistants (RAs)^[For more information on the individual RAs, please visit http://website_name.com ]  from March 28, 2020 to XX XX, 2020, without whom this dataset would not exist, and who are still making ongoing efforts to collecting real-time data on government COVID-19 policy actions. Each RA is responsible for tracking government policy actions for at least one country. RAs were allocated depending on their background, language skills and expressed interest in certain countries.^[Note depending on the level of policy coordination at the national level, certain countries were assigned multiple RAs, e.g. the United States. For a comprehensive list of which RAs were assigned to which country, please see the Appendix.]
 
@@ -54,17 +54,11 @@ Once an RA joins the project, they can pose their questions on the CoronaNet Sla
 
 Lastly, we take the following steps in order to validate the quality of the resulting data collected:
 
-First, the PIs and other trained RAs validate the initial 10 entries for each new RA to ensure that RAs were entering the data in a consistent manner and when necessary, to provide feedback to RAs. Note, we require RAs (using the forced response option in Qualtrics) to upload a .pdf of the source(s) they used to code a particular policy which increases the efficiency of the validation process. 
+1. First, we sample X % of the dataset, using the source of the data (e.g. newspaper article, government press release) as our unit of randomization, to validate. We use the source as our unit of randomization because one source may detail many different policy types.
 
-Second, 10\% of newly coded data by RAs who have already had at least 10 entries validated (see above) is sampled every day to check the validity of the data. Given the amount of data generated, we validate every survey response for 5\% (that is half of the overall 10\%) data. Meanwhile for the second 5\% of the data, we check whether the following dimensions are correctly documented:
+2. Then we then provide these sources to  RAs and ask them to code for the government policy based on these sources in a separate, but virtually identical survey instrument. If the source is in a language the RA cannot read, then a new source is drawn.
 
-+ The raw, qualitative description of the event
-+ The policy initiator
-+ The policy type
-+ The geographic policy target, if applicable
-+ The date the policy was implemented
-
-If an RA was found to have made a mistake, then we  sample 5 entries which correspond to the type of mistake made (e.g. if the RA incorrectly codes an 'External Border Restriction' as a 'Quarantine', we sample 5 entries where the RA has coded a policy as being about a 'Quarantine') and randomly sample 5 more entries, to ascertain whether the mistake was systematic in nature or not. 
+3. We then check for discrepancies between the originally coded data and the second coding of the data in terms of both the number of policies coded and the content of what is coded. If there are no discrepancies, then we consider the data valid. If an RA was found to have made a mistake, then we  sample X entries which correspond to the type of mistake made (e.g. if the RA incorrectly codes an 'External Border Restriction' as a 'Quarantine', we sample 5 entries where the RA has coded a policy as being about a 'Quarantine') and randomly sample X more entries, to ascertain whether the mistake was systematic in nature or not. 
 
 Our validation checks reveal that [...]
 
