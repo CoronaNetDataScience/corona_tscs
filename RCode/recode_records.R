@@ -4,7 +4,7 @@
 
 
 # note RA Adrianna Poppe did not enter in the record id for her correction to 9008490; doing it for her here
-qualtrics[which(qualtrics$entry_type_2_TEXT == 'https://bogota.gov.co/mi-ciudad/salud/decreto-081-de-alerta-amarilla-por-coronavirus-en-bogota'), 'entry_type_2_TEXT'] = 9008490
+qualtrics[which(qualtrics$entry_type_2_TEXT == 'https://bogota.gov.co/mi-ciudad/salud/decreto-081-de-alerta-amarilla-por-coronavirus-en-bogota'), 'entry_type_2_TEXT'] = "9008490"
 
 # RA Cheng-Hao Shen unncessarily chose other and NA category for target_who_what but otherwise the record is correct  
 qualtrics[which(qualtrics$target_who_what_10_TEXT == "N/A"), c('target_who_what', 'target_who_what_10_TEXT')] = ""
@@ -19,7 +19,7 @@ qualtrics[which(qualtrics$target_other == "this travel ban regards towards gover
 
 # the following code loads his corrections and incorporates them
 
-niklas_sources = read_csv(paste0(pathData, '/niklasSourcesCorrection_corrected.csv'))
+niklas_sources = read_csv(paste0(pathData, '/CoronaNet/niklasSourcesCorrection_corrected.csv'))
 niklas_sources = niklas_sources[-1,] # remove first row where i had given him a description of the columns
 qualtrics[which(qualtrics$record_id %in% niklas_sources$record_id), c('sources_matrix_1_1', 'sources_matrix_2_1')]  = niklas_sources[, c('correct_date_1', 'correct_date_2')]
 

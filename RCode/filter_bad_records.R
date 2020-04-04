@@ -37,4 +37,5 @@ qualtrics = mutate(qualtrics,
                                         record_id %in% c('3548864', '9939713', '933728', '9523505')~FALSE,
                                         # this entry clearly wrong, remove, validate/fix later
                                         target_who_what_10_TEXT %in% c("Tests","Facilities were meant to increase testing capacity",
-                                                                       "Also foreign residents")~FALSE))
+                                                                       "Also foreign residents")~FALSE,
+                                        TRUE~TRUE))

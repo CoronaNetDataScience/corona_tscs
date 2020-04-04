@@ -150,8 +150,7 @@ qualtrics$policy_id = ifelse(
   qualtrics$record_id
 )
 
-saveRDS(qualtrics,"data/qualtrics_clean_wide.rds")
-
+# after here there are errors
 
 # rename variables ----------------------------------
 
@@ -255,6 +254,8 @@ qualtrics$target_country[grepl('Other',  qualtrics$target_country)]
 # !!! NOTE  haven't done this yet, should do this at some point
 qualtrics[which(qualtrics$target_region == "Other Regions (please specify below)"), 'target_region_14_TEXT']
 
+
+saveRDS(qualtrics,"data/qualtrics_wide_clean.rds")
 
 # add in additional rows for target areas as needed ----------------------------------
 #
