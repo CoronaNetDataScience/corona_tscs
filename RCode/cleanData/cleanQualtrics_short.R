@@ -579,5 +579,5 @@ qualtrics[which(
 
 # save clean file ---------------
 
-save(qualtrics,
+saveRDS(qualtrics,
      file = paste0(pathData, "/coronaNet/coranaNetData_clean.rds"))

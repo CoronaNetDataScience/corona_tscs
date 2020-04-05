@@ -1,0 +1,249 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={CoronaNet Working Paper},
+  pdfauthor={Cindy Cheng\^{}\{1,*\}; Joan Barcelo\^{}2; Allison Hartnett\^{}3; Robert Kubinec\^{}2; Luca Messerschmidt\^{}1},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{tikzit}
+\input{basic_oval.tikzstyles}
+\linespread{1.6}
+
+\title{CoronaNet Working Paper}
+\author{Cindy Cheng\(^{1,*}\) \and Joan Barcelo\(^2\) \and Allison Hartnett\(^3\) \and Robert Kubinec\(^2\) \and Luca Messerschmidt\(^1\)}
+\date{4/5/2020}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We have an amazing dataset.\footnote{Technical University of Munich} \footnote{New York University Abu Dhabi} \footnote{Yale University} * Corresponding Author: \href{mailto:cindy.cheng@hfp.tum.de}{\nolinkurl{cindy.cheng@hfp.tum.de}}
+\end{abstract}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+The CoronaNet COVID-19 Government Response Tracker Database provides fine-grained, dyadic data on policy actions taken by governments across the world since the Chinese government reported the COVID-19 outbreak on December 31, 2019. The dataset presented here covers all policy actions for X number of countries up until XX XX, 2020, for a total of YY number of events.\footnote{Our data collection efforts are still ongoing. For the most current, up to date version of the dataset, please visit \url{http://website_name.com}}
+
+The rapid and devastating spread of the coronavirus has put in stark relief the previously invisible connections among different countries and people. Our dataset illuminates a countervailing kind of network --- it documents not only what actions governments have taken against COVID-19, but how these actions have targeted other geographical regions and the people and resources within them over time. The data, which is publicly available, will allow us to understand among other things, how the effectiveness of different government policies may vary over time or depending on policy actions taken by other governments.
+
+More specifically, the CoronaNet database collects data on government policy actions taken against the coronavirus across the following dimensions and tracks them over time:
+
+\begin{itemize}
+\tightlist
+\item
+  The type of government policy implemented (e.g.~quarantine, closure of schools {[}15 total{]} )
+\item
+  The level of government initiating the action (e.g.~national, provincial, municipal etc.)
+\item
+  The geographical target of the policy action, if applicable (e.g.~national, provincial, municipal etc.)
+\item
+  The human or material target of the policy action, if applicable (e.g.~travlers, ventilators)
+\item
+  The directionality of the policy action, if applicable (e.g., inbound, outbound, both)
+\item
+  The mechanism of travel that the policy action targets, if applicable (e.g.~flights, trains)
+\item
+  The compliance with the policy action (e.g.~mandatory, volulntary)
+\item
+  The timing of the policy action (e.g.~date announced, date implemented)
+\end{itemize}
+
+In what follows, we describe in greater detail the methodology we employed to collect this data, a description of the data, and an application of the data {[}\ldots.{]} For more information on the exact variables collected, please reference the codebook in the appendix.
+
+\hypertarget{methodology}{%
+\section{Methodology}\label{methodology}}
+
+The collection of the dataset was crowdsourced by X research assistants (RAs)\footnote{For more information on the individual RAs, please visit \url{http://website_name.com} } from March 28, 2020 to XX XX, 2020, without whom this dataset would not exist, and who are still making ongoing efforts to collecting real-time data on government COVID-19 policy actions. Each RA is responsible for tracking government policy actions for at least one country. RAs were allocated depending on their background, language skills and expressed interest in certain countries.\footnote{Note depending on the level of policy coordination at the national level, certain countries were assigned multiple RAs, e.g.~the United States. For a comprehensive list of which RAs were assigned to which country, please see the Appendix.}
+
+As researchers learn more about the various health, economic, and social effects of the corona-virus pandemic, it is crucial that they have access to both reliable, valid, and timely data. We have adopted the following data collection methodology to ensure the availability of such data as rapidly as possible while still maintaining high standards of quality at every stage of the data collection process.
+
+\hypertarget{data-collection-software-instrument}{%
+\subsection{Data Collection Software Instrument}\label{data-collection-software-instrument}}
+
+To streamline the CoronaNet data collection effort, we designed a Qualtrics survey with survey questions about different aspects of a government policy action. With this tool, RAs can easily and efficiently document different policy actions by answering the relevant questions posed in the survey. For example, instead of entering the country that initiated a policy action into a spreadsheet, RAs answer the following question in the survey: ``From what country does this policy originate from?'' and choose from the available options given in the survey.
+
+By using a survey instrument to collect data, we are able to systemetize the collection of very fine-grained data. The value of this approach of course, depends on the comprehensiveness of the questions posed in the survey, especially in terms of the universe of policy actions that countries have implemented against COVID-19. For example, if the survey only allowed RAs to select `qurantines' as a government policy, it would not capture any data on external border restrictions, which would seriously reduce the value of the resulting data.
+
+As such, to ensure the comprehensiveness of the data, before designing the survey, one of the PIs collected in depth, over-time data on policy actions taken by one country, Taiwan, since the beginning of the outbreak as well as cross-national data on travel bans implemented by most countries for a total of more than 450 events.\footnote{The specific data source the PI cross referenced for this effort was the March 20, 2020 version of the following New York Times article Salcedo, Andrea and Gina Cherelus, ``Coronavirus Travel Restrictions, Across the Globe'' \emph{New York Times}, 20 March 2020, \url{https://www.nytimes.com/article/coronavirus-travel-restrictions.html}} We chose to focus on Taiwan on because of its relative success, as of March 28, 2020, in limiting the negative health consequences of the coronavirus within its borders.\footnote{Beech, Hannah. ``Tracking the Coronavirus: How Crowded Asian Cities Tackled an Epidemic.'' \emph{New York Times} 18 March 2020 \url{https://www.nytimes.com/2020/03/17/world/asia/coronavirus-singapore-hong-kong-taiwan.html}} As such, it seems likely that other countries may choose to emulate some of the policy measures that Taiwan had implemented, which helps increase the comprehensiveness of the questions we ask in our survey. Meanwhile, by also investigating variation in how different countries around the world have implemented travel restrictions, we have also helped ensure that our survey is able to comprehensively document variation in how an important and commonly used policy tool is applied, e.g.~restrictions of different methods of travel (e.g.~flights, cruises), restrictions across borders and within borders, restrictions targeted toward people of different status (e.g.~citizens, travelers). As a last step, the team also consulted the ACAPS COVID-19: Government Measures Dataset\footnote{\url{https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset}} to validate the comprehensiveness of the policy measures considered in the survey instrument.
+
+To further address concerns about the comprehensiveness of our data, the survey instrument also allows for a degree of flexibility in learning about new policies that we might not have considered when designing the survey with the use of text entry fields that allows RAs to choose `Other' categories that. To date, X\% of the the data has been coded as `Other' suggesting that {[}\ldots.{]}. Please see the descriptive statistics in the Data section for more information.
+
+There are many additional benefits of using a survey instrument for data collection, especially in terms of ensuring the reliability and validity of the resulting the data:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  First, we reduce the likelihood of unforced measurement error. Because RAs can only document one policy action at a time in a given iteration of a survey and do not have access to the full spreadsheet when they are entering in the data, they are prevented from entering data into incorrect fields or unknowingly overwriting existing data, as would be possible with manual data entry into a spreadsheet.
+\item
+  For another, we are able to ensure that RAs can only choose among standardized responses to the survey questions, which increases the reliability of the data and also reduces the likelihood of measurement error. For example, when RAs choose different dates that we would like them to document (e.g., the date a policy was announced) they are forced to choose from a calendar embedded into the survey which systemizes the day, month and year format that the date is recorded in.
+\item
+  Moreover, we also reduce measurement error by coding in different conditional logics for when certain survey questions are posed, which obviates the occurence of logical fallacies in our data. For example, we are able to avoid a situations where an RA might accidentally code the United States as having closed all schools in another country.
+\item
+  Meanwhile, by using the forced response option in Qualtrics, we are also able to reduce the amount of missing data in the dataset. Where there is truly missing data due, there is a text entry at the end of the survey where RAs can describe what difficulties they encountered in collecting information for a particular policy event.
+\item
+  We also increase the reliability of the documentation for each policy by embedding descriptions of different possible responses within the survey. For example, in the survey question where RAs are asked to identify the policy type (`type' variable, see Codebook), the survey question includes pop-up buttons which allow RAs to easily get descriptions and examples of each possible policy type. Such pop-up buttons were also made availble for the survey questions which code for the people or materials a policy was targed at (`target\_who\_what') and whether the policy was inbound, outbound or both (`target\_direction'). Embedding such information in the dataset both clarifies the distinction between different answer choices and increases the efficiency of the policy documentation process (as RAs are not obliged to refer back and forth from the survey to the codebook).
+\item
+  Finally, the use of a survey instrument allows us to easily link policy events together over time should there be updates to existing policies. Once coded, each policy is given a unique Record ID, which RAs can easily look up, reference and link to if they need to update a particular policy.
+\end{enumerate}
+
+\hypertarget{ra-training}{%
+\subsection{RA Training}\label{ra-training}}
+
+All RAs watch a mandatory 50 minute video training of the survey instrument which explains how to use the survey instrument. RAs are also provided with written guidelines on how to collect data and a comprehensive codebook. While both of these documents are availble in the Appendix, to briefly describe it here, the written guidelines provide a definition of what counts as a new or updated policy and provides a checklist for RAs to follow in order to identify and document different policies. In the checklist, RAs are instructed to check the data sources in the order given in the guidelines to identify policies, to document the relevant information into the survey and to save and upload a .pdf of the source they found to document each policy into Qualtrics. The codebook meanwhile provides provides descriptions and examples of the different possible response options in the survey. Using a training video and the written codebook also has the added benefit of helping us efficiently disseminate the information RAs need to use the survey experiment consistently.
+
+In order to participate as an RA in this project, RAs must fill out the CoronaNet Research Assistant Form\footnote{\url{https://docs.google.com/forms/d/e/1FAIpQLSeybAW0DC0UE1x2EqLiTifVFuSUxqJLGFB8VI4wVCG61tVYKg/viewform}} in which:
+
+\begin{itemize}
+\tightlist
+\item
+  They identify themselves.
+\item
+  They certify that they have viewed the training video in which we explain how to use the survey instrument.
+\item
+  They certify they have joined the CoronaNet Slack Channel (see section below for more information).
+\item
+  They certify that they understand that RA responsibilities entail
+\item
+  gathering historical data on COVID-19 government policy actions for my country, and;
+\item
+  providing daily updates for new government policy actions.
+\item
+  They certify that they understand they can access the data collection guidlines and codebook or pose their questions on the Slack Channel should they have any questions.
+\item
+  They certify that they are expected to upload .pdfs of the sources they access to the survey instrument.
+\end{itemize}
+
+Once the RA submits the form, they are sent a personalized link to access the survey. With the customized link, we are also able to keep track of which RA coded what entries.
+
+\hypertarget{real-time-communication-and-feedback}{%
+\subsection{Real-Time Communication and Feedback}\label{real-time-communication-and-feedback}}
+
+Once an RA joins the project, they can pose their questions on the CoronaNet Slack \#ra-chat channel, which they must join in order to participate in the project. The channel allows any RA to pose a question or issue they may have in using the survey instrument to any of the PIs and allows all other RAs to learn from the exchange at the same time. As such, RAs are able to receive feedback and learn from each other's questions in a timely and centralized manner.
+
+\hypertarget{post-data-collection-validation-checks}{%
+\subsection{Post-Data Collection Validation Checks}\label{post-data-collection-validation-checks}}
+
+Lastly, we take the following steps in order to validate the quality of the resulting data collected:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  First, we sample X \% of the dataset, using the source of the data (e.g.~newspaper article, government press release) as our unit of randomization, to validate. We use the source as our unit of randomization because one source may detail many different policy types.
+\item
+  Then we then provide these sources to RAs and ask them to code for the government policy based on these sources in a separate, but virtually identical survey instrument. If the source is in a language the RA cannot read, then a new source is drawn.
+\item
+  We then check for discrepancies between the originally coded data and the second coding of the data in terms of both the number of policies coded and the content of what is coded. If there are no discrepancies, then we consider the data valid. If an RA was found to have made a mistake, then we sample X entries which correspond to the type of mistake made (e.g.~if the RA incorrectly codes an `External Border Restriction' as a `Quarantine', we sample 5 entries where the RA has coded a policy as being about a `Quarantine') and randomly sample X more entries, to ascertain whether the mistake was systematic in nature or not.
+\end{enumerate}
+
+Our validation checks reveal that {[}\ldots{]}
+
+\hypertarget{dataset}{%
+\section{Dataset}\label{dataset}}
+
+Here we present some descriptive statistics to illustrate the type of data that the CoronaNet project is able to provide {[}\ldots{]}
+
+Of the XX events in the dataset, we have identified YY unique events. That is, some events in the database are updates or changes to existing policies. We link such events overtime using a unique ID (`record\_id'). An event counts as an update if it deals with a change in either the:
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\tightlist
+\item
+  Time duration or\footnote{An example of (1) is if Germany lengthens its quarantine to 28 days from 14 day.}
+\item
+  Strength of an existing policy in terms of either\footnote{Examples with regards to (2) is if Germany changes the stringency of an existing quarantine such that: (a) people can no longer leave their houses to go to work whereas before they could (b) the quarantine used to be voluntary but now its mandatory (c) the quarantine used to apply to everyone and now it only applies to the elderly.}
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  the nature of the policy
+\item
+  compliance rules for the policy
+\item
+  who the policy applies towards, if applicable.
+\end{enumerate}
+
+A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g.~policy type, targeted country.
+
+\hypertarget{tba-indices}{%
+\section{(TBA) Indices}\label{tba-indices}}
+
+\hypertarget{application-of-the-datatsetindices}{%
+\section{Application of the datatset/indices}\label{application-of-the-datatsetindices}}
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+\hypertarget{appendix}{%
+\section*{Appendix}\label{appendix}}
+\addcontentsline{toc}{section}{Appendix}
+
+\hypertarget{codebook}{%
+\subsection*{Codebook}\label{codebook}}
+\addcontentsline{toc}{subsection}{Codebook}
+
+\end{document}

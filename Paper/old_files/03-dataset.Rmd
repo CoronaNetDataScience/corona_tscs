@@ -1,0 +1,13 @@
+# Dataset
+
+Here we present some descriptive statistics to illustrate the type of data that the CoronaNet project is able to provide [...]
+
+Of the XX events in the dataset, we have identified YY unique events. That is, some events in the database are updates or changes to existing policies. We link such events overtime using a unique ID ('record_id'). An event counts as an update if it deals with a change in either the:
+
+(1) Time duration or^[An example of (1) is if Germany lengthens its quarantine to 28 days from 14 day.]
+(2) Strength of an existing policy in terms of either^[Examples with regards to (2) is if Germany changes the stringency of an existing quarantine such that: (a) people can no longer leave their houses to go to work whereas before they could (b) the quarantine used to be voluntary but now its mandatory (c) the quarantine used to apply to everyone and now it only applies to the elderly.] 
+(a) the nature of the policy 
+(b) compliance rules for the policy 
+(c) who the policy applies towards, if applicable.
+
+A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g. policy type, targeted country.
