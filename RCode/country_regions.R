@@ -2,7 +2,7 @@
 # It then subsets the data to just the COW countries from the countrycode R package and adds Hong Kong and Macau 
 
 if(Sys.info()['user'] == 'cindycheng'){
-	pathData = "/Users/cindycheng/Dropbox/corona-govt-response/Data"}
+	pathData = "/Users/cindycheng/Dropbox/corona_tscs/data"}
 
 # -----------------------------
 # Load packages
@@ -96,6 +96,15 @@ country_regions_clean = rbind(country_regions_clean, add_countries)
 country_regions_clean$Country = as.character(country_regions_clean$Country)
 country_regions_clean = country_regions_clean[order(country_regions_clean$Country),]
  
+
+# replace philippines regions with provinces
+	# RA Cheng-Hao Shen rightly pointed out that the proper administrative unit for the Phillipines is as follows
+
+philippines = read.csv(paste0(pathData, '/regions/List of Provinces of the Philippines.csv'), stringsAsFactors = FALSE, header = FALSE)
+
+
+country_regions_clean[which(country_regions_clean$Country == 'Philippines'),-c(1,2)] = c(philippines$V1, NA, NA)
+
 
 write.csv(country_regions_clean , file = paste0(pathData, '/regions/country_region_clean.csv'), row.names = FALSE, na= "") 
 
