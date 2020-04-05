@@ -15,7 +15,9 @@ jQuery('body').on('click','.ui-widget-overlay',function(){ jQuery("[id='dialog2'
 jQuery("[id='dialog3']" ).dialog({ autoOpen: false});
 jQuery('body').on('click','.ui-widget-overlay',function(){ jQuery("[id='dialog3']").dialog('close'); });
 	
-
+jQuery("[id='dialog3']" ).dialog({ autoOpen: false});
+jQuery('body').on('click','.ui-widget-overlay',function(){ jQuery("[id='dialog3']").dialog('close'); });
+	
 jQuery( "#btn1" ).click(function() {
 jQuery("#dialog1").dialog( "option", "modal", true );
 jQuery("#dialog1").dialog( "open" );

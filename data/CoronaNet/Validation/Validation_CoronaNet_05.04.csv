@@ -1,0 +1,2918 @@
+StartDate,EndDate,Status,IPAddress,Progress,Duration (in seconds),Finished,RecordedDate,ResponseId,RecipientLastName,RecipientFirstName,RecipientEmail,ExternalReference,LocationLatitude,LocationLongitude,DistributionChannel,UserLanguage,ra_name,entry_type,entry_type_3_TEXT,entry_type_4_TEXT,event_description,type,type_15_TEXT,type_quarantine,type_quarantine_4_TEXT,type_quarantine_5_TEXT,type_quarantine_days,type_ext_restrict,type_mass_gathering,type_schools,type_business,type_business_6_TEXT,type_health_resource,type_health_resource_1_TEXT,type_health_resource_2_TEXT,type_health_resource_3_TEXT,type_health_resource_13_TEXT,type_health_resource_4_TEXT,type_health_resource_5_TEXT,type_health_resource_6_TEXT,type_health_resource_7_TEXT,type_health_resource_8_TEXT,type_health_resource_15_TEXT,type_health_resource_9_TEXT,type_health_resource_10_TEXT,type_health_resource_11_TEXT,type_health_resource_17_TEXT,type_other,init_country,init_country_level,588_init_province,589_init_province,590_init_province,591_init_province,592_init_province,593_init_province,594_init_province,595_init_province,596_init_province,597_init_province,598_init_province,599_init_province,600_init_province,601_init_province,602_init_province,603_init_province,604_init_province,605_init_province,606_init_province,607_init_province,608_init_province,609_init_province,610_init_province,611_init_province,612_init_province,613_init_province,614_init_province,615_init_province,616_init_province,617_init_province,618_init_province,619_init_province,620_init_province,621_init_province,622_init_province,623_init_province,624_init_province,625_init_province,626_init_province,627_init_province,628_init_province,629_init_province,630_init_province,631_init_province,632_init_province,633_init_province,634_init_province,635_init_province,636_init_province,637_init_province,638_init_province,639_init_province,640_init_province,641_init_province,642_init_province,643_init_province,644_init_province,645_init_province,646_init_province,647_init_province,648_init_province,649_init_province,650_init_province,651_init_province,652_init_province,653_init_province,654_init_province,655_init_province,656_init_province,657_init_province,658_init_province,659_init_province,660_init_province,661_init_province,662_init_province,663_init_province,664_init_province,665_init_province,666_init_province,667_init_province,668_init_province,669_init_province,670_init_province,671_init_province,672_init_province,673_init_province,674_init_province,675_init_province,676_init_province,677_init_province,678_init_province,679_init_province,680_init_province,681_init_province,682_init_province,683_init_province,684_init_province,685_init_province,686_init_province,687_init_province,688_init_province,689_init_province,690_init_province,691_init_province,692_init_province,693_init_province,694_init_province,695_init_province,696_init_province,697_init_province,698_init_province,699_init_province,700_init_province,701_init_province,702_init_province,703_init_province,704_init_province,705_init_province,706_init_province,707_init_province,708_init_province,709_init_province,710_init_province,711_init_province,712_init_province,713_init_province,714_init_province,715_init_province,716_init_province,717_init_province,718_init_province,719_init_province,720_init_province,721_init_province,722_init_province,723_init_province,724_init_province,725_init_province,726_init_province,727_init_province,728_init_province,729_init_province,730_init_province,731_init_province,732_init_province,733_init_province,734_init_province,735_init_province,736_init_province,737_init_province,738_init_province,739_init_province,740_init_province,741_init_province,742_init_province,743_init_province,744_init_province,745_init_province,746_init_province,747_init_province,748_init_province,749_init_province,750_init_province,751_init_province,752_init_province,753_init_province,754_init_province,755_init_province,756_init_province,757_init_province,758_init_province,759_init_province,760_init_province,761_init_province,762_init_province,763_init_province,764_init_province,765_init_province,766_init_province,767_init_province,768_init_province,769_init_province,770_init_province,771_init_province,772_init_province,773_init_province,774_init_province,775_init_province,776_init_province,777_init_province,778_init_province,779_init_province,780_init_province,781_init_province,782_init_province,783_init_province,784_init_province,init_city,init_other_level,init_other,target_geog_level,target_country,target_region,target_region_14_TEXT,target_country_sub,target_geog_sublevel,target_province,target_city,target_other,target_who_what,target_who_what_10_TEXT,target_direction,travel_mechanism,travel_mechanism_9_TEXT,compliance,compliance_3_TEXT,enforcer,enforcer_7_TEXT,date_announced,date_start,date_end,sources_matrix_1_1,sources_matrix_1_2,sources_matrix_1_3,sources_matrix_1_4,sources_matrix_2_1,sources_matrix_2_2,sources_matrix_2_3,sources_matrix_2_4,sources_matrix_3_1,sources_matrix_3_2,sources_matrix_3_3,sources_matrix_3_4,sources_matrix_4_1,sources_matrix_4_2,sources_matrix_4_3,sources_matrix_4_4,sources_matrix_5_1,sources_matrix_5_2,sources_matrix_5_3,sources_matrix_5_4,sources_matrix_6_1,sources_matrix_6_2,sources_matrix_6_3,sources_matrix_6_4,sources_matrix_7_1,sources_matrix_7_2,sources_matrix_7_3,sources_matrix_7_4,sources_matrix_8_1,sources_matrix_8_2,sources_matrix_8_3,sources_matrix_8_4,sources_matrix_9_1,sources_matrix_9_2,sources_matrix_9_3,sources_matrix_9_4,sources_matrix_10_1,sources_matrix_10_2,sources_matrix_10_3,sources_matrix_10_4,source_file_Id,source_file_Name,source_file_Size,source_file_Type,notes,record_id,ra_check,check
+Start Date,End Date,Response Type,IP Address,Progress,Duration (in seconds),Finished,Recorded Date,Response ID,Recipient Last Name,Recipient First Name,Recipient Email,External Data Reference,Location Latitude,Location Longitude,Distribution Channel,User Language,"Please select your name from the drop-down list. If you are not on the list and believe you should be, please contact one of the PIs listed above.","This is a validation entry. 
+
+Please enter the records ID in the following text entry ID from this list of database entries. - Selected Choice","This is a validation entry. 
+
+Please enter the records ID in the following text entry ID from this list of database entries. - Validate an Existing Entry (type in Record ID in text box) - Text","This is a validation entry. 
+
+Please enter the records ID in the following text entry ID from this list of database entries. - Reconciliate an Existing Entry (type in Record ID in text box) - Text","Please provide a description of the government policy you are documenting in the text box below. This will be very important as (1) this data forms the raw basis for categorizing different parts of the policy and (2) it can help others quickly understand what the nature of the policy is about so please take your time in entering an thorough but succinct description.   
+Please try to include the following information in the description:
+
+
+	The name of the country from which a policy originates
+	The date the policy is supposed to take effect
+	Information about the 'type' of policy (see buttons below)
+	If applicable, the country or region that a policy is targeted towards
+	If applicable, the type of people or resources a policy is targeted towards
+	If applicable, when a policy is slated to end
+
+
+Where possible:
+
+
+	Copy and paste exact language used for each policy type variable; when necessary, make the language more succinct.
+	However, if a particular policy applies to multiple targets, keep the original language.
+
+
+Example: India “is enforcing a two-week quarantine on all passengers, including Indian nationals arriving from or having visited China, Italy, Iran, Republic of Korea, France, Spain and Germany after Feb. 15.” --- Keep this sentence as is and don’t extract different target countries for each entry. Note that there is no information on when the policy is slated to end. For more examples of how you should enter into the description, please click on the buttons in the question below and look at the examples for each policy type.","Please select the appropriate policy category. For a description and example of each policy category, please click on the relevant cateogry below. 
+
+ 
+
+
+    
+
+
+
+Declaration of Emergency
+
+ 
+  
+   Description    
+
+
+   The head of government declares a state of national emergency.    
+
+
+   
+
+
+   Example
+
+
+   On March 15, 2020, in South Africa: “President  Ramaphosa announces national state of disaster”
+  
+ 
+
+
+
+
+
+
+Quarantine
+
+ 
+  
+   Description    
+
+
+   Targets of the policy are obliged to quarantine or shelter in place for at least 14 days.    
+
+
+   
+
+
+   Example
+
+
+   On March 17, “Hong Kong residents and tourists alike, who've been to Italy in the past fortnight, will be required to spend 14 days in a government quarantine centre.”
+  
+ 
+
+
+
+
+
+
+External Border Restrictions
+
+ 
+  
+   Description    
+
+
+   Government policies which reduce the ability to access ports of entry or exit to or from a country.    
+
+
+   
+
+
+   Example
+
+
+   On March 14, 2020, the “Namibian government suspends inbound and Outbound flights for 30 days”
+  
+ 
+
+
+
+
+
+
+
+Internal Border Restrictions
+
+ 
+  
+   Description    
+
+
+   Government policies which reduce the ability to move freely within a country.
+
+
+   
+
+
+   Example
+
+
+   In Peru as of March 15, 2020, “Officials are also restricting the movement of people across provinces.”
+  
+ 
+
+
+
+
+
+
+Restrict. of Mass Gatherings
+
+ 
+  
+   Description    
+
+
+   Government policies that limit the number of people allowed to congregate in a place (including sporting events, concerts, etc.).
+
+
+   
+
+
+   Example
+
+
+   On March 16, 2020 in the United States, “The latest recommendation announced Monday by the federal government to promote social distancing and limit the transmission of the coronavirus: no more than 10 people in one place.”
+  
+ 
+
+
+
+
+
+
+
+Social Distancing
+
+ 
+  
+   Description    
+
+
+   Government policies that limit physical contact between individuals to 1.5 meters or 6 feet.
+
+
+   
+
+
+   Example
+
+
+   On March 22, the German implemented new rules that stated that “a 1.5 meter distance should be kept at all times when in public”  
+  
+ 
+
+
+
+
+
+
+
+Curfew
+
+ 
+  
+   Description    
+
+
+   Government policies that limit domestic freedom of movement to certain times of the day.
+
+
+   
+
+
+   Example
+
+
+   In Serbia, “[a]s of March 21, 2020 the following measures are in effect: Curfew for all residents with few exceptions from 8:00pm to 5:00am the next day”
+  
+ 
+
+
+
+
+
+
+Closure of Schools
+
+ 
+  
+   Description    
+
+
+   Government policy which closes educational establishments in a country
+
+
+   
+
+
+   Example
+
+
+   In Slovakia, as of March 12, “All schools and Educational establishments will be shut down”
+  
+ 
+
+
+
+
+
+
+
+Restrict. Non-Essential Govt. Services
+
+ 
+  
+   Description    
+
+
+   Government policy restricts non-essential government services.
+
+
+   
+
+
+   Example
+
+
+   In Malaysia from March 18 to March 31, “All government and private services except those involved in essential services such as water, electricity, power, telecommunications, postal, transportation, fuel,finance, banking, health, pharmacy, fire, port, airport, security, retail and food supply will also be closed.”
+  
+ 
+
+
+
+
+
+
+
+Restrict. Non-Essential Businesses
+
+ 
+  
+   Description    
+
+
+   Government policy restricts non-essential commercial activity.
+
+
+   
+
+
+   Example
+
+
+   In Serbia, “As of March 21, 2020 the following measures are in effect: Supermarkets, gas stations, restaurants, post offices, banks and other service providers will be reducing their hours to observe the curfew, with some closing at 6:00 PM or earlier. Cafes, restaurants and shopping centers are closed.Delivery of food is allowed.”
+  
+ 
+
+
+
+
+
+
+
+Health Monitoring
+
+ 
+  
+   Description    
+
+
+   Government policies that seek to monitor the health of individuals who are afflicted with or who are likely to be afflicted with the coronavirus
+
+
+   
+
+
+   Example
+
+
+   On January 5, 2020, “Taiwan CDC monitors all individuals who had traveled to Wuhan within 14 days and exhibited a or symptoms of upper respiratory tract infections”
+  
+ 
+
+
+
+
+
+
+
+Health Testing
+
+ 
+  
+   Description    
+
+
+   Government policies which seeks to sample large populations for coronavirus regardless of suspected likelihood of affliction with coronavirus
+
+
+   
+
+
+   Example
+
+
+   On March 22, “South Korea began testing all passengers arriving from Europe”
+  
+ 
+
+
+
+
+
+
+
+Health Resources
+
+ 
+  
+   Description    
+
+
+   Government policies which affect the material (e.g. medical equipment, number of hospitals for public health) or human (e.g. doctors, nurses) health resources of a country.
+
+
+   
+
+
+   Example
+
+
+   On January 24, 2020, “Taiwan bans exports of face masks; ban extended to end of April” ; On March 20, it was announced that ""to accommodate the growing demand of laboratory tests for COVID-19, His Majesty the Sultan and Yang Di-Pertuan of Brunei Darussalam has consented to the construction of an additional virology laboratory""
+  
+ 
+
+
+
+
+
+
+Public Awareness Campaigns
+
+ 
+  
+   Description    
+
+
+    Efforts to disseminate and convey reliable information about COVID-19, including ways to prevent or mitigate the health effects of COVID-19.
+.
+
+
+   
+
+
+   Example
+
+
+   On March 22, it was announced that ""the Provincial Youth Council in Namiba carried out an intense public awareness campaign on methods of disease prevention, during which, young associates distributed pamphlets with statements about the pandemic and ways of prevention.""
+  
+ 
+
+
+
+
+
+
+
+New Task Force or Bureau
+
+ 
+  
+   Description    
+
+
+   Government policy that changes the administrative capacity of a part of government to respond to the crisis.
+
+
+   
+
+
+   Example
+
+
+   On January 20, 2020, “Taiwan activated the Central Epidemic Command Center (CECC) which mobilizes government funds and military personnel to facilitate face mask production” - Selected Choice","Please select the appropriate policy category. For a description and example of each policy category, please click on the relevant cateogry below. 
+
+ 
+
+
+    
+
+
+
+Declaration of Emergency
+
+ 
+  
+   Description    
+
+
+   The head of government declares a state of national emergency.    
+
+
+   
+
+
+   Example
+
+
+   On March 15, 2020, in South Africa: “President  Ramaphosa announces national state of disaster”
+  
+ 
+
+
+
+
+
+
+Quarantine
+
+ 
+  
+   Description    
+
+
+   Targets of the policy are obliged to quarantine or shelter in place for at least 14 days.    
+
+
+   
+
+
+   Example
+
+
+   On March 17, “Hong Kong residents and tourists alike, who've been to Italy in the past fortnight, will be required to spend 14 days in a government quarantine centre.”
+  
+ 
+
+
+
+
+
+
+External Border Restrictions
+
+ 
+  
+   Description    
+
+
+   Government policies which reduce the ability to access ports of entry or exit to or from a country.    
+
+
+   
+
+
+   Example
+
+
+   On March 14, 2020, the “Namibian government suspends inbound and Outbound flights for 30 days”
+  
+ 
+
+
+
+
+
+
+
+Internal Border Restrictions
+
+ 
+  
+   Description    
+
+
+   Government policies which reduce the ability to move freely within a country.
+
+
+   
+
+
+   Example
+
+
+   In Peru as of March 15, 2020, “Officials are also restricting the movement of people across provinces.”
+  
+ 
+
+
+
+
+
+
+Restrict. of Mass Gatherings
+
+ 
+  
+   Description    
+
+
+   Government policies that limit the number of people allowed to congregate in a place (including sporting events, concerts, etc.).
+
+
+   
+
+
+   Example
+
+
+   On March 16, 2020 in the United States, “The latest recommendation announced Monday by the federal government to promote social distancing and limit the transmission of the coronavirus: no more than 10 people in one place.”
+  
+ 
+
+
+
+
+
+
+
+Social Distancing
+
+ 
+  
+   Description    
+
+
+   Government policies that limit physical contact between individuals to 1.5 meters or 6 feet.
+
+
+   
+
+
+   Example
+
+
+   On March 22, the German implemented new rules that stated that “a 1.5 meter distance should be kept at all times when in public”  
+  
+ 
+
+
+
+
+
+
+
+Curfew
+
+ 
+  
+   Description    
+
+
+   Government policies that limit domestic freedom of movement to certain times of the day.
+
+
+   
+
+
+   Example
+
+
+   In Serbia, “[a]s of March 21, 2020 the following measures are in effect: Curfew for all residents with few exceptions from 8:00pm to 5:00am the next day”
+  
+ 
+
+
+
+
+
+
+Closure of Schools
+
+ 
+  
+   Description    
+
+
+   Government policy which closes educational establishments in a country
+
+
+   
+
+
+   Example
+
+
+   In Slovakia, as of March 12, “All schools and Educational establishments will be shut down”
+  
+ 
+
+
+
+
+
+
+
+Restrict. Non-Essential Govt. Services
+
+ 
+  
+   Description    
+
+
+   Government policy restricts non-essential government services.
+
+
+   
+
+
+   Example
+
+
+   In Malaysia from March 18 to March 31, “All government and private services except those involved in essential services such as water, electricity, power, telecommunications, postal, transportation, fuel,finance, banking, health, pharmacy, fire, port, airport, security, retail and food supply will also be closed.”
+  
+ 
+
+
+
+
+
+
+
+Restrict. Non-Essential Businesses
+
+ 
+  
+   Description    
+
+
+   Government policy restricts non-essential commercial activity.
+
+
+   
+
+
+   Example
+
+
+   In Serbia, “As of March 21, 2020 the following measures are in effect: Supermarkets, gas stations, restaurants, post offices, banks and other service providers will be reducing their hours to observe the curfew, with some closing at 6:00 PM or earlier. Cafes, restaurants and shopping centers are closed.Delivery of food is allowed.”
+  
+ 
+
+
+
+
+
+
+
+Health Monitoring
+
+ 
+  
+   Description    
+
+
+   Government policies that seek to monitor the health of individuals who are afflicted with or who are likely to be afflicted with the coronavirus
+
+
+   
+
+
+   Example
+
+
+   On January 5, 2020, “Taiwan CDC monitors all individuals who had traveled to Wuhan within 14 days and exhibited a or symptoms of upper respiratory tract infections”
+  
+ 
+
+
+
+
+
+
+
+Health Testing
+
+ 
+  
+   Description    
+
+
+   Government policies which seeks to sample large populations for coronavirus regardless of suspected likelihood of affliction with coronavirus
+
+
+   
+
+
+   Example
+
+
+   On March 22, “South Korea began testing all passengers arriving from Europe”
+  
+ 
+
+
+
+
+
+
+
+Health Resources
+
+ 
+  
+   Description    
+
+
+   Government policies which affect the material (e.g. medical equipment, number of hospitals for public health) or human (e.g. doctors, nurses) health resources of a country.
+
+
+   
+
+
+   Example
+
+
+   On January 24, 2020, “Taiwan bans exports of face masks; ban extended to end of April” ; On March 20, it was announced that ""to accommodate the growing demand of laboratory tests for COVID-19, His Majesty the Sultan and Yang Di-Pertuan of Brunei Darussalam has consented to the construction of an additional virology laboratory""
+  
+ 
+
+
+
+
+
+
+Public Awareness Campaigns
+
+ 
+  
+   Description    
+
+
+    Efforts to disseminate and convey reliable information about COVID-19, including ways to prevent or mitigate the health effects of COVID-19.
+.
+
+
+   
+
+
+   Example
+
+
+   On March 22, it was announced that ""the Provincial Youth Council in Namiba carried out an intense public awareness campaign on methods of disease prevention, during which, young associates distributed pamphlets with statements about the pandemic and ways of prevention.""
+  
+ 
+
+
+
+
+
+
+
+New Task Force or Bureau
+
+ 
+  
+   Description    
+
+
+   Government policy that changes the administrative capacity of a part of government to respond to the crisis.
+
+
+   
+
+
+   Example
+
+
+   On January 20, 2020, “Taiwan activated the Central Epidemic Command Center (CECC) which mobilizes government funds and military personnel to facilitate face mask production” - Other Policy Not Listed Above - Text",Please choose all that apply in terms of the conditions of the quarantine: - Selected Choice,Please choose all that apply in terms of the conditions of the quarantine: - Quarantine only applies to people of certain ages. Please note the age restrictions in the text box. - Text,Please choose all that apply in terms of the conditions of the quarantine: - Other - Text,"If the number of days that the quarantine is in place is different from 14 days, please enter the number in the text entry below.
+Note, if this is an update to a previous entry and the quarantine has been extended, in the update, note the total number of days that the quarantine is in place.","Please select all that apply in terms of the strategies that are employed to restrict movement on the external border.
+ 
+
+Note:
+
+
+	The distinction between the 'Health Testing' variable in the type question and the 'Health screening' option given below is that the 'Health Testing' option refers to testing of the general population for the purpose of ascertaining the underlying infection rate while the 'Health Screening' option below refers to the testing of a general population for the purpose of restricting movement across borders. 
+	A later question will ask about what *kind* of travel the external border restrictions restrict (e.g. flights, cruises)","If the number of people who are restricted from gathering en masse is specified, please enter the number in the text entry below:",Please select all that apply in terms of which educational entities were closed:,Please choose all that apply in terms of the types of business activity that was restricted: - Selected Choice,Please choose all that apply in terms of the types of business activity that was restricted: - Other - Text,"Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Selected Choice","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Masks - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Ventilators - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Personal Protective Equipment (e.g. gowns, goggles) - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Other Health Materials - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Hospitals - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Temporary Quarantine Centers - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Temporary Medical Centers - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Public Testing Facilities (e.g. drive-in testing for COVID-19) - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Health Research Facilities - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Other Health Infrastructure - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Doctors - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Nurses - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Health Volunteers - Text","Please choose all that apply in terms of the type of health resources that the government policy affects. 
+ 
+
+
+For each of the following values below:
+
+
+	
+	 If there is additional information about the number of health resources in question, please briefly write it in the provided text box, otherwise leave the text box empty.
+
+	
+		
+		For example, if 8 new hospitals are built, in the text entry for 'Hospitals', fill in the text entry box with '8 new hospitals'.
+		
+	
+	
+	
+	To the extent possible, please try to find a source that provides more specific information about the type of health resource. When this is not possible, you can choose an option that notes the type of medical resource is 'Unspecified'. 
+
+	
+		
+		For example 'Unspecified Health Materials', this means that the event description describes an increase in, for example, medical equipment for a country, but does not provide more detail on what kind of medical equipment. - Other Heath Staff - Text","You selected 'Other Policy Not Listed Above' as the policy type. This means that you were unable to match the government policy to any of the categories listed on the previous page. After verifying this is the case, please provide a brief description of the policy here:",List of Countries,Was the policy made from a level of government other than the national level?,"Afghanistan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Albania - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Algeria - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Andorra - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Angola - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Antigua and Barbuda - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Argentina - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Armenia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Australia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Austria - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Azerbaijan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Bahamas - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Bahrain - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Bangladesh - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Barbados - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Belarus - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Belgium - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Belize - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Benin - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Bhutan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Bolivia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Bosnia and Herzegovina - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Botswana - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Brazil - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Brunei - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Bulgaria - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Burkina Faso - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Burundi - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Cabo Verde - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Cambodia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Cameroon - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Canada - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Central African Republic - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Chad - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Chile - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","China - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Colombia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Comoros - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Costa Rica - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Croatia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Cuba - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Cyprus - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Czechia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Democratic Republic of the Congo - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Denmark - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Djibouti - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Dominica - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Dominican Republic - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Ecuador - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Egypt - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","El Salvador - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Equatorial Guinea - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Eritrea - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Estonia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Eswatini - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Ethiopia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Fiji - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Finland - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","France - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Gabon - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Gambia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Georgia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Germany - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Ghana - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Greece - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Grenada - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Guatemala - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Guinea - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Guinea-Bissau - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Guyana - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Haiti - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Honduras - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Hong Kong - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Hungary - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Iceland - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","India - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Indonesia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Iran - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Iraq - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Ireland - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Israel - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Italy - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Ivory Coast - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Jamaica - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Japan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Jordan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Kazakhstan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Kenya - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Kiribati - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Kuwait - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Kyrgyzstan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Laos - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Latvia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Lebanon - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Lesotho - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Liberia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Libya - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Liechtenstein - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Lithuania - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Luxembourg - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Macau - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Madagascar - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Malawi - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Malaysia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Maldives - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Mali - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Malta - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Marshall Islands - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Mauritania - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Mauritius - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Mexico - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Micronesia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Moldova - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Monaco - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Mongolia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Montenegro - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Morocco - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Mozambique - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Myanmar - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Namibia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Nauru - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Nepal - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Netherlands - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","New Zealand - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Nicaragua - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Niger - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Nigeria - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","North Korea - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","North Macedonia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Norway - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Oman - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Pakistan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Palau - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Panama - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Papua New Guinea - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Paraguay - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Peru - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Philippines - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Poland - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Portugal - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Qatar - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Republic of the Congo - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Romania - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Russia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Rwanda - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Saint Kitts and Nevis - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Saint Lucia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Saint Vincent and the Grenadines - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Samoa - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","San Marino - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Sao Tome and Principe - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Saudi Arabia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Senegal - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Seychelles - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Sierra Leone - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Singapore - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Slovakia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Slovenia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Solomon Islands - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Somalia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","South Africa - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","South Korea - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","South Sudan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Spain - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Sri Lanka - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Sudan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Suriname - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Sweden - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Switzerland - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Syria - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Taiwan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Tajikistan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Tanzania - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Thailand - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Timor Leste - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Togo - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Tonga - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Trinidad and Tobago - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Tunisia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Turkey - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Turkmenistan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Tuvalu - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Uganda - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Ukraine - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","United Arab Emirates - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","United Kingdom - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","United States - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Uruguay - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Uzbekistan - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Vanuatu - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Vatican - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Venezuela - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Vietnam - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Yemen - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Zambia - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","Zimbabwe - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","European Union - Please select the appropriate province/state for [Field-1]. 
+ 
+
+If this policy was initiated from the city/municipal or other government level and it is difficult to identify the relevant province, leave blank.","If this policy was announced by a particular city, please specify the city here:","You selected that this policy was made from a government level other than national, provincial or municipal. Please further specify one of the following","If the policy was announced by a government administrative body other than the national government, provincial/state government or city/municipal government, please specify here:",Please specify which geographical or administrative entity is the target of the policy:,"Please select as many countries that are targets of this policy as applicable. If the policy applies domestically, please select the corresponding country name.
+ 
+
+
+	Note you may select more than one country by holding down either your CNTRL or CMD key and clicking. In cases where a policy applies to all countries except one, please select all countries and then de-select by holding down the CNTRL or CMD key and clicking on the country again. You can select multiple countries quickly by holding down the CNTRL or CMD key and scrolling through the options.
+		For example, in the following event, New Zealand is an exception to Australia's travel ban against non-residents and non-Australian citizens. “On March 19, Australia’s prime minister announced a travel ban on all non-residents and non-Australian citizens entering the country, according to the U.S. Embassy in Australia. The measure takes effect on March 20 at 9 p.m., Australian Eastern time. New Zealand citizens are allowed to enter the country. They will need to self-isolate at home or at a hotel for 14 days.”
+	
+	
+	If the event applies to all countries however, please choose the 'All Countries' option in response to the request to 'Please specify which geographical entity is the target of the policy'","Please choose as many applicable regions as possible.
+If the targets are regions with the exception of a single country (e.g. all Schengen Countries except Switzerland) then please choose 'Other Regions' and enter this into the text field. - Selected Choice","Please choose as many applicable regions as possible.
+If the targets are regions with the exception of a single country (e.g. all Schengen Countries except Switzerland) then please choose 'Other Regions' and enter this into the text field. - Other Regions (please specify below) - Text",Please specify the country for which the targeted subnational geographical or administrative unit is located:,What subnational geographical or administrative unit is this policy targeted towards?,"Please write in what province(s)/states this policy is targeted towards: 
+
+If there are multiple provinces, please separate with a semicolon (e.g. California; New York; Alabama)","Please write in what cities/municipalities this policy is targeted towards: 
+
+If there are multiple cities/municipalities, please separate with a semicolon (e.g. Beijing; Shanghai).","Please write in what other geographic or administrative unit this policy is targeted towards:
+ 
+
+If there are multiple geographic or administrative units, please separate with a semicolon (e.g. Santa Clara County; Sonoma County).","Please select from the list below what or whom the policy is targeted at (could be another country, residents inside the country, etc.). For a description and example of each category, please click on the relevant button below. For a visualization of how these variables relate to each other, please refer to the table below:
+
+ 
+All (Travelers + Residents) 
+
+ 
+  
+   Description    
+
+
+   A government policy that applies to all humans regardless of residency or travel status.    
+
+
+   
+
+
+   Example
+
+
+   “Starting March 16, Germany will close its borders with Austria, Denmark, France, Luxembourg and Switzerland, the country’s interior minister said on March 15.”
+  
+ 
+
+
+
+ 
+  
+    
+   All Travelers (Citizen Travelers + Foreign Travelers) 
+
+ 
+  
+   Description    
+
+
+   A government policy that applies to all those travelling outside the country initiating the policy, both foreign and domestic.
+
+
+   
+
+
+   Example
+
+
+   In South Africa, on March 15 “all travelers who have entered South Africa from high risk countries since mid February will be required to present themselves for testing”
+  
+ 
+
+   All Residents (Citizen Residents + Foreign Residents)
+
+ 
+  
+   Description    
+
+
+   Government policy targeted toward residents, both foreign nationals and domestic nationals, in the country initiating the policy.
+
+
+   
+
+
+   Example
+
+
+   In the Dominican Republic, starting March 20, there is a “Nationwide nighttime curfew over the next two weeks.”
+  
+ 
+
+  
+  
+    All 
+ Citizens 
+  
+
+ 
+  
+   Definition    
+
+
+   Individuals with citizenship or permanent residency in the country initiating the policy
+
+
+
+
+ 
+
+   Citizen Travelers
+
+ 
+  
+   Description    
+
+
+   A government policy that applies only to domestic nationals travelling outside the country initiating the policy.
+
+
+   
+
+
+   Example
+
+
+   As of March 15, according to the Ghanaian government, “Ghanaian citizens must self-quarantine for 14 days upon re-entry.”
+  
+ 
+
+   Citizen Residents
+
+ 
+  
+   Description    
+
+
+   Government policies that apply only to citizens who are residing in the country initiating the policy.
+
+
+   
+
+
+   Example
+
+
+   On March 21, ""the Hungarian government has asked its citizens to avoid any travel to infected areas, according to the U.S. Embassy in Hungary.""
+  
+ 
+
+  
+  
+   
+     
+ All 
+ Foreign 
+ Nationals 
+
+ 
+  
+   Definition     
+
+
+   Individuals without citizenship or permanent residency in the country initiating the policy.
+
+
+   
+
+
+   
+
+
+   
+  
+ 
+
+
+
+    
+   Foreign Travelers
+
+ 
+  
+   Description    
+
+
+   A government policy that applies to only to foreign nationals travelling outside the country initiating the policy.    
+
+
+   
+
+
+   Example
+
+
+   “As of March 16, all travelers without permanent or temporary residency for more than 90 days cannot enter the country, according to the U.S. Embassy in the Czech Republic.”
+  
+ 
+
+   Foreign Residents
+
+ 
+  
+   Description    
+
+
+   Government policies that that apply only to foreign nationals who are residing in the country in initiating the policy
+
+
+   
+
+
+   Example
+
+
+   ""The United Arab Emirates is barring entry to holders of valid resident visas for a renewable period of two weeks, effective Thursday March 19.""
+  
+ 
+
+  
+ 
+
+
+
+
+
+
+    
+
+
+
+Health Staff
+
+ 
+  
+   Description    
+
+
+   Government policy targeted toward human health resources. 
+
+
+   
+
+
+   Example
+
+
+   On February 23, “Taiwan bans healthcare workers from travelling abroad.”
+  
+ 
+
+
+
+
+
+
+
+Health-Related Supplies
+
+ 
+  
+   Description    
+
+
+   Government policy targeted toward non-human health resources.
+
+
+   
+
+
+   Example
+
+
+    On March 4, “Taiwan bans export of digital thermometers.” - Selected Choice","Please select from the list below what or whom the policy is targeted at (could be another country, residents inside the country, etc.). For a description and example of each category, please click on the relevant button below. For a visualization of how these variables relate to each other, please refer to the table below:
+
+ 
+All (Travelers + Residents) 
+
+ 
+  
+   Description    
+
+
+   A government policy that applies to all humans regardless of residency or travel status.    
+
+
+   
+
+
+   Example
+
+
+   “Starting March 16, Germany will close its borders with Austria, Denmark, France, Luxembourg and Switzerland, the country’s interior minister said on March 15.”
+  
+ 
+
+
+
+ 
+  
+    
+   All Travelers (Citizen Travelers + Foreign Travelers) 
+
+ 
+  
+   Description    
+
+
+   A government policy that applies to all those travelling outside the country initiating the policy, both foreign and domestic.
+
+
+   
+
+
+   Example
+
+
+   In South Africa, on March 15 “all travelers who have entered South Africa from high risk countries since mid February will be required to present themselves for testing”
+  
+ 
+
+   All Residents (Citizen Residents + Foreign Residents)
+
+ 
+  
+   Description    
+
+
+   Government policy targeted toward residents, both foreign nationals and domestic nationals, in the country initiating the policy.
+
+
+   
+
+
+   Example
+
+
+   In the Dominican Republic, starting March 20, there is a “Nationwide nighttime curfew over the next two weeks.”
+  
+ 
+
+  
+  
+    All 
+ Citizens 
+  
+
+ 
+  
+   Definition    
+
+
+   Individuals with citizenship or permanent residency in the country initiating the policy
+
+
+
+
+ 
+
+   Citizen Travelers
+
+ 
+  
+   Description    
+
+
+   A government policy that applies only to domestic nationals travelling outside the country initiating the policy.
+
+
+   
+
+
+   Example
+
+
+   As of March 15, according to the Ghanaian government, “Ghanaian citizens must self-quarantine for 14 days upon re-entry.”
+  
+ 
+
+   Citizen Residents
+
+ 
+  
+   Description    
+
+
+   Government policies that apply only to citizens who are residing in the country initiating the policy.
+
+
+   
+
+
+   Example
+
+
+   On March 21, ""the Hungarian government has asked its citizens to avoid any travel to infected areas, according to the U.S. Embassy in Hungary.""
+  
+ 
+
+  
+  
+   
+     
+ All 
+ Foreign 
+ Nationals 
+
+ 
+  
+   Definition     
+
+
+   Individuals without citizenship or permanent residency in the country initiating the policy.
+
+
+   
+
+
+   
+
+
+   
+  
+ 
+
+
+
+    
+   Foreign Travelers
+
+ 
+  
+   Description    
+
+
+   A government policy that applies to only to foreign nationals travelling outside the country initiating the policy.    
+
+
+   
+
+
+   Example
+
+
+   “As of March 16, all travelers without permanent or temporary residency for more than 90 days cannot enter the country, according to the U.S. Embassy in the Czech Republic.”
+  
+ 
+
+   Foreign Residents
+
+ 
+  
+   Description    
+
+
+   Government policies that that apply only to foreign nationals who are residing in the country in initiating the policy
+
+
+   
+
+
+   Example
+
+
+   ""The United Arab Emirates is barring entry to holders of valid resident visas for a renewable period of two weeks, effective Thursday March 19.""
+  
+ 
+
+  
+ 
+
+
+
+
+
+
+    
+
+
+
+Health Staff
+
+ 
+  
+   Description    
+
+
+   Government policy targeted toward human health resources. 
+
+
+   
+
+
+   Example
+
+
+   On February 23, “Taiwan bans healthcare workers from travelling abroad.”
+  
+ 
+
+
+
+
+
+
+
+Health-Related Supplies
+
+ 
+  
+   Description    
+
+
+   Government policy targeted toward non-human health resources.
+
+
+   
+
+
+   Example
+
+
+    On March 4, “Taiwan bans export of digital thermometers.” - Other - Text","Please select whether this policy is inbound, outbound or both inbound/outbound. For a description and example of each category, please click on the below. 
+
+ 
+
+
+    
+
+
+
+Inbound 
+
+ 
+  
+   Description    
+
+
+   Government policy that seeks to control movement of people or goods entering the country initiating the policy.
+
+
+   
+
+
+   Example
+
+
+   In Malaysia, on January 30, “The state of Sabah has canceled all flights from China and South Korea.”
+  
+ 
+
+
+
+
+
+
+Outbound
+
+ 
+  
+   Description    
+
+
+   Government policy that seeks to control movement of people or goods exiting the country initiating the policy.
+
+
+   
+
+
+   Example
+
+
+   On March 18, “The government of Belgium declared all nonessential travel outside of Belgium is forbidden until April 5, according to the United States Embassy in Belgium.”
+  
+ 
+
+
+
+
+
+
+Inbound/Outbound
+
+ 
+  
+   Description    
+
+
+   Government policy that seeks to control the movement of people or goods entering or exiting the country
+    
+
+
+   
+
+
+   Example
+
+
+    In Jordan, “As of March 17, all flights, excluding commercial airfreight traffic, will be suspended, according to officials.”","If applicable, please select what mode of transportation this policy is applied to. Please select all that apply: - Selected Choice","If applicable, please select what mode of transportation this policy is applied to. Please select all that apply: - Other (please specify) - Text","What kind of enforcement does this policy have (if any)? Please select all that apply:
+
+ 
+
+
+    
+
+
+
+Mandatory With Legal Penalties
+
+ 
+  
+   Description    
+
+
+   The prescribed government policy is mandatory/ must be followed. If the description of a policy does not state otherwise, assume that it is mandatory. If the policy is not followed, people may face legal penalties like jail time.
+
+
+
+   
+
+
+   Example
+
+
+   “On March 15, Uruguay announced it would halt all flights from Europe starting March 20.
+  
+ 
+
+
+
+
+
+
+Mandatory with Fines 
+
+ 
+  
+   Description    
+
+
+   The prescribed government policy is mandatory/ must be followed but some exceptions are allowed. If the policy is not followed, people must pay a fine. 
+
+
+   
+
+
+   Example
+
+
+   In Switzerland as announced on March 22, ""Gatherings in public spaces of more than 5 people are prohibited. This includes public spaces such as public squares, park, playgrounds, walking paths, etc. If five or fewer people meet, they must maintain a distance of 2 meters from one another. Anyone not complying with this rule will be fined.""
+  
+ 
+
+
+
+
+
+
+Mandatory (Unspecified/Implied)
+
+ 
+  
+   Description    
+
+
+   The prescribed government policy is mandatory/must be followed but the penalty for failing to comply is not made explicit or is implied. For instance, in the example given below, the implication of the policy (even though it is not explicitly stated) is that travelers without a health certificate will not be allowed to enter the country. 
+
+
+
+   
+
+
+   Example
+
+
+    In the Dominican Republic, as of March 19, “all travelers arriving in the country must complete a travel history form”
+
+  
+ 
+
+
+
+
+
+
+
+Mandatory with Exceptions
+
+ 
+  
+   Description    
+
+
+   There are some exceptions to the policy but it is mandatory for those for whom it applies. 
+
+
+
+   
+
+
+   Example
+
+
+    E.g. As of March 13, the Indian government suspended most travel and tourism visas, with the exception of “diplomatic, official, U.N. or International Organizations, employment and project visas” until April 15.
+
+  
+ 
+
+
+
+
+
+
+
+Recommended/Voluntary but no penalties
+
+ 
+  
+   Description    
+
+
+   The prescribed policy is recommended by the initiating body but compliance is voluntary.
+
+
+
+   
+
+
+   Example
+
+
+    As of March 14, Brazil had not imposed travel restrictions. Its health ministry recommended that all passengers who arrive on international flights remain at home for at least seven days and seek medical help if they develop coronavirus symptoms. - Selected Choice","What kind of enforcement does this policy have (if any)? Please select all that apply:
+
+ 
+
+
+    
+
+
+
+Mandatory With Legal Penalties
+
+ 
+  
+   Description    
+
+
+   The prescribed government policy is mandatory/ must be followed. If the description of a policy does not state otherwise, assume that it is mandatory. If the policy is not followed, people may face legal penalties like jail time.
+
+
+
+   
+
+
+   Example
+
+
+   “On March 15, Uruguay announced it would halt all flights from Europe starting March 20.
+  
+ 
+
+
+
+
+
+
+Mandatory with Fines 
+
+ 
+  
+   Description    
+
+
+   The prescribed government policy is mandatory/ must be followed but some exceptions are allowed. If the policy is not followed, people must pay a fine. 
+
+
+   
+
+
+   Example
+
+
+   In Switzerland as announced on March 22, ""Gatherings in public spaces of more than 5 people are prohibited. This includes public spaces such as public squares, park, playgrounds, walking paths, etc. If five or fewer people meet, they must maintain a distance of 2 meters from one another. Anyone not complying with this rule will be fined.""
+  
+ 
+
+
+
+
+
+
+Mandatory (Unspecified/Implied)
+
+ 
+  
+   Description    
+
+
+   The prescribed government policy is mandatory/must be followed but the penalty for failing to comply is not made explicit or is implied. For instance, in the example given below, the implication of the policy (even though it is not explicitly stated) is that travelers without a health certificate will not be allowed to enter the country. 
+
+
+
+   
+
+
+   Example
+
+
+    In the Dominican Republic, as of March 19, “all travelers arriving in the country must complete a travel history form”
+
+  
+ 
+
+
+
+
+
+
+
+Mandatory with Exceptions
+
+ 
+  
+   Description    
+
+
+   There are some exceptions to the policy but it is mandatory for those for whom it applies. 
+
+
+
+   
+
+
+   Example
+
+
+    E.g. As of March 13, the Indian government suspended most travel and tourism visas, with the exception of “diplomatic, official, U.N. or International Organizations, employment and project visas” until April 15.
+
+  
+ 
+
+
+
+
+
+
+
+Recommended/Voluntary but no penalties
+
+ 
+  
+   Description    
+
+
+   The prescribed policy is recommended by the initiating body but compliance is voluntary.
+
+
+
+   
+
+
+   Example
+
+
+    As of March 14, Brazil had not imposed travel restrictions. Its health ministry recommended that all passengers who arrive on international flights remain at home for at least seven days and seek medical help if they develop coronavirus symptoms. - Mandatory with Exceptions (Please list exceptions in the text entry) - Text","Please select all that apply in terms of organizations enforcing compliance or issuing recommendations for the policy you are documenting.
+ 
+
+Note that the response 'police' can refer to police at any level of government (e.g. national, provincial, etc.) Please select as many dimensions as possible. That is, if the source says a policy is enforced by the provincial police, please select both 'provincial/state government' and 'police'. If the report only refers to police enforcement without stating the level of government, then select 'police only. - Selected Choice","Please select all that apply in terms of organizations enforcing compliance or issuing recommendations for the policy you are documenting.
+ 
+
+Note that the response 'police' can refer to police at any level of government (e.g. national, provincial, etc.) Please select as many dimensions as possible. That is, if the source says a policy is enforced by the provincial police, please select both 'provincial/state government' and 'police'. If the report only refers to police enforcement without stating the level of government, then select 'police only. - Other (Please specify in the text box) - Text",Enter a date:,"When does the policy take effect? If there is no available information about this, just use the day it was announced.","When does the policy end? If there is no available information about this, just leave blank","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 1 - Date","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 1 - URL/link","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 1 - Newspaper/Institution Name","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 1 - Title","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 2 - Date","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 2 - URL/link","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 2 - Newspaper/Institution Name","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 2 - Title","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 3 - Date","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 3 - URL/link","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 3 - Newspaper/Institution Name","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 3 - Title","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 4 - Date","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 4 - URL/link","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 4 - Newspaper/Institution Name","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 4 - Title","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 5 - Date","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 5 - URL/link","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 5 - Newspaper/Institution Name","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 5 - Title","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 6 - Date","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 6 - URL/link","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 6 - Newspaper/Institution Name","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 6 - Title","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 7 - Date","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 7 - URL/link","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 7 - Newspaper/Institution Name","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 7 - Title","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 8 - Date","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 8 - URL/link","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 8 - Newspaper/Institution Name","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 8 - Title","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 9 - Date","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 9 - URL/link","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 9 - Newspaper/Institution Name","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 9 - Title","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 10 - Date","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 10 - URL/link","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 10 - Newspaper/Institution Name","Please record the sources of information that you used to collect this data in the below.
+ 
+Please remember to save a .pdf of the source that you collected. Save the .pdf with the following filename format ""[Date Source Collected]_[Title of the Source].pdf"":
+
+
+	[Date Source Collected]  refers to the day on which the RA collects the data, not when the source was published
+	Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).
+	E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" 
+	If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it - Source 10 - Title","Please upload a PDF file for your sources. The easiest way to get a PDF of a website is to go to File -> Print, and choose ""Save as PDF"" in the Printer drop down option in the menu.
+Save the .pdf with the following filename format : ""[Date Source Collected]_[Title of the Source].pdf""E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it
+If you have multiple sources, please upload a zip file with all of the files. - Id","Please upload a PDF file for your sources. The easiest way to get a PDF of a website is to go to File -> Print, and choose ""Save as PDF"" in the Printer drop down option in the menu.
+Save the .pdf with the following filename format : ""[Date Source Collected]_[Title of the Source].pdf""E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it
+If you have multiple sources, please upload a zip file with all of the files. - Name","Please upload a PDF file for your sources. The easiest way to get a PDF of a website is to go to File -> Print, and choose ""Save as PDF"" in the Printer drop down option in the menu.
+Save the .pdf with the following filename format : ""[Date Source Collected]_[Title of the Source].pdf""E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it
+If you have multiple sources, please upload a zip file with all of the files. - Size","Please upload a PDF file for your sources. The easiest way to get a PDF of a website is to go to File -> Print, and choose ""Save as PDF"" in the Printer drop down option in the menu.
+Save the .pdf with the following filename format : ""[Date Source Collected]_[Title of the Source].pdf""E.g. ""03-21-2020_CDC implements extra inspection measures for Wuhan flights.pdf"" Note the [Date Source Collected] should be in the following format: MM-DD-YYYY (e.g. 03-22-2020).If using a frequently updated version of a website as your source (e.g. the US Embassy website for you country) please be sure to save a new .pdf each day that you access it
+If you have multiple sources, please upload a zip file with all of the files. - Type","If you have any other thoughts/concerns/things we should know about this event, please input them here and we will review them.",record_id,ra_check,check
+"{""ImportId"":""startDate"",""timeZone"":""Europe/Berlin""}","{""ImportId"":""endDate"",""timeZone"":""Europe/Berlin""}","{""ImportId"":""status""}","{""ImportId"":""ipAddress""}","{""ImportId"":""progress""}","{""ImportId"":""duration""}","{""ImportId"":""finished""}","{""ImportId"":""recordedDate"",""timeZone"":""Europe/Berlin""}","{""ImportId"":""_recordId""}","{""ImportId"":""recipientLastName""}","{""ImportId"":""recipientFirstName""}","{""ImportId"":""recipientEmail""}","{""ImportId"":""externalDataReference""}","{""ImportId"":""locationLatitude""}","{""ImportId"":""locationLongitude""}","{""ImportId"":""distributionChannel""}","{""ImportId"":""userLanguage""}","{""ImportId"":""QID46""}","{""ImportId"":""QID47""}","{""ImportId"":""QID47_3_TEXT""}","{""ImportId"":""QID47_4_TEXT""}","{""ImportId"":""QID138_TEXT""}","{""ImportId"":""QID11""}","{""ImportId"":""QID11_15_TEXT""}","{""ImportId"":""QID132""}","{""ImportId"":""QID132_4_TEXT""}","{""ImportId"":""QID132_5_TEXT""}","{""ImportId"":""QID137_TEXT""}","{""ImportId"":""QID147""}","{""ImportId"":""QID136_TEXT""}","{""ImportId"":""QID131""}","{""ImportId"":""QID133""}","{""ImportId"":""QID133_6_TEXT""}","{""ImportId"":""QID143""}","{""ImportId"":""QID143_1_TEXT""}","{""ImportId"":""QID143_2_TEXT""}","{""ImportId"":""QID143_19_TEXT""}","{""ImportId"":""QID143_11_TEXT""}","{""ImportId"":""QID143_4_TEXT""}","{""ImportId"":""QID143_5_TEXT""}","{""ImportId"":""QID143_6_TEXT""}","{""ImportId"":""QID143_7_TEXT""}","{""ImportId"":""QID143_12_TEXT""}","{""ImportId"":""QID143_14_TEXT""}","{""ImportId"":""QID143_8_TEXT""}","{""ImportId"":""QID143_9_TEXT""}","{""ImportId"":""QID143_18_TEXT""}","{""ImportId"":""QID143_15_TEXT""}","{""ImportId"":""QID141_TEXT""}","{""ImportId"":""QID50""}","{""ImportId"":""QID51""}","{""ImportId"":""588_QID88""}","{""ImportId"":""589_QID88""}","{""ImportId"":""590_QID88""}","{""ImportId"":""591_QID88""}","{""ImportId"":""592_QID88""}","{""ImportId"":""593_QID88""}","{""ImportId"":""594_QID88""}","{""ImportId"":""595_QID88""}","{""ImportId"":""596_QID88""}","{""ImportId"":""597_QID88""}","{""ImportId"":""598_QID88""}","{""ImportId"":""599_QID88""}","{""ImportId"":""600_QID88""}","{""ImportId"":""601_QID88""}","{""ImportId"":""602_QID88""}","{""ImportId"":""603_QID88""}","{""ImportId"":""604_QID88""}","{""ImportId"":""605_QID88""}","{""ImportId"":""606_QID88""}","{""ImportId"":""607_QID88""}","{""ImportId"":""608_QID88""}","{""ImportId"":""609_QID88""}","{""ImportId"":""610_QID88""}","{""ImportId"":""611_QID88""}","{""ImportId"":""612_QID88""}","{""ImportId"":""613_QID88""}","{""ImportId"":""614_QID88""}","{""ImportId"":""615_QID88""}","{""ImportId"":""616_QID88""}","{""ImportId"":""617_QID88""}","{""ImportId"":""618_QID88""}","{""ImportId"":""619_QID88""}","{""ImportId"":""620_QID88""}","{""ImportId"":""621_QID88""}","{""ImportId"":""622_QID88""}","{""ImportId"":""623_QID88""}","{""ImportId"":""624_QID88""}","{""ImportId"":""625_QID88""}","{""ImportId"":""626_QID88""}","{""ImportId"":""627_QID88""}","{""ImportId"":""628_QID88""}","{""ImportId"":""629_QID88""}","{""ImportId"":""630_QID88""}","{""ImportId"":""631_QID88""}","{""ImportId"":""632_QID88""}","{""ImportId"":""633_QID88""}","{""ImportId"":""634_QID88""}","{""ImportId"":""635_QID88""}","{""ImportId"":""636_QID88""}","{""ImportId"":""637_QID88""}","{""ImportId"":""638_QID88""}","{""ImportId"":""639_QID88""}","{""ImportId"":""640_QID88""}","{""ImportId"":""641_QID88""}","{""ImportId"":""642_QID88""}","{""ImportId"":""643_QID88""}","{""ImportId"":""644_QID88""}","{""ImportId"":""645_QID88""}","{""ImportId"":""646_QID88""}","{""ImportId"":""647_QID88""}","{""ImportId"":""648_QID88""}","{""ImportId"":""649_QID88""}","{""ImportId"":""650_QID88""}","{""ImportId"":""651_QID88""}","{""ImportId"":""652_QID88""}","{""ImportId"":""653_QID88""}","{""ImportId"":""654_QID88""}","{""ImportId"":""655_QID88""}","{""ImportId"":""656_QID88""}","{""ImportId"":""657_QID88""}","{""ImportId"":""658_QID88""}","{""ImportId"":""659_QID88""}","{""ImportId"":""660_QID88""}","{""ImportId"":""661_QID88""}","{""ImportId"":""662_QID88""}","{""ImportId"":""663_QID88""}","{""ImportId"":""664_QID88""}","{""ImportId"":""665_QID88""}","{""ImportId"":""666_QID88""}","{""ImportId"":""667_QID88""}","{""ImportId"":""668_QID88""}","{""ImportId"":""669_QID88""}","{""ImportId"":""670_QID88""}","{""ImportId"":""671_QID88""}","{""ImportId"":""672_QID88""}","{""ImportId"":""673_QID88""}","{""ImportId"":""674_QID88""}","{""ImportId"":""675_QID88""}","{""ImportId"":""676_QID88""}","{""ImportId"":""677_QID88""}","{""ImportId"":""678_QID88""}","{""ImportId"":""679_QID88""}","{""ImportId"":""680_QID88""}","{""ImportId"":""681_QID88""}","{""ImportId"":""682_QID88""}","{""ImportId"":""683_QID88""}","{""ImportId"":""684_QID88""}","{""ImportId"":""685_QID88""}","{""ImportId"":""686_QID88""}","{""ImportId"":""687_QID88""}","{""ImportId"":""688_QID88""}","{""ImportId"":""689_QID88""}","{""ImportId"":""690_QID88""}","{""ImportId"":""691_QID88""}","{""ImportId"":""692_QID88""}","{""ImportId"":""693_QID88""}","{""ImportId"":""694_QID88""}","{""ImportId"":""695_QID88""}","{""ImportId"":""696_QID88""}","{""ImportId"":""697_QID88""}","{""ImportId"":""698_QID88""}","{""ImportId"":""699_QID88""}","{""ImportId"":""700_QID88""}","{""ImportId"":""701_QID88""}","{""ImportId"":""702_QID88""}","{""ImportId"":""703_QID88""}","{""ImportId"":""704_QID88""}","{""ImportId"":""705_QID88""}","{""ImportId"":""706_QID88""}","{""ImportId"":""707_QID88""}","{""ImportId"":""708_QID88""}","{""ImportId"":""709_QID88""}","{""ImportId"":""710_QID88""}","{""ImportId"":""711_QID88""}","{""ImportId"":""712_QID88""}","{""ImportId"":""713_QID88""}","{""ImportId"":""714_QID88""}","{""ImportId"":""715_QID88""}","{""ImportId"":""716_QID88""}","{""ImportId"":""717_QID88""}","{""ImportId"":""718_QID88""}","{""ImportId"":""719_QID88""}","{""ImportId"":""720_QID88""}","{""ImportId"":""721_QID88""}","{""ImportId"":""722_QID88""}","{""ImportId"":""723_QID88""}","{""ImportId"":""724_QID88""}","{""ImportId"":""725_QID88""}","{""ImportId"":""726_QID88""}","{""ImportId"":""727_QID88""}","{""ImportId"":""728_QID88""}","{""ImportId"":""729_QID88""}","{""ImportId"":""730_QID88""}","{""ImportId"":""731_QID88""}","{""ImportId"":""732_QID88""}","{""ImportId"":""733_QID88""}","{""ImportId"":""734_QID88""}","{""ImportId"":""735_QID88""}","{""ImportId"":""736_QID88""}","{""ImportId"":""737_QID88""}","{""ImportId"":""738_QID88""}","{""ImportId"":""739_QID88""}","{""ImportId"":""740_QID88""}","{""ImportId"":""741_QID88""}","{""ImportId"":""742_QID88""}","{""ImportId"":""743_QID88""}","{""ImportId"":""744_QID88""}","{""ImportId"":""745_QID88""}","{""ImportId"":""746_QID88""}","{""ImportId"":""747_QID88""}","{""ImportId"":""748_QID88""}","{""ImportId"":""749_QID88""}","{""ImportId"":""750_QID88""}","{""ImportId"":""751_QID88""}","{""ImportId"":""752_QID88""}","{""ImportId"":""753_QID88""}","{""ImportId"":""754_QID88""}","{""ImportId"":""755_QID88""}","{""ImportId"":""756_QID88""}","{""ImportId"":""757_QID88""}","{""ImportId"":""758_QID88""}","{""ImportId"":""759_QID88""}","{""ImportId"":""760_QID88""}","{""ImportId"":""761_QID88""}","{""ImportId"":""762_QID88""}","{""ImportId"":""763_QID88""}","{""ImportId"":""764_QID88""}","{""ImportId"":""765_QID88""}","{""ImportId"":""766_QID88""}","{""ImportId"":""767_QID88""}","{""ImportId"":""768_QID88""}","{""ImportId"":""769_QID88""}","{""ImportId"":""770_QID88""}","{""ImportId"":""771_QID88""}","{""ImportId"":""772_QID88""}","{""ImportId"":""773_QID88""}","{""ImportId"":""774_QID88""}","{""ImportId"":""775_QID88""}","{""ImportId"":""776_QID88""}","{""ImportId"":""777_QID88""}","{""ImportId"":""778_QID88""}","{""ImportId"":""779_QID88""}","{""ImportId"":""780_QID88""}","{""ImportId"":""781_QID88""}","{""ImportId"":""782_QID88""}","{""ImportId"":""783_QID88""}","{""ImportId"":""784_QID88""}","{""ImportId"":""QID53_TEXT""}","{""ImportId"":""QID145""}","{""ImportId"":""QID89_TEXT""}","{""ImportId"":""QID97""}","{""ImportId"":""QID98""}","{""ImportId"":""QID104""}","{""ImportId"":""QID104_14_TEXT""}","{""ImportId"":""QID106""}","{""ImportId"":""QID99""}","{""ImportId"":""QID100_TEXT""}","{""ImportId"":""QID101_TEXT""}","{""ImportId"":""QID102_TEXT""}","{""ImportId"":""QID66""}","{""ImportId"":""QID66_10_TEXT""}","{""ImportId"":""QID67""}","{""ImportId"":""QID68""}","{""ImportId"":""QID68_9_TEXT""}","{""ImportId"":""QID69""}","{""ImportId"":""QID69_3_TEXT""}","{""ImportId"":""QID70""}","{""ImportId"":""QID70_7_TEXT""}","{""ImportId"":""QID71_TEXT""}","{""ImportId"":""QID72_TEXT""}","{""ImportId"":""QID73_TEXT""}","{""ImportId"":""QID134_1_1""}","{""ImportId"":""QID134_1_2""}","{""ImportId"":""QID134_1_3""}","{""ImportId"":""QID134_1_4""}","{""ImportId"":""QID134_2_1""}","{""ImportId"":""QID134_2_2""}","{""ImportId"":""QID134_2_3""}","{""ImportId"":""QID134_2_4""}","{""ImportId"":""QID134_3_1""}","{""ImportId"":""QID134_3_2""}","{""ImportId"":""QID134_3_3""}","{""ImportId"":""QID134_3_4""}","{""ImportId"":""QID134_5_1""}","{""ImportId"":""QID134_5_2""}","{""ImportId"":""QID134_5_3""}","{""ImportId"":""QID134_5_4""}","{""ImportId"":""QID134_6_1""}","{""ImportId"":""QID134_6_2""}","{""ImportId"":""QID134_6_3""}","{""ImportId"":""QID134_6_4""}","{""ImportId"":""QID134_7_1""}","{""ImportId"":""QID134_7_2""}","{""ImportId"":""QID134_7_3""}","{""ImportId"":""QID134_7_4""}","{""ImportId"":""QID134_8_1""}","{""ImportId"":""QID134_8_2""}","{""ImportId"":""QID134_8_3""}","{""ImportId"":""QID134_8_4""}","{""ImportId"":""QID134_9_1""}","{""ImportId"":""QID134_9_2""}","{""ImportId"":""QID134_9_3""}","{""ImportId"":""QID134_9_4""}","{""ImportId"":""QID134_10_1""}","{""ImportId"":""QID134_10_2""}","{""ImportId"":""QID134_10_3""}","{""ImportId"":""QID134_10_4""}","{""ImportId"":""QID134_11_1""}","{""ImportId"":""QID134_11_2""}","{""ImportId"":""QID134_11_3""}","{""ImportId"":""QID134_11_4""}","{""ImportId"":""QID142_FILE_ID""}","{""ImportId"":""QID142_FILE_NAME""}","{""ImportId"":""QID142_FILE_SIZE""}","{""ImportId"":""QID142_FILE_TYPE""}","{""ImportId"":""QID79_TEXT""}","{""ImportId"":""record_id""}","{""ImportId"":""ra_check""}","{""ImportId"":""check""}"
+2020-04-03 14:56:01,2020-04-03 16:06:34,0,49.214.208.31,100,4232,1,2020-04-03 16:07:12,R_1PXK6UEKoW3b46r,,,,,25.0478057861328125,121.53179931640625,anonymous,EN,80,3,5582116,,"Starting from Dec. 31, 2019, the Taiwan Centers for Disease Control conducts ""boarding quarantine"" on every direct flight from Wuhan, China, and sets up a thermographic camera on its connecting jet bridge.
+
+""Boarding quarantine"" (登機檢疫) is a concept in Chinese which is an action taken by quarantine staffs to board a plane after it lands and to quarantine everyone aboard and education them about existing disease-control-related regulations. Until the staffs make sure no one has lower respiratory tract infection symptoms (cough, asthma, etc.), the staffs will let everyone get off the plane.
+
+The policy ends on Jan 23, because, starting from Jan 23 10 a.m., all Wuhan's outbound transportation is closed.",11,,,,,,,,,,,,,,,,,,,,,,,,,,,171,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,81,,,,36,3,,Wuhan,,2,,1,2,,5,,7,Taiwan Centers for Disease Control,12-31-2019,12-31-2019,01-23-2020,04-03-2020,https://www.cdc.gov.tw/Bulletin/Detail/zicpvVlBKj-UVeZ5yWBrLQ?typeid=9,Taiwan Centers for Disease Control,"Taiwan CDC conducts boarding quarantine on planes from Wuhan from ",04-03-2020,https://www.dw.com/en/wuhan-lockdown-china-takes-extreme-measures-to-stop-virus-spread/a-52120126,DW News,Wuhan lockdown: China takes extreme measures to stop virus spread,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,F_3MmQI5Gv1VbH2jO,04-03-2020_Taiwan CDC conducts boarding quarantine on planes from Wuhan.zip,10505829,application/zip,"I added a definition of ""boarding quarantine"" in the description of the policy.",838881,,0
+2020-04-03 16:10:12,2020-04-03 16:19:55,0,49.214.208.31,100,582,1,2020-04-03 16:19:59,R_dhhzOdTWf0iB9vj,,,,,25.0478057861328125,121.53179931640625,anonymous,EN,80,3,3526794,,"Taiwan CDC cooperates with DeepQ Technology Corp. to add information about COVID-19 on Taiwan CDC's official line account (including introduction of the novel corona virus, preventive measures, precautions for returning nationals and residents, and the international COVID-19 epidemic)",16,,,,,,,,,,,,,,,,,,,,,,,,,,,171,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,4,,7,Taiwan CDC,01-29-2020,01-29-2020,,04-03-2020,https://www.cdc.gov.tw/Bulletin/Detail/0so3QVAZEqwADcevX04G9Q?typeid=9,Taiwan CDC,Taiwan CDC and DeepQ adds COVID-19 information on Taiwan CDC's official Line account,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,F_uljq20w36OFb9m1,04-03-2020_Taiwan CDC and DeepQ adds COVID-19 information on Taiwan CDC's official Line account.pdf,239031,application/pdf,,7348619,,0
+2020-04-03 16:20:11,2020-04-03 16:43:59,0,49.214.208.31,100,1428,1,2020-04-03 16:44:10,R_XyTCRvFvAjvdfTX,,,,,25.0478057861328125,121.53179931640625,anonymous,EN,80,3,313900,,Taiwan's Ministry of Health and Welfare releases 6 million surgical masks to the public per day (from Jan. 28 to Jan. 30) to be sold in convenient stores.,13,,,,,,,,,,,1,18 million surgical masks in total will be released in three days,,,,,,,,,,,,,,,171,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,79,171,,,,,,,,5,,1,10,,4,,2,,01-28-2020,01-28-2020,01-30-2020,04-03-2020,https://udn.com/news/story/7266/4309200,United Daily News,Taiwan Ministry of Health to release 18 million surgical masks,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,F_3JxuywQowtJTiE9,04-03-2020_Taiwan Ministry of Health to release 18 million surgical masks.pdf,1893058,application/pdf,,6005602,,0
+2020-04-03 20:32:52,2020-04-03 22:00:21,0,93.104.20.199,100,5248,1,2020-04-03 22:00:28,R_d4o8XWCye48l8Hf,,,,,48.1497039794921875,11.5850067138671875,anonymous,EN,156,3,,,"Russia Federation, January 31, 2020, began preparation for the evacuation of citizens from the territory of Wuhan city and Hubei province, China.",15,evacuation of citizens,,,,,,,,,,,,,,,,,,,,,,,,,beginning of the evacuation of citizens from Wuhan city and Hubei province,144,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5,,"1,3,4",,01-31-2020,02-01-2020,,01-31-2020,http://government.ru/orders/selection/401/39178/#,government committee,results of the Committee meeting,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,F_UDv2Wioixywb9zH,01-31-2020_results of the Committee meeting.pdf,208034,application/pdf,,9249703,,0
+2020-04-03 22:14:14,2020-04-03 22:44:01,0,93.104.20.199,100,1786,1,2020-04-03 22:44:03,R_2ZWhIvneALln0je,,,,,48.1497039794921875,11.5850067138671875,anonymous,EN,156,3,9492786,,"Russia. January 31 introduces External Border restrictions: temporary stops air traffic with China, except for flights from Moscow – Beijing and back, Moscow – Shanghai and back, Moscow-Guangzhou and back, Moscow-Hong Kong and back; and closes the Russian-Chinese and Russian-Mongolian border for Chinese citizens, except for holders of a residence permit from February 1",3,,,,,,4,,,,,,,,,,,,,,,,,,,,,144,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,79,36,,,,,,,,4,,1,1,,5,,"1,4,7","FSB, Ministry of transportation ",01-31-2020,02-01-2020,,01-31-2020,http://government.ru/orders/selection/401/39178/#,"government Committee ",results of the Committee meeting,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,F_2aVKZTUpAEahm79,01-31-2020_results of the Committee meeting.pdf,208034,application/pdf,,7048789,,0
+2020-04-03 23:20:32,2020-04-03 23:31:15,0,93.104.20.199,100,643,1,2020-04-03 23:31:17,R_1FxIruGtunfqUSk,,,,,48.1497039794921875,11.5850067138671875,anonymous,EN,156,3,9492786,,"Russia, 31 of January announces External Border Restrictions:  screening for coronavirus and isolation for Chinese citizens with a residence permit of the Russian Federation from February 1 ",3,,,,,,1,,,,,,,,,,,,,,,,,,,,,144,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,79,36,,,,,,,,7,,1,1,,5,,"1,5,7",FSB,01-31-2020,02-01-2020,,01-31-2020,http://government.ru/orders/selection/401/39178/#,"Government committee ",results of the Committee meeting,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,F_uy5WDs4cT4lmxxf,01-31-2020_results of the Committee meeting.pdf,208034,application/pdf,,3888760,,0
+2020-04-04 13:17:40,2020-04-04 13:53:31,0,102.166.220.151,100,2150,1,2020-04-04 13:53:33,R_1GBb6Vmavuycf6O,,,,,1,38,anonymous,EN,111,3,7759572,,"23 March 2020: South Africa is enforcing a ""21-day lockdown effective midnight on Thursday, March 26, 2020, to midnight on Thursday, 16 April 2020, for all of South Africa""",4,,,,,,,,,,,,,,,,,,,,,,,,,,,161,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,79,161,,,,,,,,5,,3,1,,3,"The categories of people who will be exempted from this lockdown are the following: health workers in the public and private sectors, emergency personnel, those in security services – such as the police, traffic officers, military medical personnel, soldiers – and other persons necessary for our response to the pandemic.","1,2,3,8",,03-23-2020,03-26-2020,04-16-2020,04-04-2020,http://www.thepresidency.gov.za/speeches/statement-president-cyril-ramaphosa-escalation-measures-combat-covid-19-epidemic%2C-union,"National Coronavirus Command Council ",Statement by President Cyril Ramaphosa on escalation of measures to combat the Covid-19 epidemic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,F_pSfSPqDTJJDwHlv,04-04-2020_President Cyril Ramaphosa Declares a 21-day Lockdown Effective Midnight Thursday 26 March 2020.pdf,337267,application/pdf,"The nation-wide lockdown will be enacted in terms of the Disaster Management Act, which means from midnight on Thursday 26 March until midnight on Thursday 16 April, all South Africans will have to stay at home.
+",453021,,0
+2020-04-04 15:44:36,2020-04-04 15:57:11,0,93.104.4.50,100,755,1,2020-04-04 15:57:13,R_3eqb6rKzviVLBjq,,,,,48.1497039794921875,11.5850067138671875,anonymous,EN,156,3,3341185,,"Russia. February 3. Restrictions of mass gatherings. By order of the Prime Minister, the investment forum is postponed.",5,,,,,,,,,,,,,,,,,,,,,,,,,,,144,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5,,1,,02-03-2020,02-03-2020,,02-03-2020,http://government.ru/docs/38911/,Government,Order of the Government of Russia,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,F_3KwukuZhDH4V6vQ,02-03-2020_order of the Government of Russia.pdf,125324,application/pdf,This policy applies only to a specific investment forum.,4042540,,0
+2020-04-04 17:11:59,2020-04-04 18:38:04,0,93.104.4.50,100,5165,1,2020-04-04 18:38:07,R_3Pzbt5NB30tlFPb,,,,,48.1497039794921875,11.5850067138671875,anonymous,EN,156,3,6887965,,"Ireland, 12 of March The Department of Education and Skills announces closure of schools until March 29th. The policy was extended until 12 of April.      ",8,,,,,,,,"1,2,3,4",,,,,,,,,,,,,,,,,,,80,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5,,"1,2,7","Department of education and skills ",03-12-2020,03-12-2020,04-12-2020,03-12-2020,https://www.education.ie/en/Press-Events/Press-Releases/2020-press-releases/12-march-2020-statement-from-the-department-of-education-and-skills.html,Department of Education and Skills,Statement from the Department of Education and Skills,04-01-2020,https://www.gov.ie/en/publication/cf9b0d-new-public-health-measures-effective-now-to-prevent-further-spread-o/?referrer=/en/publication/ea1c30-updated-measures-in-response-to-covid-19-coronavirus/," Department of Health and Department of the Taoiseach",Public Health Measures in place until 12 Apri,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,F_1IAYRqQRPM3qN1h,Ireland _education.zip,76593,application/zip,This entry is an extension of closure of schools,4264674,,0
+2020-04-04 19:17:36,2020-04-04 20:18:39,0,93.104.4.50,100,3662,1,2020-04-04 20:18:41,R_vCPwOJibqYtYwLv,,,,,48.1497039794921875,11.5850067138671875,anonymous,EN,156,3,5550303,,"United Kingdom Government February 3, announced to provide £20 million in funding to develop a new vaccine for coronavirus and other infectious diseases",13,,,,,,,,,,,8,,,,,,,,,,,,,,,,186,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,79,186,,,,,,,,9,,1,10,,5,,"1,2",,02-03-2020,02-03-2020,,02-03-2020,https://www.gov.uk/government/news/20m-announced-to-fund-vaccines-for-coronavirus-and-other-infectious-diseases,UK Government,"£20m announced to fund vaccines for coronavirus and other infectious diseases ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,F_sI0VNqcBgGTCyXv,02-03-2020_£20m announced to fund vaccines for coronavirus and other infectious diseases - GOV.UK.pdf,76574,application/pdf,,2489817,,1

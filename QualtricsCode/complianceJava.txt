@@ -1,0 +1,54 @@
+Qualtrics.SurveyEngine.addOnload(function()
+{
+	/*Place your JavaScript here to run when the page loads*/
+
+});
+
+Qualtrics.SurveyEngine.addOnReady(function()
+{
+jQuery("[id='dialog1']" ).dialog({ autoOpen: false});
+jQuery('body').on('click','.ui-widget-overlay',function(){ jQuery("[id='dialog1']").dialog('close'); });
+
+jQuery("[id='dialog2']" ).dialog({ autoOpen: false});
+jQuery('body').on('click','.ui-widget-overlay',function(){ jQuery("[id='dialog2']").dialog('close'); });
+	
+jQuery("[id='dialog3']" ).dialog({ autoOpen: false});
+jQuery('body').on('click','.ui-widget-overlay',function(){ jQuery("[id='dialog3']").dialog('close'); });
+	
+jQuery("[id='dialog4']" ).dialog({ autoOpen: false});
+jQuery('body').on('click','.ui-widget-overlay',function(){ jQuery("[id='dialog4']").dialog('close'); });
+
+jQuery("[id='dialog5']" ).dialog({ autoOpen: false});
+jQuery('body').on('click','.ui-widget-overlay',function(){ jQuery("[id='dialog5']").dialog('close'); });
+	
+jQuery( "#btn1" ).click(function() {
+jQuery("#dialog1").dialog( "option", "modal", true );
+jQuery("#dialog1").dialog( "open" );
+});
+jQuery( "#btn2" ).click(function() {
+jQuery("#dialog2").dialog( "option", "modal", true );
+jQuery("#dialog2").dialog( "open" );
+});
+jQuery( "#btn3" ).click(function() {
+jQuery("#dialog3").dialog( "option", "modal", true );
+jQuery("#dialog3").dialog( "open" );
+});
+
+jQuery( "#btn4" ).click(function() {
+jQuery("#dialog4").dialog( "option", "modal", true );
+jQuery("#dialog4").dialog( "open" );
+});
+
+
+jQuery( "#btn5" ).click(function() {
+jQuery("#dialog5").dialog( "option", "modal", true );
+jQuery("#dialog5").dialog( "open" );
+});
+
+});
+
+Qualtrics.SurveyEngine.addOnUnload(function()
+{
+	/*Place your JavaScript here to run when the page is unloaded*/
+
+});

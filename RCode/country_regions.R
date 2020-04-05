@@ -4,6 +4,7 @@
 if(Sys.info()['user'] == 'cindycheng'){
 	pathData = "/Users/cindycheng/Dropbox/corona_tscs/data"}
 
+ 
 # -----------------------------
 # Load packages
 # -----------------------------
@@ -97,16 +98,21 @@ country_regions_clean$Country = as.character(country_regions_clean$Country)
 country_regions_clean = country_regions_clean[order(country_regions_clean$Country),]
  
 
-# replace philippines regions with provinces
-	# RA Cheng-Hao Shen rightly pointed out that the proper administrative unit for the Phillipines is as follows
+## add Palestine
+country_regions_clean = country_regions_clean %>% add_row(Country = "Palestine")
 
+# per RA Cheng-Hao, change entries for Philippines to provinces instead
+# of autonomous regions as currently given by geonames
 philippines = read.csv(paste0(pathData, '/regions/List of Provinces of the Philippines.csv'), stringsAsFactors = FALSE, header = FALSE)
+country_regions_clean[which(country_regions_clean$Country == 'Philippines'), -c(1, 2)] = c(philippines$V1, NA, NA)
 
 
-country_regions_clean[which(country_regions_clean$Country == 'Philippines'),-c(1,2)] = c(philippines$V1, NA, NA)
+# reorder 
 
+country_regions_clean = country_regions_clean[order(country_regions_clean$Country),]
 
 write.csv(country_regions_clean , file = paste0(pathData, '/regions/country_region_clean.csv'), row.names = FALSE, na= "") 
+
 
  
 
