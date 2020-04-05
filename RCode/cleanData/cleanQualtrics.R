@@ -160,10 +160,12 @@ names(qualtrics)[which(names(qualtrics) %in% c("type_quarantine_days", "type_mas
 names(qualtrics)[grep(
   'type_health_resource_\\d_TEXT|type_health_resource_\\d\\d_TEXT',
   names(qualtrics)
-)] = c(
+)] =  c(
   'type_num_masks',
   'type_num_ventilators',
   'type_num_ppe',
+  'type_num_hand_sanit',
+  'type_num_test_kits',
   'type_other_health_materials',
   'type_num_hospitals',
   'type_num_quaranCen',
@@ -176,6 +178,7 @@ names(qualtrics)[grep(
   'type_num_volunt',
   'type_other_health_staff'
 )
+
 
 # rename/link names for provinces back to the country
 names(qualtrics)[grep('init_province', names(qualtrics))]  = paste0("init_prov_", gsub(" |\\-", '', c(

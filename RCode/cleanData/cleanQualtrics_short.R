@@ -45,6 +45,7 @@
 # setup -----------------------------
 
 pathData = "data"
+pathData = "/Users/cindycheng/Dropbox/corona_tscs/data/"
 
 ## load packages and functions
 
@@ -79,6 +80,7 @@ capwords <- function(s, strict = FALSE) {
 country_regions = read_csv(file = paste0(pathData, '/regions/country_region_clean.csv'))
 qualtrics = read_survey(paste0(pathData, '/CoronaNet/coronanet_raw_latest.csv'))
 
+ 
 # This script filters out bad records (need to remove/fix these manually so we don't do this)
 
 source("RCode/filter_bad_records.R")
@@ -154,6 +156,7 @@ qualtrics$policy_id = ifelse(
 
 # rename variables ----------------------------------
 
+ 
 # rename all type questions that ask extra detail about the 'number' of a policy using the same variable name format
 names(qualtrics)[which(names(qualtrics) %in% c("type_quarantine_days", "type_mass_gathering"))] = c('type_num_quarantine_days', 'type_num_mass_gathering')
 names(qualtrics)[grep(
@@ -163,6 +166,8 @@ names(qualtrics)[grep(
   'type_num_masks',
   'type_num_ventilators',
   'type_num_ppe',
+  'type_num_hand_sanit',
+  'type_num_test_kits',
   'type_other_health_materials',
   'type_num_hospitals',
   'type_num_quaranCen',
@@ -180,7 +185,7 @@ names(qualtrics)[grep(
 names(qualtrics)[grep('init_province', names(qualtrics))]  = paste0("init_prov_", gsub(" |\\-", '', c(
   'European Union', country_regions$Country
 )))
-
+ 
 # remove empty columns ----------------------------------
 # find empty columns, only delete empty columns of provinces or sources
 empty_columns = names(which(apply(qualtrics, 2, function(x) {
