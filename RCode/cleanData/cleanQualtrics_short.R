@@ -45,7 +45,7 @@
 # setup -----------------------------
 
 pathData = "data"
-pathData = "/Users/cindycheng/Dropbox/corona_tscs/data/"
+
 
 ## load packages and functions
 
@@ -94,6 +94,7 @@ source("RCode/recode_records.R")
 
 # remove all diacritics from the text entries for init_city, target_city, target_other
 
+# https://github.com/tidyverse/stringr/issues/149 do as hadley does...
 ## !!! NOTE probably should do this for all text entries
 qualtrics$init_city = stringi::stri_trans_general(qualtrics$init_city, "Latin-ASCII")
 qualtrics$target_city  = stringi::stri_trans_general(qualtrics$target_city , "Latin-ASCII")
@@ -221,6 +222,7 @@ country_regions_long = country_regions %>%
 
 # match province code to actual province name
 qualtrics <- left_join(qualtrics,country_regions_long,by="index_prov")
+
 
 # combining info on target countries --------------------
 
@@ -351,15 +353,18 @@ qualtrics = qualtrics %>%
   # !!! note should probably create code to clean all @'s from text entries before hand
   separate(type_sub_num, c("type_sub", 'type_sub_num'),  "@", fill = 'right')
 
-
+ 
 # clean names so that they match what they originally were in the codebook
 qualtrics$type_sub  = gsub('type_num_', '', qualtrics$type_sub) %>% capwords()
 qualtrics$type_sub = qualtrics$type_sub %>% recode(
   MedCen = "Temporary Medical Centers",
   Ppe = "Personal Protective Equipment (e.g. gowns; goggles)",
+  Hand_sanit = "Hand Sanitizer",
+  Test_kits  = "Test Kits",
   QuaranCen = "Temporary Quarantine Centers",
   Research = "Health Research Facilities",
   PubTest = "Public Testing Facilities (e.g. drive-in testing for COVID-19)"
+
 )
 
 # !!! NOTE still need to check if all the text entries for the number of a policy type make sense/find a standard format for them as much as possible
