@@ -19,6 +19,7 @@ data {
     int S; // number of suppression measures
     matrix[time_all,3] ortho_time;
     matrix[num_country,S] suppress;
+    matrix[num_country,time_all] time_outbreak_center;
     vector[time_all] count_outbreak;
     int country_pop[num_country];
     real phi_scale; // prior on how much change there could be in infection rate over time
@@ -28,7 +29,6 @@ transformed data {
   matrix[num_country,time_all] time_outbreak_trans2; // convert raw time numbers to ortho-normal polynomials
   matrix[num_country,time_all] time_outbreak_trans3; // convert raw time numbers to ortho-normal polynomials
   matrix[num_country,3] time_array[time_all]; 
-  matrix[num_country,time_all] time_outbreak_center;
   
   for(t in 1:time_all) {
     for(n in 1:num_country) {
@@ -54,9 +54,9 @@ transformed data {
   
   // need a centered time vector
   
-  for(n in 1:num_country) {
-    time_outbreak_center[n,] = (to_vector(time_outbreak[n,])' - mean(to_vector(time_outbreak[n,])))/sd(to_vector(time_outbreak[n,]));
-  }
+  // for(n in 1:num_country) {
+  //   time_outbreak_center[n,] = (to_vector(time_outbreak[n,])' - mean(to_vector(time_outbreak[n,])))/sd(to_vector(time_outbreak[n,]));
+  // }
     
 }
 parameters {
@@ -80,8 +80,7 @@ transformed parameters {
   
   for(t in 1:time_all) {
       //real num_low;
-      num_infected_high[,t] = alpha[2] + country_int + 
-                                        time_array[t]*poly + 
+      num_infected_high[,t] = alpha[2] + time_array[t]*poly + 
                                         world_infect*count_outbreak[t] +
                                         (suppress_effect[1]*suppress')' +
                                         + ((suppress_effect[2]*suppress') .* time_outbreak_center[,t]')';
@@ -127,41 +126,41 @@ model {
   
 }
 generated quantities {
-    vector[S] suppress_margin;
-    matrix[time_all,rows(suppress)] suppress_margin_time;
-  
-  for(s in 1:S) {
-    
-    //matrix[rows(suppress),cols(suppress)] suppress_high = suppress;
-    //matrix[rows(suppress),cols(suppress)] suppress_low = suppress;
-    //matrix[rows(suppress),rows(count_outbreak)] y_high;
-    //matrix[rows(suppress),rows(count_outbreak)] y_low;
-    //matrix[rows(suppress),rows(count_outbreak)] suppress_margin_time;
-    
-    
-    //suppress_high[,s] = suppress[,s] + setstep(suppress[,s]);
-    //suppress_low[,s] = suppress[,s] - setstep(suppress[,s]);
-    
-    
-    for(t in 1:time_all) {
-      
-        // y_high[,t] =  alpha[2] + country_int + 
-        //                                 time_array[t]*poly + 
-        //                                 world_infect*count_outbreak[t] +
-        //                                 (suppress_effect[1]*suppress_high')' +
-        //                                 ((suppress_effect[2]*suppress_high') .* time_outbreak_center[,t]')';
-        //                                 
-        // y_low[,t] = alpha[2] + country_int + 
-        //                                 time_array[t]*poly + 
-        //                                 world_infect*count_outbreak[t] +
-        //                                 (suppress_effect[1]*suppress_low')' +
-        //                                 ((suppress_effect[2]*suppress_low') .* time_outbreak_center[,t]')';
-                                        
-                                        
-        suppress_margin_time[t,s] = mean(inv_logit(num_infected_high[,t]) .* (suppress_effect[1,s] + suppress_effect[2,s] * time_outbreak_center[,t]));
-        //                                 
-    }
-    
-    suppress_margin[s] = mean(inv_logit(to_vector(suppress_margin_time)));
-  }
+  //   vector[S] suppress_margin;
+  //   matrix[time_all,rows(suppress)] suppress_margin_time;
+  // 
+  // for(s in 1:S) {
+  //   
+  //   //matrix[rows(suppress),cols(suppress)] suppress_high = suppress;
+  //   //matrix[rows(suppress),cols(suppress)] suppress_low = suppress;
+  //   //matrix[rows(suppress),rows(count_outbreak)] y_high;
+  //   //matrix[rows(suppress),rows(count_outbreak)] y_low;
+  //   //matrix[rows(suppress),rows(count_outbreak)] suppress_margin_time;
+  //   
+  //   
+  //   //suppress_high[,s] = suppress[,s] + setstep(suppress[,s]);
+  //   //suppress_low[,s] = suppress[,s] - setstep(suppress[,s]);
+  //   
+  //   
+  //   for(t in 1:time_all) {
+  //     
+  //       // y_high[,t] =  alpha[2] + country_int + 
+  //       //                                 time_array[t]*poly + 
+  //       //                                 world_infect*count_outbreak[t] +
+  //       //                                 (suppress_effect[1]*suppress_high')' +
+  //       //                                 ((suppress_effect[2]*suppress_high') .* time_outbreak_center[,t]')';
+  //       //                                 
+  //       // y_low[,t] = alpha[2] + country_int + 
+  //       //                                 time_array[t]*poly + 
+  //       //                                 world_infect*count_outbreak[t] +
+  //       //                                 (suppress_effect[1]*suppress_low')' +
+  //       //                                 ((suppress_effect[2]*suppress_low') .* time_outbreak_center[,t]')';
+  //                                       
+  //                                       
+  //       suppress_margin_time[t,s] = mean(inv_logit(num_infected_high[,t]) .* (suppress_effect[1,s] + suppress_effect[2,s] * time_outbreak_center[,t]));
+  //       //                                 
+  //   }
+  //   
+  //   suppress_margin[s] = mean(inv_logit(to_vector(suppress_margin_time)));
+  // }
 }

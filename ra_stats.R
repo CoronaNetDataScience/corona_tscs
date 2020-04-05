@@ -3,8 +3,9 @@
 require(dplyr)
 require(ggplot2)
 require(readr)
+require(tidyr)
 
-export <- read_csv("data/COVID-19 Government Response Tracker Database_April 3, 2020_04.51.csv") %>% 
+export <- read_csv("data/ra_data_pull.csv") %>% 
   slice(-c(1:2)) %>% 
   filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)") %>% 
   mutate(RecordedDate=lubridate::ymd_hms(RecordedDate),
@@ -74,3 +75,7 @@ export %>%
   arrange(desc(n)) %>% 
   select(Name="ra_name",`Count of Records`="n") %>% 
   write_csv("data/ra_leader_board.csv")
+
+# ra_houses <- distinct(export,ra_name) %>% 
+#   mutate(house=sample(c("Europe","Americas","Middle East and Africa","Asia"),size=n(),replace=T)) %>% 
+#   write_csv("data/house_assignments.csv")
