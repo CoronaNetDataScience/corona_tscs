@@ -32,6 +32,7 @@ require(datasets)
 require(extraDistr)
 require(patchwork)
 require(rstanarm) # for observed data modeling
+require(tidycensus)
 
 set.seed(662817)
 
@@ -111,6 +112,10 @@ vote_share <- filter(x,candidate=="Trump, Donald J.",
 
 state_gdp <- readxl::read_xlsx("data/qgdpstate0120_0_bea.xlsx",sheet="Table 3") %>% 
   mutate(gdp=(Q1 + Q2 + Q3 +Q4)/4)
+
+# US Census data - population & percent foreign-born
+
+
 
 # health data
 
@@ -205,7 +210,9 @@ combined <- group_by(combined,state) %>%
               "Public Health Funding",
               "gdp",
               "trump",
-              "day_emergency"), ~as.numeric(scale(.)))
+              "day_emergency"), ~as.numeric(scale(.))) %>% 
+  group_by(month_day) %>% 
+  mutate(world_infect=sum(outbreak_time>1))
 
 # create case dataset
 
@@ -240,14 +247,15 @@ colnames(outbreak_matrix) <- colnames(cases_matrix_num)
 
 time_outbreak_matrix <- t(apply(outbreak_matrix,1,cumsum))
 
-just_data <- distinct(select(combined,state,day_emergency,population,trump,air="Air Pollution",
+just_data <- distinct(select(ungroup(combined),state,day_emergency,population,trump,air="Air Pollution",
                       heart="Cardiovascular Deaths",
                       providers="Dedicated Health Care Provider",
                       young="Population under 18 years",
                       smoking="Smoking",
-                      gdp)) %>% arrange(state)
+                      gdp,
+                      public_health="Public Health Funding")) %>% arrange(state)
 
-covs <- scale(select(ungroup(just_data),-state,-population) %>% as.matrix)
+covs <- select(ungroup(just_data),-state,-population) %>% as.matrix
 
 # now give to Stan
 
@@ -364,7 +372,7 @@ rank1 <- all_est_state %>%
 Figure \@ref(fig:infectstate) shows the 5% - 95% high posterior density (HPD) intervals of the latent infection rate by state since January 1st. The intervals are shaded by the relative time when a state declared a state of emergency, which reveals that state of emergency declarations are correlated with higher infection rates. As can be seen, there is a sharp discontinuity in the plot around March 1st when infection rates began to increase. While it would appear that the rate of increase has leveled off in the last week, that is not a supported inference as the scale is the logit scale, so it is similar to the log scale in that higher numbers are farther away than they appear visually. Because the latent scale is not identified, the figure is only showing how the infection rates have evolved from zero to the true but unknown top infection rate. As such, it appears to be slowing as it reaches the top of the scale, but that is simply an illusion of logarithmic growth. 
 
 
-```{r suppress1,echo=F}
+```{r suppress2,echo=F}
 
 suppress_effect <- as.data.frame(us_fit,"suppress_effect") %>% 
   mutate(iter=1:n()) %>% 
@@ -499,8 +507,10 @@ if(run_model) {
 
 # calculate the same info but only with observed data
 
-obs_model <- stan_glm(cbind(combined$Difference,floor(combined$population/100) - combined$Difference) ~ I(outbreak_time^2) +
+if(run_model) {
+  obs_model <- stan_glm(cbind(combined$Difference,floor(combined$population/100) - combined$Difference) ~ I(outbreak_time^2) +
                    I(outbreak_time^3) +
+                     day_emergency*outbreak_time +
                         `Cardiovascular Deaths`*outbreak_time +
                         `Air Pollution`*outbreak_time +
                         `Dedicated Health Care Provider`*outbreak_time +
@@ -508,13 +518,19 @@ obs_model <- stan_glm(cbind(combined$Difference,floor(combined$population/100) -
                         `Population under 18 years`*outbreak_time +
                         `Public Health Funding`*outbreak_time +
                         gdp*outbreak_time +
-                        trump*outbreak_time,
+                        trump*outbreak_time +
+                     world_infect,
                       data=combined,
                  QR=TRUE,
                       family="binomial",
                  chains=1,cores=1)
 
 saveRDS(obs_model,"data/obs_model.rds")
+} else {
+  obs_model <- readRDS("data/obs_model.rds")
+}
+
+
 
 out_data <- mcmc_intervals_data(obs_model,regex_pars=":") %>% 
   filter(!grepl(x=parameter,pattern="I"))
@@ -749,7 +765,8 @@ over_all_time2 <- left_join(over_all_time2,tibble(variable=1:ncol(covs),
                       day_emergency="Date\nEmergency",
                       young="% Population\n<18",
                       smoking="% Smokers",
-                      trump="Trump\nVote Share"))
+                      trump="Trump\nVote Share",
+                      public_health="Public Health\nFunding"))
 
 over_all_sum2 <- left_join(over_all_sum2,tibble(variable=1:ncol(covs),
                                         label=colnames(covs))) %>% 
@@ -761,7 +778,8 @@ over_all_sum2 <- left_join(over_all_sum2,tibble(variable=1:ncol(covs),
                       day_emergency="Date\nEmergency",
                       young="% Population\n<18",
                       smoking="% Smokers",
-                      trump="Trump\nVote Share"))
+                      trump="Trump\nVote Share",
+                      public_health="Public Health\nFunding"))
 
 p3 <- over_all_sum2 %>%
   ggplot(aes(y=med_est,x=reorder(label,med_est))) +
@@ -821,16 +839,54 @@ plot_data2 <- left_join(plot_data2,tibble(variable=1:ncol(covs),
                       day_emergency="Date\nEmergency",
                       young="% Population\n<18",
                       smoking="% Smokers",
-                      trump="Trump\nVote Share"))
+                      trump="Trump\nVote Share",
+                      public_health="Public Health\nFunding"))
+
+plot_data3 <- mcmc_intervals_data(obs_model,pars=c("day_emergency",
+                                                   "trump",
+                                                   "`Air Pollution`",
+                                                   "`Cardiovascular Deaths`",
+                                                   "`Dedicated Health Care Provider`",
+                                                   "`Population under 18 years`",
+                                                   "Smoking",
+                                                   "gdp",
+                                                   "`Public Health Funding`",
+                                                   "day_emergency:outbreak_time",
+                                                   "outbreak_time:trump",
+                                                   "outbreak_time:`Air Pollution`",
+                                                   "outbreak_time:`Cardiovascular Deaths`",
+                                                   "outbreak_time:`Dedicated Health Care Provider`",
+                                                   "outbreak_time:`Population under 18 years`",
+                                                   "outbreak_time:Smoking",
+                                                   "outbreak_time:gdp",
+                                                   "outbreak_time:`Public Health Funding`")) %>% 
+  mutate(supp_type=rep(c(1,2),each=9),
+         variable=rep(1:9,2))
+
+# join back to labels 
+
+plot_data3 <- left_join(plot_data3,tibble(variable=1:ncol(covs),
+                                        label=colnames(covs))) %>% 
+  mutate(label=recode(label,
+                      air="Air\nQuality",
+                      providers="No.\nProviders",
+                      gdp="GDP",
+                      heart="Cardiovascular\nDeaths",
+                      day_emergency="Date\nEmergency",
+                      young="% Population\n<18",
+                      smoking="% Smokers",
+                      trump="Trump\nVote Share",
+                      public_health="Public Health\nFunding"))
 
 plot_data <- bind_rows(list(`Partially\nIdentified`=plot_data1,
-                            Identified=plot_data2),
+                            Identified=plot_data2,
+                            `Observed\nCases`=plot_data3),
                        .id="model")
 
 p1 <- plot_data %>% 
   filter(supp_type==1) %>% 
   ggplot(aes(y=m,x=reorder(label,m))) +
-  geom_pointrange(aes(ymin=ll,ymax=hh,colour=model),alpha=0.8,position=position_dodge(width=0.5)) +
+  geom_pointrange(aes(ymin=ll,ymax=hh,colour=model),alpha=0.8,position=position_dodge(width=0.5),size=.5) +
   theme_minimal() +
   xlab("")  +
   ylab("Effect on Proportion Infected") +
@@ -848,7 +904,7 @@ p2 <- plot_data %>%
   ggplot(aes(y=m,x=reorder(label,m))) +
     xlab("")  +
   ylab("Effect on Proportion Infected") +
-  geom_pointrange(aes(ymin=ll,ymax=hh,colour=model),alpha=0.8,position=position_dodge(width=0.5)) +
+  geom_pointrange(aes(ymin=ll,ymax=hh,colour=model),alpha=0.8,position=position_dodge(width=0.5),size=.5) +
   ggtitle("Time-Varying Effect on\nProportion Infected") +
   theme_minimal() +
     scale_color_brewer(type="qual") +
@@ -861,59 +917,24 @@ p2 <- plot_data %>%
 
 p1 + p2 + plot_annotation(tag_levels="A")
 
-ggsave("marginal.png")
+ggsave("effect_compare.png")
 
 ```
 
-```{r compmarg_old}
+```{r comptests,fig.cap="Comparison of Standardized Smoking Rates and COVID-19 Tests per 10,000 Residents by State"}
+
+check_tests <- group_by(combined,state,Smoking) %>% summarize(mean_tests=(mean(tests,na.rm=T)/population[1])*10000)
+
+check_tests %>% 
+  ggplot(aes(y=Smoking,x=mean_tests)) +
+    stat_smooth(method="lm",alpha=0.1) +
+  geom_text_repel(aes(label=state),alpha=0.8,segment.size=0) +
+  theme_minimal() +
+  theme(panel.grid = element_blank()) +
+  ylab("Smoking Rates (Standard Deviation)") +
+  xlab("Tests per 10,000 state residents")
 
 
-
-# marg_data_scale <- as.data.frame(us_fit_scale,"suppress_margin") %>% 
-#   mutate(model="Identified",iter=1:n()) %>% 
-#   gather(key="parameter",value="estimate",-iter,-model) %>% 
-#         mutate(variable=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?0?")),
-#          time_point=as.numeric(str_extract(parameter,"[1-9][0-9]?0?(?=\\])")),
-#          time_point=ymd(min(combined$month_day)) + days(time_point-1)) %>% 
-#   group_by(variable,model) %>% 
-#   summarize(med_est=median(estimate),
-#             high_est=quantile(estimate,.95),
-#             low_est=quantile(estimate,.05))
-# 
-# marg_data_noid <- as.data.frame(us_fit,"suppress_margin") %>% 
-#   mutate(model="Partially Identified",iter=1:n()) %>% 
-#   gather(key="parameter",value="estimate",-iter,-model) %>% 
-#         mutate(variable=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?0?")),
-#          time_point=as.numeric(str_extract(parameter,"[1-9][0-9]?0?(?=\\])")),
-#          time_point=ymd(min(combined$month_day)) + days(time_point-1)) %>% 
-#     group_by(variable,model) %>% 
-#   summarize(med_est=median(estimate),
-#             high_est=quantile(estimate,.95),
-#             low_est=quantile(estimate,.05))
-# 
-# marg_data <- bind_rows(marg_data_scale,marg_data_noid)
-# 
-# marg_data <- left_join(marg_data,tibble(variable=1:ncol(covs),
-#                                         label=colnames(covs))) %>% 
-#   mutate(label=recode(label,
-#                       air="Air\nQuality",
-#                       providers="No.\nProviders",
-#                       gdp="GDP",
-#                       heart="Cardiovascular\nDeaths",
-#                       day_emergency="Date\nEmergency",
-#                       young="% Population\n<18",
-#                       smoking="% Smokers",
-#                       trump="Trump\nVote Share"))
-# 
-# marg_data %>% 
-#   ggplot(aes(y=med_est,x=label)) +
-#   geom_pointrange(aes(ymin=low_est,ymax=high_est),alpha=0.5) +
-#   theme_minimal() +
-#   geom_hline(yintercept = 0,linetype=2) +
-#   theme(panel.grid = element_blank(),
-#         axis.text.x=element_text(angle = 90)) +
-#   coord_flip() +
-#   facet_wrap(~model,scales="free")
 
 
 ```

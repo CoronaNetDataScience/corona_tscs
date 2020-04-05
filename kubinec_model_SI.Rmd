@@ -24,6 +24,7 @@ require(historydata)
 require(readr)
 require(datasets)
 require(extraDistr)
+require(rstanarm)
 
 set.seed(662817)
 
@@ -44,11 +45,11 @@ In this document I put forward a model for the rate of infected people $I_{ct} \
 The unobserved infection rate $I_{ct}$ is a function of the following parameters:
 
 \begin{align}
-Pr(I_{ct}|T=t) \sim Beta(&\alpha_1 + \alpha_c + \beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct'}>0) \forall t' \in t'<t + \textbf{1}\beta_{S1} + \\
+Pr(I_{ct}|T=t) \sim Beta(&\alpha_1 + \beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct'}>0) \forall t' \in t'<t + \textbf{1}\beta_{S1} + \\
                         &\beta_{I1}t_o + \beta_{I2}t_o^2 + \beta_{I3}t_o^3 + \textbf{1}\beta_{S2},\phi)
 \end{align}
 
-Where $g(\cdot)$ is the inverse logit function, $\alpha_c$ are country-level intercepts (less one for identification), $\beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct_a-1}>0) \forall t' \in t'<t$ is the sum of countries with at least one case of infection in the world at any previous time point, and the three $\beta_{Ii}$ are polynomial coefficients of post-outbreak time points $t_o$. The sum of countries parameter measures the spread of the virus due to travel across state borders, and as such will increase rapidly as more states are infected. By contrast, the polynomial time trends represent possible within-state transmission of the virus, which can cause exponentially growing case counts compared to the linear sum of infected countries parameter. Finally, the parameter $\phi$ is a dispersion parameter governing how precise the infection rate estimate is. 
+Where $g(\cdot)$ is the inverse logit function, $\beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct_a-1}>0) \forall t' \in t'<t$ is the sum of countries with at least one case of infection in the world at any previous time point, and the three $\beta_{Ii}$ are polynomial coefficients of post-outbreak time points $t_o$. The sum of countries parameter measures the spread of the virus due to travel across state borders, and as such will increase rapidly as more states are infected. By contrast, the polynomial time trends represent possible within-state transmission of the virus, which can cause exponentially growing case counts compared to the linear sum of infected countries parameter. Finally, the parameter $\phi$ is a dispersion parameter governing how precise the infection rate estimate is. 
 
 Given these two primary ways that the infection rate can increase, there are two ways that possible suppression measures targeted at the virus can enter the model. The first is a constant factor, $\textbf{1}\beta_{S1}$, which is an indicator function that is equal to **1** if a country has taken suppression measures and **0** otherwise. This constant parameter is meant to capture the ability of countries or regions to stop the spread of transmission due to foreign travelers arriving in the country/region, which occurs at a roughly constant level over time. 
 
@@ -105,7 +106,6 @@ As I will show, no other identification restrictions are necessary to estimate t
 \beta_{qc} &\sim E(\sigma_q)\\
 \sigma_q &\sim E(.1)\\
 \beta_{Si} &\sim N(0,2)\\
-\alpha_c &\sim N(0,3)\\
 \beta_{Ii} &\sim N(0,10)\\
 \alpha_1 &\sim N(0,10)\\
 \alpha_2 &\sim N(0,10)
@@ -123,11 +123,10 @@ Because this model is fully generative, we can simulate it using Monte Carlo met
 
 # simulation parameters
 num_country <- 100
-# unobserved country-level heterogeneity for outbreak onset
-country_int <- c(0,sort(rnorm(num_country-1,0,.25)))
+
 time_points <- 100
 # allows for linear growth that later becomes explosive
-polynomials <- c(.03,0.007,-0.0001)
+polynomials <- c(.03,0.0003,-0.00001)
 
 # factor that determines how many people a country is willing/able to test
 
@@ -145,8 +144,8 @@ t1 <- c(1,rep(0,num_country-1))
 # first is for preventing domestic transmission from occuring
 # second is for preventing further domestic transmission once it starts
 
-suppress1 <- -0.8
-suppress2 <- -0.05
+suppress1 <- -0.5
+suppress2 <- -0.03
 
 # high value of phi = high over-time stability
 phi <- c(300,300)
@@ -296,8 +295,32 @@ sim_data <- list(time_all=time_points,
                  ortho_time=ortho_time,
                  tests=check1$tested,
                  count_outbreak=as.numeric(scale(apply(check1$time_counts,2,function(c) sum(c>0)))),
-                 time_outbreak=check1$time_counts,
+                 time_outbreak=matrix(scale(c(check1$time_counts)),nrow=nrow(check1$time_counts),
+                                                   ncol=ncol(check1$time_counts)),
                  suppress=suppress_measures)
+
+# need to make a regular type data frame to do observed modeling with rstanarm
+
+obs_data <- as_tibble(check1$case_count) %>% 
+  mutate(num_country=1:n()) %>% 
+  gather(key="time_points",value="cases",-num_country)
+  
+
+# join in outbreak timing + covariates
+
+time_data <- as_tibble(sim_data$time_outbreak) %>% 
+  mutate(num_country=1:n()) %>% 
+  gather(key="time_points",value="time_outbreak",-num_country) %>% 
+  mutate(time_points=stringr::str_extract(time_points,"[0-9]+"))
+
+obs_data <- left_join(obs_data,time_data,by=c("time_points","num_country")) %>% 
+  left_join(tibble(country_pop=country_pop,
+                   suppress=suppress_measures,
+                   num_country=1:length(country_pop)),by="num_country") %>% 
+  mutate(time_points=as.numeric(time_points),
+         time_points=as.numeric(scale(time_points))) %>% 
+  left_join(tibble(count_outbreak=sim_data$count_outbreak,
+                   time_points=1:time_points))
 
 if(run_model) {
   
@@ -307,9 +330,15 @@ if(run_model) {
 
 pan_model_est <- sampling(pan_model,data=sim_data,chains=2,cores=2,iter=1200,warmup=800,init=init_vals)
 
+naive_model <- stan_glm(cbind(obs_data$cases,obs_data$country_pop-obs_data$cases)~poly(time_points,3) +
+                          count_outbreak +
+                          suppress*time_outbreak)
+
 saveRDS(pan_model_est,"data/pan_model_est.rds")
+saveRDS(naive_model,"data/naive_model_sim.rds")
 } else {
   pan_model_est <- readRDS("data/pan_model_est.rds")
+  naive_model <- readRDS("data/naive_model_sim.rds")
 }
 
 ```
