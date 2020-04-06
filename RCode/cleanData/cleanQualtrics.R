@@ -45,7 +45,7 @@
 # setup -----------------------------
 
 pathData = "data"
-
+path = "/Users/cindycheng/Dropbox/corona_tscs/"
 ## load packages and functions
 
 library(tidyr)
@@ -76,27 +76,28 @@ capwords <- function(s, strict = FALSE) {
 # because the TUM has not purchased one
 # .csv downloads it is!
 
-country_regions = read_csv(file = paste0(pathData, '/regions/country_region_clean.csv'))
-qualtrics = read_survey(paste0(pathData, '/CoronaNet/coronanet_raw_latest.csv'))
+country_regions = read_csv(file = paste0(path, '/data/regions/country_region_clean.csv'))
+qualtrics = read_survey(paste0(path, '/data/CoronaNet/coronanet_raw_latest.csv'))
 
-# This script filters out bad records (need to remove/fix these manually so we don't do this)
-
-source("RCode/filter_bad_records.R")
-
-# This script manually recodes values
-# Also should be fixed so we don't do this
-
-source("RCode/recode_records.R")
 
 # text entry cleaning ----------------------------------
+## do this first before filtering out bad records/recoding values so that all text values have diacritics removed from them
+## !!! NOTE probably should do this for all text entries
 
 # remove all diacritics from the text entries for init_city, target_city, target_other
-
-## !!! NOTE probably should do this for all text entries
 qualtrics$init_city = stringi::stri_trans_general(qualtrics$init_city, "Latin-ASCII")
 qualtrics$target_city  = stringi::stri_trans_general(qualtrics$target_city , "Latin-ASCII")
 qualtrics$target_other  = stringi::stri_trans_general(qualtrics$target_other , "Latin-ASCII")
 qualtrics$target_city[which(qualtrics$target_city == 'bogota')] = "Bogota"
+
+
+# This script filters out bad records (need to remove/fix these manually so we don't do this)
+source(paste0(path, "/RCode/validation/filter_bad_records.R"))
+
+# This script manually recodes values
+# Also should be fixed so we don't do this
+ 
+source(paste0(path, "/RCode/validation/recode_records.R"))
 
 # replace entries with documented corrected entries as necessary ----------------------------------
 
@@ -221,6 +222,8 @@ country_regions_long = country_regions %>%
 # match province code to actual province name
 qualtrics <- left_join(qualtrics,country_regions_long,by="index_prov")
 
+
+
 # combining info on target countries --------------------
 
 
@@ -277,6 +280,7 @@ qualtrics = qualtrics %>%
 # and think about how we want to deal with the 'All' countries entry
 
 
+
 ### for first version, don't break out target provinces/cities into separate rows
 # but code for doing so is below
 
@@ -290,8 +294,13 @@ qualtrics = qualtrics %>%
 # check target_other variable text entries are standardized
 #  !!!! NOTE haven't done this yet, not necessary for formatting data
 # but we should def do this at some point
-table(qualtrics$target_other)
+table(qualtrics$target_other) %>% names() %>%  unique() %>% length()
 
+names(qualtrics)
+# note that Palestine/Gaza wasn't an option in the target_country/target_province survey before
+
+
+ 
 # check target_who_what variable text entries are standardized
 #  !!!! NOTE haven't done this yet, not necessary for formatting data
 # but we should def do this
@@ -354,6 +363,8 @@ qualtrics$type_sub  = gsub('type_num_', '', qualtrics$type_sub) %>% capwords()
 qualtrics$type_sub = qualtrics$type_sub %>% recode(
   MedCen = "Temporary Medical Centers",
   Ppe = "Personal Protective Equipment (e.g. gowns; goggles)",
+  Hand_sanit = "Hand Sanitizer",
+  Test_kits  = "Test Kits",
   QuaranCen = "Temporary Quarantine Centers",
   Research = "Health Research Facilities",
   PubTest = "Public Testing Facilities (e.g. drive-in testing for COVID-19)"
@@ -578,8 +589,9 @@ qualtrics[which(
     qualtrics$type_sub_cat != "Other Restricted Businesses"
 ), c('type_sub_cat_other')] = NA
 
+dim(qualtrics)
 
 # save clean file ---------------
 
-save(qualtrics,
+saveRDS(qualtrics,
      file = paste0(pathData, "/coronaNet/coranaNetData_clean.rds"))
