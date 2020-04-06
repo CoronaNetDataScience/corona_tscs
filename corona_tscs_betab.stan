@@ -29,7 +29,6 @@ transformed data {
   matrix[num_country,time_all] time_outbreak_trans2; // convert raw time numbers to ortho-normal polynomials
   matrix[num_country,time_all] time_outbreak_trans3; // convert raw time numbers to ortho-normal polynomials
   matrix[num_country,3] time_array[time_all]; 
-  //matrix[num_country,time_all] time_outbreak_center;
   
   for(t in 1:time_all) {
     for(n in 1:num_country) {
@@ -52,13 +51,6 @@ transformed data {
                                 append_col(time_outbreak_trans2[,t],
                                             time_outbreak_trans3[,t]));
   }
-  
-  // need a centered time vector
-  
-  // for(n in 1:num_country) {
-  //   time_outbreak_center[n,] = (to_vector(time_outbreak[n,])' - mean(to_vector(time_outbreak[n,])))/sd(to_vector(time_outbreak[n,]));
-  // }
-    
 }
 parameters {
   vector[3] poly; // polinomial function of time
@@ -69,11 +61,10 @@ parameters {
   // we assume that as infection rates increase, more tests will be conducted
   vector[2] alpha; // other intercepts
   vector<lower=0>[2] phi; // shape parameter for infected
-  vector[num_country-1] country_int_free; // varying intercepts by country - 1 for identification
   real<lower=0> sigma_test_raw; // estimate of between-state testing heterogeneity
 }
 transformed parameters {
-  vector[num_country] country_int = append_row(0,country_int_free); // not strictly necessary but centers around 0
+
   matrix[num_country,time_all] num_infected_high; // modeled infection rates for domestic transmission
   
   
@@ -99,7 +90,6 @@ model {
     suppress_effect[i] ~ normal(0,2);
   
   finding ~ exponential(.1);
-  country_int_free ~ normal(0,3);
   sigma_test_raw ~ exponential(.1);
   country_test_raw ~ exponential(sigma_test_raw); // more likely near the middle than the ends
   

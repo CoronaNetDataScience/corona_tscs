@@ -5,7 +5,7 @@ author: |
   | New York University Abu Dhabi
 date: "April 1st, 2020"
 toc: false
-csl: science.csl
+csl: nature.csl
 output: 
   #bookdown::word_document2
   bookdown::pdf_document2:
@@ -45,7 +45,7 @@ system2("git",args=c("-C ~/covid-19-data","pull"))
 
 # whether to run model (it will take a few hours) or load saved model from disk
 
-run_model <- T
+run_model <- F
 
 pan_model <- stan_model("corona_tscs_betab.stan")
 
@@ -823,6 +823,26 @@ Plot A of Figure \@ref(fig:compmarg), by comparison, does not reveal many inter-
 
 
 ```{r compmarg,fig.cap="Comparison of Effects from Identified and Partially-Identified Models"}
+
+plot_data1 <- mcmc_intervals_data(us_fit,regex_pars ="effect") %>% 
+  mutate(supp_type=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?0?")),
+         variable=as.numeric(str_extract(parameter,"[1-9]?0?(?=\\])")))
+
+# join back to labels 
+
+plot_data1 <- left_join(plot_data1,tibble(variable=1:ncol(covs),
+                                        label=colnames(covs))) %>% 
+  mutate(label=recode(label,
+                      air="Air\nQuality",
+                      providers="No.\nProviders",
+                      gdp="GDP",
+                      heart="Cardiovascular\nDeaths",
+                      day_emergency="Date\nEmergency",
+                      young="% Population\n<18",
+                      smoking="% Smokers",
+                      trump="Trump\nVote Share",
+                      public_health="Public Health\nFunding"))
+
 plot_data2 <- mcmc_intervals_data(us_fit_scale,regex_pars ="effect") %>% 
   mutate(supp_type=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?0?")),
          variable=as.numeric(str_extract(parameter,"[1-9]?0?(?=\\])")))

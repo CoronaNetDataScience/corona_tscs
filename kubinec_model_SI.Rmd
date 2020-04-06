@@ -45,15 +45,15 @@ In this document I put forward a model for the rate of infected people $I_{ct} \
 The unobserved infection rate $I_{ct}$ is a function of the following parameters:
 
 \begin{align}
-Pr(I_{ct}|T=t) \sim Beta(&\alpha_1 + \beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct'}>0) \forall t' \in t'<t + \textbf{1}\beta_{S1} + \\
-                        &\beta_{I1}t_o + \beta_{I2}t_o^2 + \beta_{I3}t_o^3 + \textbf{1}\beta_{S2},\phi)
+Pr(I_{ct}|T=t) \sim Beta(&\alpha_1 + \beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct'}>0) \forall t' \in t'<t + \beta_{S1}X_{c} + \\
+                        &\beta_{I1}t_o + \beta_{I2}t_o^2 + \beta_{I3}t_o^3 + \beta_{S2}X_{c},\phi)
 \end{align}
 
 Where $g(\cdot)$ is the inverse logit function, $\beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct_a-1}>0) \forall t' \in t'<t$ is the sum of countries with at least one case of infection in the world at any previous time point, and the three $\beta_{Ii}$ are polynomial coefficients of post-outbreak time points $t_o$. The sum of countries parameter measures the spread of the virus due to travel across state borders, and as such will increase rapidly as more states are infected. By contrast, the polynomial time trends represent possible within-state transmission of the virus, which can cause exponentially growing case counts compared to the linear sum of infected countries parameter. Finally, the parameter $\phi$ is a dispersion parameter governing how precise the infection rate estimate is. 
 
-Given these two primary ways that the infection rate can increase, there are two ways that possible suppression measures targeted at the virus can enter the model. The first is a constant factor, $\textbf{1}\beta_{S1}$, which is an indicator function that is equal to **1** if a country has taken suppression measures and **0** otherwise. This constant parameter is meant to capture the ability of countries or regions to stop the spread of transmission due to foreign travelers arriving in the country/region, which occurs at a roughly constant level over time. 
+Given these two primary ways that the infection rate can increase, there are two ways that possible suppression measures targeted at the virus can enter the model. The first is a constant factor, $\beta_{S1}X_c$, which is an continous covariate indicating the strength of country-level suppression measures $X_c$. This constant parameter is meant to capture the ability of countries or regions to stop the spread of transmission due to foreign travelers arriving in the country/region, which occurs at a roughly constant level over time. 
 
-The second way suppression measures enter the model is through $\textbf{1}\beta_{S2}$, which can increase over time as the virus increases. This parameter reflects possible social distancing measures which will grow more effective as domestic transmission of the virus increases (i.e. as the polynomial time trend takes off). As such, it is assumed that any deviation from the common domestic virus transmission pattern is due to these time-varying suppression measures.
+The second way suppression measures enter the model is through $\beta_{S2}X_c$, which can increase over time as the virus increases. This parameter reflects possible measures which will grow more effective as domestic transmission of the virus increases (i.e. as the polynomial time trend takes off). As such, it is assumed that any deviation from the common domestic virus transmission pattern is due to these time-varying suppression measures.
 
 Once the outbreak has started in country $c$, which is indicated by a positive case count in time $t-1$, a time counter $t_O=1$ starts for that country and increases by 1 for each following time point until $T$.
 
@@ -129,8 +129,15 @@ time_points <- 100
 polynomials <- c(.03,0.0003,-0.00001)
 
 # factor that determines how many people a country is willing/able to test
+# countries that suppress or don't suppress
+# induce correlation between the two
 
-country_test <- rnorm(num_country,5,0.25)
+ cor_vars <- MASS::mvrnorm(n=num_country,mu=c(0,5),
+                              Sigma=matrix(c(1,-.5,-.5,1),2,2))
+
+
+country_test <- cor_vars[,2]
+suppress_measures <- cor_vars[,1]
 
 # size of countries
 
@@ -149,10 +156,6 @@ suppress2 <- -0.03
 
 # high value of phi = high over-time stability
 phi <- c(300,300)
-
-# countries that suppress or don't suppress
-
-suppress_measures <- as.numeric(runif(num_country)>0.5)
 
 # parameter governing how hard it is to find infected people and test them
 # strictly positive
@@ -244,7 +247,7 @@ all_out <- bind_rows(list(time_counts=as_tibble(check1$time_counts),
                           `Number of Tests`=as_tibble(check1$tested)),.id="Series")
 
 all_out$country <- rep(paste0("country_",1:num_country),times=length(check1))
-all_out$suppress_measures <- factor(rep(suppress_measures,times=length(check1)),labels=c("No","Yes"))
+all_out$suppress_measures <- rep(suppress_measures,times=length(check1))
 
 all_out %>% 
   gather(key = "time_id",value="indicator",-Series,-country,-suppress_measures) %>% 
@@ -284,20 +287,23 @@ ortho_time <- poly(scale(1:time_points),degree=3)
 
 init_vals <- function() {
   list(phi1=100,
-       phi2=100)
+       phi2=100,
+       alpha=c(-5,0))
 }
 
 sim_data <- list(time_all=time_points,
                  num_country=num_country,
                  country_pop=country_pop,
                  cases=check1$case_count,
-                 phi_scale=1/300,
+                 S=1,
+                 phi_scale=1/100,
                  ortho_time=ortho_time,
                  tests=check1$tested,
                  count_outbreak=as.numeric(scale(apply(check1$time_counts,2,function(c) sum(c>0)))),
-                 time_outbreak=matrix(scale(c(check1$time_counts)),nrow=nrow(check1$time_counts),
+                 time_outbreak=check1$time_counts,
+                 time_outbreak_center=matrix(scale(c(check1$time_counts),scale=F),nrow=nrow(check1$time_counts),
                                                    ncol=ncol(check1$time_counts)),
-                 suppress=suppress_measures)
+                 suppress=as.matrix(suppress_measures))
 
 # need to make a regular type data frame to do observed modeling with rstanarm
 
@@ -318,9 +324,9 @@ obs_data <- left_join(obs_data,time_data,by=c("time_points","num_country")) %>%
                    suppress=suppress_measures,
                    num_country=1:length(country_pop)),by="num_country") %>% 
   mutate(time_points=as.numeric(time_points),
-         time_points=as.numeric(scale(time_points))) %>% 
+         time_points_scale=as.numeric(scale(time_points,scale=F))) %>% 
   left_join(tibble(count_outbreak=sim_data$count_outbreak,
-                   time_points=1:time_points))
+                   time_points=as.numeric(1:time_points)),by="time_points")
 
 if(run_model) {
   
@@ -330,9 +336,14 @@ if(run_model) {
 
 pan_model_est <- sampling(pan_model,data=sim_data,chains=2,cores=2,iter=1200,warmup=800,init=init_vals)
 
-naive_model <- stan_glm(cbind(obs_data$cases,obs_data$country_pop-obs_data$cases)~poly(time_points,3) +
+naive_model <- stan_glm(cbind(cases,country_pop-cases)~poly(time_points_scale,3) +
                           count_outbreak +
-                          suppress*time_outbreak)
+                          suppress + 
+                          suppress:time_outbreak,
+                        data=obs_data,
+                        family="binomial",
+                        cores=1,
+                        chains=1)
 
 saveRDS(pan_model_est,"data/pan_model_est.rds")
 saveRDS(naive_model,"data/naive_model_sim.rds")
@@ -359,7 +370,7 @@ all_est <- as.data.frame(pan_model_est,"num_infected_high") %>%
          time_point=as.numeric(str_extract(variable,"[1-9][0-9]?0?(?=\\])")))
 
 all_est <- left_join(all_est,tibble(country_num=1:num_country,
-                                    suppress_measures=factor(suppress_measures,labels=c("No","Yes"))),by="country_num")
+                                    suppress_measures=suppress_measures),by="country_num")
 
 all_est %>% 
   ggplot(aes(y=med_est,x=time_point)) +
@@ -383,7 +394,7 @@ We see very good recovery of the estimates from the model given the observed dat
 
 require(bayesplot)
 
-mcmc_hist(as.array(pan_model_est,c("suppress_effect[1]","suppress_effect[2]")))
+mcmc_hist(pan_model_est,regex_pars=c("suppress"))
 
 ```
 

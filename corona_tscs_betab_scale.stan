@@ -68,11 +68,9 @@ parameters {
   // we assume that as infection rates increase, more tests will be conducted
   vector[2] alpha; // other intercepts
   vector<lower=0>[2] phi; // shape parameter for infected
-  vector[num_country-1] country_int_free; // varying intercepts by country - 1 for identification
   real<lower=0> sigma_test_raw; // estimate of between-state testing heterogeneity
 }
 transformed parameters {
-  vector[num_country] country_int = append_row(0,country_int_free); // not strictly necessary but centers around 0
   matrix[num_country,time_all] num_infected_high; // modeled infection rates for domestic transmission
   
   
@@ -99,7 +97,6 @@ model {
   
   
   finding ~ exponential(5);
-  country_int_free ~ normal(0,3);
   sigma_test_raw ~ exponential(.1);
   country_test_raw ~ exponential(sigma_test_raw); // more likely near the middle than the ends
   
