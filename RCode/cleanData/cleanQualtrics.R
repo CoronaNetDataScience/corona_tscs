@@ -45,7 +45,7 @@
 # setup -----------------------------
 
 pathData = "data"
-path = "/Users/cindycheng/Dropbox/corona_tscs/"
+
 ## load packages and functions
 
 library(tidyr)
@@ -98,6 +98,7 @@ source(paste0(path, "/RCode/validation/filter_bad_records.R"))
 # Also should be fixed so we don't do this
  
 source(paste0(path, "/RCode/validation/recode_records.R"))
+
 
 # replace entries with documented corrected entries as necessary ----------------------------------
 
@@ -216,13 +217,19 @@ qualtrics = qualtrics %>%
 
 # reshape country_regions data to long format
 country_regions_long = country_regions %>%
-  gather(key="p_num",value="p_name",-Country,-ISO2) %>% 
+  gather(key="p_num",value="init_pov",-Country,-ISO2) %>% 
   mutate(index_prov=paste0(Country,p_num))
 
 # match province code to actual province name
 qualtrics <- left_join(qualtrics,country_regions_long,by="index_prov")
 
 
+qualtrics[which(qualtrics$target_other == 'Thuringia'),] 
+
+qualtrics[which(qualtrics$target_other == 'Thuringia'),] %>% c()
+
+table(qualtrics$target_other)
+table(qualtrics$target_region_14_TEXT)
 
 # combining info on target countries --------------------
 
