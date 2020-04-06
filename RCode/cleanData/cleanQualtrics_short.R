@@ -83,12 +83,12 @@ qualtrics = read_survey(paste0(pathData, '/CoronaNet/coronanet_raw_latest.csv'))
  
 # This script filters out bad records (need to remove/fix these manually so we don't do this)
 
-source("RCode/filter_bad_records.R")
+source("RCode/validation/filter_bad_records.R")
 
 # This script manually recodes values
 # Also should be fixed so we don't do this
 
-source("RCode/recode_records.R")
+source("RCode/validation/recode_records.R")
 
 # text entry cleaning ----------------------------------
 
