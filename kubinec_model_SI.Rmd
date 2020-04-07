@@ -122,7 +122,7 @@ Because this model is fully generative, we can simulate it using Monte Carlo met
 ```{r onset,fig.width=7,fig.height=6,fig.cap="Simulation of Observed Tests and Cases Given Unobserved Infectious Process"}
 
 # simulation parameters
-num_country <- 10
+num_country <- 50
 
 time_points <- 100
 # allows for linear growth that later becomes explosive
@@ -133,7 +133,7 @@ polynomials <- c(.03,0.0003,-0.00001)
 # induce correlation between the two
 
  cor_vars <- MASS::mvrnorm(n=num_country,mu=c(0,5),
-                              Sigma=matrix(c(1,-.5,-.5,1),2,2))
+                              Sigma=matrix(c(1,.7,.7,1),2,2))
 
 
 country_test <- cor_vars[,2]
@@ -152,7 +152,7 @@ t1 <- c(1,rep(0,num_country-1))
 # second is for preventing further domestic transmission once it starts
 
 suppress1 <- -0.5
-suppress2 <- -0.03
+suppress2 <- -0.05
 
 # high value of phi = high over-time stability
 phi <- c(300,300)
@@ -286,13 +286,13 @@ I can then fit an empirical model using Stan, a Markov Chain Monte Carlo sampler
 ortho_time <- poly(scale(1:time_points,scale=F),degree=3)
 
 init_vals <- function() {
-  list(phi1=100,
-       phi2=100,
+  list(phi1=300,
+       phi2=300,
        world_infect=.1,
        finding=1,
        poly=c(0,0,0),
        country_test=rnorm(num_country,5,.25),
-       alpha=c(0,0),
+       alpha=c(-7,0),
        sigma_test_raw=1)
 }
 
@@ -346,7 +346,7 @@ pan_model_est <- sampling(pan_model,data=sim_data,chains=2,cores=2,iter=1200,war
 naive_model <- stan_glm(cbind(cases,country_pop-cases)~poly(time_points_scale,3) +
                           count_outbreak +
                           suppress + 
-                          suppress:time_outbreak,
+                          suppress:poly(time_points_scale,3)[,1],
                         data=obs_data,
                         family="binomial",
                         cores=1,
@@ -369,7 +369,7 @@ all_est <- as.data.frame(pan_model_est,"num_infected_high") %>%
   mutate(iter=1:n()) %>% 
   gather(key="variable",value="estimate",-iter) %>% 
   group_by(variable) %>% 
-  mutate(estimate=plogis(estimate)) %>% 
+  mutate(estimate=estimate) %>% 
   summarize(med_est=quantile(estimate,.5),
             high_est=quantile(estimate,.95),
             low_est=quantile(estimate,.05)) %>% 
@@ -387,7 +387,7 @@ all_est %>%
   fill=suppress_measures),alpha=0.5) +
   theme_minimal() +
   scale_color_brewer(type="div") +
-  ylab("Proportion of Population Infected") +
+  ylab("Latent Infection Scale") +
   xlab("Days Since Outbreak Start") +
   theme(panel.grid = element_blank(),
         legend.position = "top") 
@@ -400,8 +400,32 @@ We see very good recovery of the estimates from the model given the observed dat
 ```{r suppeff,fig.cap="Recovered Simulated Virus Suppression Parameters"}
 
 require(bayesplot)
+require(patchwork)
 
-mcmc_hist(pan_model_est,regex_pars=c("suppress"))
+p1 <- mcmc_intervals_data(as.array(pan_model_est,pars=c("suppress_effect[1,1]",
+                                                "suppress_effect[2,1]")))
+
+p2 <- mcmc_intervals_data(naive_model,pars=c("suppress",
+                                                "suppress:poly(time_points_scale, 3)[, 1]"))
+
+bind_rows(list(Latent=p1,
+               Observed=p2),.id="Model") %>% 
+  mutate(parameter=recode(parameter,
+                          `suppress_effect[1,1]`="Constant\nEffect",
+                          `suppress_effect[2,1]`="Over-Time\nEffect",
+                          `suppress`="Constant\nEffect",
+                          `suppress:poly(time_points_scale, 3)[, 1]`="Over-Time\nEffect")) %>% 
+  ggplot(aes(y=m,x=Model)) +
+  geom_pointrange(aes(ymin=ll,ymax=hh,colour=parameter),position=position_dodge(0.5)) +
+  theme_minimal() +
+  geom_hline(yintercept=0,linetype=3) +
+  scale_color_brewer(type="qual") +
+  guides(color="none") +
+  ylab("Parameter Estimate") +
+  theme(panel.grid = element_blank(),
+        legend.position = "top") +
+  coord_flip() +
+  facet_wrap(~parameter,scales="free_x")
 
 ```
 
