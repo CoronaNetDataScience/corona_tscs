@@ -567,7 +567,7 @@ out_data <- mcmc_intervals_data(obs_model,regex_pars=":") %>%
 
 
 
-```{r infectscaled,fig.cap="Approximate Total Number of COVID-19 Infected Individuals in the U.S. as of April 7th",fig.height=4}
+```{r infectscaled,fig.cap="Approximate Total Number of COVID-19 Infected Individuals in the U.S. as of April 7th",fig.height=5}
 all_est_state <- as.data.frame(us_fit_scale,"num_infected_high") %>% 
   mutate(iter=1:n()) %>% 
   gather(key="variable",value="estimate",-iter) %>% 
@@ -760,7 +760,7 @@ Figure \@ref(fig:compmarg) shows the marginal effect of covariates in the model 
 
 However, it is nonetheless important to note that state-level Trump vote share is not associated with increasing COVID-19 infections, despite public opinion polling showing that Americans who are more conservative tend to discount the danger posed by the virus.^[See https://www.vox.com/2020/3/15/21180506/coronavirus-poll-democrats-republicans-trump.] In addition, those states that declared an earlier state of emergency have not yet witnessed a slowing infection rate. Again, as the infection increases, there will be more data to make inter-state comparisons and obtain more information about whether these associations will hold up for the course of the disease. At present, however, there is no reason to believe that states that declared emergencies later or have more Trump voters are facing increasing disease trends at present.
 
-```{r suppress1,echo=F,fig.height=5,fig.cap="Marginal Effects of Covariates on Latent Infection Rates for U.S. States"}
+```{r suppress1,echo=F,fig.height=7,fig.cap="Marginal Effects of Covariates on Latent Infection Rates for U.S. States"}
 
 suppress_effect <- as.data.frame(us_fit_scale,"suppress_effect") %>% 
   mutate(iter=1:n()) %>% 
@@ -1047,6 +1047,4 @@ To fit the model, it is necessary to have at least an estimate of how many tests
 
 # Bibliography
 
-# Acknowledgements
 
-For helpful comments I thank Cindy Cheng, Joan Barcelo and Luiz Max Cavalho.
