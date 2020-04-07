@@ -47,6 +47,6 @@ qualtrics = mutate(qualtrics,
 # in the future, we should think about creating code that automates the search for these survey fallacies
 ##record_id %in% c('3548864', '9939713', '933728', '9523505')~FALSE,
 #----
-test<-coronanet_raw_latest[!is.na(coronanet_raw_latest$target_who_what_10_TEXT),]
-
-test<-test[,c("record_id","target_who_what_10_TEXT")]
+# test<-coronanet_raw_latest[!is.na(coronanet_raw_latest$target_who_what_10_TEXT),]
+# 
+# test<-test[,c("record_id","target_who_what_10_TEXT")]
