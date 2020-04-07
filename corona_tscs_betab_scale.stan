@@ -73,9 +73,6 @@ parameters {
 transformed parameters {
   matrix[num_country,time_all] num_infected_high; // modeled infection rates for domestic transmission
   
-  
-  num_infected_high[,1] = rep_vector(0,num_country);
-  
   for(t in 1:time_all) {
       //real num_low;
       num_infected_high[,t] = alpha[2] + time_array[t]*poly + 
