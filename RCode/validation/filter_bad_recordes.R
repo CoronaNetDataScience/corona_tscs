@@ -29,6 +29,24 @@ qualtrics = mutate(qualtrics,
                                                                        "Also foreign residents")~FALSE,
                                         TRUE~TRUE))
 
+#filter all, where announced data > entry date (unlogic)
+library(lubridate)
+q <- qualtrics
+q$date_announced<-mdy(q$date_announced)
+q$StartDate<-as.Date(q$StartDate)
+q<-q[which(q$date_announced >q$StartDate),]
+q<-q$record_id 
+qualtrics<- qualtrics[!qualtrics$record_id%in% q,]
+
+#filter all, where announced data > source published date (unlogic)
+q <- qualtrics
+q$date_announced<-mdy(q$date_announced)
+q$sources_matrix_1_1<-mdy(q$sources_matrix_1_1)
+
+q<-q[which(q$date_announced >q$sources_matrix_1_1),]
+q<-q$record_id 
+qualtrics<- qualtrics[!qualtrics$record_id%in% q,]
+
 
 # Log of what has been solved
 

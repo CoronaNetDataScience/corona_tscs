@@ -53,3 +53,12 @@ qualtrics[which(qualtrics$target_other == 'Tolima (Ibague)'), 'target_other'] = 
 # coder used 'other' text entry for target_who_what for hopstials; change to 'health infrastructure' for now and we should think about whether to add an extra option for coders
 qualtrics[which(qualtrics$target_who_what_10_TEXT == "Health-Infrastructure"),'target_who_what']  = "Health-Infrastructure"
 qualtrics[which(qualtrics$target_who_what_10_TEXT == "Infirmiry"),'target_who_what']  = "Health-Infrastructure"
+
+# Coder made new Entry but it should be update: Record 5733066 should be an update for 4262184 Record  6511463 should be an update for 3083058
+qualtrics[which(qualtrics$record_id== 5733066),"entry_type"]  = "Update on Existing Entry (type in Record ID in text box)"
+qualtrics[which(qualtrics$record_id== 5733066),"entry_type_3_TEXT"]  = 4262184
+
+qualtrics[which(qualtrics$record_id== 6511463),"entry_type"]  = "Update on Existing Entry (type in Record ID in text box)"
+qualtrics[which(qualtrics$record_id== 6511463),"entry_type_3_TEXT"]  = 3083058
+
+
