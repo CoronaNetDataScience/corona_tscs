@@ -3,7 +3,7 @@ title: "A Retrospective Bayesian Model for Measuring Covariate Effects on Observ
 author: |
   | Robert Kubinec
   | New York University Abu Dhabi
-date: "April 1st, 2020"
+date: "April 7th, 2020"
 toc: false
 csl: nature.csl
 output: 
@@ -14,7 +14,7 @@ output:
       in_header:
           preamble.tex
 bibliography: BibTexDatabase.bib
-abstract: "As the COVID-19 outbreak increases, increasing numbers of researchers are examining how an array of factors either hurt or help the spread of the disease. In this paper I present a retrospective Bayesian model that is much simpler than epidemiological models of disease progression for the purpose of identifying the effect of covariates on the historical infection rate. I show that while observed cases and test counts cannot be used to measure the true infection rate due to confounding between the infection rate and the observed data, it is possible to use informative priors derived from more complicated models to determine associations between background factors and the disease. This retrospective model is useful for researchers in fields who are collecting increasing amounts of data about contextual factors, like government policies and political partisanship, that are related to the virus but who have no need or interest in forecasting the disease's spread. To apply the model, I show that as of March 30th, U.S. states with higher rates of cardiovascular deaths are associated with more rapidly rising COVID-19 infection rates, while a state's vote share for Donald Trump in the 2016 election is not.^[To reproduce the model and to access the underlying Stan code, please see my [Github page](https://github.com/saudiwin/corona_tscs). This paper is part of the [CoronaNet project](https://lumesserschmidt.github.io/CoronaNet/) collecting data on government responses to the COVID-19 pandemic. For helpful comments I thank Cindy Cheng, Joan Barcelo and Luiz Max Cavalho.]"
+abstract: "As the COVID-19 outbreak increases, increasing numbers of researchers are examining how an array of factors either hurt or help the spread of the disease. Unfortunately, the majority of available data, primarily confirmed cases of COVID-19, are widely known to be biased indicators of the spread of the disease. In this paper I present a retrospective Bayesian model that is much simpler than epidemiological models of disease progression but is still able to identify the effect of covariates on the historical infection rate. I show that while observed cases and test counts cannot be used to measure the true infection rate due to confounding between the infection rate and the observed data, it is possible to use informative priors derived from susceptible-infected-recovered (SIR) models to estimate associations between background factors and the disease. The model is validated by comparing estimation of the count of infected to projections from expert surveys and extant disease forecasts. To apply the model, I show that as of April 7th, U.S. states with higher rates of cardiovascular deaths are associated with more rapidly rising COVID-19 infection rates, while a state's vote share for Donald Trump in the 2016 election is not.^[To reproduce the model and to access the underlying Stan code, please see my [Github page](https://github.com/saudiwin/corona_tscs). This paper is part of the [CoronaNet project](https://lumesserschmidt.github.io/CoronaNet/) collecting data on government responses to the COVID-19 pandemic. For helpful comments I thank Cindy Cheng, Joan Barcelo and Luiz Max Cavalho.]"
 ---
 
 ```{r setup, include=FALSE}
@@ -398,23 +398,32 @@ num_infected <- as.data.frame(us_fit,"num_infected_high") %>%
 p_infected <- group_by(num_infected,iter) %>% 
   summarize(est=mean(dlogis(estimate)))
 
-over_all <- parallel::mclapply(sample(1:max(num_infected$iter),100), function(q) {
-  over_supp <- lapply(1:max(suppress_effect$variable), function(s) {
-    over_time_level <- lapply(seq(min(time_outbreak_center),max(time_outbreak_center),length.out=100), function(i) {
-      this_eff <- p_infected$est[q] * (suppress_effect$estimate[suppress_effect$supp_type==1 & suppress_effect$variable==s & suppress_effect$iter==q] + suppress_effect$estimate[suppress_effect$supp_type==2 & suppress_effect$variable==s & suppress_effect$iter==q]*i)
-    
-    tibble(estimate=this_eff,
-           time_scale_point=i,
-           iter=q,
-           variable=s)
+if(run_model) {
+    over_all <- parallel::mclapply(sample(1:max(num_infected$iter),100), function(q) {
+    over_supp <- lapply(1:max(suppress_effect$variable), function(s) {
+      over_time_level <- lapply(seq(min(time_outbreak_center),max(time_outbreak_center),length.out=100), function(i) {
+        this_eff <- p_infected$est[q] * (suppress_effect$estimate[suppress_effect$supp_type==1 & suppress_effect$variable==s & suppress_effect$iter==q] + suppress_effect$estimate[suppress_effect$supp_type==2 & suppress_effect$variable==s & suppress_effect$iter==q]*i)
+      
+      tibble(estimate=this_eff,
+             time_scale_point=i,
+             iter=q,
+             variable=s)
+      }) %>% bind_rows
+      
+      over_time_level
+      
     }) %>% bind_rows
     
-    over_time_level
+    return(over_supp)
+  },mc.cores=3) %>% bind_rows
     
-  }) %>% bind_rows
-  
-  return(over_supp)
-},mc.cores=3) %>% bind_rows
+    saveRDS(over_all,"data/over_all.rds")
+    
+} else {
+  over_all <- readRDS("data/over_all.rds")
+}
+
+
 
 
 over_all_time <- group_by(over_all,variable,time_scale_point) %>% 
@@ -444,7 +453,9 @@ over_all_time <- left_join(over_all_time,tibble(variable=1:ncol(covs),
                       day_emergency="Date\nEmergency",
                       young="% Population\n<18",
                       smoking="% Smokers",
-                      trump="Trump\nVote Share"))
+                      trump="Trump\nVote Share",
+                      prop_foreign="% Foreign-Born",
+                      public_health="Public Health\nFunding"))
 
 over_all_sum <- left_join(over_all_sum,tibble(variable=1:ncol(covs),
                                         label=colnames(covs))) %>% 
@@ -456,7 +467,9 @@ over_all_sum <- left_join(over_all_sum,tibble(variable=1:ncol(covs),
                       day_emergency="Date\nEmergency",
                       young="% Population\n<18",
                       smoking="% Smokers",
-                      trump="Trump\nVote Share"))
+                      trump="Trump\nVote Share",
+                      prop_foreign="% Foreign-Born",
+                      public_health="Public Health\nFunding"))
 
 p1 <- over_all_sum %>%
   ggplot(aes(y=med_est,x=reorder(label,med_est))) +
@@ -513,18 +526,17 @@ if(run_model) {
 # calculate the same info but only with observed data
 
 if(run_model) {
-  obs_model <- stan_glm(cbind(combined$Difference,floor(combined$state_pop/100) - combined$Difference) ~ I(outbreak_time^2) +
-                   I(outbreak_time^3) +
-                     day_emergency*outbreak_time +
-                        `Cardiovascular Deaths`*outbreak_time +
-                        `Air Pollution`*outbreak_time +
-                        `Dedicated Health Care Provider`*outbreak_time +
-                        `Smoking`*outbreak_time +
-                        `Population under 18 years`*outbreak_time +
-                     prop_foreign*outbreak_time +
-                        `Public Health Funding`*outbreak_time +
-                        gdp*outbreak_time +
-                        trump*outbreak_time +
+  obs_model <- stan_glm(cbind(combined$Difference,floor(combined$state_pop/100) - combined$Difference) ~ poly(outbreak_time,3)[,2:3] +
+                     day_emergency*poly(outbreak_time,1)[,1] +
+                        `Cardiovascular Deaths`*poly(outbreak_time,1)[,1] +
+                        `Air Pollution`*poly(outbreak_time,1)[,1] +
+                        `Dedicated Health Care Provider`*poly(outbreak_time,1)[,1] +
+                        `Smoking`*poly(outbreak_time,1)[,1] +
+                        `Population under 18 years`*poly(outbreak_time,1)[,1] +
+                     prop_foreign*poly(outbreak_time,1)[,1] +
+                        `Public Health Funding`*poly(outbreak_time,1)[,1] +
+                        gdp*poly(outbreak_time,1)[,1] +
+                        trump*poly(outbreak_time,1)[,1] +
                      world_infect,
                       data=combined,
                  QR=TRUE,
@@ -758,34 +770,42 @@ num_infected <- as.data.frame(us_fit_scale,"num_infected_high") %>%
 p_infected <- group_by(num_infected,iter) %>% 
   summarize(est=mean(dlogis(estimate)))
 
-
-over_all <- parallel::mclapply(sample(1:max(num_infected$iter),100), function(q) {
-  over_supp <- lapply(1:max(suppress_effect$variable), function(s) {
-    over_time_level <- lapply(seq(min(time_outbreak_center),max(time_outbreak_center),length.out=100), function(i) {
-      this_eff <- p_infected$est[q] * (suppress_effect$estimate[suppress_effect$supp_type==1 & suppress_effect$variable==s & suppress_effect$iter==q] + suppress_effect$estimate[suppress_effect$supp_type==2 & suppress_effect$variable==s & suppress_effect$iter==q]*i)
-    
-    tibble(estimate=this_eff,
-           time_scale_point=i,
-           iter=q,
-           variable=s)
+if(run_model) {
+    over_all2 <- parallel::mclapply(sample(1:max(num_infected$iter),100), function(q) {
+    over_supp <- lapply(1:max(suppress_effect$variable), function(s) {
+      over_time_level <- lapply(seq(min(time_outbreak_center),max(time_outbreak_center),length.out=100), function(i) {
+        this_eff <- p_infected$est[q] * (suppress_effect$estimate[suppress_effect$supp_type==1 & suppress_effect$variable==s & suppress_effect$iter==q] + suppress_effect$estimate[suppress_effect$supp_type==2 & suppress_effect$variable==s & suppress_effect$iter==q]*i)
+      
+      tibble(estimate=this_eff,
+             time_scale_point=i,
+             iter=q,
+             variable=s)
+      }) %>% bind_rows
+      
+      over_time_level
+      
     }) %>% bind_rows
     
-    over_time_level
+    return(over_supp)
+  },mc.cores=3) %>% bind_rows
     
-  }) %>% bind_rows
-  
-  return(over_supp)
-},mc.cores=3) %>% bind_rows
+    saveRDS(over_all2,"data/over_all2.rds")
+    
+} else {
+  over_all2 <- readRDS("data/over_all2.rds")
+}
 
 
-over_all_time2 <- group_by(over_all,variable,time_scale_point) %>% 
+
+
+over_all_time2 <- group_by(over_all2,variable,time_scale_point) %>% 
   summarize(med_est=median(estimate),
             high_est=quantile(estimate,.95),
             low_est=quantile(estimate,.05)) %>% 
   mutate(model="Fully\nIdentified")
 
 
-over_all_sum2 <- group_by(over_all,variable) %>% 
+over_all_sum2 <- group_by(over_all2,variable) %>% 
   summarize(med_est=median(estimate),
             high_est=quantile(estimate,.95),
             low_est=quantile(estimate,.05)) %>% 
@@ -916,16 +936,16 @@ plot_data3 <- mcmc_intervals_data(obs_model,pars=c("day_emergency",
                                                    "gdp",
                                                    "prop_foreign",
                                                    "`Public Health Funding`",
-                                                   "day_emergency:outbreak_time",
-                                                   "outbreak_time:trump",
-                                                   "outbreak_time:`Air Pollution`",
-                                                   "outbreak_time:`Cardiovascular Deaths`",
-                                                   "outbreak_time:`Dedicated Health Care Provider`",
-                                                   "outbreak_time:`Population under 18 years`",
-                                                   "outbreak_time:Smoking",
-                                                   "outbreak_time:gdp",
-                                                   "outbreak_time:prop_foreign",
-                                                   "outbreak_time:`Public Health Funding`")) %>% 
+                                                   "day_emergency:poly(outbreak_time, 1)[, 1]",
+                                                   "poly(outbreak_time, 1)[, 1]:trump",
+                                                   "poly(outbreak_time, 1)[, 1]:`Air Pollution`",
+                                                   "poly(outbreak_time, 1)[, 1]:`Cardiovascular Deaths`",
+                                                   "poly(outbreak_time, 1)[, 1]:`Dedicated Health Care Provider`",
+                                                   "poly(outbreak_time, 1)[, 1]:`Population under 18 years`",
+                                                   "poly(outbreak_time, 1)[, 1]:Smoking",
+                                                   "poly(outbreak_time, 1)[, 1]:gdp",
+                                                   "poly(outbreak_time, 1)[, 1]:prop_foreign",
+                                                   "poly(outbreak_time, 1)[, 1]:`Public Health Funding`")) %>% 
   mutate(supp_type=rep(c(1,2),each=10),
          variable=rep(1:10,2))
 
@@ -945,8 +965,7 @@ plot_data3 <- left_join(plot_data3,tibble(variable=1:ncol(covs),
                       prop_foreign="% Foreign-Born",
                       public_health="Public Health\nFunding"))
 
-plot_data <- bind_rows(list(`Partially\nIdentified`=plot_data1,
-                            Identified=plot_data2,
+plot_data <- bind_rows(list(`Latent\nInfection Rate`=plot_data2,
                             `Observed\nCases`=plot_data3),
                        .id="model")
 
@@ -990,7 +1009,7 @@ ggsave("effect_compare.png")
 
 ```{r comptests,fig.cap="Comparison of Standardized Smoking Rates and COVID-19 Tests per 10,000 Residents by State"}
 
-check_tests <- group_by(combined,state,Smoking) %>% summarize(mean_tests=(mean(tests,na.rm=T)/population[1])*10000)
+check_tests <- group_by(combined,state,Smoking) %>% summarize(mean_tests=(mean(tests,na.rm=T)/state_pop[1])*10000)
 
 check_tests %>% 
   ggplot(aes(y=Smoking,x=mean_tests)) +
