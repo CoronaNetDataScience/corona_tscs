@@ -92,12 +92,12 @@ qualtrics$target_city[which(qualtrics$target_city == 'bogota')] = "Bogota"
 
 
 # This script filters out bad records (need to remove/fix these manually so we don't do this)
-source(paste0(path, "/RCode/validation/filter_bad_records.R"))
+source(paste0(path, "/RCode/validation/filter_bad_recordes.R"))
 
 # This script manually recodes values
 # Also should be fixed so we don't do this
  
-source(paste0(path, "/RCode/validation/recode_records.R"))
+source(paste0(path, "/RCode/validation/recode_recordes.R"))
 
 
 # replace entries with documented corrected entries as necessary ----------------------------------

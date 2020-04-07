@@ -6,12 +6,34 @@ require(dplyr)
 require(readr)
 require(readxl)
 require(stringr)
+require(idealstan)
 
 
 
 # load cleaned data
 
 clean_data <- readRDS("data/CoronaNet/coranaNetData_clean.rds")
+
+# severity index
+
+severity <- readRDS("data/CoronaNet/severity_fit.rds")
+
+# output by countries
+
+sev_data <- summary(severity) %>% 
+  select(country="Person",severity_index="Posterior Median",
+         date_announced="Time_Point") %>% 
+  mutate(country=recode(country,Czechia="Czech Republic",
+                `Hong Kong`="China",
+                `United States`="United States of America",
+                `Bahamas`="The Bahamas",
+                `Tanzania`="United Republic of Tanzania",
+                `North Macedonia`="Macedonia",
+                `Micronesia`="Federated States of Micronesia",
+                `Timor Leste`="East Timor",
+                `Republic of the Congo`="Republic of Congo",
+                `Cabo Verde`="Cape Verde",
+                `Eswatini`="Swaziland"))
 
 # select only columns we need
 
@@ -77,6 +99,10 @@ data_viz <- data_viz %>% group_by(record_id) %>%
                                   grepl(x=target_country,
                                         pattern=",$")~"Domestic",
                                   TRUE~target_country))
+
+# Add in severity index
+
+data_viz <- left_join(data_viz,sev_data,by=c("country","date_announced"))
 
 write_csv(data_viz,"data/CoronaNet/data_viz_clean.csv")
 
