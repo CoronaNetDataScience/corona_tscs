@@ -45,7 +45,7 @@ system2("git",args=c("-C ~/covid-19-data","pull"))
 
 # whether to run model (it will take a few hours) or load saved model from disk
 
-run_model <- T
+run_model <- F
 
 pan_model <- stan_model("corona_tscs_betab.stan")
 
@@ -54,10 +54,10 @@ pan_model <- stan_model("corona_tscs_betab.stan")
 
 # Introduction
 
-As more and more data has become available on observed case counts of the SARS-CoV2 coronavirus, there have been increasing attempts to infer how contextual factors like government policies, partisanship, and temperature affect the disease's spread [@carleton2020;@sajadi2020;@dudel2020;@tansim2020]. The temptation to make inferences from the observed data, however, can lead to misleading conclusions. For example, some policy makers like Deborah Bix have begun to question whether the predictions of epidemiological models are far worse than the observed data.^[See article available at https://www.realclearpolitics.com/video/2020/03/26/dr_birx_coronavirus_data_d] By contrast, in this paper I show that the unobserved infection rate is a confounding variable affecting any estimates of covariates on the observed counts of COVID-19 cases and tests. For this reason, in this paper I present a retrospective Bayesian model that can adjust for this bias by estimating the unseen infection rate up to an unidentified constant. Furthermore, by incorporating informative priors from the susceptible-infected-recovered (SIR)/susceptible-exposed-infected-recovered (SEIR) papers on SARS-CoV2  [@peak2020;@riou2020;@verity2020;@perkins2020;@lourenco2020;@li2020;@ferguson2020], it is possible to put bounds on the unseen infection rate and estimate both recent disease trends and the effect of covariates on the historical spread of the disease.
+As more and more data has become available on observed case counts of the SARS-CoV2 coronavirus, there have been increasing attempts to infer how contextual factors like government policies, partisanship, and temperature affect the disease's spread [@carleton2020;@sajadi2020;@dudel2020;@tansim2020]. The temptation to make inferences from the observed data, however, can lead to misleading conclusions. For example, some policy makers have publicly questioned whether the predictions of epidemiological models are far worse than the observed case count.^[See article available at https://www.realclearpolitics.com/video/2020/03/26/dr_birx_coronavirus_data_d] By contrast, in this paper I show that the unobserved infection rate is a confounding variable affecting any estimates of covariates on the observed counts of COVID-19 cases and tests. For this reason, in this paper I present a retrospective Bayesian model that can adjust for this bias by estimating the unseen infection rate up to an unidentified constant. Furthermore, by incorporating informative priors from the susceptible-infected-recovered (SIR)/susceptible-exposed-infected-recovered (SEIR) papers on SARS-CoV2  [@peak2020;@riou2020;@verity2020;@perkins2020;@lourenco2020;@li2020;@ferguson2020], it is possible to put an informative prior on the unseen infection rate and estimate both recent disease trends and the effect of covariates on the historical spread of the disease.
 
 
-In this paper, I show how the model can be applied by measuring the association between U.S. state-level factors and the disease as of March 30th, 2020, including the timing of state of emergency declarations, vote share in the 2016 election for President Donald Trump, gross domestic product (GDP), and health-related factors. I show that as of March 31st the timing of state of emergency declarations and vote share for President Donald Trump do not predict the number of infected individuals, while higher numbers of cardiovascular deaths, lower state income and lower air pollution are positively associated with infection rates.
+In this paper, I show how the model can be applied by measuring the association between U.S. state-level factors and the disease as of April 7th, 2020, including the timing of state of emergency declarations, vote share in the 2016 election for President Donald Trump, gross domestic product (GDP), and health-related factors. I show that as of April 7th the timing of state of emergency declarations and vote share for President Donald Trump do not predict the number of infected individuals, while higher numbers of cardiovascular deaths, lower state income and lower air pollution are positively associated with infection rates.
 
 # Model Overview
 
@@ -65,13 +65,13 @@ In this section I present an intuitive overview of the model, and I refer the in
 
 The compartmental model employed by epidemiologists to study disease, and in particular SARS-CoV2 [@peak2020;@riou2020;@verity2020;@perkins2020;@lourenco2020;@li2020;@ferguson2020], estimates different classes of individuals in the population, denoted $S$ for susceptible, $I$ for infected, and $R$ for recovered (other letters may be added such as $E$ for exposed). Using ordinary differential equations, the count of the infected can then be estimated by equating these three identities assuming a fixed population size, as seems reasonable during a relatively quick epidemic. These models guide our understanding of the disease and its progression, and have made warnings about the disease's spread that are proving true on a daily basis.
 
-By contrast, this paper endeavors to estimate a much simpler quantity than the entire evolution of the outbreak. Many researchers and the general public often want to learn about what has already happened, or the *empirical* infection rate. For a number of time points $t \in T$ since the outbreak's start and countries/regions $c \in C$, I aim to identify the following quantity:
+By contrast, this paper endeavors to estimate a much simpler quantity than the entire evolution of the outbreak. Many researchers and the general public often want to learn about what has already happened, or the *empirical* infection rate (also called the attack rate in the epidemiological literature). For a number of time points $t \in T$ since the outbreak's start and countries/regions $c \in C$, I aim to identify the following quantity:
 
 $$
 f_t \left (\frac{I_{ct}}{S_{ct}+R_{ct}} \right )
 $$
 
-Assuming a fixed population size, this quantity is simply the rate of infections in the population up to the present. Because these are the quantities themselves, not their derivatives, there is no attempt to simultaneously solve for all the parameters. The function $f_t$ determines the historical time trend of the rate of infection (which is assumed to be same across countries/regions) in the population up to time $T$, the present. Because the denominator is shifting over time due to disease progression dynamics, this model is only useful for retrospection, i.e., to examine factors that may be influencing the empirical time trend $f_t$. As $S_{ct}$ and $R_{ct}$ are exogenous to the model, the model cannot predict future prevalence of the disease given that it does not determine these crucial factors. In other words, this model can be seen as a local linear approximation to the $I_{ct}$ curve from an SIR model.
+Assuming a fixed population size, this quantity is simply the marginal rate of infections in the population up to the present. Because these are the quantities themselves, not their derivatives, there is no attempt to simultaneously solve for all the parameters. The function $f_t$ determines the historical time trend of the rate of infection (which is assumed to be same across countries/regions) in the population up to time $T$, the present. Because the denominator is shifting over time due to disease progression dynamics, this model is only useful for retrospection, i.e., to examine factors that may be influencing the empirical time trend $f_t$. As $S_{ct}$ and $R_{ct}$ are exogenous to the model, the model cannot predict future prevalence of the disease given that it does not determine these crucial factors. In other words, this model can be seen as a local linear approximation to the $I_{ct}$ curve from an SIR model.
 
 However, we do not have estimates of the actual infected rate $I_{ct}$, only positive COVID-19 cases $a_{ct}$ and numbers of COVID-19 tests $q_{ct}$. Given this limitation, the aim of the model is to backwards infer the infection rate $I_{ct}$ as a latent process given observed test and counts. Modeling the latent process is necessary to avoid bias in using only observed case counts as a proxy for $I_{ct}$. The reason for this is shown in Figure \ref{tikzfig} in which a covariate $X_{ct}$, such as temperature, is hypothesized to affect the infection rate $I_{ct}$. Unfortunately, increasing infection rates can cause both increasing numbers of observed counts $a_{ct}$ and tests $q_{ct}$. As more people are infected, more tests are likely to be done, which will increase the number of cases independently of the infection rate. As a result, due to the back-door path from the infection rate $I_{ct}$ to case counts $a_{ct}$ via the number of tests $q_{ct}$, it is impossible to infer the effect of $X_{ct}$ on $I_{ct}$ from the observed data alone without modeling the latent infection rate. 
 
@@ -91,9 +91,9 @@ Furthermore, I show in the supplementary materials that if further information c
 
 The only data required to fit the model, in addition to estimates of the background covariates, are observed cases and tests for COVID-19 by day. In this section, I fit the model to numbers of COVID-19 case counts on US states and territories provided by [The New York Times](https://github.com/nytimes/covid-19-data). By doing so, we can use the differences in trajectories across states to help identify the effect of state-level covariates on the infection rate. I supplement these observed case counts with testing data by day from the [COVID-19 Tracking Project](https://github.com/COVID19Tracking/covid-tracking-data). The testing data starts at March 4th, so I impute the testing data back in time by assuming that the average case/tests ratio stays the same to the origin of the outbreak. Furthermore, as there are discrepancies where the reported number of tests in some states like New Jersey is less than the total number of cases, I impute the number of tests via the case/test ratio for the sample as a whole.
 
-To analyze the effect of suppression policies, I proxy for preparedness to fight the epidemic by including the date that states of emergencies were declared across U.S. states and territories in the model.^[See this site for dates and relevant sources: https://en.wikipedia.org/wiki/U.S._state_and_local_government_response_to_the_2020_coronavirus_pandemic] The suppression covariate is then equal to a vector of days which is mean centered and standardized. I further add in state-level data on Donald Trump's vote share for the 2016 election from the MIT Election Lab, a 2019 estimate of state GDP from the Bureau of Economic Analysis, and a ranking of air pollution, cardiovascular deaths per capita, dedicated health care providers, preventable hospitalizations, and smoking rates provided by the United Health Foundation.
+To analyze the effect of suppression policies, I proxy for preparedness to fight the epidemic by including the date that states of emergencies were declared across U.S. states and territories in the model.^[See this site for dates and relevant sources: https://en.wikipedia.org/wiki/U.S._state_and_local_government_response_to_the_2020_coronavirus_pandemic] The suppression covariate is then equal to a vector of days which is mean centered and standardized. I further add in state-level data on Donald Trump's vote share for the 2016 election from the MIT Election Lab, a 2019 estimate of state GDP from the Bureau of Economic Analysis, the 2018 percentage of foreign born residents from the U.S. Census Bureau, and 2019 state-level average data on air pollution, cardiovascular deaths per capita, dedicated health care providers, public health funding, preventable hospitalizations, and smoking rates provided by the United Health Foundation.
 
-In this section I first fit a partially-identified model without any information about the true number of infected people to demonstrate that we can identify the sign and relative rank effect of suppression policies without this information. I then show how we can use insight from SIR/SEIR models to add in informative prior information on the likely number of infected people and translate the estimates into probable infection rates. 
+In this section I first fit a partially-identified model without any information about the true number of infected people to demonstrate that it is possible to obtain estimates of covariates, though with substantial uncertainty. I then show how we can use insight from SIR/SEIR models to add in informative prior information on the likely number of infected people and translate the estimates into probable infection rates. I then show that these estimates in fact closely track the predictions of SIR/SEIR models for the U.S. population from March 2020, providing external validity for the method and for these predictions.
 
 
 
@@ -545,7 +545,7 @@ out_data <- mcmc_intervals_data(obs_model,regex_pars=":") %>%
 
 
 
-```{r infectscaled,fig.cap="Approximate Total Number of COVID-19 Infected Individuals in the U.S. as of March 31st",fig.height=4}
+```{r infectscaled,fig.cap="Approximate Total Number of COVID-19 Infected Individuals in the U.S. as of April 7th",fig.height=4}
 all_est_state <- as.data.frame(us_fit_scale,"num_infected_high") %>% 
   mutate(iter=1:n()) %>% 
   gather(key="variable",value="estimate",-iter) %>% 
@@ -592,6 +592,27 @@ max_obs <- calc_sum$all_cum_sum[calc_sum$time_point==max(calc_sum$time_point)]
 
 options(scipen=999)
 
+# load expert survey results
+
+expert_survey <- read_csv("data/consensusForecastsDB.csv") %>% 
+  filter(questionLabel %in% c("QF5","QF4","QF3"),
+         surveyIssued>ymd("2020-03-16")) %>% 
+    mutate(keep=case_when(surveyIssued==ymd("2020-03-02")~"QF4",
+                        surveyIssued==ymd("2020-03-09")~"QF6",
+                        surveyIssued==ymd("2020-03-16")~"QF4",
+                        surveyIssued==ymd("2020-03-23")~"QF4",
+                        surveyIssued==ymd("2020-03-30")~"QF3",
+                        TRUE~"reject")) %>% 
+  filter(questionLabel==keep,cumprob>0.05,cumprob<0.95) %>% 
+  group_by(surveyIssued,questionLabel) %>% 
+  summarize(med_est=bin[abs(cumprob-0.5)==min(abs(cumprob-0.5))],
+            low_est=bin[abs(cumprob-0.1)==min(abs(cumprob-.1))],
+            high_est=bin[abs(cumprob-0.9)==min(abs(cumprob-.9))]) %>% 
+  rename(time_point="surveyIssued")
+
+
+# need to add in cumulative case counts
+
 calc_sum %>% 
   ggplot(aes(y=med_est,x=time_point)) +
   geom_ribbon(aes(ymin=low_est,
@@ -603,7 +624,7 @@ calc_sum %>%
   ylab("Total Number Infected/Reported") +
   scale_y_continuous(labels=scales::comma) +
   labs(caption="Blue 5% - 95% HPD intervals show estimated infected and the black line\nshows observed cases from the New York Times.\nThese estimates are based on the assumption that as few as 10% of cases\nmay be reported based on SIR/SEIR models.") +
-  annotate("text",x=ymd(c("2020-03-26","2020-03-26")),
+  annotate("text",x=ymd(c("2020-04-07","2020-04-07")),
            y=c(max_est,max_obs),
            hjust=1,
            vjust=0,
@@ -612,11 +633,24 @@ calc_sum %>%
            label=c(paste0("Estimated Infected:\n",formatC(low_max_est,big.mark=",",format = "f",digits=0)," - ",
                                                          formatC(high_max_est,big.mark=",",format = "f",digits=0)),
                    paste0("Total Reported Cases:\n",formatC(max_obs,big.mark=",")))) +
+  annotate("text",x=ymd(c("2020-03-01","2020-03-12",
+                          as.character(expert_survey$time_point))),
+           y=c(300000,180000,expert_survey$high_est*1.01),
+           vjust=0,
+           fontface="bold",
+           size=3,
+           label=c("Li et al. March 8th",
+                   "Perkins et al. March 26th",
+                   paste0("Expert Survey\n",expert_survey$time_point)),alpha=0.8) +
+  # previously published annotations
+  annotate("pointrange",x=ymd("2020-03-01"),y=9001,ymin=2299,ymax=20403,alpha=0.5) +
+  annotate("pointrange",x=ymd("2020-03-12"),y=22876,ymin=7451,ymax=53044,alpha=0.5) +
+  geom_pointrange(data=expert_survey,aes(ymin=low_est,ymax=high_est),alpha=0.5) +
   xlab("Days Since Outbreak Start") +
   theme(panel.grid = element_blank(),
         legend.position = "top")
 
-ggsave("est_vs_obs.png")
+ggsave("est_vs_obs_experts.png")
 
 ```
 
@@ -892,8 +926,8 @@ plot_data3 <- mcmc_intervals_data(obs_model,pars=c("day_emergency",
                                                    "outbreak_time:gdp",
                                                    "outbreak_time:prop_foreign",
                                                    "outbreak_time:`Public Health Funding`")) %>% 
-  mutate(supp_type=rep(c(1,2),each=9),
-         variable=rep(1:9,2))
+  mutate(supp_type=rep(c(1,2),each=10),
+         variable=rep(1:10,2))
 
 # join back to labels 
 

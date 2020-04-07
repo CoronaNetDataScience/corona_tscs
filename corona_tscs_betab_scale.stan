@@ -78,7 +78,7 @@ transformed parameters {
       num_infected_high[,t] = alpha[2] + time_array[t]*poly + 
                                         world_infect*count_outbreak[t] +
                                         (suppress_effect[1]*suppress')' +
-                                        + ((suppress_effect[2]*suppress') .* time_outbreak_center[,t]')';
+                                        + ((suppress_effect[2]*suppress') .* time_outbreak_trans1[,t]')';
   }
 
   

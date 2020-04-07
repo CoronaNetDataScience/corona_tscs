@@ -55,8 +55,8 @@ transformed data {
 parameters {
   vector[3] poly; // polinomial function of time
   real<lower=0> finding; // difficulty of identifying infected cases 
-  real world_infect; // infection rate based on number of travelers
-  row_vector<upper=0>[S] suppress_effect[2]; // suppression effect of govt. measures, cannot increase virus transmission rate
+  real<lower=0> world_infect; // infection rate based on number of travelers
+  row_vector[S] suppress_effect[2]; // suppression effect of govt. measures, cannot increase virus transmission rate
   vector<lower=0>[num_country] country_test_raw; // unobserved rate at which countries are willing to test vs. number of infected
   // we assume that as infection rates increase, more tests will be conducted
   vector[2] alpha; // other intercepts
@@ -72,7 +72,7 @@ transformed parameters {
       num_infected_high[,t] = alpha[2] + time_array[t]*poly + 
                                         world_infect*count_outbreak[t] +
                                         (suppress_effect[1]*suppress')' +
-                                        + ((suppress_effect[2]*suppress') .* time_outbreak_center[,t]')';
+                                        + ((suppress_effect[2]*suppress') .* time_outbreak_trans1[,t]')';
   }
 
   
