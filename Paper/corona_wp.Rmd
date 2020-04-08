@@ -214,7 +214,7 @@ The advantage of employing a statistical model, rather than simply summing acros
 
 Furthermore, because the model is stochastic, it is robust to coding errors. As we discuss in our validation section, while we are continuing to validate the data on a daily basis, the massive speed and scope of data collection means that we cannot identify all issues with the data. However, the measurement model employed only requires us to assume that on average the policy codings are correct, not that they are correct for each instance. Coding error, such as incorrectly selecting a policy type, will propogate through the model as higher uncertainty intervals, but will not affect average posterior estimates. As our data quality improves, and we are able to collect more data over time, the model will produce more variegated estimates with smaller uncertainty intervals.
 
-Figure 
+Figure \@ref(fig:plotindex) shows the estimated index scores for the `r length(unique(clean_data$country))` countries in our dataset at present. Of course, a caveat with the index is that not all of the possible measures may be coded in the data already due to difficulty in finding the policies in published sources. However, there is still clear differentation within the index in terms of when policies were imposed, with some countries starting to impose policies much earlier than others. Furthermore, there is a clear break about March 1st when countries began to impose more stringent policies across the world.
 
 ```{r plotindex,fig.cap="CoronaNet Time-Varying Index of Severity of Measures Opposing COVID-19 Pandemic"}
 
@@ -258,14 +258,20 @@ ggsave("index.png")
 
 ```
 
+Table \@ref(tab:rankcount) shows the rank of countries for the index at present. San Marino occupies the highest position, likely because of harsh lockdowns imposed as a result of the outbreak in central Italy. Slovenia has had a nationwide lockdown in place for several weeks, while Azerbaijan took early action to close its borders with Iran in February after the outbreak started. It is important to note the uncertainty in the index measures, as the top 10 countries cannot be distinguished from each other in severity except for San Marino. We believe these uncertainty intervals are important to capture the difficulty in using published policies to compare countries. However, we also see substantial value in this index, particularly in its ability to show change over time. 
+
 
 ```{r rankcount}
 
 get_est %>% 
+  ungroup %>% 
   filter(date_announced==max(date_announced)) %>% 
   select(Country="country",`Rank`="Country Rank",`5% Low Score`="low_est",
          `Median Score`="med_est",
          `95% High Score`="high_est") %>% 
+  mutate(Rank=(max(Rank)+1)-Rank) %>% 
+  arrange(Rank) %>% 
+  mutate_at(c("5% Low Score","Median Score","95% High Score"),~round(.,1)) %>% 
     knitr::kable("latex",booktabs=T,longtable=T,
                caption="Rank of Countries by Severity Index as of April 3rd, 2020") %>% 
   kable_styling(latex_options = c("striped", "hold_position")) %>% 
