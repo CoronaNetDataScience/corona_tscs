@@ -33,9 +33,11 @@ data.
     infections ratio.
 
 3.  **kubinec\_model\_preprint.Rmd**: A copy of the paper draft with
-    embedded R code. Because the fitted model objects are too large to
-    put on Github, all Stan models must be re-fit to compile the paper.
-    The process will take approximately 2 hours.
+    embedded R code. You can access fitted Stan model objects to compile
+    the paper here:
+    <https://drive.google.com/open?id=1cTCQTAjH8I-11jp3CEdIJZ0NaGRAn8dT>.
+    Otherwise all Stan models must be re-fit to compile the paper. The
+    process will take approximately 2 hours.
 
 4.  **kubinec\_model\_SI.Rmd**: This file contains an Rmarkdown file
     with embedded R code showing how to simulate the model. It is the

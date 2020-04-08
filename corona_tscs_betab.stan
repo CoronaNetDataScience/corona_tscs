@@ -55,7 +55,7 @@ transformed data {
 parameters {
   vector[3] poly; // polinomial function of time
   real<lower=0> finding; // difficulty of identifying infected cases 
-  real world_infect; // infection rate based on number of travelers
+  real<lower=0> world_infect; // infection rate based on number of travelers
   row_vector[S] suppress_effect[2]; // suppression effect of govt. measures, cannot increase virus transmission rate
   vector<lower=0>[num_country] country_test_raw; // unobserved rate at which countries are willing to test vs. number of infected
   // we assume that as infection rates increase, more tests will be conducted
@@ -67,22 +67,19 @@ transformed parameters {
 
   matrix[num_country,time_all] num_infected_high; // modeled infection rates for domestic transmission
   
-  
-  num_infected_high[,1] = rep_vector(0,num_country);
-  
   for(t in 1:time_all) {
       //real num_low;
       num_infected_high[,t] = alpha[2] + time_array[t]*poly + 
                                         world_infect*count_outbreak[t] +
                                         (suppress_effect[1]*suppress')' +
-                                        + ((suppress_effect[2]*suppress') .* time_outbreak_center[,t]')';
+                                        + ((suppress_effect[2]*suppress') .* time_outbreak_trans1[,t]')';
   }
 
   
 }
 model {
   
-  poly ~ normal(0,10); // could be large
+  poly ~ normal(0,5); // could be large
   world_infect ~ normal(0,1);
   alpha ~ normal(0,10); // this can reach extremely low values
   phi ~ exponential(phi_scale);
@@ -91,7 +88,7 @@ model {
   
   finding ~ exponential(.1);
   sigma_test_raw ~ exponential(.1);
-  country_test_raw ~ exponential(sigma_test_raw); // more likely near the middle than the ends
+  country_test_raw ~ exponential(.1); // more likely near the middle than the ends
   
   // first model probability of infection
   
