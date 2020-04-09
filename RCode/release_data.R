@@ -144,9 +144,17 @@ sev_data <- summary(severity) %>%
 
 release <- filter(clean_data,!is.na(init_country)) %>% 
               select(record_id,entry_type,event_description,type,country="init_country",
+                     init_country_level,
+                     index_prov,
                      target_country="target_country_region",
+                     target_geog_level,
+                     target_who_what,
                      recorded_date="RecordedDate",
-                     target_direction,compliance,date_announced,
+                     target_direction,
+                     travel_mechanism,
+                     compliance,
+                     enforcer,
+                     date_announced,
                      link="sources_matrix_1_2") %>% 
   mutate(date_announced=lubridate::mdy(date_announced),
          entry_type=recode(entry_type,
@@ -218,4 +226,9 @@ release_combined <- left_join(release,covid_test,by=c(ISO_A3="ISO3",
   left_join(recovered,by=c("country","date_announced")) %>% 
   left_join(niehaus,by=c("country"))
 
-write_csv(release,"data/CoronaNet/coronanet_release_allvars.csv")
+write_csv(release_combined,"data/CoronaNet/coronanet_release_allvars.csv")
+write_csv(release_combined,"../CoronaNet/data/coronanet_release_allvars.csv")
+
+# copy raw data over
+
+system("cp data/CoronaNet/coranaNetData_clean.rds ../CoronaNet/data/coranaNetData_clean.rds")
