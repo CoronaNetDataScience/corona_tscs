@@ -19,13 +19,13 @@ institute:
   - yale: Yale University
 date: "4/5/2020"
 toc: false
+bibliography: BibTexDatabase.bib
 output: 
   #bookdown::word_document2
   bookdown::pdf_document2:
     keep_tex: true
     includes:
       in_header:
-        
           preamble.tex
     # pandoc_args:
     #   - '--lua-filter=scholarly-metadata.lua'
