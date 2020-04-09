@@ -4,12 +4,14 @@ require(dplyr)
 require(ggplot2)
 require(readr)
 require(tidyr)
+require(googlesheets4)
 
-export <- read_csv("data/ra_data_pull.csv") %>% 
+export <- read_csv("data/CoronaNet/RA/ra_data_pull.csv") %>% 
   slice(-c(1:2)) %>% 
   filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)") %>% 
   mutate(RecordedDate=lubridate::ymd_hms(RecordedDate),
-         record_date_day=lubridate::as_date(RecordedDate))
+         record_date_day=lubridate::as_date(RecordedDate),
+         entry_type=recode(entry_type,`1`="New Entry"))
 
 
 export %>% 
@@ -76,6 +78,18 @@ export %>%
   select(Name="ra_name",`Count of Records`="n") %>% 
   write_csv("data/ra_leader_board.csv")
 
-# ra_houses <- distinct(export,ra_name) %>% 
-#   mutate(house=sample(c("Europe","Americas","Middle East and Africa","Asia"),size=n(),replace=T)) %>% 
-#   write_csv("data/house_assignments.csv")
+# output to record sheet
+
+sheets_auth()
+
+current_sheet <- sheets_get("https://docs.google.com/spreadsheets/d/183lWnJH7rSVkOTiuCXt9D7uCwS1SdJSOleXPpFkj2us/edit#gid=0")
+
+export %>% 
+  select(-target_country,-record_date_day) %>% 
+  mutate(link_correct=paste0("https://tummgmt.eu.qualtrics.com/jfe/form/SV_bf6YMWbTpYJAW4l?Q_R=",ResponseId,
+                            "&Q_R_DEL=1&record_id=",record_id,"&link_type=C"),
+         link_update=paste0("https://tummgmt.eu.qualtrics.com/jfe/form/SV_bf6YMWbTpYJAW4l?Q_R=",ResponseId,
+                            "&record_id=",record_id,"&link_type=U")) %>% 
+  arrange(init_country,date_announced) %>% 
+  sheets_write(ss=current_sheet,sheet="Sheet1")
+
