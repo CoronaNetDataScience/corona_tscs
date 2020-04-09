@@ -30,7 +30,7 @@ output:
     # pandoc_args:
     #   - '--lua-filter=scholarly-metadata.lua'
     #   - '--lua-filter=author-info-blocks.lua'
-abstract: "In this paper we present an initial release of a large hand-coded dataset of more than 5,000 separate policy announcements from governments around the world. The data are being made publicy available at our website and Github account (see footnote below), in combination with COVID-19 testing data and country-level covariates. The data are intended to be used by researchers for the purpose of studying the interaction of disease outbreaks and government responses, in addition to the possible determinants of these varying levels of policy strictness. For that purpose, we also include a time-varying severity index of government responses obtained through a time-varying Bayesian latent variable model. ^[or the most current, up to date version of the dataset, please visit http://coronanet-project.org and also our Github page at https://github.com/saudiwin/corona_tscs.] "
+abstract: "In this paper we present an initial release of a large hand-coded dataset of more than 5,000 separate policy announcements from governments around the world. The data are being made publicy available,^[For the most current, up to date version of the dataset, please visit http://coronanet-project.org and also our Github page at https://github.com/saudiwin/corona_tscs.] in combination with COVID-19 testing data and country-level covariates. Due to the speed of the COVID-19 outbreak, we will be releasing this data on a daily basis with a 5-day lag for record validity checking. We believe this to be one of the largest and fastest manual data collection projects to date in political science, employing more than 150 research assistants across 18 time zones and making use of cloud-based managerial and data collection technology. We analyze the dataset with a Bayesian time-varying ideal point model showing the quick acceleration of more harsh policies across countries beginning in mid-March and continuing to the present.  "
 ---
 
 ```{r setup, include=FALSE}
@@ -46,12 +46,13 @@ require(rstan)
 require(ggrepel)
 
 # let's load some data!
+# run RCode/cleanData/cleanQualtrics_short.R
 
 clean_data <- readRDS("../data/CoronaNet/coranaNetData_clean.rds") %>% 
   mutate(date_announced=mdy(date_announced)) %>% 
   filter(date_announced<today())
 
-slack <- readRDS("../data/slack/corona_govt_response_slack_latest_clean.rds")
+#slack <- readRDS("../data/slack/corona_govt_response_slack_latest_clean.rds")
 
 ```
 
@@ -135,18 +136,18 @@ To provide a better sense of the level of activity on the Slack channel, Figure 
 
 ```{r members ,fig.cap="Plot of the number of Project Members present and active on Slack over time" }
 
-ggplot(slack %>% filter(var %in% c("Project members present on Slack", "Project members posting messages" )),
-			aes(x = Date, y = value, color = var))+
-			geom_line(size = 1)+ 
-			xlab("Date")+
-			ylab("Number of Project members")+
-			scale_x_date(date_labels = "%a %d-%m-%y", date_breaks = "day")+
-			scale_color_manual(values=c( "#3B7EA1",  "#FDB515"))+
-			theme_minimal()+
-			theme(legend.position="bottom",
-				  legend.title = element_blank(),
-				  axis.text.x = element_text(angle = 90, hjust = 1),
-				  panel.grid.minor = element_blank())
+# ggplot(slack %>% filter(var %in% c("Project members present on Slack", "Project members posting messages" )),
+# 			aes(x = Date, y = value, color = var))+
+# 			geom_line(size = 1)+ 
+# 			xlab("Date")+
+# 			ylab("Number of Project members")+
+# 			scale_x_date(date_labels = "%a %d-%m-%y", date_breaks = "day")+
+# 			scale_color_manual(values=c( "#3B7EA1",  "#FDB515"))+
+# 			theme_minimal()+
+# 			theme(legend.position="bottom",
+# 				  legend.title = element_blank(),
+# 				  axis.text.x = element_text(angle = 90, hjust = 1),
+# 				  panel.grid.minor = element_blank())
 
 ```
 
