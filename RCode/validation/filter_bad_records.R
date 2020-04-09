@@ -29,7 +29,7 @@ qualtrics = mutate(qualtrics,
                                                                        "Also foreign residents")~FALSE,
                                         TRUE~TRUE))
 
-'
+
 #filter all, where announced data > entry date (unlogic)
 library(lubridate)
 q <- qualtrics
@@ -58,7 +58,7 @@ qualtrics<- qualtrics[!qualtrics$record_id%in% q,]
 # RA Mara Forster asked to start fresh on some entries and thus to ignore the following three entries:----
 ##record_id %in% c(7897317, 5297, 571317)~FALSE,
 ## 4979089 and 5608933 Veronika asked us to delete these----
-##record_id  %in% c('4979089','5608933')~FALSE,
+## record_id  %in% c('4979089','5608933')~FALSE,
 # these entries should not be possible ----
 #shouldnt be able to select restriciton of mass gatherings and then type of school
 #shouldnt be able to select quarantine and then type of school
