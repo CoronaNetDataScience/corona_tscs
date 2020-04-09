@@ -58,17 +58,19 @@ slack <- readRDS("../data/slack/corona_govt_response_slack_latest_clean.rds")
 
 ```
 
+
+
 # Introduction
 
-The COVID-19 pandemic has changed government public health policies with astonishing speed and immense cost to human societies. A major barrier to rigorous analyses of these fast-changing policies is the lack of quality hand-coded data of the type normally used by scientific communities to study policy effects. To address this concern, we present in this paper  the CoronaNet COVID-19 Government Response Database, which provides fine-grained, dyadic data on policy actions taken by governments across the world since the Chinese government reported the COVID-19 outbreak on December 31, 2019. The dataset presented here covers all policy actions for `r length(unique(clean_data$init_country))` of countries up until `r max(clean_data$date_announced,na.rm=T)`, for a total of `r length(unique(clean_data$record_id))` events. 
+Governments all around the world have implemented an astonishing variety of policies in reaction to the COVID-19 pandemic. A major barrier to rigorous analyses of these fast-changing policies is the lack of quality hand-coded data of the type normally used by scientific communities to study policy effects. To address this concern, we present in this paper  the CoronaNet COVID-19 Government Response Database, which provides fine-grained, dyadic data on policy actions taken by governments across the world since the Chinese government reported the COVID-19 outbreak on December 31, 2019. The dataset presented here covers all policy actions for `r length(unique(clean_data$init_country))` of countries up until `r max(clean_data$date_announced,na.rm=T)`, for a total of `r length(unique(clean_data$record_id))` events. 
 
-Employing a team of over 150 research assistants in 18 time zones, we will release the data on a daily basis with a five-day lag between data collection and release to provide validation. We further have implemented ongoing random evaluation of coding efforts to ensure the best possible quality given the considerable time constraints. We believe that this data will permit crucial inference on both the determinants of these policies and their effects on societies, economies and the disease's spread.
+With the help of a team of over 150 research assistants in 18 time zones, we will release the data on a daily basis with a five-day lag between data collection and release to provide validation. We further have implemented ongoing random evaluation of coding efforts to ensure the best possible quality given the considerable time constraints. We believe that this data will permit crucial inference on both the determinants of these policies and their effects on societies, economies and the disease's spread.
 
 <!-- The rapid and devastating spread of the SARS-CoV-2 virus has put in stark relief the previously invisible connections among different countries and people. Our dataset illuminates a countervailing kind of network --- it documents not only what actions governments have taken against COVID-19, but how these actions have targeted other geographical regions and the people and resources within them over time. The data, which is publicly available, will allow us to understand among other things, how the effectiveness of different government policies may vary over time or depending on policy actions taken by other governments.  -->
 
 More specifically, the CoronaNet database collects data on government policy actions taken against the coronavirus across the following dimensions on a daily basis:
 
-+ The type of government policy implemented (e.g. quarantine, closure of schools [15 total] )
++ The type of government policy implemented (e.g. quarantine, closure of schools [16 total] )
 + The level of government initiating the action (e.g. national, provincial, municipal etc.)
 + The geographical target of the policy action, if applicable (e.g. national, provincial, municipal etc.)
 + The human or material target of the policy action, if applicable (e.g. travlers, ventilators)
@@ -77,13 +79,13 @@ More specifically, the CoronaNet database collects data on government policy act
 + The compliance with the policy action (e.g. mandatory, volulntary)
 + The timing of the policy action (e.g. date announced, date implemented)
 
-In what follows, we describe in greater detail the methodology we employed to collect this data, a description of the data, and also the application of our data in modeling the stringency of measures over time. Using a Bayesian dynamic item-response theory model, we produce a statistically-valid index that ranks countries in terms of their reponse to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented.
+In what follows, we describe in greater detail the methodology we employed to collect this data, a description of the data, and also the application of our data in modeling the stringency of measures over time. Using a Bayesian dynamic item-response theory model, we produce a statistically-valid index that ranks countries in terms of their response to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented.
 
 # Methodology
 
 To collect the data, we recruited `r length(unique(clean_data$ra_name))-6` research assistants (RAs) from colleges and universities around the world, representing 18 out of the 24 time zones.^[For more information on the individual RAs, please visit http://coronanet-project.org/people]  Data collection started on March 28, 2020 and has proceeded very rapidly, accumulating `r length(unique(clean_data$record_id))` records as of the date of this article. Each RA is responsible for tracking government policy actions for at least one country. RAs were allocated depending on their background, language skills and expressed interest in certain countries.^[Note depending on the level of policy coordination at the national level, certain countries were assigned multiple RAs, e.g. the United States, Germany, or France. For a comprehensive list of which RAs were assigned to which country, please see the Appendix.]
 
-We have also partnered with the machine learning company Jataware to automate the collection of more than 200,000 news articles from around the world related to COVID-19.^[We thank Brandon Rose and Jataware for making the news database available to this project.] Jataware employes a natural language processing (NLP) classifier using Bidirectional Encoder Representations from Transformers (BERT) to detect whether a given article is indicative of a governmental policy intervention related to COVID-19. They  then apply a secondary NLP classifier to categorize the type of policy intervention (e.g. "state of emergency", "shelter-in-place", "quarantine", "travel restrictions", etc). Next, Jataware extracts the geospatial and temporal extent of the policy intervention (e.g. “Washington DC” and “March 15, 2020”) whenever possible. The resulting list of news sources is then provided to our RAs for manual coding and further data validation.
+We have also partnered with the machine learning company Jataware to automate the collection of more than 200,000 news articles from around the world related to COVID-19.^[We thank Brandon Rose and Jataware for making the news database available to this project.] Jataware employs a natural language processing (NLP) classifier using Bidirectional Encoder Representations from Transformers (BERT) to detect whether a given article is indicative of a governmental policy intervention related to COVID-19. They then apply a secondary NLP classifier to categorize the type of policy intervention (e.g. "state of emergency", "shelter-in-place", "quarantine", "travel restrictions", etc). Next, Jataware extracts the geospatial and temporal extent of the policy intervention (e.g. “Washington DC” and “March 15, 2020”) whenever possible. The resulting list of news sources is then provided to our RAs for manual coding and further data validation.
 
 As researchers learn more about the various health, economic, and social effects of the corona-virus pandemic, it is crucial that they have access to both reliable, valid, and timely data. We have adopted the following data collection methodology to ensure the availability of such data as rapidly as possible while still maintaining high standards of quality at every stage of the data collection process. 
 
@@ -135,7 +137,7 @@ Once the RA submits the form, they are sent a personalized link to access the su
 
 Once an RA joins the project, they can pose their questions on a CoronaNet Slack channel, which they must join in order to participate in the project. The channel allows any RA to pose a question or issue they may have in using the survey instrument to any of the PIs and allows all other RAs to learn from the exchange at the same time. As such, RAs are able to receive feedback and learn from each other's questions in a timely and centralized manner. 
 
-Since the data collection effort was launched on March 28, 2020 until April 6, 2020, both RAs and PIs have actively used Slack to communicate with on another. In particular, on the Slack channel devoted to asking questions about the Qualtrics survey, there were 1,091 messages posted by 108 project members. To provide a better sense of the level of activity on Slack, Figure \@ref(fig:members) plots the number of project members who had logged into the Slack per day as well as the number of project members who posted at least one message per day and shows that participation and activity Slack  has steadily grown over time and ^[Note, the dip in the overall trend corresponds to weekend days.].
+Since the data collection effort was launched on March 28, 2020 until April 6, 2020, both RAs and PIs have actively used Slack to communicate with on another.  On the Slack channel devoted to asking questions about the Qualtrics data survey in particular, there were 1,091 messages posted by 108 project members. To provide a better sense of the level of activity on Slack, Figure \@ref(fig:members) plots the number of project members who had logged into the Slack per day as well as the number of project members who posted at least one message per day and shows that participation and activity Slack  has steadily grown over time.^[Note, the dip in the overall trend corresponds to weekend days.]
 
 
 ```{r members, fig.cap="Plot of the number of Project Members present and active on Slack over time" }
@@ -229,11 +231,11 @@ clean_data %>%
 
 Of the `r length(unique(clean_data$record_id))` events in the dataset, we have identified `r length(unique(clean_data$record_id[clean_data$entry_type %in% c("1","New Entry")]))` unique events. That is, some events in the database are updates or changes to existing policies. We link such events overtime using a unique ID (`record_id`). An event counts as an update if it deals with a change in either the:
 
-1. Time duration or^[An example of (1) is if Germany lengthens its quarantine to 28 days from 14 day.]
-2. Strength of an existing policy in terms of either^[Examples with regards to (2) is if Germany changes the stringency of an existing quarantine such that: (a) people can no longer leave their houses to go to work whereas before they could (b) the quarantine used to be voluntary but now its mandatory (c) the quarantine used to apply to everyone and now it only applies to the elderly.] 
-   a. the nature of the policy 
-   b.  compliance rules for the policy 
-   c. who the policy applies towards, if applicable.
+1. Time duration or^[E.g. Germany lengthens its quarantine to 28 days from 14 days.]
+2. Strength of an existing policy in terms of either:
+   a. the nature of the policy^[E.g. People can no longer leave their houses to go to work whereas before they could]
+   b. compliance rules for the policy^[E.g The quarantine used to be voluntary but now its mandatory] 
+   c. who the policy applies towards^[E.g. The quarantine used to apply to people of all ages and now it only applies to the elderly.]
 
 A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g. policy type, targeted country.
 
@@ -291,7 +293,7 @@ ggsave("index.png")
 
 Table \@ref(tab:rankcount) shows the rank of countries for the index at present. An important note about these results is that the rank only measures the posterior median, or most likely estimate, but the 5% - 95% uncertainty interval shows that substantial uncertainty exists in comparing neighboring countries in the index. More certain comparisons can be made between the top, middle and bottom third of countries, while within these categories the estimates are not precise enough to make finer-grained distinctions with confidence.
 
-With this caveat in mindSan Marino occupies the highest position, likely because of harsh lockdowns imposed as a result of the outbreak in central Italy that occurred relatively early. Slovenia has had a nationwide lockdown in place for several weeks, while Azerbaijan took early action to close its borders with Iran in February after the outbreak started. It is important to note the uncertainty in the index measures, as the top 10 countries cannot be distinguished from each other in severity except for San Marino. We believe these uncertainty intervals are important to capture the difficulty in using published policies to compare countries. However, we also see substantial value in this index, particularly in its ability to show change over time. 
+With this caveat in mind San Marino occupies the highest position, likely because of harsh lockdowns imposed as a result of the outbreak in central Italy that occurred relatively early. Slovenia has had a nationwide lockdown in place for several weeks, while Azerbaijan took early action to close its borders with Iran in February after the outbreak started. It is important to note the uncertainty in the index measures, as the top 10 countries cannot be distinguished from each other in severity except for San Marino. We believe these uncertainty intervals are important to capture the difficulty in using published policies to compare countries. However, we also see substantial value in this index, particularly in its ability to show change over time. 
 
 
 ```{r rankcount}
@@ -318,9 +320,9 @@ Finally, we would note in Figure \@ref(fig:plotindex) the strong evidence of pol
 
 # Conclusion
 
-As policymakers, researchers and the broader public debate and compare how to succeed against the novel threats posed by COVID-19, they need real-time, traceable data on government policies in order to understand which of these policies are effective, and under what conditions.  This requires specific knowledge of the variation in policies and their implementation. The goal of the dataset and severity index presented hereis to provide this information. 
+As policymakers, researchers and the broader public debate and compare how to succeed against the novel threats posed by COVID-19, they need real-time, traceable data on government policies in order to understand which of these policies are effective, and under what conditions.  This requires specific knowledge of the variation in policies and their implementation. The goal of the dataset and severity index presented here is to provide this information. 
 
-We have tried to match our data collection efforts to keep up with the exponential speed with which the corona-virus has already upended global public health and the international economy while also mainting high levels of quality. However, we will inevitably be refining, revising and updating our data to reflect new knowledge and trends as the pandemic unfolds. The data that we present in this first version of the dataset represents only our initial efforts and we anticipate making ongoing improvements to the dataset over time. 
+We have tried to match our data collection efforts to keep up with the exponential speed with which the corona-virus has already upended global public health and the international economy while also maintaining high levels of quality. However, we will inevitably be refining, revising and updating our data to reflect new knowledge and trends as the pandemic unfolds. The data that we present in this first version of the dataset represents only our initial efforts and we anticipate making ongoing improvements to the dataset over time. 
 
 In future work, the CoronaNet team will also provide their own analyses of what drives these responses, under what conditions they can stymy the epidemic, etc., so as to contribute to the social science research community and provide urgently needed knowledge for policymakers and the wider global community.
 
