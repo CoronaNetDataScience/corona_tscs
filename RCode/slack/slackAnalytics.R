@@ -6,7 +6,7 @@ library(ggplot2)
 library(forcats)
 
 # load data
-pathData = "/Users/cindycheng/Dropbox/corona_tscs/data"
+pathData = "/cloud/project/data/slack"
 slack = read.csv(paste0(pathData, "/slack/corona-govt-response_latest.csv"), stringsAsFactors = FALSE)
 
 
