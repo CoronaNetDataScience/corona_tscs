@@ -17,6 +17,8 @@ This repository contains data from the [CoronaNet data collection project](http:
 
 First, CoronaNet data releases:
 
+**Please note that while we make every effort to validate this data, the speed and scale with which it was collected means that we cannot validate all of it. If you find an error in the data, please file an issue on this Github page.**
+
 1. **`data/CoronaNet/coronanet_release.csv`** This file contains variables from the CoronaNet government response project, representing national and sub-national policy event data from more than 140 countries since January 1st, 2020. The data include source links, descriptions, targets (i.e. other countries), the type and level of enforcement, and a comprehensive set of policy types. For more detail on this data, you can see our [codebook here](https://docs.google.com/document/d/1zvNMpwj0onFvUZ_gLl4RRjqS-clbHv3TIX6EOHofsME).
 
 2. **`data/CoronaNet/coronanet_release.csv`** This file contains the government response information from `coronanet_release.csv` along with the following datasets:

@@ -19,6 +19,11 @@ Counts”.
 
 First, CoronaNet data releases:
 
+**Please note that while we make every effort to validate this data, the
+speed and scale with which it was collected means that we cannot
+validate all of it. If you find an error in the data, please file an
+issue on this Github page.**
+
 1.  **`data/CoronaNet/coronanet_release.csv`** This file contains
     variables from the CoronaNet government response project,
     representing national and sub-national policy event data from more
