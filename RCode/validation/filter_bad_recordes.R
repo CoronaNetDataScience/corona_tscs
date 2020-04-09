@@ -38,6 +38,7 @@ q$StartDate<-as.Date(q$StartDate)
 q<-q[which(q$date_announced >q$StartDate),]
 q<-q$record_id 
 qualtrics<- qualtrics[!qualtrics$record_id%in% q,]
+q
 
 #filter all, where announced data > source published date (unlogic)
 q <- qualtrics
@@ -46,17 +47,9 @@ q$sources_matrix_1_1<-mdy(q$sources_matrix_1_1)
 
 q<-q[which(q$date_announced >q$sources_matrix_1_1),]
 q<-q$record_id 
+q
 qualtrics<- qualtrics[!qualtrics$record_id%in% q,]
 
-
-#filter all, where source published date > entry date (unlogic)
-q <- qualtrics
-q$StartDate<-as.Date(q$StartDate)
-q$sources_matrix_1_1<-mdy(q$sources_matrix_1_1)
-
-q<-q[which(q$sources_matrix_1_1>q$StartDate),]
-q<-q$record_id 
-qualtrics<- qualtrics[!qualtrics$record_id%in% q,]'
 
 
 # Log of what has been solved
@@ -67,9 +60,9 @@ qualtrics<- qualtrics[!qualtrics$record_id%in% q,]'
 ## 4979089 and 5608933 Veronika asked us to delete these----
 ##record_id  %in% c('4979089','5608933')~FALSE,
 # these entries should not be possible ----
-#shouldn't be able to select restriciton of mass gatherings and then type of school
-#shouldn't be able to select quarantine and then type of school
-# shouldn't be able to select quarantine and then type of external restriction
+#shouldnt be able to select restriciton of mass gatherings and then type of school
+#shouldnt be able to select quarantine and then type of school
+# shouldnt be able to select quarantine and then type of external restriction
 # in terms of the survey version now, I checked on April 2 and this is not possible for this current version of the dataset
 # remove for now, but check what happened later!
 # my guess is that some of these RAs coded these cases as one policy type first, and then backtracked to another  policy type, and qualtrics saved the entries for the sub-types 
