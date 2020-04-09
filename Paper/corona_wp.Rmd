@@ -51,6 +51,8 @@ clean_data <- readRDS("../data/CoronaNet/coranaNetData_clean.rds") %>%
   mutate(date_announced=mdy(date_announced)) %>% 
   filter(date_announced<today())
 
+# in order to create the 'corona_govt_response_slack_latest_clean.rds' file, please run the code in corona_tscs/RCode/slackAnalytics.R file
+
 slack <- readRDS("../data/slack/corona_govt_response_slack_latest_clean.rds")
 
 ```
@@ -128,16 +130,16 @@ Once the RA submits the form, they are sent a personalized link to access the su
 
 ## Real-Time Communication and Feedback
 
-Once an RA joins the project, they can pose their questions on a CoronaNet Slack channel, which they must join in order to participate in the project. The channel allows any RA to pose a question or issue they may have in using the survey instrument to any of the PIs and allows all other RAs to learn from the exchange at the same time. As such, RAs are able to receive feedback and learn from each other's questions in a timely and centralized manner. Since the data collection effort was launched on March 28, 2020 until April 6, 2020, there were 1,091 messages posted by 108 project members on the Slack channel devoted to asking questions about the Qualtrics survey.
+Once an RA joins the project, they can pose their questions on a CoronaNet Slack channel, which they must join in order to participate in the project. The channel allows any RA to pose a question or issue they may have in using the survey instrument to any of the PIs and allows all other RAs to learn from the exchange at the same time. As such, RAs are able to receive feedback and learn from each other's questions in a timely and centralized manner. 
 
-To provide a better sense of the level of activity on the Slack channel, Figure \@ref(fig:members) plots the number of project members who had logged into the Slack channel per day as well as the number of project members who posted at least one message per day. This figure shows that participation and activity on the Slack channel has steadily grown^[Note, the dip in the overall trend corresponds to weekend days.].
+Since the data collection effort was launched on March 28, 2020 until April 6, 2020, both RAs and PIs have actively used Slack to communicate with on another. In particular, on the Slack channel devoted to asking questions about the Qualtrics survey, there were 1,091 messages posted by 108 project members. To provide a better sense of the level of activity on Slack, Figure \@ref(fig:members) plots the number of project members who had logged into the Slack per day as well as the number of project members who posted at least one message per day and shows that participation and activity Slack  has steadily grown over time and ^[Note, the dip in the overall trend corresponds to weekend days.].
 
 
-```{r members ,fig.cap="Plot of the number of Project Members present and active on Slack over time" }
+```{r members, fig.cap="Plot of the number of Project Members present and active on Slack over time" }
 
 ggplot(slack %>% filter(var %in% c("Project members present on Slack", "Project members posting messages" )),
 			aes(x = Date, y = value, color = var))+
-			geom_line(size = 1)+ 
+			geom_line(size = 2)+ 
 			xlab("Date")+
 			ylab("Number of Project members")+
 			scale_x_date(date_labels = "%a %d-%m-%y", date_breaks = "day")+
