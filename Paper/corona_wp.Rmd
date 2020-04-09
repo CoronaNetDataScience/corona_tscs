@@ -25,10 +25,11 @@ output:
     keep_tex: true
     includes:
       in_header:
+        
           preamble.tex
-    pandoc_args:
-      - '--lua-filter=scholarly-metadata.lua'
-      - '--lua-filter=author-info-blocks.lua'
+    # pandoc_args:
+    #   - '--lua-filter=scholarly-metadata.lua'
+    #   - '--lua-filter=author-info-blocks.lua'
 abstract: "In this paper we present an initial release of a large hand-coded dataset of more than 5,000 separate policy announcements from governments around the world. The data are being made publicy available at our website and Github account (see footnote below), in combination with COVID-19 testing data and country-level covariates. The data are intended to be used by researchers for the purpose of studying the interaction of disease outbreaks and government responses, in addition to the possible determinants of these varying levels of policy strictness. For that purpose, we also include a time-varying severity index of government responses obtained through a time-varying Bayesian latent variable model. ^[or the most current, up to date version of the dataset, please visit http://coronanet-project.org and also our Github page at https://github.com/saudiwin/corona_tscs.] "
 ---
 
