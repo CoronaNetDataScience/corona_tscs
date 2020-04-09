@@ -44,7 +44,7 @@
 
 # setup -----------------------------
 
-pathData = "data"
+path = "/cloud/project"
 
 ## load packages and functions
 
@@ -92,12 +92,12 @@ qualtrics$target_city[which(qualtrics$target_city == 'bogota')] = "Bogota"
 
 
 # This script filters out bad records (need to remove/fix these manually so we don't do this)
-source(paste0(path, "/RCode/validation/filter_bad_recordes.R"))
+source(paste0(path, "/RCode/validation/filter_bad_records.R"))
 
 # This script manually recodes values
 # Also should be fixed so we don't do this
  
-source(paste0(path, "/RCode/validation/recode_recordes.R"))
+source(paste0(path, "/RCode/validation/recode_records.R"))
 
 
 # replace entries with documented corrected entries as necessary ----------------------------------
@@ -224,13 +224,6 @@ country_regions_long = country_regions %>%
 qualtrics <- left_join(qualtrics,country_regions_long,by="index_prov")
 
 
-qualtrics[which(qualtrics$target_other == 'Thuringia'),] 
-
-qualtrics[which(qualtrics$target_other == 'Thuringia'),] %>% c()
-
-table(qualtrics$target_other)
-table(qualtrics$target_region_14_TEXT)
-
 # combining info on target countries --------------------
 
 
@@ -256,7 +249,7 @@ if (all (is.na(qualtrics[which(qualtrics$target_geog_level == "All countries"), 
   )
 }
 
-
+source(paste0(path, "/RCode/validation/recode_records_countries.R"))
 #### Clean the 'other countries' text entries
 ## !!! NOTE that until April 2, it wasn't possible to do text entry for this, so we've lost this data for now
 # its only 4 entries however, and should be straightforward to look in the original sources to get that info
@@ -270,22 +263,73 @@ qualtrics[which(qualtrics$target_region == "Other Regions (please specify below)
 
 
 # add in additional rows for target areas as needed ----------------------------------
-#
+
 # currently, multiple targets are grouped together in one cell if the policy is the same on all dimensions for all targets
+
+# Disaggregate regions (e.g. Schengen Area) into the relevant component countries
+# !!! NOTE: still think about how we want to deal with the 'All' countries entry
+
+regions = c("Europe",
+            "North America",
+            "Asia",
+            "Africa",
+            "Latin America",
+            "Oceania",
+            "Central America",
+            "ASEAN Countries",
+            "Middle East",
+            "European Union (without the UK)",
+            "European Union (with the UK)",
+            "Schengen Area (with the UK)",
+            "Schengen Area (without the UK)")
+
+regions_disagg = c("Russia,Ukraine,France,Spain,Sweden,Norway,Germany,Finland,Poland,Italy,United Kingdom,Romania,Belarus,Kazakhstan,Greece,Bulgaria,Iceland,Hungary,Portugal,Austria,Czechia,Serbia,Ireland,Lithuania,Latvia,Croatia,Bosnia and Herzegovina,Slovakia,Estonia,Denmark,Switzerland,Netherlands,Moldova,Belgium,Armenia,Albania,North Macedonia,Turkey,Slovenia,Montenegro,Kosovo,Cyprus,Azerbaijan,Luxembourg,Georgia,Andorra,Malta,Liechtenstein,San Marino,Monaco,Vatican",
+                   "United States,Mexico,Canada,Guatemala,Cuba,Haiti,Dominican Republic,Honduras,El Salvador,Nicaragua,Costa Rica,Panama,Puerto Rico,Jamaica,Trinidad and Tobago,Guadeloupe,Martinique,Bahamas,Belize,Barbados,Saint Lucia,United States,Virgin Islands,Grenada,Antigua and Barbuda,Dominica,Saint Kitts and Nevis,Saint Martin,British Virgin Islands,Anguilla,Montserrat",
+                   "Afghanistan,Armenia,Azerbaijan,Bahrain,Bangladesh,Bhutan,Brunei,Cambodia,China,Cyprus,Egypt,Georgia,India,Indonesia,Iran,Iraq,Israel,Japan,Jordan,Kazakhstan,Korea, North Korea,South Korea,Kuwait,Kyrgyzstan,Laos,Lebanon,Malaysia,Maldives,Mongolia,Myanmar,Nepal,Oman,Pakistan,Philippines,Qatar,Russia,Saudi Arabia,Singapore,Sri Lanka,Syria,Tajikistan,Thailand,Timor-Leste,Turkey,Turkmenistan,United Arab Emirates,Uzbekistan,Vietnam,Yemen,Palestine,Taiwan",
+                   "Algeria,Angola,Botswana,Burundi,Cameroon,Cabo Verde,Central African Republic,Chad,Comoros,Republic of the Congo,Democratic Republic of the Congo,Benin,Equatorial Guinea,Ethiopia,Eritrea,Djibouti,Gabon,Gambia,Ghana,Guinea,Ivory Coast,Kenya,Lesotho,Liberia,Libya,Madagascar,Malawi,Mali,Mauritania,Mauritius,Morocco,Mozambique,Namibia,Niger,Nigeria,Guinea-Bissau,Réunion,Rwanda,Sao Tome and Príncipe,Senegal,Seychelles,Sierra Leone,Somalia,South Africa,Zimbabwe,South Sudan,Sudan,Swaziland,Togo,Tunisia,Uganda,Egypt,Tanzania,Burkina Faso,Zambia",
+                   "Argentina,Bolivia,Brazil,Chile,Colombia,Ecuador,Falkland Islands,Guyana,Paraguay,Peru,Suriname,Uruguay,Venezuela",
+                   "Australia,Papua New Guinea,New Zealand,Fiji,Solomon Islands,Vanuatu,Kiribati,Micronesia,Tonga,American Samoa, Marshall Islands,Palau,Tuvalu,Nauru",
+                   "Guatemala, Belize, Honduras, El Salvador, Nicaragua, Costa Rica, Panama",
+                   "Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, Philippines, Singapore, Thailand, Vietnam",
+                   "Bahrain,Cyprus,Egypt,Iran,Iraq,Israel,Jordan,Kuwait,Lebanon,Oman,Palestine,Qatar,Saudi Arabia,Syria,Turkey,United Arab Emirates,Yemen",
+                   "Austria,Belgium,Bulgaria,Croatia,Cyprus,Czechia,Denmark,Estonia,Finland,France,Germany,Greece,Hungary,Ireland,Italy,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Poland,Portugal,Romania,Slovakia,Slovenia,Spain,Sweden",
+                   "Austria,Belgium,Bulgaria,Croatia,Cyprus,Czechia,Denmark,Estonia,Finland,France, Germany,Greece,Hungary,Ireland,Italy,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Poland,Portugal,Romania,Slovakia,Slovenia,Spain,Sweden,United Kingdom",
+                   "Austria,Belgium,Czech Republic,Denmark,Estonia,Finland,France,Germany,Greece,Hungary,Iceland,Italy,Latvia,Liechtenstein,Lithuania,Luxembourg, Malta, Netherlands,Norway,Poland,Portugal,Slovakia,Slovenia,Spain,Sweden,Switzerland,Slovakia,Slovenia,Spain,Sweden,United Kingdom",
+                   "Austria,Belgium,Czech Republic,Denmark,Estonia,Finland,France,Germany,Greece,Hungary,Iceland,Italy,Latvia,Liechtenstein,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Slovakia,Slovenia,Spain,Sweden,Switzerland,Slovakia,Slovenia,Spain,Sweden")
+
+regions_df = data.frame(regions, regions_disagg)
+
+# drop observations where coder chose more than 3 regions; CHECK later
+qualtrics = qualtrics  %>% filter(unlist(lapply(stringr:::str_split(qualtrics$target_region, ','), function(x) length(x[!is.na(x)]))) <4)
+
+
+# if coder selected multiple regions, separate them out into different columns
+num_region_columns = max(unlist(lapply(stringr:::str_split(qualtrics$target_region, ','), function(x) length(x[!is.na(x)]))))
+qualtrics = qualtrics  %>% separate(target_region, c(paste0("regions", 1:num_region_columns)), sep = ',', remove = FALSE)
+
+# match regions to the countries that comprise them
+qualtrics[, paste0("regions", 1:num_region_columns)]  = data.frame(apply(qualtrics [, paste0("regions", 1:num_region_columns)], 2, function(x){
+  regions_df$regions_disagg[match(x, regions_df$regions)]}), stringsAsFactors = FALSE)
+ 
+ 
+# recollapse separate columns into one column
+qualtrics  = qualtrics  %>% 
+  mutate_at(vars(starts_with("regions")),
+            list( ~ replace(., is.na(.), ""))) %>%
+  unite(target_regions_disagg, contains('regions'), sep = ',') %>%
+ mutate(target_regions_disagg = gsub('\\,\\,|\\,$', "", target_regions_disagg))
+
+# separate out disaggregated target countries into separate rows
+qualtrics  = qualtrics %>% separate_rows(target_regions_disagg)
+
 
 ## add additional rows for target countries/regional groupings
 qualtrics = qualtrics %>%
   mutate_at(vars(starts_with("target_")),
             list( ~ replace(., is.na(.), ""))) %>%
-  unite(target_country_region, c(target_country, target_region), sep = ',') %>%
-  mutate(target_country_region = gsub("\\,$|^\\,", "", target_country_region)) %>%
-  separate_rows(target_country_region, sep = ',')
-
-
-### !!! NOTE, we still need to write up some code to disaggregate the countries in regional groupings
-# e.g. split out Schengen Area into the relevant countries
-# and think about how we want to deal with the 'All' countries entry
-
+  unite(target_country, c(target_country, target_regions_disagg), sep = ',') %>%
+  mutate(target_country = gsub("\\,$|^\\,", "", target_country)) %>%
+  separate_rows(target_country, sep = ',')
 
 
 ### for first version, don't break out target provinces/cities into separate rows
@@ -297,13 +341,11 @@ qualtrics = qualtrics %>%
 # add in additional rows for target cities as needed
 #qualtrics = qualtrics %>% separate_rows(target_city, sep = ';')
 
-
 # check target_other variable text entries are standardized
 #  !!!! NOTE haven't done this yet, not necessary for formatting data
 # but we should def do this at some point
 table(qualtrics$target_other) %>% names() %>%  unique() %>% length()
 
-names(qualtrics)
 # note that Palestine/Gaza wasn't an option in the target_country/target_province survey before
 
 
@@ -340,9 +382,9 @@ unique(qualtrics$target_who_what_10_TEXT)
 # (C) then we resolve any duplicates that arise from doing (A) and (B)
 
 # (A) add column names of each health resource to each row that has a text entry
-qualtrics[, grep('type_num', names(qualtrics))] =  apply(select(qualtrics, contains('type_num')), 1, function(x) {
+qualtrics[, grep('type_num', names(qualtrics))] =  data.frame(t(apply(select(qualtrics, contains('type_num')), 1, function(x) {
   ifelse(is.na(x), x, paste(names(x), x, sep = "@"))
-}) %>% t()
+})), stringsAsFactors = FALSE)
 
 qualtrics = qualtrics %>%
   # first change all of the NA's in the relevant columns that code for the number of policies to ""
@@ -596,9 +638,8 @@ qualtrics[which(
     qualtrics$type_sub_cat != "Other Restricted Businesses"
 ), c('type_sub_cat_other')] = NA
 
-dim(qualtrics)
-
+ 
 # save clean file ---------------
-
+ 
 saveRDS(qualtrics,
-     file = paste0(pathData, "/coronaNet/coranaNetData_clean.rds"))
+     file = paste0(path, "/data/CoronaNet/coranaNetData_clean.rds"))
