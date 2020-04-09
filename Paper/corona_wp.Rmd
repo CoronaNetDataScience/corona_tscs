@@ -52,6 +52,8 @@ clean_data <- readRDS("../data/CoronaNet/coranaNetData_clean.rds") %>%
   mutate(date_announced=mdy(date_announced)) %>% 
   filter(date_announced<today())
 
+# run /RCode/slack/slackAnalytics.R")
+
 slack <- readRDS("../data/slack/corona_govt_response_slack_latest_clean.rds")
 
 ```
