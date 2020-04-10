@@ -46,6 +46,7 @@
 
 path = "/cloud/project"
 pathData <- 'data/'
+path = "/cloud/project/data"
 
 
 ## load packages and functions
@@ -79,12 +80,12 @@ capwords <- function(s, strict = FALSE) {
 # because the TUM has not purchased one
 # .csv downloads it is!
 
-country_regions = read_csv(file = paste0(pathData, '/regions/country_region_clean.csv'))
-qualtrics = read_survey(paste0(pathData, '/CoronaNet/coronanet_raw_latest.csv'))
+country_regions = read_csv(file = 'data/regions/country_region_clean.csv')
+qualtrics = read_survey('data/CoronaNet/coronanet_raw_latest.csv')
 
  
 # This script filters out bad records (need to remove/fix these manually so we don't do this)
-
+ 
 source("RCode/validation/filter_bad_records.R")
 
 # This script manually recodes values
@@ -653,3 +654,4 @@ qualtrics[which(
  
 saveRDS(qualtrics,
      file = "data/CoronaNet/coranaNetData_clean.rds")
+
