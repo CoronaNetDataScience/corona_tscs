@@ -1,6 +1,6 @@
 # This code transforms the raw survey qualtrics data
 # for the CoronaNet Project into a long format
-# the output for this code is currently saved under 'coranaNetData_clean_April+3%2C+2020_01.39.rda' in the Data/CoronaNet folder of the Dropbox
+# the output for this code is currently saved under 'coranaNetData_clean.rds' in the Data/CoronaNet folder of the Dropbox
 
 ## the code should transform the data such that:
 # for the initiating policy actor, there is:
@@ -53,6 +53,7 @@ library(magrittr)
 library(dplyr)
 library(readr)
 library(qualtRics)
+library(stringr)
 
 
 capwords <- function(s, strict = FALSE) {
@@ -217,13 +218,13 @@ qualtrics = qualtrics %>%
 
 # reshape country_regions data to long format
 country_regions_long = country_regions %>%
-  gather(key="p_num",value="init_pov",-Country,-ISO2) %>% 
+  gather(key="p_num",value="init_prov",-Country,-ISO2) %>% 
   mutate(index_prov=paste0(Country,p_num))
 
 # match province code to actual province name
 qualtrics <- left_join(qualtrics,country_regions_long,by="index_prov")
 
-
+ 
 # combining info on target countries --------------------
 
 
@@ -307,6 +308,8 @@ qualtrics = qualtrics  %>% filter(unlist(lapply(stringr:::str_split(qualtrics$ta
 num_region_columns = max(unlist(lapply(stringr:::str_split(qualtrics$target_region, ','), function(x) length(x[!is.na(x)]))))
 qualtrics = qualtrics  %>% separate(target_region, c(paste0("regions", 1:num_region_columns)), sep = ',', remove = FALSE)
 
+
+
 # match regions to the countries that comprise them
 qualtrics[, paste0("regions", 1:num_region_columns)]  = data.frame(apply(qualtrics [, paste0("regions", 1:num_region_columns)], 2, function(x){
   regions_df$regions_disagg[match(x, regions_df$regions)]}), stringsAsFactors = FALSE)
@@ -319,18 +322,33 @@ qualtrics  = qualtrics  %>%
   unite(target_regions_disagg, contains('regions'), sep = ',') %>%
  mutate(target_regions_disagg = gsub('\\,\\,|\\,$', "", target_regions_disagg))
 
+
+
+
+
 # separate out disaggregated target countries into separate rows
-qualtrics  = qualtrics %>% separate_rows(target_regions_disagg)
-
-
+qualtrics  = qualtrics %>% separate_rows(target_regions_disagg, sep = ',')
+ 
 ## add additional rows for target countries/regional groupings
 qualtrics = qualtrics %>%
-  mutate_at(vars(starts_with("target_")),
+  mutate_at(vars("target_country", "target_regions_disagg"),
             list( ~ replace(., is.na(.), ""))) %>%
   unite(target_country, c(target_country, target_regions_disagg), sep = ',') %>%
   mutate(target_country = gsub("\\,$|^\\,", "", target_country)) %>%
   separate_rows(target_country, sep = ',')
 
+
+# replace  empty rows in [target_country] with disagregated 'All countries' from [target_geog_level]
+qualtrics[which(qualtrics$target_country == 'All'), 'target_country'] = paste(country_regions$Country, collapse = ',')
+qualtrics[which(qualtrics$target_country == 'All'), 'target_region'] = 'All countries'
+
+
+# separate out disaggregated target countries from 'All countries' into separate rows 
+qualtrics  = qualtrics %>% separate_rows(target_country, sep = ',')
+
+qualtrics$target_country = str_trim(qualtrics$target_country)
+
+ 
 
 ### for first version, don't break out target provinces/cities into separate rows
 # but code for doing so is below
@@ -641,5 +659,6 @@ qualtrics[which(
  
 # save clean file ---------------
  
+
 saveRDS(qualtrics,
      file = paste0(path, "/data/CoronaNet/coranaNetData_clean.rds"))

@@ -1,6 +1,6 @@
 # This code transforms the raw survey qualtrics data
 # for the CoronaNet Project into a long format
-# the output for this code is currently saved under 'coranaNetData_clean_April+3%2C+2020_01.39.rda' in the Data/CoronaNet folder of the Dropbox
+# the output for this code is currently saved under 'coranaNetData_clean.rds' in the Data/CoronaNet folder of the Dropbox
 
 ## the code should transform the data such that:
 # for the initiating policy actor, there is:
@@ -54,6 +54,7 @@ library(magrittr)
 library(dplyr)
 library(readr)
 library(qualtRics)
+library(stringr)
 
 
 capwords <- function(s, strict = FALSE) {
@@ -196,6 +197,7 @@ empty_columns = names(which(apply(qualtrics, 2, function(x) {
 
 qualtrics = dplyr::select(qualtrics,-empty_columns)
 
+
 #  combining columns ----------------------------------
 
 ###------  combine columns for init_provinces ----- ###
@@ -217,7 +219,7 @@ qualtrics = qualtrics %>%
 
 # reshape country_regions data to long format
 country_regions_long = country_regions %>%
-  gather(key="p_num",value="p_name",-Country,-ISO2) %>% 
+  gather(key="p_num",value="init_prov",-Country,-ISO2) %>% 
   mutate(index_prov=paste0(Country,p_num))
 
 # match province code to actual province name
@@ -322,7 +324,7 @@ qualtrics  = qualtrics  %>%
   mutate(target_regions_disagg = gsub('\\,\\,|\\,$', "", target_regions_disagg))
 
 # separate out disaggregated target countries into separate rows
-qualtrics  = qualtrics %>% separate_rows(target_regions_disagg)
+qualtrics  = qualtrics %>% separate_rows(target_regions_disagg, sep =',')
 
 
 ## add additional rows for target countries/regional groupings
@@ -333,6 +335,15 @@ qualtrics = qualtrics %>%
   mutate(target_country = gsub("\\,$|^\\,", "", target_country)) %>%
   separate_rows(target_country, sep = ',')
 
+
+# replace  empty rows in [target_country] with disagregated 'All countries' from [target_geog_level]
+qualtrics[which(qualtrics$target_country == 'All'), 'target_country'] = paste(country_regions$Country, collapse = ',')
+qualtrics[which(qualtrics$target_country == 'All'), 'target_region'] = 'All countries'
+
+# separate out disaggregated target countries from 'All countries' into separate rows 
+qualtrics  = qualtrics %>% separate_rows(target_country, sep = ',')
+
+qualtrics$target_country = str_trim(qualtrics$target_country)
 
 
 ### for first version, don't break out target provinces/cities into separate rows
@@ -356,10 +367,6 @@ table(qualtrics$target_other)
 
 table(qualtrics$target_who_what)
 unique(qualtrics$target_who_what_10_TEXT)
-
-
-# get a separate row for every policy sub-type --------------------------------------
-#
 
 
 
@@ -406,7 +413,7 @@ qualtrics = qualtrics %>%
   # !!! note should probably create code to clean all @'s from text entries before hand
   separate(type_sub_num, c("type_sub", 'type_sub_num'),  "@", fill = 'right')
 
- 
+
 # clean names so that they match what they originally were in the codebook
 qualtrics$type_sub  = gsub('type_num_', '', qualtrics$type_sub) %>% capwords()
 qualtrics$type_sub = qualtrics$type_sub %>% recode(
@@ -417,7 +424,7 @@ qualtrics$type_sub = qualtrics$type_sub %>% recode(
   QuaranCen = "Temporary Quarantine Centers",
   Research = "Health Research Facilities",
   PubTest = "Public Testing Facilities (e.g. drive-in testing for COVID-19)"
-
+  
 )
 
 # !!! NOTE still need to check if all the text entries for the number of a policy type make sense/find a standard format for them as much as possible
@@ -638,6 +645,7 @@ qualtrics[which(
   qualtrics$type == "Restriction of Non-Essential Businesses" &
     qualtrics$type_sub_cat != "Other Restricted Businesses"
 ), c('type_sub_cat_other')] = NA
+
 
 
 # save clean file ---------------
