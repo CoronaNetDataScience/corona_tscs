@@ -146,7 +146,7 @@ sev_data <- summary(severity) %>%
 
 # select only columns we need
 
-release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target_other)) %>% 
+release <- filter(clean_data,!is.na(init_country),is.na(init_other),target_other=="") %>% 
               select(record_id,entry_type,event_description,type,country="init_country",
                      init_country_level,
                      province="init_prov",
