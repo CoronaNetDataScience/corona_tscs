@@ -117,10 +117,6 @@ niehaus <- read_csv("data/data_niehaus/03_21_20_0105am_wep.csv") %>%
 
 clean_data <- readRDS("data/CoronaNet/coranaNetData_clean.rds")
 
-# filter out region miscoding
-
-
-
 # severity index
 
 severity <- readRDS("data/severity_fit.rds")
@@ -146,6 +142,7 @@ sev_data <- summary(severity) %>%
 
 # select only columns we need
 
+
 release <- filter(clean_data,!is.na(init_country),is.na(init_other),target_other=="") %>% 
               select(record_id,entry_type,event_description,type,country="init_country",
                      init_country_level,
@@ -160,8 +157,8 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),target_other
                      enforcer,
                      date_announced,
                      link="sources_matrix_1_2") %>% 
-  mutate(date_announced=lubridate::mdy(date_announced),
-         province=ifelse(country=="Hong Kong","Hong Kong",province),
+  mutate(province=ifelse(country=="Hong Kong","Hong Kong",province),
+         date_announced=lubridate::mdy(date_announced),
          entry_type=recode(entry_type,
                            `1`="New Entry",
                            `Correction`="Correction to Existing Entry (type in Record ID in text box)",

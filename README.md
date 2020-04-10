@@ -57,7 +57,7 @@ issue on this Github page.**
 5.  `country` The country initiating the policy
 6.  `init_country_level` Whether the policy came from the national level
     or a sub-national unit
-7.  `province` The ID of the sub-national unit
+7.  `index_prov` The ID of the sub-national unit
 8.  `target_country` Which foreign country a policy is targeted at
     (i.e. travel policies)
 9.  `target_geog_level` Whether the target of the policy is a country as

@@ -42,12 +42,7 @@
 # 4) ?relabel some of the variable names for text entry vars to make them more intuitive
 # 5) at the very end, download latest version of dataset and make sure everything still works
 
-# setup -----------------------------
-
-path = "/cloud/project"
-pathData <- 'data/'
-path = "/cloud/project/data"
-
+# DO NOT USE PATHS. USE RSTUDIO PROJECTS WITH RELATIVE PATHS.
 
 ## load packages and functions
 
@@ -654,4 +649,3 @@ qualtrics[which(
  
 saveRDS(qualtrics,
      file = "data/CoronaNet/coranaNetData_clean.rds")
-

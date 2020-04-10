@@ -280,7 +280,7 @@ get_est %>%
   geom_label_repel(data=sample_n(ungroup(sample_n(group_by(get_est,country),1)),50),aes(label=country),size=2.5) +
   theme_minimal() +
   theme(panel.grid = element_blank()) +
-  labs(caption="Estimates are derived from Stan, a Markov Chain Monte Carlo sampler.\nThe intervals represent the median and 5% - 95% posterior density region.\nPlot shows one estimate per country per day.")
+  labs(caption="Estimates are derived from Stan, a Markov Chain Monte Carlo sampler.\nThe intervals represent the median and 5% - 95% posterior density region.\nPlot shows one estimate per country per day.") +
   xlab("") +
   ylab("Severity Index Scale (0 to 100)")
 
@@ -326,7 +326,20 @@ In future work, we intend to analyze the policy combinations that are best able 
 
 ## Appendix {-}
 
+```{r ratable}
+library(readr)
+contribution <- read_csv("data/CoronaNet/People/contribution.csv")
+library(knitr)
+library(readxl)
+contribution <- dplyr::rename(contribution, Country = country)
+knitr::kable(contribution,booktabs=T,
+          caption = 'Table of contributing researchers and their responsible countries') %>% 
+  kable_styling(latex_options = c("striped", "hold_position"))
+```
+
+
 # References
+
 
 
 
