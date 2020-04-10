@@ -7,7 +7,7 @@ author:
       correspondence: true
   - Joan Barcelo:
       institute: nyuad
-  - Allison Hartnett:
+  - Allison Spencer Hartnett:
       institute: yale
   - Robert Kubinec:
       institute: nyuad
