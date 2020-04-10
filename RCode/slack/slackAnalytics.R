@@ -6,8 +6,8 @@ library(forcats)
 
 # load data
 
-pathData = "/cloud/project/data/slack"
-slack = read.csv(paste0(pathData, "/slack/corona-govt-response_latest.csv"), stringsAsFactors = FALSE)
+pathData = "/cloud/project/data"
+slack = read.csv(paste0(pathData, "/slack/corona-govt-response_slack_latest.csv"), stringsAsFactors = FALSE)
 
 
 
@@ -18,7 +18,8 @@ slack =  slack %>% dplyr:::filter(Date >= "2020-03-28")
 # remove weekly stats
 slack = select(slack, -Weekly.active.members, -Weekly.members.posting.messages)
 slack = slack %>% dplyr:::rename(Project.members.present.on.Slack = Daily.active.members ,
-							  Project.members.posting.messages = Daily.members.posting.messages	)
+							  Project.members.posting.messages = Daily.members.posting.messages,
+							  Messages.posted.by.project.members           = Messages.posted.by.members)
 
 # reshape data to long form
 slack = slack %>% gather("var", "value", -Date)
@@ -26,14 +27,16 @@ slack = slack %>% gather("var", "value", -Date)
 # clean up var names
 slack$var = gsub('\\.', ' ', slack$var)
 
+slack$var %>% unique()
 # set order or vars in factor levels
 slack$var = fct_relevel(slack$var, "Project members present on Slack", 
 						"Project members posting messages",
 						"Messages posted by project members" ,
 						"Messages in DMs"  )
 
+
+saveRDS(slack, file = paste0(pathData, '/slack/corona_govt_response_slack_latest_clean.rds'))
  
-saveRDS(slack, file = 'data/slack/corona_govt_response_slack_latest_clean.rds')
 
 
 # # make plot of daily active members and daily members posting messges

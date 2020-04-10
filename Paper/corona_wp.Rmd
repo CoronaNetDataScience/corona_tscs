@@ -182,7 +182,7 @@ clean_data %>%
   group_by(type) %>% 
   summarize(`Total Number of Policies`=n(),
             `Number of Countries`=length(unique(init_country)),
-            `Number of Targeted Countries`=length(unique(target_country_region)),
+            `Number of Targeted Countries`=length(unique(target_country)),
             `% With Mandatory Enforcement`=round(mean(grepl(x=compliance,pattern="Mandatory")*100,na.rm=T),0)) %>% 
   select(Type="type",everything()) %>% 
   filter(!is.na(Type)) %>% 
