@@ -51,7 +51,7 @@ to_make <- id_make(clean_comp,outcome_disc="compliance",person_id="init_country"
 # note no missing data :)
 
 
-severity_fit <- id_estimate(to_make,model_type=1,vary_ideal_pts="random_walk",ncores=3,nchains=3,niters=1000,
+severity_fit <- id_estimate(to_make,model_type=1,vary_ideal_pts="random_walk",ncores=1,nchains=1,niters=1000,
                             fixtype="prefix",
                             restrict_ind_high="Restriction of Non-Essential Businesses",
                             restrict_ind_low="Curfew",
