@@ -45,6 +45,7 @@
 # setup -----------------------------
 
 path = "/cloud/project"
+pathData <- 'data/'
 
 
 ## load packages and functions
@@ -251,7 +252,7 @@ if (all (is.na(qualtrics[which(qualtrics$target_geog_level == "All countries"), 
   )
 }
 
-source(paste0(path, "/RCode/validation/recode_records_countries.R"))
+source("RCode/validation/recode_records_countries.R")
 #### Clean the 'other countries' text entries
 ## !!! NOTE that until April 2, it wasn't possible to do text entry for this, so we've lost this data for now
 # its only 4 entries however, and should be straightforward to look in the original sources to get that info
@@ -389,7 +390,7 @@ unique(qualtrics$target_who_what_10_TEXT)
 # (C) then we resolve any duplicates that arise from doing (A) and (B)
 
 # (A) add column names of each health resource to each row that has a text entry
-qualtrics[, grep('type_num', names(qualtrics))] =  data.frame(t(aapply(select(qualtrics, contains('type_num')), 1, function(x) {
+qualtrics[, grep('type_num', names(qualtrics))] =  data.frame(t(apply(select(qualtrics, contains('type_num')), 1, function(x) {
   ifelse(is.na(x), x, paste(names(x), x, sep = "@"))
 })), stringsAsFactors = FALSE)
 
@@ -651,4 +652,4 @@ qualtrics[which(
 # save clean file ---------------
  
 saveRDS(qualtrics,
-     file = paste0(path, "/data/CoronaNet/coranaNetData_clean.rds"))
+     file = "data/CoronaNet/coranaNetData_clean.rds")
