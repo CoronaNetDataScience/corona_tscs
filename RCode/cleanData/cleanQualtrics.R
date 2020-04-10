@@ -242,7 +242,7 @@ if (length(qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'
 
 # double check to make sure 'target_country' is empty when 'all countries' is selected
 if (all (is.na(qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country']))) {
-  qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country'] = "All"
+  qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country'] = "All countries"
   print('All Good')
 } else{
   stop(
@@ -339,12 +339,11 @@ qualtrics = qualtrics %>%
 
 
 # replace  empty rows in [target_country] with disagregated 'All countries' from [target_geog_level]
-qualtrics[which(qualtrics$target_country == 'All'), 'target_country'] = paste(country_regions$Country, collapse = ',')
-qualtrics[which(qualtrics$target_country == 'All'), 'target_region'] = 'All countries'
-
+# qualtrics[which(qualtrics$target_country == 'All'), 'target_country'] = paste(country_regions$Country, collapse = ',')
+# qualtrics[which(qualtrics$target_country == 'All'), 'target_region'] = 'All countries'
 
 # separate out disaggregated target countries from 'All countries' into separate rows 
-qualtrics  = qualtrics %>% separate_rows(target_country, sep = ',')
+# qualtrics  = qualtrics %>% separate_rows(target_country, sep = ',')
 
 qualtrics$target_country = str_trim(qualtrics$target_country)
 
