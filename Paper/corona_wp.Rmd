@@ -328,6 +328,28 @@ In future work, the CoronaNet team will also provide their own analyses of what 
 
 
 ## Appendix {-}
+
+
+```{r echo= FALSE, results='asis', message=FALSE}
+library(readr)
+contribution <- read_csv("data/CoronaNet/People/contribution.csv")
+library(knitr)
+library(readxl)
+contribution <- dplyr::rename(contribution, Country = country)
+DT::datatable(contribution,
+          caption = 'Table of contributing researchers and their responsible countries',
+          class = 'cell-border stripe', 
+          filter = 'top',
+          escape= c(1,2,4,3),
+          fillContainer = FALSE, 
+          options = list(pageLength = 250, 
+                         autoWidth = TRUE,
+                         dom = 'Bfrtip',
+                         scrollX = TRUE, 
+            selection="multiple"
+          ))
+```
+
 ## Codebook {-}
 
 
