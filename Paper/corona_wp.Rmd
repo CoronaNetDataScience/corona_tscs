@@ -1,5 +1,5 @@
 ---
-title: "A Dyadic, Hand-Coded Dataset of Government Responses to the COVID-19 Pandemic"
+title: "CoronaNet: A Dyadic Dataset of Government Responses to the COVID-19 Pandemic"
 author: 
   - Cindy Cheng: 
       email: cindy.cheng@hfp.tum.de
@@ -17,30 +17,30 @@ institute:
   - tum: Hochschule f?r Politik, Technical University of Munich
   - nyuad: New York University Abu Dhabi
   - yale: Yale University
-date: "4/5/2020"
+date: "April 10th, 2020"
 toc: false
 bibliography: BibTexDatabase.bib
 output: 
   #bookdown::word_document2
   bookdown::pdf_document2:
     keep_tex: true
-    latex_engine: xelatex
+    #latex_engine: xelatex
     includes:
       in_header:
           preamble.tex
     pandoc_args:
       - '--lua-filter=scholarly-metadata.lua'
       - '--lua-filter=author-info-blocks.lua'
-
 abstract: "As the COVID-19 pandemic spreads around the world, governments have implemented a broad set of policies to limit the spread of the pandemic. In this paper we present an initial release of a large hand-coded dataset of more than 4,500 separate policy announcements from governments around the world. This data is being made publicly available, in combination with other data that we have collected (including COVID-19 tests, cases, and deaths) as well as a number of country-level covariates. Due to the speed of the COVID-19 outbreak, we will be releasing this data on a daily basis with a 5-day lag for record validity checking. In a truly global effort, our team is comprised of more than 190 research assistants across 18 time zones and makes use of cloud-based managerial and data collection technology in addition to machine learning coding of news sources. We analyze the dataset with a Bayesian time-varying ideal point model showing the quick acceleration of more harsh policies across countries beginning in mid-March and continuing to the present. While some relatively low-cost policies like task forces and health monitoring began early, countries generally adopted more harsh measures within a narrow time window, suggesting strong policy diffusion effects.^[We thank the very large number of research assistants who coded this data. Their names and affiliations are listed in the appendix. For the most current, up to date version of the dataset, please visit http://coronanet-project.org and also our Github page at https://github.com/saudiwin/corona_tscs. For more information on the exact variables collected, please see our publicly available codebook [at this link](https://docs.google.com/document/d/1zvNMpwj0onFvUZ_gLl4RRjqS-clbHv3TIX6EOHofsME/edit?usp=sharing).]"
-
-
-```{r, include=FALSE}
-options(tinytex.verbose = TRUE)
-```
+---
 
 ```{r setup, include=FALSE}
+<<<<<<< HEAD
 knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE)
+=======
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,tinytex.verbose = TRUE)
+
+>>>>>>> 5f16de2666077f7eb0e17d9be1d14f4ee43e1251
 require(dplyr)
 require(tidyr)
 require(ggplot2)
@@ -49,6 +49,13 @@ require(stringr)
 require(kableExtra)
 require(rstan)
 require(ggrepel)
+<<<<<<< HEAD
+=======
+library(readr)
+library(knitr)
+library(readxl)
+
+>>>>>>> 5f16de2666077f7eb0e17d9be1d14f4ee43e1251
 # let's load some data!
 # run RCode/cleanData/cleanQualtrics_short.R
 clean_data <- readRDS("../data/CoronaNet/coranaNetData_clean.rds") %>% 
@@ -232,11 +239,10 @@ The advantage of employing a statistical model, rather than simply summing acros
 
 Furthermore, because the model is stochastic, it is robust to coding errors of the kind that often occur in these types of datasets. As we discuss in our validation section, while we are continuing to validate the data on a daily basis, the massive speed and scope of data collection means that we cannot identify all issues with the data in real time. However, the measurement model employed only requires us to assume that on average the policy codings are correct, not that they are correct for each instance. Coding error, such as incorrectly selecting a policy type, will propagate through the model as higher uncertainty intervals, but will not affect average posterior estimates. As our data quality improves, and we are able to collect more data over time, the model will produce more variegated estimates with smaller uncertainty intervals.
 
+Figure \@ref(fig:plotindex) shows the estimated index scores for the `r length(unique(clean_data$country))` countries in our dataset at present. Of course, a caveat with the index is that we may be missing some possible policy measures that have occurred due to the difficulty in finding them in published sources. However, there is still clear differentiation within the index in terms of when policies were imposed, with some countries starting to impose policies much earlier than others. Furthermore, there is a clear break about March 1st when countries began to impose more stringent policies across the world.
 
 Figure \@ref(fig:plotindex) shows the estimated index scores for the `r length(unique(clean_data$country))` countries in our dataset at present. Of course, a caveat with the index is that we may be missing some possible policy measures that have occurred due to the difficulty in finding them in published sources. However, there is still clear differentiation within the index in terms of when policies were imposed, with some countries starting to impose policies much earlier than others. Furthermore, there is a clear break about March 1st when countries began to impose more stringent policies across the world.
 
-
-<!-- regular html comment 
 ```{r plotindex,fig.cap="CoronaNet Time-Varying Index of Severity of Measures Opposing COVID-19 Pandemic"}
 severity_fit <- readRDS("../data/severity_fit.rds")
 all_lev <- as.character(unique(clean_data$init_country))
@@ -275,10 +281,20 @@ get_est %>%
 ggsave("index.png")
 
 ```
+<<<<<<< HEAD
 --> 
+=======
+
+
+>>>>>>> 5f16de2666077f7eb0e17d9be1d14f4ee43e1251
 Table \@ref(tab:rankcount) shows the rank of countries for the index at present. An important note about these results is that the rank only measures the posterior median, or most likely estimate, but the 5% - 95% uncertainty interval shows that substantial uncertainty exists in comparing neighboring countries in the index. More certain comparisons can be made between the top, middle and bottom third of countries, while within these categories the estimates are not precise enough to make finer-grained distinctions with confidence.
 With this caveat in mind, San Marino occupies the highest position, likely because of harsh lockdowns imposed as a result of the outbreak in northern Italy that occurred relatively early. Slovenia has had a nationwide lockdown in place for several weeks, while Azerbaijan took early action to close its borders with Iran in February after the outbreak started. It is important to note the uncertainty in the index measures, as the top 10 countries cannot be distinguished from each other in severity except for San Marino. We believe these uncertainty intervals are important to capture the difficulty in using published policies to compare countries. However, we also see substantial value in this index, particularly in its ability to show change over time. 
+<<<<<<< HEAD
 <!-- regular html comment 
+=======
+
+
+>>>>>>> 5f16de2666077f7eb0e17d9be1d14f4ee43e1251
 ```{r rankcount}
 
 get_est %>% 
@@ -297,7 +313,7 @@ get_est %>%
   column_spec(2:5,width="2.5cm")
 
 ```
--->
+
 Finally, we note in Figure \@ref(fig:plotindex) the strong evidence of policy diffusion effects. While information about COVID-19 existed at least as early as January, we do not see large-scale changes occurring in severity scores until March. Furthermore, the trajectories are highly non-linear, with a large number of countries quickly transitioning from relatively low to relatively high scores. This tandem movement is a strong indication of policy diffusion as countries adopted similar policies across time and space as opposed to a more linear learning process.
 # Conclusion
 As policymakers, researchers and the broader public debate and compare how to succeed against the novel threats posed by COVID-19, they need real-time, traceable data on government policies in order to understand which of these policies are effective, and under what conditions.  This requires specific knowledge of the variation in policies and their implementation. The goal of the dataset and severity index presented here is to provide this information. 
@@ -305,13 +321,17 @@ We have tried to match our data collection efforts to keep up with the exponenti
 In future work, we intend to analyze the policy combinations that are best able to stymie the epidemic so as to contribute to the social science research community and provide urgently needed knowledge for policymakers and the wider global community.
 ## Appendix {-}
 ```{r ratable}
-library(readr)
+
 contribution <- read_csv("../data/CoronaNet/People/contribution.csv")
-library(knitr)
-library(readxl)
-contribution <- dplyr::rename(contribution, Country = country)
-knitr::kable(contribution,booktabs=T,
-          caption = 'Table of contributing researchers and their responsible countries') %>% 
-  kable_styling(latex_options = c("striped", "hold_position"))
+
+
+contribution <- dplyr::rename(contribution, Country = "country") %>% 
+  mutate(Vita=coalesce(Vita,""),
+         Affiliation=coalesce(Affiliation,"")) 
+knitr::kable(contribution,booktabs=T,longtable=T,
+          caption = 'Contributing Researchers and their Responsible Countries') %>% 
+  kable_styling(latex_options = c("striped", "hold_position")) %>% 
+  column_spec(2:3,width="2cm") %>% 
+  column_spec(4,width="3cm")
 ```
 # References
