@@ -17,7 +17,7 @@ institute:
   - tum: Technical University of Munich
   - nyuad: New York University Abu Dhabi
   - yale: Yale University
-date: "4/5/2020"
+date: "April 10th, 2020"
 toc: false
 bibliography: BibTexDatabase.bib
 output: 
@@ -44,6 +44,9 @@ require(stringr)
 require(kableExtra)
 require(rstan)
 require(ggrepel)
+library(readr)
+library(knitr)
+library(readxl)
 
 # let's load some data!
 # run RCode/cleanData/cleanQualtrics_short.R
@@ -327,10 +330,9 @@ In future work, we intend to analyze the policy combinations that are best able 
 ## Appendix {-}
 
 ```{r ratable}
-library(readr)
-contribution <- read_csv("data/CoronaNet/People/contribution.csv")
-library(knitr)
-library(readxl)
+
+contribution <- read_csv("../data/CoronaNet/People/contribution.csv")
+
 contribution <- dplyr::rename(contribution, Country = country)
 knitr::kable(contribution,booktabs=T,
           caption = 'Table of contributing researchers and their responsible countries') %>% 
