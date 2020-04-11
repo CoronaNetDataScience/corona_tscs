@@ -89,11 +89,11 @@ In what follows, we describe in greater detail the methodology we employed to co
 
 # Methodology
 
-To collect the data, we recruited `r length(unique(clean_data$ra_name))-6` research assistants (RAs) from colleges and universities around the world, representing 18 out of the 24 time zones.^[For more information on the individual RAs, please visit http://coronanet-project.org/]  Data collection started on March 28, 2020 and has proceeded very rapidly, reaching `r length(unique(clean_data$record_id))` records as of the date of this article. Each RA is responsible for tracking government policy actions for at least one country. RAs were allocated depending on their background, language skills and expressed interest in certain countries.^[Note depending on the level of policy coordination at the national level, certain countries were assigned multiple RAs, e.g. the United States, Germany, or France.]
+To collect the data, we recruited more than 190 research assistants (RAs) from colleges and universities around the world, representing 18 out of the 24 time zones.^[For more information on the individual RAs, please visit http://coronanet-project.org/]  Data collection started on March 28, 2020 and has proceeded very rapidly, reaching `r length(unique(clean_data$record_id))` records as of the date of this article. Each RA is responsible for tracking government policy actions for at least one country. RAs were allocated depending on their background, language skills and expressed interest in certain countries.^[Note depending on the level of policy coordination at the national level, certain countries were assigned multiple RAs, e.g. the United States, Germany, or France.]
 
 We have also partnered with the machine learning company Jataware to automate the collection of more than 200,000 news articles from around the world related to COVID-19.^[We thank Brandon Rose and Jataware for making the news database available to this project.] Jataware employs a natural language processing (NLP) classifier using Bidirectional Encoder Representations from Transformers (BERT) to detect whether a given article is indicative of a governmental policy intervention related to COVID-19. They then apply a secondary NLP classifier to categorize the type of policy intervention (e.g. "state of emergency", "shelter-in-place", "quarantine", "travel restrictions", etc). Next, Jataware extracts the geospatial and temporal extent of the policy intervention (e.g. “Washington DC” and “March 15, 2020”) whenever possible. The resulting list of news sources is then provided to our RAs for manual coding and further data validation.
 
-As researchers learn more about the various health, economic, and social effects of the corona-virus pandemic, it is crucial that they have access to data that is reliable, valid, and timely (to the greatest extent possible). We have adopted the following data collection methodology that we believe optimizes over all three of these constraints.
+As researchers learn more about the various health, economic, and social effects of the coronavirus pandemic, it is crucial that they have access to data that is reliable, valid, and timely (to the greatest extent possible). We have adopted the following data collection methodology that we believe optimizes over all three of these constraints.
 
 ## Data Collection Software Instrument
 
@@ -132,9 +132,9 @@ In order to participate as an RA in this project, RAs must fill out the CoronaNe
 * They certify that they have viewed the training video in which we explain how to use the survey instrument.
 * They certify they have joined the CoronaNet Slack Channel (see section below for more information).
 * They certify that they understand that RA responsibilities entail 
-  + gathering historical data on COVID-19 government policy actions for my country, and;
+  + gathering historical data on COVID-19 government policy actions for their country, and;
   + providing daily updates for new government policy actions.
-* They certify that they understand they can access the data collection guidelines and codebook or pose their questions on the Slack Channel should they have any questions.
+* They certify that they understand they can access the data collection guidelines and codebook or pose their questions on the Slack Channel.
 * They certify that they are expected to upload .pdfs of the sources they access to the survey instrument.
 
 Once the RA submits the form, they are sent a personalized link to access the survey. With the customized link, we are also able to keep track of which RA coded what entries.
@@ -176,7 +176,7 @@ Lastly, we take the following steps in order to validate the quality of the resu
 
 # Dataset
 
-Here we present some descriptive statistics to illustrate the type of data that the CoronaNet project is able to provide. Table \@ref(tab:desctab) shows the number of records for each policy type, the number of unique countries for each policy type, and also how many countries are targeted in total by each policy type.^[Future versions of the dataset will also include more detailed information for some policy categories. For example, among other things, we are also collecting information on the types of 'health resources' (e.g. masks, hospitals, doctors ) and types of 'restrictions of non-essential business activities' (e.g. retail businesses, restaurants/bars). Where applicable, we are also collecting information on the volume of a certain policy (e.g. the number of masks, hospitals and doctors. ). We will also be including a variable which documents which institution is responsible for enforcing a certain policy (e.g. national government, military).] We note that these are cumulative totals for these different categories in the data.
+Here we present some descriptive statistics to illustrate the type of data that the CoronaNet project is able to provide. Table \@ref(tab:desctab) shows the number of records for each policy type, the number of unique countries for each policy type, and also how many countries are targeted in total by each policy type.^[Future versions of the dataset will also include more detailed information for some policy categories. For example, among other things, we are also collecting information on the types of 'health resources' (e.g. masks, hospitals, doctors ) and types of 'restrictions of non-essential business activities' (e.g. retail businesses, restaurants/bars). Where applicable, we are also collecting information on the volume of a certain policy (e.g. the number of masks, hospitals and doctors.). We will also be including a variable which documents which institution is responsible for enforcing a certain policy (e.g. national government, military).] We note that these are cumulative totals for these different categories in the data.
 
 ```{r desctab}
 
@@ -249,11 +249,11 @@ The advantage of employing a statistical model, rather than simply summing acros
 
 Furthermore, because the model is stochastic, it is robust to coding errors of the kind that often occur in these types of datasets. As we discuss in our validation section, while we are continuing to validate the data on a daily basis, the massive speed and scope of data collection means that we cannot identify all issues with the data in real time. However, the measurement model employed only requires us to assume that on average the policy codings are correct, not that they are correct for each instance. Coding error, such as incorrectly selecting a policy type, will propagate through the model as higher uncertainty intervals, but will not affect average posterior estimates. As our data quality improves, and we are able to collect more data over time, the model will produce more variegated estimates with smaller uncertainty intervals.
 
-<!-- regular html comment 
+
 Figure \@ref(fig:plotindex) shows the estimated index scores for the `r length(unique(clean_data$country))` countries in our dataset at present. Of course, a caveat with the index is that we may be missing some possible policy measures that have occurred due to the difficulty in finding them in published sources. However, there is still clear differentiation within the index in terms of when policies were imposed, with some countries starting to impose policies much earlier than others. Furthermore, there is a clear break about March 1st when countries began to impose more stringent policies across the world.
 
 
-
+<!-- regular html comment 
 ```{r plotindex,fig.cap="CoronaNet Time-Varying Index of Severity of Measures Opposing COVID-19 Pandemic"}
 
 severity_fit <- readRDS("../data/severity_fit.rds")
@@ -321,15 +321,15 @@ get_est %>%
   column_spec(2:5,width="2.5cm")
 
 ```
-
-Finally, we note in Figure \@ref(fig:plotindex) the strong evidence of policy diffusion effects. While information about COVID-19 existed at least as early as January, we do not see large-scale changes occurring in severity scores until March. Furthermore, the trajectories are highly non-linear, with a large number of countries quickly transitioning from relatively low to relatively high scores. This tandem movement is a strong indication of policy diffusion as countries adopted similar policies across time and space as opposed to a more linear learning process.
 -->
+Finally, we note in Figure \@ref(fig:plotindex) the strong evidence of policy diffusion effects. While information about COVID-19 existed at least as early as January, we do not see large-scale changes occurring in severity scores until March. Furthermore, the trajectories are highly non-linear, with a large number of countries quickly transitioning from relatively low to relatively high scores. This tandem movement is a strong indication of policy diffusion as countries adopted similar policies across time and space as opposed to a more linear learning process.
+
 
 # Conclusion
 
 As policymakers, researchers and the broader public debate and compare how to succeed against the novel threats posed by COVID-19, they need real-time, traceable data on government policies in order to understand which of these policies are effective, and under what conditions.  This requires specific knowledge of the variation in policies and their implementation. The goal of the dataset and severity index presented here is to provide this information. 
 
-We have tried to match our data collection efforts to keep up with the exponential speed with which the corona-virus has already upended global public health and the international economy while also maintaining high levels of quality. However, we will inevitably be refining, revising and updating our data to reflect new knowledge and trends as the pandemic unfolds. The data that we present in this first version of the dataset represents only the initial release of the data, and we will continue to validate and release data so long as governments continue to develop policies in response to the coronavirus.
+We have tried to match our data collection efforts to keep up with the exponential speed with which the coronavirus has already upended global public health and the international economy while also maintaining high levels of quality. However, we will inevitably be refining, revising and updating our data to reflect new knowledge and trends as the pandemic unfolds. The data that we present in this first version of the dataset represents only the initial release of the data, and we will continue to validate and release data so long as governments continue to develop policies in response to the coronavirus.
 
 In future work, we intend to analyze the policy combinations that are best able to stymie the epidemic so as to contribute to the social science research community and provide urgently needed knowledge for policymakers and the wider global community.
 
