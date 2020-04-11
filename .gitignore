@@ -1,4 +1,5 @@
 .Rproj.user
+.Renviron
 .Rhistory
 .RData
 .Ruserdata
@@ -6,3 +7,6 @@
 *.png
 *.html
 *DS*
+*.aux
+*.out
+*synctec*

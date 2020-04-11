@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=filled circle] (2) at (-5.25, -1.25) {$X_{ct}$};
+		\node [style=filled circle] (3) at (-1, -1.25) {$I_{ct}$};
+		\node [style=filled circle] (4) at (3, -3) {$q_{ct}$};
+		\node [style=filled circle] (5) at (3, 0) {$a_{ct}$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=pointer] (3) to (5);
+		\draw [style=pointer] (2) to (3);
+		\draw [style=pointer] (3) to (4);
+		\draw [style=pointer] (4) to (5);
+	\end{pgfonlayer}
+\end{tikzpicture}

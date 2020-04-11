@@ -1,9 +1,12 @@
 # This code merges the country and region data from the geonames website together 
 # It then subsets the data to just the COW countries from the countrycode R package and adds Hong Kong and Macau 
 
-if(Sys.info()['user'] == 'cindycheng'){
-	pathData = "/Users/cindycheng/Dropbox/corona-govt-response/Data"}
+# There are two output files in this code
+# 1) a matrix of countries and their respective provinces in:  /regions/country_region_clean.csv
+# 2) a vector of all countries in:  /regions/all_countries.csv
 
+
+pathData = '/cloud/project/data'
 # -----------------------------
 # Load packages
 # -----------------------------
@@ -97,8 +100,21 @@ country_regions_clean$Country = as.character(country_regions_clean$Country)
 country_regions_clean = country_regions_clean[order(country_regions_clean$Country),]
  
 
+## add Palestine
+country_regions_clean = country_regions_clean %>% add_row(Country = "Palestine")
+
+# per RA Cheng-Hao, change entries for Philippines to provinces instead
+# of autonomous regions as currently given by geonames
+philippines = read.csv(paste0(pathData, '/regions/List of Provinces of the Philippines.csv'), stringsAsFactors = FALSE, header = FALSE)
+country_regions_clean[which(country_regions_clean$Country == 'Philippines'), -c(1, 2)] = c(philippines$V1, NA, NA)
+
+
+# reorder 
+country_regions_clean = country_regions_clean[order(country_regions_clean$Country),]
 write.csv(country_regions_clean , file = paste0(pathData, '/regions/country_region_clean.csv'), row.names = FALSE, na= "") 
 
+write.csv(data.frame(Country = country_regions_clean$Country) , file = paste0(pathData, '/regions/all_countries.csv'), row.names = FALSE, na= "") 
+ 
  
 
 ## from the code below looks like issue with Slovenia is common to these datasets
