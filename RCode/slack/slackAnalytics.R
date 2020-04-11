@@ -18,7 +18,7 @@ slack =  slack %>% dplyr:::filter(Date >= "2020-03-28")
 # remove weekly stats
 slack = select(slack, -Weekly.active.members, -Weekly.members.posting.messages)
 slack = slack %>% dplyr:::rename(Project.members.present.on.Slack = Daily.active.members ,
-							  Project.members.posting.messages = Daily.members.posting.messages,
+							  Project.members.posting.at.least.one.message = Daily.members.posting.messages,
 							  Messages.posted.by.project.members           = Messages.posted.by.members)
 
 # reshape data to long form
@@ -30,7 +30,7 @@ slack$var = gsub('\\.', ' ', slack$var)
 slack$var %>% unique()
 # set order or vars in factor levels
 slack$var = fct_relevel(slack$var, "Project members present on Slack", 
-						"Project members posting messages",
+						"Project members posting at least one message",
 						"Messages posted by project members" ,
 						"Messages in DMs"  )
 
@@ -40,7 +40,7 @@ saveRDS(slack, file = paste0(pathData, '/slack/corona_govt_response_slack_latest
 
 
 # # make plot of daily active members and daily members posting messges
-# p1 = ggplot(slack %>% filter(var %in% c("Project members present on Slack", "Project members posting messages" )),
+# p1 = ggplot(slack %>% filter(var %in% c("Project members present on Slack","Project members posting at least one message" )),
 # 			aes(x = Date, y = value, color = var))+
 # 			geom_line(size = 1)+ 
 # 			xlab("Date")+
