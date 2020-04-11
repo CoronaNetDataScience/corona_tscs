@@ -44,6 +44,8 @@
 
 # DO NOT USE PATHS. USE RSTUDIO PROJECTS WITH RELATIVE PATHS.
 
+path = "/cloud/project/"
+
 ## load packages and functions
 
 library(tidyr)

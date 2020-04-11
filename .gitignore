@@ -6,5 +6,7 @@
 *.rds
 *.png
 *.html
-*.pdf
 *DS*
+*.aux
+*.out
+*synctec*
