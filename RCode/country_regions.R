@@ -1,12 +1,10 @@
 # This code merges the country and region data from the geonames website together 
 # It then subsets the data to just the COW countries from the countrycode R package and adds Hong Kong and Macau 
 
-# There are two output files in this code
-# 1) a matrix of countries and their respective provinces in:  /regions/country_region_clean.csv
-# 2) a vector of all countries in:  /regions/all_countries.csv
+if(Sys.info()['user'] == 'cindycheng'){
+	pathData = "/Users/cindycheng/Dropbox/corona_tscs/data"}
 
-
-pathData = '/cloud/project/data'
+ 
 # -----------------------------
 # Load packages
 # -----------------------------
@@ -110,11 +108,12 @@ country_regions_clean[which(country_regions_clean$Country == 'Philippines'), -c(
 
 
 # reorder 
+
 country_regions_clean = country_regions_clean[order(country_regions_clean$Country),]
+
 write.csv(country_regions_clean , file = paste0(pathData, '/regions/country_region_clean.csv'), row.names = FALSE, na= "") 
 
-write.csv(data.frame(Country = country_regions_clean$Country) , file = paste0(pathData, '/regions/all_countries.csv'), row.names = FALSE, na= "") 
- 
+
  
 
 ## from the code below looks like issue with Slovenia is common to these datasets

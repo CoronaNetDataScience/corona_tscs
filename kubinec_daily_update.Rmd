@@ -1,0 +1,388 @@
+---
+title: "Daily Update of Potential Number of People Infected with COVID-19 in the United States"
+author: "Robert Kubinec"
+date: "`r paste0(lubridate::ymd(lubridate::today()),'T12:00:00')`"
+output: html_document
+bibliography: BibTexDatabase.bib
+header:
+  title: "Daily Update of Potential Number of People Infected with COVID-19 in the United States"
+  summary: "This estime adjusts upward the reports from the New York Times of observed cases in the United States based on epidiomological models and past trends."
+  image: "headers/coronavirus.jpg"
+  date: "`r paste0(lubridate::ymd(lubridate::today()),'T12:00:00')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(dplyr)
+require(tidyr)
+require(ggplot2)
+require(rstan)
+require(stringr)
+require(lubridate)
+require(bayesplot)
+require(historydata)
+require(readr)
+require(datasets)
+require(extraDistr)
+
+set.seed(662817)
+
+rstan_options(auto_write=T)
+
+knitr::opts_chunk$set(warning=F,message=F)
+
+# whether to run model (it will take a few hours) or load saved model from disk
+
+run_model <- T
+
+# update data
+
+system2("git",args=c("-C ~/covid-tracking-data","pull"))
+system2("git",args=c("-C ~/covid-19-data","pull"))
+
+pan_model <- stan_model("corona_tscs_betab_scale.stan")
+
+```
+
+# Daily Update Explanation
+
+These daily updates are designed to adjust the reported cases for the United States by the New York Times to estimates of how many people are actually infected with COVID-19 in the United States. The methodological details of the underlying statistical model can be [found here](http://www.robertkubinec.com/post/kubinec_model_draft/?fbclid=IwAR0KyOrJME64OaUdcWoX2H7syVtBDEArC-BiS0t3X1Oh3OYLnt5hORikZ4s). In essence, I use estimates of the true number of infected people from published epidemiology models (SIR/SEIR) and adjust for time trends in plausible infection rates based on reported cases and tests by U.S. state. The model explicitly adjusts for varying levels of tests across states. The data come from  [The New York Times](https://github.com/nytimes/covid-19-data) and the [COVID-19 Tracking Project](https://github.com/COVID19Tracking/covid-tracking-data). 
+
+The overall trend for the United States as of `r lubridate::today()` is in the chart below. This report is updated daily with the count of cases and tests from the previous data. The shaded region shows uncertainty in how many individuals may be infected.
+
+```{r munge_data,include=F}
+
+# vote share
+# MIT Election Lab
+load("data/mit_1976-2016-president.rdata")
+
+vote_share <- filter(x,candidate=="Trump, Donald J.",
+                     party=="republican",
+                     writein=="FALSE") %>% 
+  mutate(trump=candidatevotes/totalvotes)
+
+# state GDP
+
+state_gdp <- readxl::read_xlsx("data/qgdpstate0120_0_bea.xlsx",sheet="Table 3") %>% 
+  mutate(gdp=(Q1 + Q2 + Q3 +Q4)/4)
+
+# health data
+
+health <- read_csv("data/2019-Annual.csv") %>% 
+  filter(`Measure Name` %in% c("Air Pollution","Cardiovascular Deaths","Dedicated Health Care Provider",
+                              "Population under 18 years", "Public Health Funding","Smoking")) %>% 
+  select(`Measure Name`,state="State Name",Value) %>% 
+  distinct %>% 
+  spread(key="Measure Name",value="Value")
+
+data(us_state_populations)
+
+state_pop <- filter(us_state_populations,year==2010) %>% 
+  select(state,population)
+
+merge_names <- tibble(state.abb,
+                      state=state.name)
+
+nyt_data <- read_csv("~/covid-19-data/us-states.csv") %>% 
+  complete(date,state,fill=list(cases=0,deaths=0,fips=0)) %>% 
+  mutate(month_day=ymd(date)) %>% 
+  group_by(state) %>% 
+    arrange(state,date) %>% 
+  mutate(Difference=cases - dplyr::lag(cases),
+         Difference=coalesce(Difference,0,0)) %>% 
+  left_join(merge_names,by="state")
+
+tests <- read_csv("~/covid-tracking-data/data/states_daily_4pm_et.csv") %>% 
+  mutate(month_day=ymd(date)) %>% 
+  arrange(state,month_day) %>% 
+  group_by(state) %>% 
+  mutate(tests_diff=total-dplyr::lag(total),
+         cases_diff=positive-dplyr::lag(positive),
+         cases_diff=coalesce(cases_diff,positive),
+         cases_diff=ifelse(cases_diff<0,0,cases_diff),
+         tests_diff=coalesce(tests_diff,total),
+         tests_diff=ifelse(tests_diff<0,0,tests_diff)) %>% 
+  select(month_day,tests="tests_diff",total,state.abb="state")
+
+# merge cases and tests
+
+combined <- left_join(nyt_data,tests,by=c("state.abb","month_day")) %>% 
+  left_join(state_pop,by="state") %>% 
+  filter(!is.na(population))
+
+# add suppression data
+
+emergency <- read_csv("data/state_emergency_wikipedia.csv") %>% 
+  mutate(day_emergency=dmy(paste0(`State of emergency declared`,"-2020")),
+         mean_day=mean(as.numeric(day_emergency),na.rm=T),
+         sd_day=sd(as.numeric(day_emergency),na.rm=T),
+         day_emergency=((as.numeric(day_emergency) - mean_day)/sd_day)) %>% 
+  select(state="State/territory",day_emergency,mean_day,sd_day) %>% 
+  mutate(state=substr(state,2,nchar(state))) %>% 
+  filter(!is.na(day_emergency))
+
+combined <- left_join(combined,emergency,by="state")
+
+# add in other datasets 
+
+combined <- left_join(combined,health,by="state")
+combined <- left_join(combined,select(state_gdp,state,gdp),by="state")
+combined <- left_join(combined,select(vote_share,state,trump))
+
+# impute data
+
+combined <- group_by(combined,state) %>% 
+  mutate(test_case_ratio=sum(tests,na.rm=T)/sum(Difference,na.rm=T)) %>% 
+  ungroup %>% 
+  mutate(test_case_ratio=ifelse(test_case_ratio<1 | is.na(test_case_ratio),
+                                mean(test_case_ratio[test_case_ratio>1],na.rm=T),test_case_ratio)) %>% 
+  group_by(state) %>% 
+    mutate(tests=case_when(Difference>0 & is.na(tests)~Difference*test_case_ratio,
+                    Difference==0~0,
+                    Difference>tests~Difference*test_case_ratio,
+                    TRUE~tests)) %>% 
+  arrange(state) %>% 
+  filter(state!="Puerto Rico")
+
+# create case dataset
+
+cases_matrix <- select(combined,Difference,month_day,state) %>% 
+  group_by(month_day,state) %>% 
+  summarize(Difference=as.integer(mean(Difference))) %>% 
+  spread(key = "month_day",value="Difference")
+
+cases_matrix_num <- as.matrix(select(cases_matrix,-state))
+
+# create tests dataset
+
+tests_matrix <- select(combined,tests,month_day,state) %>% 
+  group_by(month_day,state) %>% 
+  summarize(tests=as.integer(mean(tests))) %>% 
+  spread(key = "month_day",value="tests")
+
+tests_matrix_num <- as.matrix(select(tests_matrix,-state))
+
+# need the outbreak matrix
+
+outbreak_matrix <- as.matrix(lapply(1:ncol(cases_matrix_num), function(c) {
+  if(c==1) {
+    outbreak <- as.numeric(cases_matrix_num[,c]>0)
+  } else {
+    outbreak <- as.numeric(apply(cases_matrix_num[,1:c],1,function(col) any(col>0)))
+  }
+  tibble(outbreak)
+}) %>% bind_cols)
+
+colnames(outbreak_matrix) <- colnames(cases_matrix_num)
+
+time_outbreak_matrix <- t(apply(outbreak_matrix,1,cumsum))
+
+just_data <- distinct(select(combined,state,day_emergency,population,trump,air="Air Pollution",
+                      heart="Cardiovascular Deaths",
+                      providers="Dedicated Health Care Provider",
+                      young="Population under 18 years",
+                      smoking="Smoking",
+                      gdp)) %>% arrange(state)
+
+covs <- scale(select(ungroup(just_data),-state,-population) %>% as.matrix)
+
+# now give to Stan
+
+ortho_time <- poly(scale(1:ncol(cases_matrix_num)),degree=3)
+
+real_data <- list(time_all=ncol(cases_matrix_num),
+                 num_country=nrow(cases_matrix_num),
+                 S=ncol(covs),
+                 country_pop=floor(just_data$population/100),
+                 cases=cases_matrix_num,
+                 ortho_time=ortho_time,
+                 phi_scale=.01,
+                 count_outbreak=as.numeric(scale(apply(outbreak_matrix,2,sum))),
+                 tests=tests_matrix_num,
+                 time_outbreak=time_outbreak_matrix,
+                 suppress=covs)
+
+init_vals <- function() {
+  list(phi_raw=c(30,10),
+       world_infect=0.5,
+       finding=0.5,
+       alpha=c(0,-10))
+}
+
+
+
+if(run_model) {
+  us_fit_scale <- sampling(pan_model,data=real_data,chains=3,cores=3,iter=1500,warmup=1000,control=list(adapt_delta=0.95),
+                   init=init_vals)
+  
+  saveRDS(us_fit_scale,"data/us_fit_scale.rds")
+} else {
+  us_fit_scale <- readRDS("data/us_fit_scale.rds")
+}
+
+
+```
+
+```{r infect_by_state,echo=F}
+all_est_state <- as.data.frame(us_fit_scale,"num_infected_high") %>% 
+  mutate(iter=1:n()) %>% 
+  gather(key="variable",value="estimate",-iter) %>% 
+  group_by(variable) %>% 
+  mutate(state_num=as.numeric(str_extract(variable,"(?<=\\[)[1-9][0-9]?0?")),
+         time_point=as.numeric(str_extract(variable,"[1-9][0-9]?0?(?=\\])")),
+         time_point=ymd(min(combined$month_day)) + days(time_point-1))
+
+all_est_state <- left_join(all_est_state,tibble(state_num=1:nrow(cases_matrix),
+                                                state=cases_matrix$state,
+                                                state_pop=real_data$country_pop,
+                                    suppress_measures=real_data$suppress,by="state_num"))
+
+# merge in total case count
+
+case_count <- gather(cases_matrix,key="time_point",value="cases",-state) %>% 
+  mutate(time_point=ymd(time_point)) %>% 
+  group_by(state) %>% 
+  arrange(state,time_point) %>% 
+  mutate(cum_sum_cases=cumsum(cases)) 
+
+us_case_count <- group_by(case_count,time_point) %>% 
+  summarize(all_cum_sum=sum(cum_sum_cases))
+
+all_est_state <- left_join(all_est_state,us_case_count,by="time_point")
+
+calc_sum <- all_est_state %>% 
+  ungroup %>% 
+  mutate(estimate=(plogis(estimate)/100)*(state_pop*100)) %>% 
+  group_by(state_num,iter) %>% 
+  arrange(state_num,time_point) %>% 
+  mutate(cum_est=cumsum(estimate)) %>% 
+  group_by(time_point,iter,all_cum_sum) %>% 
+  summarize(us_total=sum(cum_est)) %>% 
+  group_by(time_point,all_cum_sum) %>% 
+  summarize(med_est=quantile(us_total,.5),
+            high_est=quantile(us_total,.95),
+            low_est=quantile(us_total,.05)) 
+
+max_est <- as.integer(round(calc_sum$med_est[calc_sum$time_point==max(calc_sum$time_point)]))
+high_max_est <- as.integer(round(calc_sum$high_est[calc_sum$time_point==max(calc_sum$time_point)]))
+low_max_est <- as.integer(round(calc_sum$low_est[calc_sum$time_point==max(calc_sum$time_point)]))
+max_obs <- calc_sum$all_cum_sum[calc_sum$time_point==max(calc_sum$time_point)]
+
+calc_sum %>% 
+  ggplot(aes(y=med_est,x=time_point)) +
+  geom_ribbon(aes(ymin=low_est,
+  ymax=high_est),
+  fill="blue",
+  alpha=0.5) +
+  geom_line(aes(y=all_cum_sum)) +
+  theme_minimal() +
+  ylab("Total Number Infected/Reported") +
+  scale_y_continuous(labels=scales::comma) +
+  ggtitle("Approximate Cumulative Count of COVID-19 Infected Individuals in the U.S.",
+          subtitle="Blue 5% - 95% HPD Intervals Show Estimated Infected and Black Line Observed Cases") +
+  labs(caption="These estimates are based on the assumption that as few as 10% of cases\nmay be reported based on SIR/SEIR models. Does not exclude people who may have recovered or died.") +
+  annotate("text",x=ymd(c("2020-03-26","2020-03-26")),
+           y=c(max_est,max_obs),
+           hjust=1,
+           vjust=0,
+           fontface="bold",
+           size=3,
+           label=c(paste0("Estimated Infected:\n",formatC(low_max_est,big.mark=",",format = "f",digits=0)," - ",
+                                                         formatC(high_max_est,big.mark=",",format = "f",digits=0)),
+                   paste0("Total Reported Cases:\n",formatC(max_obs,big.mark=",")))) +
+  xlab("Days Since Outbreak Start") +
+  theme(panel.grid = element_blank(),
+        legend.position = "top")
+
+ggsave("est_vs_obs.png")
+
+calc_sum_state <- all_est_state %>% 
+  ungroup %>% 
+  mutate(estimate=(plogis(estimate)/100)*(state_pop*100)) %>% 
+  group_by(state,iter) %>% 
+  arrange(state,time_point) %>% 
+  mutate(cum_est=cumsum(estimate)) %>% 
+  group_by(time_point,state,suppress_measures) %>% 
+  summarize(med_est=quantile(cum_est,.5),
+            high_est=quantile(cum_est,.95),
+            low_est=quantile(cum_est,.05)) 
+
+# Annotations
+
+# get top 5 plus random 5 
+
+top_5 <- filter(calc_sum_state,time_point==max(calc_sum_state$time_point)) %>% 
+  arrange(desc(med_est)) %>% 
+  ungroup %>% 
+  slice(c(1:5,sample(6:length(unique(calc_sum_state$state)),5))) %>% 
+  distinct %>% 
+  mutate(label=paste0(state,":",formatC(low_est,big.mark=",",format = "f",digits=0)," - ",
+                                                         formatC(high_est,big.mark=",",format = "f",digits=0)))
+
+```
+
+The trend by state is in the chart below. The uncertainty intervals for only a few states are listed to clarify the visualization:
+
+```{r state_plot}
+require(ggrepel)
+
+calc_sum_state %>% 
+  ggplot(aes(y=med_est,x=time_point)) +
+  geom_line(aes(group=state,colour=med_est)) +
+  # geom_ribbon(aes(ymin=low_est,
+  # ymax=high_est,
+  # group=state_num,
+  # fill=suppress_measures),alpha=0.5) +
+  theme_minimal() +
+  scale_color_distiller(palette="Reds",direction=1) +
+  ylab("Cumulative Count") +
+  ggtitle("Average Cumulative Count of Infected People by U.S. State",
+          "Some Lines Labeled with Uncertainty of Estimates (5% - 95% Interval)") +
+  labs(caption="These estimates are based on the assumption that as few as 10% of cases\nmay be reported based on SIR/SEIR models. Does not exclude people who may have recovered or died.") +
+  geom_text_repel(data=top_5,aes(x=time_point,y=med_est,label=label),
+                  size=3,fontface="bold",segment.colour = NA) +
+  scale_y_continuous(labels=scales::comma) +
+  xlab("Days Since Outbreak Start") +
+  geom_hline(yintercept = 0,linetype=3) +
+  guides(colour="none") +
+  theme(panel.grid = element_blank(),
+        legend.position = "top")
+ggsave("certain_state_rates.png")
+```
+
+Finally, this plot shows which states have been testing more or less relative to the approximate number of infected individuals:
+
+```{r tests_per_infected,fig.height=6}
+
+test_var <- as.data.frame(us_fit_scale,"country_test_raw") %>%
+  mutate(iter=1:n()) %>%
+  gather(key="variable",value="estimate",-iter) %>%
+  mutate(state_num=as.numeric(str_extract(variable,"(?<=\\[)[1-9][0-9]?0?")))
+
+test_var <- left_join(test_var,tibble(state_num=1:nrow(cases_matrix),
+                                                state=cases_matrix$state,
+                                                state_pop=real_data$country_pop,
+                                    suppress_measures=real_data$suppress))
+
+test_var %>%
+  group_by(state) %>%
+    summarize(med_est=quantile(estimate,.5),
+            high_est=quantile(estimate,.95),
+            low_est=quantile(estimate,.05)) %>%
+  ggplot(aes(y=med_est,x=reorder(state,med_est))) +
+  geom_pointrange(aes(ymin=low_est,ymax=high_est)) +
+  theme_minimal() +
+  theme(panel.grid = element_blank()) +
+  coord_flip() +
+  xlab("") +
+  ggtitle("Comparison of States' Testing Rates Relative to Infection Rates",
+          subtitle="Based on Model of Latent COVID-19 Infection Process") +
+  labs(caption = "Only relative differences between states are identified. The raw numbers do not have a
+                  direct interpretation in terms of tests per infected individuals as the total number
+                  of infected individuals is unknown.") +
+  ylab("Proportion Tested Relative to Proportion Infected")
+
+ggsave("testing.png",scale=1.1)
+
+```
+

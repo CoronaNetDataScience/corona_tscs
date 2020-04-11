@@ -2,7 +2,7 @@
 // Robert Kubinec
 // New York University Abu Dhabi
 // March 20, 2020
-functions{
+functions {
   vector setstep(vector col_var) {
     
     vector[rows(col_var)] diff_var = col_var + (max(fabs(col_var)) * sqrt(0.0000007)) - col_var;
@@ -19,8 +19,8 @@ data {
     int S; // number of suppression measures
     matrix[time_all,3] ortho_time;
     matrix[num_country,S] suppress;
-    vector[time_all] count_outbreak;
     matrix[num_country,time_all] time_outbreak_center;
+    vector[time_all] count_outbreak;
     int country_pop[num_country];
     real phi_scale; // prior on how much change there could be in infection rate over time
 }
@@ -51,11 +51,18 @@ transformed data {
                                 append_col(time_outbreak_trans2[,t],
                                             time_outbreak_trans3[,t]));
   }
+  
+  // need a centered time vector
+  
+  // for(n in 1:num_country) {
+  //   time_outbreak_center[n,] = (to_vector(time_outbreak[n,])' - mean(to_vector(time_outbreak[n,])))/sd(to_vector(time_outbreak[n,]));
+  // }
+    
 }
 parameters {
   vector[3] poly; // polinomial function of time
   real<lower=0> finding; // difficulty of identifying infected cases 
-  real<lower=0> world_infect; // infection rate based on number of travelers
+  real<lower=0> world_infect;// infection rate based on number of travelers
   row_vector[S] suppress_effect[2]; // suppression effect of govt. measures, cannot increase virus transmission rate
   vector<lower=0>[num_country] country_test_raw; // unobserved rate at which countries are willing to test vs. number of infected
   // we assume that as infection rates increase, more tests will be conducted
@@ -64,7 +71,6 @@ parameters {
   real<lower=0> sigma_test_raw; // estimate of between-state testing heterogeneity
 }
 transformed parameters {
-
   matrix[num_country,time_all] num_infected_high; // modeled infection rates for domestic transmission
   
   for(t in 1:time_all) {
@@ -79,16 +85,17 @@ transformed parameters {
 }
 model {
   
-  poly ~ normal(0,5); // could be large
+  poly ~ normal(0,10); // could be large
   world_infect ~ normal(0,1);
   alpha ~ normal(0,10); // this can reach extremely low values
   phi ~ exponential(phi_scale);
   for(i in 1:2)
     suppress_effect[i] ~ normal(0,2);
   
-  finding ~ exponential(.1);
+  
+  finding ~ exponential(5);
   sigma_test_raw ~ exponential(.1);
-  country_test_raw ~ exponential(.1); // more likely near the middle than the ends
+  country_test_raw ~ exponential(sigma_test_raw); // more likely near the middle than the ends
   
   // first model probability of infection
   
@@ -102,13 +109,17 @@ model {
     
     tests[,t] ~ beta_binomial(country_pop,mu_tests*phi[1],(1-mu_tests)*phi[1]);
     cases[,t] ~ beta_binomial(tests[,t],mu_cases*phi[2],(1-mu_cases)*phi[2]);
+    
+    log(mix_prop) - log(mu_tests) ~ std_normal();
+    
+    // jacobian adjustment
+    target += log1m(mix_prop) + log1m(mu_tests);
   
   }
 
   
 }
 generated quantities {
-  
   //   vector[S] suppress_margin;
   //   matrix[time_all,rows(suppress)] suppress_margin_time;
   // 
@@ -146,7 +157,4 @@ generated quantities {
   //   
   //   suppress_margin[s] = mean(inv_logit(to_vector(suppress_margin_time)));
   // }
-  
-  
 }
-
