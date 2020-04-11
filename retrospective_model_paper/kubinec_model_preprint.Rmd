@@ -1047,7 +1047,7 @@ check_tests %>%
   ylab("GDP Per Capita (Standard Deviation)") +
   xlab("Tests per 10,000 state residents")
 
-
+ggsave("gdp_tests.png")
 
 
 ```
