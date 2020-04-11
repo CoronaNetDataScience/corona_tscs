@@ -8,7 +8,6 @@ require(googlesheets4)
 
 export <- read_csv("data/CoronaNet/RA/ra_data_pull.csv") %>% 
   slice(-c(1:2)) %>% 
-  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)") %>% 
   mutate(RecordedDate=lubridate::ymd_hms(RecordedDate),
          record_date_day=lubridate::as_date(RecordedDate),
          entry_type=recode(entry_type,`1`="New Entry"))
@@ -16,6 +15,7 @@ export <- read_csv("data/CoronaNet/RA/ra_data_pull.csv") %>%
 
 export %>% 
   filter(record_date_day!=lubridate::today()) %>% 
+  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)") %>% 
   group_by(record_date_day) %>% 
   count %>% 
   ggplot(aes(y=n,x=record_date_day)) +
@@ -26,10 +26,11 @@ export %>%
   xlab("") +
   ggtitle("Number of Updates/New Entry Records\nin CoronaNet Database Since March 26th")
 
-ggsave("date_performance.png")
+ggsave("date_performance.png",width = 6,height=3)
 
 export %>% 
   filter(record_date_day!=lubridate::today()) %>% 
+  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)") %>% 
   group_by(record_date_day) %>% 
   count %>% 
   ungroup %>% 
@@ -43,17 +44,18 @@ export %>%
   xlab("") +
   ggtitle("Number of Updates/New Entry Records\nin CoronaNet Database Since March 26th")
 
-ggsave("date_performance_cumsum.png")
+ggsave("date_performance_cumsum.png",width = 6,height=3)
 
 # country coverage by days
 
 export %>% 
+  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)") %>% 
   group_by(init_country,record_date_day) %>% 
   mutate(n_exists=ifelse(n()>1,1,NA)) %>% 
   ungroup %>% 
   complete(init_country,record_date_day,fill=list(n_exists=NA)) %>% 
   group_by(init_country) %>% 
-  arrange(record_date_day) %>% 
+  arrange(init_country,record_date_day) %>% 
   fill(n_exists,.direction="down") %>% 
   mutate(n_exists=coalesce(n_exists,0)) %>% 
   distinct(record_date_day,init_country,n_exists) %>% 
@@ -67,12 +69,13 @@ export %>%
   xlab("") +
   ggtitle("Number of Countries Covered\nin CoronaNet Database Since March 26th")
 
-ggsave("country_cov.png")
+ggsave("country_cov.png",width = 6,height=3)
 
 # need to produce leader board
 
 export %>% 
   group_by(ra_name) %>% 
+  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)") %>% 
   count %>% 
   arrange(desc(n)) %>% 
   select(Name="ra_name",`Count of Records`="n") %>% 
