@@ -6,7 +6,7 @@ library(forcats)
 
 # load data
 
-pathData = "/cloud/project/data"
+pathData = "data"
 slack = read.csv(paste0(pathData, "/slack/corona-govt-response_slack_latest.csv"), stringsAsFactors = FALSE)
 
 
