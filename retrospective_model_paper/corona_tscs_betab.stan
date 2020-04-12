@@ -88,7 +88,7 @@ model {
   
   finding ~ exponential(.1);
   sigma_test_raw ~ exponential(.1);
-  country_test_raw ~ exponential(.1); // more likely near the middle than the ends
+  country_test_raw ~ exponential(sigma_test_raw); // more likely near the middle than the ends
   
   // first model probability of infection
   
