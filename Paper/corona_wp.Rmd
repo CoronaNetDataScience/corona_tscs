@@ -54,7 +54,7 @@ library(readxl)
 
 clean_data <- readRDS("../data/CoronaNet/coranaNetData_clean.rds") %>% 
   mutate(date_announced=mdy(date_announced)) %>% 
-  filter(date_announced<(today()-days(5)),!is.na(init_country),is.na(init_other),target_other=="")
+  filter(date_announced<(today()-days(5)),!is.na(init_country),is.na(init_other),is.na(target_other) | target_other=="")
 
 # run /RCode/slack/slackAnalytics.R")
 
