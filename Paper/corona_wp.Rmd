@@ -75,7 +75,7 @@ With the help of a team of over 190 research assistants in 18 time zones, we wil
 More specifically, the CoronaNet database collects data on government policy actions taken against the coronavirus across the following dimensions on a daily basis:
 
 + The type of government policy implemented (e.g. quarantine, closure of schools  [16 total] )
-+ The level of government initiating the action (e.g. national, provincial, municipal )
++ The level of government initiating the action (e.g. national, provincial )
 + The geographical target of the policy action, if applicable (e.g. national, provincial, municipal)
 + The human or material target of the policy action, if applicable (e.g. travelers, health staff)
 + The directionality of the policy action, if applicable (e.g. inbound, outbound, both)
