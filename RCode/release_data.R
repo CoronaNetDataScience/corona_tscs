@@ -143,8 +143,11 @@ sev_data <- summary(severity) %>%
 # select only columns we need
 
 
-release <- filter(clean_data,!is.na(init_country),is.na(init_other),target_other=="") %>% 
+release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target_other) | target_other=="") %>% 
               select(record_id,entry_type,event_description,type,country="init_country",
+                     date_announced,
+                     date_start,
+                     date_end,
                      init_country_level,
                      province="init_prov",
                      target_country="target_country",
@@ -155,10 +158,11 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),target_other
                      travel_mechanism,
                      compliance,
                      enforcer,
-                     date_announced,
                      link="sources_matrix_1_2") %>% 
   mutate(province=ifelse(country=="Hong Kong","Hong Kong",province),
          date_announced=lubridate::mdy(date_announced),
+         date_start=lubridate::mdy(date_start),
+         date_end=lubridate::mdy(date_end),
          entry_type=recode(entry_type,
                            `1`="New Entry",
                            `Correction`="Correction to Existing Entry (type in Record ID in text box)",
@@ -204,7 +208,7 @@ missing <- filter(release,is.na(ISO_A2))
 
 # we will get a warning because of the European Union
 
-if(nrow(missing)>0) {
+if(nrow(missing)>0 && !(all(missing$country=="European Union"))) {
   
   warning("Country doesn't match ISO data.")
   

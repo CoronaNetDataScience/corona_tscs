@@ -5,7 +5,7 @@ author:
       email: cindy.cheng@hfp.tum.de
       institute: tum
       correspondence: true
-  - Joan Barcelo:
+  - Joan Barceló:
       institute: nyuad
   - Allison Spencer Hartnett:
       institute: yale
@@ -14,7 +14,7 @@ author:
   - Luca Messerschmidt:
       institute: tum
 institute:
-  - tum: Hochschule für Politik, Technical University of Munich
+  - tum: Hochschule für Politik at the Technical University of Munich (TUM) and TUM School of Governance
   - nyuad: New York University Abu Dhabi
   - yale: Yale University
 date: "April 10th, 2020"
@@ -124,7 +124,7 @@ There are many additional benefits of using a survey instrument for data collect
 
 All RAs watch a mandatory 50 minute video training of the survey instrument which explains how to use the survey instrument. RAs are also provided with written guidelines on how to collect data and a comprehensive codebook. To briefly describe it here, the written guidelines provide a definition of what counts as a new or updated policy (see Data section for more details) and provides a checklist for RAs to follow in order to identify and document different policies. In the checklist, RAs are instructed to find policies by checking the sources in the order given in the guidelines to identify policies, to document the relevant information into the survey and to save and upload a document of the source they found for each policy into Qualtrics. The codebook meanwhile provides descriptions and examples of the different possible response options in the survey. Using a training video and the written codebook also has the added benefit of helping us efficiently disseminate the information RAs need to use the survey experiment consistently. 
 
-In order to participate as an RA in this project, RAs must fill out the CoronaNet Research Assistant Form^[See https://docs.google.com/forms/d/e/1FAIpQLSeybAW0DC0UE1x2EqLiTifVFuSUxqJLGFB8VI4wVCG61tVYKg/viewform] in which:
+In order to participate as an RA in this project, RAs must fill out a form^[See [this link](https://docs.google.com/forms/d/e/1FAIpQLSeybAW0DC0UE1x2EqLiTifVFuSUxqJLGFB8VI4wVCG61tVYKg/viewform) ] in which:
 
 * They identify themselves.
 * They certify that they have viewed the training video in which we explain how to use the survey instrument.

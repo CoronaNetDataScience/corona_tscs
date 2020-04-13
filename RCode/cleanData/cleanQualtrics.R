@@ -44,7 +44,7 @@
 
 # setup -----------------------------
 
-path = "/cloud/project"
+path = "~/corona_tscs"
 
 ## load packages and functions
 
@@ -114,7 +114,7 @@ unmatched_corrections = setdiff(correction_record_ids$entry_type_2_TEXT, matched
 #  if an entry was not corrected, fill in with original record id
 qualtrics$correct_record_match = ifelse(
   qualtrics$entry_type == 'Correction to Existing Entry (type in Record ID in text box)',
-  qualtrics$entry_type_2_TEXT,
+  trimws(qualtrics$entry_type_2_TEXT),
   qualtrics$record_id
 )
 
@@ -182,47 +182,57 @@ names(qualtrics)[grep(
   'type_other_health_staff'
 )
 
+# let's do this in tidy format
+# slower but easier to debug
 
-# rename/link names for provinces back to the country
-names(qualtrics)[grep('init_province', names(qualtrics))]  = paste0("init_prov_", gsub(" |\\-", '', c(
-  'European Union', country_regions$Country
-)))
-
-# remove empty columns ----------------------------------
-# find empty columns, only delete empty columns of provinces or sources
-empty_columns = names(which(apply(qualtrics, 2, function(x) {
-  all(is.na(x))
-})))
-(empty_columns  = empty_columns[grep('prov|source', empty_columns)])
-
-qualtrics = dplyr::select(qualtrics,-empty_columns)
-
-#  combining columns ----------------------------------
-
-###------  combine columns for init_provinces ----- ###
-qualtrics = qualtrics %>%
-  # first change all of the NA's in the init_prov column to ""
-  mutate_at(vars(starts_with("init_prov")),
-            list( ~ replace(., is.na(.), ""))) %>%
-  
-  # then combine all the init_prov columns together into one column called 'prov'
-  unite(index_prov, contains('init_prov'), sep = '') %>%
-  
-  # remove init_prov_[country name] columns now that they are made redundant by the 'prov' variable
-  select(-contains("init_prov")) %>%
-  
-  # keep only the number which indexes the province and combine it with the country name to make a province index
-  mutate(index_prov = ifelse(index_prov != "", paste0(
-    init_country, gsub("[^0-9]", "", index_prov)
-  ), ""))
+qualtrics <- gather(qualtrics,key="province",value="prov_num",matches("init\\_province")) %>% 
+  mutate(index_prov=paste0(init_country,str_extract(prov_num,"[0-9]+"))) %>% 
+  select(-prov_num,-province)
 
 # reshape country_regions data to long format
 country_regions_long = country_regions %>%
   gather(key="p_num",value="init_prov",-Country,-ISO2) %>% 
-  mutate(index_prov=paste0(Country,p_num))
+  mutate(index_prov=paste0(Country,p_num)) %>% 
+  filter(!is.na(init_prov)) %>% 
+  select(-p_num)
 
 # match province code to actual province name
 qualtrics <- left_join(qualtrics,country_regions_long,by="index_prov")
+
+
+# rename/link names for provinces back to the country
+# changed as the code wasn't working
+# names(qualtrics)[grep('init_province', names(qualtrics))]  = paste0("init_prov_", gsub(" |\\-", '', c(
+#   'European Union', country_regions$Country
+# )))
+
+# remove empty columns ----------------------------------
+# find empty columns, only delete empty columns of provinces or sources
+# empty_columns = names(which(apply(qualtrics, 2, function(x) {
+#   all(is.na(x))
+# })))
+# (empty_columns  = empty_columns[grep('prov|source', empty_columns)])
+# 
+# qualtrics = dplyr::select(qualtrics,-empty_columns)
+
+#  combining columns ----------------------------------
+
+###------  combine columns for init_provinces ----- ###
+# qualtrics = qualtrics %>%
+#   # first change all of the NA's in the init_prov column to ""
+#   mutate_at(vars(matches("init\\_prov")),
+#             list( ~ replace(., is.na(.), ""))) %>%
+#   
+#   # then combine all the init_prov columns together into one column called 'prov'
+#   unite(index_prov, contains('init_prov'), sep = '') %>%
+#   
+#   # remove init_prov_[country name] columns now that they are made redundant by the 'prov' variable
+#   select(-contains("init_prov")) %>%
+#   
+#   # keep only the number which indexes the province and combine it with the country name to make a province index
+#   mutate(index_prov = ifelse(index_prov != "", paste0(
+#     init_country, gsub("[^0-9]", "", index_prov)
+#   ), ""))
 
  
 # combining info on target countries --------------------
