@@ -14,7 +14,7 @@ author:
   - Luca Messerschmidt:
       institute: tum
 institute:
-  - tum: Hochschule für Politik, Technical University of Munich
+  - tum: Hochschule für Politik at the Technical University of Munich (TUM) and TUM School of Governance
   - nyuad: New York University Abu Dhabi
   - yale: Yale University
 date: "April 10th, 2020"
