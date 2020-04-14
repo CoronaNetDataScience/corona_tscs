@@ -5,6 +5,9 @@ require(ggplot2)
 require(readr)
 require(tidyr)
 require(googlesheets4)
+require(lubridate)
+
+sheets_auth()
 
 export <- read_csv("data/CoronaNet/RA/ra_data_pull.csv") %>% 
   slice(-c(1:2)) %>% 
@@ -75,15 +78,22 @@ ggsave("country_cov.png",width = 6,height=3)
 
 export %>% 
   group_by(ra_name) %>% 
-  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)") %>% 
+  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)",
+         RecordedDate>ymd("2020-04-04"),
+         RecordedDate<ymd("2020-04-11")) %>% 
   count %>% 
   arrange(desc(n)) %>% 
   select(Name="ra_name",`Count of Records`="n") %>% 
   write_csv("data/ra_leader_board.csv")
 
-# output to record sheet
+# house competition info
 
-sheets_auth()
+hogwarts <- sheets_get("https://docs.google.com/spreadsheets/d/1nhPGi7GD6RwsI2pZ5SOCRHg4mICqc5nByWZl7UgDjys/edit?usp=sharing") %>% 
+  sheets_read(sheet="Sheet1")
+
+# need 
+
+# output to record sheet
 
 current_sheet <- sheets_get("https://docs.google.com/spreadsheets/d/183lWnJH7rSVkOTiuCXt9D7uCwS1SdJSOleXPpFkj2us/edit#gid=0")
 
