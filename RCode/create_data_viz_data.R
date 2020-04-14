@@ -104,6 +104,12 @@ data_viz <- data_viz %>% group_by(record_id) %>%
 
 data_viz <- left_join(data_viz,sev_data,by=c("country","date_announced"))
 
+# fill in blank dates
+
+data_viz <- group_by(data_viz,country,date_announced) %>% 
+  arrange(country,date_announced) %>% 
+  fill(severity_index,.direction="downup")
+
 write_csv(data_viz,"data/CoronaNet/data_viz_clean.csv")
 
 # just countries + targets 

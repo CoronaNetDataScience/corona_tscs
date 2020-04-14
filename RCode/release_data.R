@@ -220,7 +220,7 @@ release <- left_join(release,sev_data,by=c("country","date_announced"))
 
 # now output raw data for sharing
 
-write_csv(release,"../CoronaNet/data/coronanet_release.csv")
+#write_csv(release,"../CoronaNet/data/coronanet_release.csv")
 write_csv(release,"data/CoronaNet/coronanet_release.csv")
 
 # merge with other files
@@ -233,8 +233,8 @@ release_combined <- left_join(release,covid_test,by=c(ISO_A3="ISO3",
   left_join(niehaus,by=c("country"))
 
 write_csv(release_combined,"data/CoronaNet/coronanet_release_allvars.csv")
-write_csv(release_combined,"../CoronaNet/data/coronanet_release_allvars.csv")
+#write_csv(release_combined,"../CoronaNet/data/coronanet_release_allvars.csv")
 
 # copy raw data over
 
-system("cp data/CoronaNet/coranaNetData_clean.rds ../CoronaNet/data/coranaNetData_clean.rds")
+#system("cp data/CoronaNet/coranaNetData_clean.rds ../CoronaNet/data/coranaNetData_clean.rds")
