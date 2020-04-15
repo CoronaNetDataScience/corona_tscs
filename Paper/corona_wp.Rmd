@@ -49,6 +49,13 @@ library(readr)
 library(knitr)
 library(readxl)
 
+
+library(devtools)
+library(igraph)
+library(remotes)
+#remotes::install_github("wjrl/RBioFabric")
+library(RBioFabric)
+
 # let's load some data!
 # run RCode/cleanData/cleanQualtrics_short.R
 
@@ -56,10 +63,13 @@ clean_data <- readRDS("../data/CoronaNet/coranaNetData_clean.rds") %>%
   mutate(date_announced=mdy(date_announced)) %>% 
   filter(date_announced<(today()-days(5)),!is.na(init_country),is.na(init_other),is.na(target_other) | target_other=="")
 
-# run /RCode/slack/slackAnalytics.R")
+# run /RCode/slack/slackAnalytics.R"
 
 slack <- readRDS("../data/slack/corona_govt_response_slack_latest_clean.rds")
 
+# run /RCode/country_regions.R
+regions_df = read.csv( "../data/regions/country_regional_groups_concordance.csv", stringsAsFactors = FALSE)
+countries = read.csv('../data/regions/all_countries.csv', stringsAsFactors = FALSE)
 ```
 
 
@@ -174,7 +184,17 @@ Lastly, we take the following steps in order to validate the quality of the resu
 
 # Dataset
 
-Here we present some descriptive statistics to illustrate the type of data that the CoronaNet project is able to provide. Table \@ref(tab:desctab) shows the number of records for each policy type, the number of unique countries for each policy type, and also how many countries are targeted in total by each policy type.^[Future versions of the dataset will also include more detailed information for some policy categories. For example, among other things, we are also collecting information on the types of 'health resources' (e.g. masks, hospitals, doctors ) and types of 'restrictions of non-essential business activities' (e.g. retail businesses, restaurants/bars). Where applicable, we are also collecting information on the volume of a certain policy (e.g. the number of masks, hospitals and doctors.). We will also be including a variable which documents which institution is responsible for enforcing a certain policy (e.g. national government, military).] We note that these are cumulative totals for these different categories in the data.
+Here we present some descriptive statistics to illustrate the type of data that the CoronaNet project is able to provide. First, however, we clarify the unit of analysis for each documented policies. Of the `r length(unique(clean_data$record_id))` events in the dataset, we have identified `r length(unique(clean_data$record_id[clean_data$entry_type %in% c("1","New Entry")]))` unique events. That is, some events in the database are updates or changes to existing policies. We link such events overtime using a unique ID (`record_id`). An event counts as an update if it deals with a change in either the:
+
+1. Time duration or^[E.g. A country lengthens its quarantine to 28 days from 14 days.]
+2. Strength of an existing policy in terms of either:
+   a. the nature of the policy^[E.g. People can no longer leave their houses to go to work whereas before they could]
+   b. compliance rules for the policy^[E.g The quarantine used to be voluntary but now its mandatory] 
+   c. who the policy applies towards^[E.g. The quarantine used to apply to people of all ages and now it only applies to the elderly.]
+
+A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g. policy type, targeted country.
+
+Table \@ref(tab:desctab) shows the number of records for each policy type, the number of unique countries for each policy type, and also how many countries are targeted in total by each policy type.^[Future versions of the dataset will also include more detailed information for some policy categories. For example, among other things, we are also collecting information on the types of 'health resources' (e.g. masks, hospitals, doctors ) and types of 'restrictions of non-essential business activities' (e.g. retail businesses, restaurants/bars). Where applicable, we are also collecting information on the volume of a certain policy (e.g. the number of masks, hospitals and doctors.). We will also be including a variable which documents which institution is responsible for enforcing a certain policy (e.g. national government, military).] We note that these are cumulative totals for these different categories in the data.
 
 ```{r desctab}
 
@@ -228,16 +248,141 @@ clean_data %>%
 ```
 
 
+We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g. 'external border restrictions', 'quarantine'). For example, in Figure \@ref(fig:biofabric_europe), we map a network of bans on inbound flights to European countries initiated by European countries^[In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican] as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied. For instance, the plot shows that the governments of Poland and San Marino banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira in Portugal banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland.
 
-Of the `r length(unique(clean_data$record_id))` events in the dataset, we have identified `r length(unique(clean_data$record_id[clean_data$entry_type %in% c("1","New Entry")]))` unique events. That is, some events in the database are updates or changes to existing policies. We link such events overtime using a unique ID (`record_id`). An event counts as an update if it deals with a change in either the:
+```{r biofabric_europe,fig.cap="Network Map of Bans on Inbound Flights by European Countries as of March 15, 2020"}
 
-1. Time duration or^[E.g. A country lengthens its quarantine to 28 days from 14 days.]
-2. Strength of an existing policy in terms of either:
-   a. the nature of the policy^[E.g. People can no longer leave their houses to go to work whereas before they could]
-   b. compliance rules for the policy^[E.g The quarantine used to be voluntary but now its mandatory] 
-   c. who the policy applies towards^[E.g. The quarantine used to apply to people of all ages and now it only applies to the elderly.]
+# add region variable
+clean_data$region = regions_df$regions[match(clean_data$init_country, regions_df$country)] 
 
-A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g. policy type, targeted country.
+# clean date_start
+clean_data$date_start= as.Date(clean_data$date_start, '%m-%d-%y')
+
+# create numeric ids per country; needed to create igraph 
+country_id = factor(unique(countries$Country))
+levels(country_id ) = 1:length(country_id )
+country_id = as.numeric(as.character(country_id))
+cid = data.frame(country_name = countries$Country, country_id)
+clean_data$country_id = cid$country_id[match(clean_data$init_country, cid$country_name)]
+clean_data$target_country_id = cid$country_id[match(clean_data$target_country, cid$country_name)]
+
+# user function for plotting biofabric plots by region, policy type, date, travel mechanism and travel direction
+'%!in%' <- function(x,y)!('%in%'(x,y))
+plotBioGraph = function(regionName, 
+                        policyType, 
+                        dateStart, 
+                        allDum  = FALSE, 
+                        travelMech = c('Flights' ,'All kinds of transport (all below except visa restrictions)'),
+                        travelDir = c("Inbound", "Inbound/Outbound")){
+  
+  # subset data
+  sub_data = clean_data %>% filter(date_start<= dateStart) 
+  sub_data =  sub_data %>% filter(type == policyType ) 
+  sub_data = sub_data %>% separate_rows(travel_mechanism, sep = ',')
+  sub_data = sub_data %>% filter(travel_mechanism %in% travelMech)  
+  sub_data = sub_data %>% filter(target_direction %in% travelDir )  
+  
+  # mandatory compliance
+  sub_data = sub_data %>% separate_rows(compliance, sep = ',' )  
+  sub_data = sub_data %>% filter(compliance %!in% "Voluntary/Recommended but No Penalties")  
+  
+  sub_data = sub_data %>% filter(target_country!="Other (please specify below)")
+
+  
+  # conditional logic for only selecting inbound flight bans external border restrctions
+  if(policyType == 'External Border Restrictions'){
+    sub_data = sub_data %>% filter(type_sub_cat %!in% c("Health Screenings (e.g. temperature checks)", "Health Certificates", "Travel History Form (e.g. documents where traveler has recently been)") )
+    sub_data = sub_data %>% filter(target_who_what %in% c("All (Travelers + Residents)", "All Travelers (Citizen Travelers + Foreign Travelers )") )
+    }
+  
+  ## Note, the following entries are not 'wrong', but are not sweeping travel bans
+  # travel restrictions by Azerbaijan for bsuiness trips/public employees
+  sub_data = sub_data %>% filter(record_id %!in% c(6286807))
+  
+
+  # Bahrain Crown Prince issues directives to halt government official visits and training abroad - March 9 
+  sub_data = sub_data %>% filter(record_id %!in% c(3869709 ))
+  
+  # Iran bans government travel
+  sub_data = sub_data %>% filter(record_id %!in% c( 1693792 ))
+  
+  # Uzbekistan bans student travel
+  sub_data = sub_data %>% filter(record_id %!in% c( 7862418 ))
+  
+  # Macau, not travel ban but health declaration doesn't fit into existing categories
+  sub_data = sub_data %>% filter(record_id %!in% c(4638284 ))
+  
+  # Nepal, travel_mechanism is about allowing flights
+  sub_data = sub_data %>% filter(record_id %!in% c(2225508 ))
+  ## FIX THE BELOW LATER IN QUALTRICS
+  
+  # this is not a travel ban for people entering Italy, but for leaving Italy
+  sub_data = sub_data %>% filter(record_id %!in% c(3071523 ))
+  
+  # Micronesia, not a ban on all countries, but unsepcificed countries that have coronacases
+  sub_data = sub_data %>% filter(record_id %!in% c(8819062,3625348, 4465391 ))
+  
+  # Colombia: this is quarantine upon arrival, not external border restriction
+  sub_data = sub_data %>% filter(record_id %!in% c(1293754 ))
+  
+  # Bahrain: these are recommendations, not mandatory bans
+  sub_data = sub_data %>% filter(record_id %!in% c(5709516, 9327917 ))
+  
+  # South Sudan, not a ban on all countries, but on unsepcified countries affected by covid
+  sub_data = sub_data %>% filter(record_id %!in% c(5302981))
+  
+  # Initiating country is Slovenia, not Iran
+  sub_data = sub_data %>% filter(record_id %!in% c(3031369))
+  
+  # Germany: target country is not Germany but 'All countries'
+  sub_data = sub_data %>% filter(record_id %!in% c(1592443,3788036, 5258786 ,1592443,3788036,5258786 ))
+  
+ 
+  #Azerbaijan target who what should be 'other' for bsuiness trips/public employees
+  sub_data = sub_data %>% filter(record_id %!in% c( 2632978))
+  
+  #Tunisia target who what should be 'other' for students
+  sub_data = sub_data %>% filter(record_id %!in% c( 7066331))
+  
+  # expand dataset to include disaggregated country data when applicable
+  sub_data[which(sub_data$target_country == 'All countries'), 'target_country'] = paste(cid$country_name, collapse = ',')
+  sub_data = sub_data %>% separate_rows(target_country, sep = ',')
+  
+  # remove duplicates
+  sub_data = sub_data %>%   
+    distinct(init_country, target_country, .keep_all = TRUE)  
+  
+  # subset to a region, if applicable
+  if(allDum == FALSE){
+    sub_data = sub_data %>% filter(region %in% regionName)}
+  
+  # extract edges and nodes for network
+  nodes = data.frame(unique(c(sub_data$init_country,sub_data$target_country)))
+  edges = data.frame(from = sub_data$init_country,to = sub_data$target_country)
+
+  # create network from subdata
+  sub_data_net = graph_from_data_frame(edges, nodes, directed = TRUE)
+
+  #format .pdf size and save pdf of bifabric
+  height <- vcount(sub_data_net)
+  width <- ecount(sub_data_net)
+  aspect <- height / width;
+  plotWidth <- 100.0
+  plotHeight <- plotWidth * (aspect * 1.2)
+
+  # make biofabric plot
+  bioFabric(passthroughNodeOrder(sub_data_net) )
+  
+}
+
+plotBioGraph("Europe", "External Border Restrictions", "2020-03-15")
+
+```
+<---
+```{r biofabric_asia,fig.cap="Network Map of Bans on Inbound Flights by Asian Countries as of March 15, 2020"}
+plotBioGraph("Asia", "External Border Restrictions", "2020-03-15")
+```
+--->
 
 # Government Response Severity Index
 

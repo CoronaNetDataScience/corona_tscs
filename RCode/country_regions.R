@@ -156,7 +156,7 @@ regions_disagg = c("Ukraine,France,Spain,Sweden,Norway,Germany,Finland,Poland,It
                    "Austria,Belgium,Czech Republic,Denmark,Estonia,Finland,France,Germany,Greece,Hungary,Iceland,Italy,Latvia,Liechtenstein,Lithuania,Luxembourg, Malta, Netherlands,Norway,Poland,Portugal,Slovakia,Slovenia,Spain,Sweden,Switzerland,United Kingdom",
                    "Austria,Belgium,Czech Republic,Denmark,Estonia,Finland,France,Germany,Greece,Hungary,Iceland,Italy,Latvia,Liechtenstein,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Slovakia,Slovenia,Spain,Sweden,Switzerland")
 
-
+paste(unlist(str_split(regions_disagg[1], ',')) %>% sort(), collapse = ', ')
 geogDum = c(rep(TRUE, 8), rep(FALSE, 5))
 
 regions_df = data.frame(regions, regions_disagg, geogDum, stringsAsFactors = FALSE)
