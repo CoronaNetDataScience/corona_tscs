@@ -35,4 +35,6 @@ qualtrics[which(qualtrics$record_id== 5733066),"entry_type_3_TEXT"]  = 4262184
 qualtrics[which(qualtrics$record_id== 6511463),"entry_type"]  = "Update on Existing Entry (type in Record ID in text box)"
 qualtrics[which(qualtrics$record_id== 6511463),"entry_type_3_TEXT"]  = 3083058
  
+qualtrics[which(qualtrics$record_id== 5501189),"type_ext_restrict"]  = c("Health Certificates")
+
 

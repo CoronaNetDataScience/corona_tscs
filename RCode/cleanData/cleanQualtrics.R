@@ -44,6 +44,7 @@
 
 # setup -----------------------------
 
+path = '/cloud/project'
 
 ## load packages and functions
 
@@ -81,6 +82,7 @@ capwords <- function(s, strict = FALSE) {
 # .csv downloads it is!
 
 country_regions = read_csv(file = paste0(path, '/data/regions/country_region_clean.csv'))
+regions_df = read_csv(file = paste0(path, '/data/regions/country_regional_groups_concordance.csv'))
 qualtrics = read_survey(paste0(path, '/data/CoronaNet/coronanet_raw_latest.csv'))
 
 # text entry cleaning ----------------------------------
@@ -286,36 +288,6 @@ source(paste0(path, "/RCode/validation/recode_records_countries.R"))
 
 # Disaggregate regions (e.g. Schengen Area) into the relevant component countries
 # !!! NOTE: still think about how we want to deal with the 'All' countries entry
-
-regions = c("Europe",
-            "North America",
-            "Asia",
-            "Africa",
-            "Latin America",
-            "Oceania",
-            "Central America",
-            "ASEAN Countries",
-            "Middle East",
-            "European Union (without the UK)",
-            "European Union (with the UK)",
-            "Schengen Area (with the UK)",
-            "Schengen Area (without the UK)")
-
-regions_disagg = c("Ukraine,France,Spain,Sweden,Norway,Germany,Finland,Poland,Italy,United Kingdom,Romania,Belarus,Greece,Bulgaria,Iceland,Hungary,Portugal,Austria,Czech Republic,Serbia,Ireland,Lithuania,Latvia,Croatia,Bosnia and Herzegovina,Slovakia,Estonia,Denmark,Switzerland,Netherlands,Moldova,Belgium,Armenia,Albania,Macedonia,Slovenia,Montenegro,Kosovo,Cyprus,Luxembourg,Georgia,Andorra,Malta,Liechtenstein,San Marino,Monaco,Vatican",
-                   "United States,Mexico,Canada,Cuba,Haiti,Dominican Republic,Puerto Rico,Jamaica,Trinidad and Tobago,Guadeloupe,Martinique,The Bahamas,Barbados,Saint Lucia,Virgin Islands,Grenada,Antigua and Barbuda,Dominica,Saint Kitts and Nevis,Saint Martin,British Virgin Islands,Anguilla,Montserrat,Saint Vincent and the Grenadines",
-                   "Afghanistan,Azerbaijan,Bangladesh,Bhutan,Brunei,Cambodia,China,India,Indonesia,Japan,Kazakhstan,Korea,North Korea,South Korea,Kyrgyzstan,Laos,Malaysia,Maldives,Mongolia,Myanmar,Nepal,Oman,Pakistan,Philippines,Russia,Singapore,Sri Lanka,Tajikistan,Thailand,East Timor,Turkey,Turkmenistan,Uzbekistan,Vietnam,Taiwan,Macau",
-                   "Algeria,Angola,Botswana,Burundi,Cameroon,Cabo Verde,Central African Republic,Chad,Comoros,Republic of Congo,Democratic Republic of the Congo,Benin,Equatorial Guinea,Ethiopia,Eritrea,Djibouti,Gabon,Gambia,Ghana,Guinea,Ivory Coast,Kenya,Lesotho,Liberia,Libya,Madagascar,Malawi,Mali,Mauritania,Mauritius,Morocco,Mozambique,Namibia,Niger,Nigeria,Guinea-Bissau,Réunion,Rwanda,Sao Tome and Principe,Senegal,Seychelles,Sierra Leone,Somalia,South Africa,Zimbabwe,South Sudan,Sudan,Swaziland,Togo,Tunisia,Uganda,Republic of Tanzania,Burkina Faso,Zambia",
-                   "Argentina,Bolivia,Brazil,Chile,Colombia,Ecuador,Falkland Islands,Guyana,Paraguay,Peru,Suriname,Uruguay,Venezuela",
-                   "Australia,Papua New Guinea,New Zealand,Fiji,Solomon Islands,Vanuatu,Kiribati,Federated States of Micronesia,Tonga,American Samoa,Marshall Islands,Palau,Tuvalu,Nauru,Samoa",
-                   "Guatemala, Belize, Honduras, El Salvador, Nicaragua, Costa Rica, Panama",
-                   "Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, Philippines, Singapore, Thailand, Vietnam",
-                   "Bahrain,Egypt,Iran,Iraq,Israel,Jordan,Kuwait,Lebanon,Oman,Palestine,Qatar,Saudi Arabia,Syria,United Arab Emirates,Yemen",
-                   "Austria,Belgium,Bulgaria,Croatia,Cyprus,Czechia,Denmark,Estonia,Finland,France,Germany,Greece,Hungary,Ireland,Italy,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Poland,Portugal,Romania,Slovakia,Slovenia,Spain,Sweden",
-                   "Austria,Belgium,Bulgaria,Croatia,Cyprus,Czechia,Denmark,Estonia,Finland,France, Germany,Greece,Hungary,Ireland,Italy,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Poland,Portugal,Romania,Slovakia,Slovenia,Spain,Sweden,United Kingdom",
-                   "Austria,Belgium,Czech Republic,Denmark,Estonia,Finland,France,Germany,Greece,Hungary,Iceland,Italy,Latvia,Liechtenstein,Lithuania,Luxembourg, Malta, Netherlands,Norway,Poland,Portugal,Slovakia,Slovenia,Spain,Sweden,Switzerland,Slovakia,Slovenia,Spain,Sweden,United Kingdom",
-                   "Austria,Belgium,Czech Republic,Denmark,Estonia,Finland,France,Germany,Greece,Hungary,Iceland,Italy,Latvia,Liechtenstein,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Slovakia,Slovenia,Spain,Sweden,Switzerland,Slovakia,Slovenia,Spain,Sweden")
-
-regions_df = data.frame(regions, regions_disagg)
 
 # drop observations where coder chose more than 3 regions; CHECK later
 qualtrics = qualtrics  %>% filter(unlist(lapply(stringr:::str_split(qualtrics$target_region, ','), function(x) length(x[!is.na(x)]))) <4)
