@@ -44,7 +44,6 @@
 
 # setup -----------------------------
 
-path = "~/corona_tscs"
 
 ## load packages and functions
 
@@ -83,7 +82,6 @@ capwords <- function(s, strict = FALSE) {
 
 country_regions = read_csv(file = paste0(path, '/data/regions/country_region_clean.csv'))
 qualtrics = read_survey(paste0(path, '/data/CoronaNet/coronanet_raw_latest.csv'))
-
 
 # text entry cleaning ----------------------------------
 ## do this first before filtering out bad records/recoding values so that all text values have diacritics removed from them
@@ -265,6 +263,9 @@ if (all (is.na(qualtrics[which(qualtrics$target_geog_level == "All countries"), 
     "Error: double check to make sure 'target_country' is empty when 'all countries' is selected"
   )
 }
+ 
+saveRDS(distinct(qualtrics),
+        file = paste0(path, "/data/CoronaNet/coranaNetData_recode_records_countries.rds"))
 
 source(paste0(path, "/RCode/validation/recode_records_countries.R"))
 #### Clean the 'other countries' text entries
@@ -672,5 +673,4 @@ qualtrics$target_country = str_trim(qualtrics$target_country)
   saveRDS(distinct(qualtrics),
           file = paste0(path, "/data/CoronaNet/coranaNetData_clean.rds"))
 
- 
 
