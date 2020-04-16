@@ -10,6 +10,10 @@ library(remotes)
 #remotes::install_github("wjrl/RBioFabric")
 library(RBioFabric)
  
+
+
+
+
 # user function for plotting biofabric plots by region, policy type, date, travel mechanism and travel direction
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
@@ -40,31 +44,18 @@ plotBioGraph = function(regionName,
     sub_data = sub_data %>% filter(target_who_what %in% c("All (Travelers + Residents)", "All Travelers (Citizen Travelers + Foreign Travelers )") )
     }
   
-  ## Note, the following entries are not 'wrong', but are not sweeping travel bans
+  ## Note,the following entry is not 'wrong', but are not sweeping travel bans
   # travel restrictions by Azerbaijan for bsuiness trips/public employees
-  sub_data = sub_data %>% filter(record_id %!in% c(6286807))
-  
 
-  # Bahrain Crown Prince issues directives to halt government official visits and training abroad - March 9 
-  sub_data = sub_data %>% filter(record_id %!in% c(3869709 ))
-  
-  # Iran bans government travel
-  sub_data = sub_data %>% filter(record_id %!in% c( 1693792 ))
-  
-  # Uzbekistan bans student travel
-  sub_data = sub_data %>% filter(record_id %!in% c( 7862418 ))
-  
-  # Macau, not travel ban but health declaration doesn't fit into existing categories
+    # Macau, not travel ban but health declaration doesn't fit into existing categories
   sub_data = sub_data %>% filter(record_id %!in% c(4638284 ))
   
-  # Nepal, travel_mechanism is about allowing flights
-  sub_data = sub_data %>% filter(record_id %!in% c(2225508 ))
-  ## FIX THE BELOW LATER IN QUALTRICS
+   ## FIX THE BELOW LATER IN QUALTRICS
   
   # this is not a travel ban for people entering Italy, but for leaving Italy
   sub_data = sub_data %>% filter(record_id %!in% c(3071523 ))
   
-  # Micronesia, not a ban on all countries, but unsepcificed countries that have coronacases
+  # Micronesia, not a ban on all countries, but unsepcificed countries that have corona cases
   sub_data = sub_data %>% filter(record_id %!in% c(8819062,3625348, 4465391 ))
   
   # Colombia: this is quarantine upon arrival, not external border restriction
@@ -145,6 +136,29 @@ country_id = as.numeric(as.character(country_id))
 cid = data.frame(country_name = countries$Country, country_id)
 clean_data$country_id = cid$country_id[match(clean_data$init_country, cid$country_name)]
 clean_data$target_country_id = cid$country_id[match(clean_data$target_country, cid$country_name)]
+
+
+dim(clean_data)
+# travel restrictions by Azerbaijan for bsuiness trips/public employees
+clean_data %>% filter(record_id %in% c(6286807, 3869709, 1693792,  7862418 , 4638284 ))%>%
+  select(target_who_what, event_description)
+
+
+# Bahrain Crown Prince issues directives to halt government official visits and training abroad - March 9 
+sub_data = sub_data %>% filter(record_id %!in% c(3869709 ))
+
+# Iran bans government travel
+sub_data = sub_data %>% filter(record_id %!in% c( 1693792 ))
+
+# Uzbekistan bans student travel
+sub_data = sub_data %>% filter(record_id %!in% c( 7862418 ))
+
+# Macau, not travel ban but health declaration doesn't fit into existing categories
+sub_data = sub_data %>% filter(record_id %!in% c(4638284 ))
+
+# Nepal, travel_mechanism is about allowing flights
+sub_data = sub_data %>% filter(record_id %!in% c(2225508 ))
+
 
 # clean_data %>% 
 #   filter(init_country == 'Portugal' & type == 'External Border Restrictions') %>%
