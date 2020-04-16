@@ -186,16 +186,17 @@ names(qualtrics)[grep(
 
 # let's do this in tidy format
 # slower but easier to debug
-
+ 
 qualtrics <- gather(qualtrics,key="province",value="prov_num",matches("init\\_province")) %>% 
   mutate(index_prov=paste0(init_country,str_extract(prov_num,"[0-9]+"))) %>% 
   select(-prov_num,-province)
-
+ 
 # reshape country_regions data to long format
 country_regions_long = country_regions %>%
   gather(key="p_num",value="init_prov",-Country,-ISO2) %>% 
-  mutate(index_prov=paste0(Country,p_num)) %>% 
-  filter(!is.na(init_prov)) %>% 
+  mutate(p_num = as.numeric(p_num)+1) %>%
+  mutate(index_prov=paste0(Country,p_num)) %>%
+  filter(!is.na(init_prov)) %>%
   select(-p_num)
 
 # match province code to actual province name
@@ -205,7 +206,18 @@ qualtrics <- left_join(qualtrics,country_regions_long,by="index_prov")
 
 qualtrics <- distinct(qualtrics)
 
+## records that have a province match are still 'duplicated'
+# e.g. if a policy comes out of Alaska it currently has
+# two index_provs: 'United States3' and 'United StatesNA'
+# remove the second one ('United StatesNA')
+qualtrics = qualtrics %>% 
+  group_by(record_id) %>%
+    filter(if (any(!is.na(init_prov)))
+      !is.na(init_prov)
+  else is.na(init_prov)) %>%
+  ungroup()
 
+ 
 # rename/link names for provinces back to the country
 # changed as the code wasn't working
 # names(qualtrics)[grep('init_province', names(qualtrics))]  = paste0("init_prov_", gsub(" |\\-", '', c(
@@ -297,13 +309,11 @@ qualtrics = qualtrics  %>% filter(unlist(lapply(stringr:::str_split(qualtrics$ta
 num_region_columns = max(unlist(lapply(stringr:::str_split(qualtrics$target_region, ','), function(x) length(x[!is.na(x)]))))
 qualtrics = qualtrics  %>% separate(target_region, c(paste0("regions", 1:num_region_columns)), sep = ',', remove = FALSE)
 
-
-
 # match regions to the countries that comprise them
 qualtrics[, paste0("regions", 1:num_region_columns)]  = data.frame(apply(qualtrics [, paste0("regions", 1:num_region_columns)], 2, function(x){
-  regions_df$regions_disagg[match(x, regions_df$regions)]}), stringsAsFactors = FALSE)
+  regions_df$country[match(x, regions_df$regions)]}), stringsAsFactors = FALSE)
  
- 
+
 # recollapse separate columns into one column
 qualtrics  = qualtrics  %>% 
   mutate_at(vars(starts_with("regions")),

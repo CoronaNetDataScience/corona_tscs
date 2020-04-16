@@ -7,7 +7,7 @@
 # 3) a data frame of countries and their regions in /regions/country_regional_groups_concordance.csv
 
 pathData = '/cloud/project/data'
-
+ 
 
 # -----------------------------
 # Load packages
@@ -115,7 +115,7 @@ country_regions_clean[which(country_regions_clean$Country == 'Palestinian Territ
 philippines = read.csv(paste0(pathData, '/regions/List of Provinces of the Philippines.csv'), stringsAsFactors = FALSE, header = FALSE)
 country_regions_clean[which(country_regions_clean$Country == 'Philippines'), -c(1, 2)] = c(philippines$V1, NA, NA)
 
-
+ 
 # reorder 
 country_regions_clean = country_regions_clean[order(country_regions_clean$Country),]
 write.csv(country_regions_clean , file = paste0(pathData, '/regions/country_region_clean.csv'), row.names = FALSE, na= "") 
@@ -156,7 +156,7 @@ regions_disagg = c("Ukraine,France,Spain,Sweden,Norway,Germany,Finland,Poland,It
                    "Austria,Belgium,Czech Republic,Denmark,Estonia,Finland,France,Germany,Greece,Hungary,Iceland,Italy,Latvia,Liechtenstein,Lithuania,Luxembourg, Malta, Netherlands,Norway,Poland,Portugal,Slovakia,Slovenia,Spain,Sweden,Switzerland,United Kingdom",
                    "Austria,Belgium,Czech Republic,Denmark,Estonia,Finland,France,Germany,Greece,Hungary,Iceland,Italy,Latvia,Liechtenstein,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Slovakia,Slovenia,Spain,Sweden,Switzerland")
 
-paste(unlist(str_split(regions_disagg[1], ',')) %>% sort(), collapse = ', ')
+
 geogDum = c(rep(TRUE, 8), rep(FALSE, 5))
 
 regions_df = data.frame(regions, regions_disagg, geogDum, stringsAsFactors = FALSE)
@@ -167,8 +167,6 @@ regions_df = regions_df[-which(is.na(regions_df$country)),]
 
 # check
 regions_df[which(duplicated(regions_df)|duplicated(regions_df, fromLast = TRUE)),]
-# !!! Note: there were some mistaken duplicates here --- check in with Luca about this
-regions_df = regions_df[-which(duplicated(regions_df$country)),]
 
 write.csv(regions_df, file = paste0(pathData, "/regions/country_regional_groups_concordance.csv"), row.names = FALSE)
 
