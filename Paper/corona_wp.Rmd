@@ -48,6 +48,7 @@ require(ggrepel)
 library(readr)
 library(knitr)
 library(readxl)
+require(gghighlight)
 
 
 library(devtools)
@@ -396,23 +397,28 @@ Figure \@ref(fig:plotindex) shows the estimated index scores for the `r length(u
 
 Figure \@ref(fig:plotindex) shows the estimated index scores for the `r length(unique(clean_data$country))` countries in our dataset at present. Of course, a caveat with the index is that we may be missing some possible policy measures that have occurred due to the difficulty in finding them in published sources. However, there is still clear differentiation within the index in terms of when policies were imposed, with some countries starting to impose policies much earlier than others. Furthermore, there is a clear break about March 1st when countries began to impose more stringent policies across the world.
 
-```{r plotindex,fig.cap="CoronaNet Time-Varying Index of Severity of Measures Opposing COVID-19 Pandemic"}
+```{r plotindex,fig.cap="CoronaNet Time-Varying Index of National Policy Activity of Measures Opposing COVID-19 Pandemic"}
+# 
+# severity_fit <- readRDS("../data/severity_fit_collapse.rds")
+# 
+# all_lev <- as.character(unique(clean_data$init_country))
+# 
+# all_lev <- all_lev[all_lev!="Chad"]
+# 
+# get_est <- as.data.frame(severity_fit@stan_samples,"L_tp1") %>%
+#   mutate(iter=1:n()) %>%
+#   gather(key="parameter",value="estimate",-iter) %>%
+#   mutate(date_announced=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?[0-9]?0?")),
+#          country=as.numeric(str_extract(parameter,"[1-9][0-9]?[0-9]?0?(?=\\])")),
+#          country=factor(country,labels=levels(severity_fit@score_data@score_matrix$person_id)),
+#          date_announced=factor(date_announced,labels=as.character(sort(unique(severity_fit@score_data@score_matrix$time_id)))))
+# 
+# saveRDS(get_est,"../data/get_est.rds")
 
-severity_fit <- readRDS("../data/severity_fit.rds")
-
-all_lev <- as.character(unique(clean_data$init_country))
-
-all_lev <- all_lev[all_lev!="Chad"]
-
-get_est <- as.data.frame(severity_fit@stan_samples,"L_tp1") %>% 
-  mutate(iter=1:n()) %>% 
-  gather(key="parameter",value="estimate",-iter) %>% 
-  mutate(date_announced=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?[0-9]?0?")),
-         country=as.numeric(str_extract(parameter,"[1-9][0-9]?[0-9]?0?(?=\\])")),
-         country=factor(country,labels=levels(severity_fit@score_data@score_matrix$person_id)),
-         date_announced=factor(date_announced,labels=as.character(unique(severity_fit@score_data@score_matrix$time_id))))
+get_est <- readRDS("../data/get_est.rds")
   
-get_est <- get_est %>%  
+                   
+get_est_sum <- get_est %>%  
             ungroup %>% 
   filter(country!="Chad") %>% 
             mutate(estimate=(estimate-min(estimate))/(max(estimate)-min(estimate))*100,
@@ -424,16 +430,38 @@ get_est <- get_est %>%
   group_by(date_announced) %>% 
   mutate(`Country Rank`=rank(med_est))
 
-get_est %>% 
+list_countries <- c("United States",
+                    "United Kingdom",
+                    "China",
+                    "Taiwan",
+                    "Singapore",
+                    "Italy",
+                    "France",
+                    "South Korea",
+                    "Gabon",
+                    "Croatia",
+                    "United Arab Emirates",
+                    "Yemen",
+                    "St. Lucia")
+
+get_est_sum %>% 
+  ungroup %>% 
   ggplot(aes(y=med_est,x=date_announced)) +
-  geom_ribbon(aes(ymin=low_est,ymax=high_est,group=country),alpha=0.2) +
+  #geom_ribbon(aes(ymin=low_est,ymax=high_est,group=country),alpha=0.2) +
   geom_line(colour="red",aes(group=country)) +
-  geom_label_repel(data=sample_n(ungroup(sample_n(group_by(get_est,country),1)),50),aes(label=country),size=2.5) +
+  gghighlight(country %in% list_countries,
+              label_params=list(size=3)) +
+  # geom_text_repel(data=filter(ungroup(get_est_sum),
+  #                              date_announced==max(date_announced),
+  #                              country %in% list_countries),
+  #                  aes(label=country),
+  #            hjust="right",
+  #            size=3) +
   theme_minimal() +
   theme(panel.grid = element_blank()) +
   labs(caption="Estimates are derived from Stan, a Markov Chain Monte Carlo sampler.\nThe intervals represent the median and 5% - 95% posterior density region.\nPlot shows one estimate per country per day.") +
   xlab("") +
-  ylab("Severity Index Scale (0 to 100)")
+  ylab("Policy Activity Index Scale (0 to 100)")
 
 ggsave("index.png")
 
@@ -447,9 +475,10 @@ With this caveat in mind, San Marino occupies the highest position, likely becau
 
 ```{r rankcount}
 
-get_est %>% 
+get_est_sum %>% 
   ungroup %>% 
-  filter(date_announced==max(date_announced)) %>% 
+  filter(date_announced==max(date_announced),
+         !(country %in% c("European Union"))) %>% 
   select(Country="country",`Rank`="Country Rank",`5% Low Score`="low_est",
          `Median Score`="med_est",
          `95% High Score`="high_est") %>% 
@@ -457,7 +486,7 @@ get_est %>%
   arrange(Rank) %>% 
   mutate_at(c("5% Low Score","Median Score","95% High Score"),~round(.,1)) %>% 
     knitr::kable("latex",booktabs=T,longtable=T,
-               caption="Rank of Countries by Severity Index as of April 3rd, 2020") %>% 
+               caption="Rank of Countries by National Policy Activity Index as of April 3rd, 2020") %>% 
   kable_styling(latex_options = c("striped", "hold_position")) %>% 
   column_spec(1,width="4cm") %>% 
   column_spec(2:5,width="2.5cm")

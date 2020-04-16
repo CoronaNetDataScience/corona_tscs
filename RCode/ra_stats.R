@@ -7,6 +7,9 @@ require(tidyr)
 require(googlesheets4)
 require(lubridate)
 
+start_week <- ymd("2020-04-11")
+end_week <- ymd("2020-04-19")
+
 sheets_auth()
 
 export <- read_csv("data/CoronaNet/RA/ra_data_pull.csv") %>% 
@@ -17,7 +20,6 @@ export <- read_csv("data/CoronaNet/RA/ra_data_pull.csv") %>%
 
 
 export %>% 
-  filter(record_date_day!=lubridate::today()) %>% 
   filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)") %>% 
   group_by(record_date_day) %>% 
   count %>% 
@@ -32,7 +34,6 @@ export %>%
 ggsave("date_performance.png",width = 6,height=3)
 
 export %>% 
-  filter(record_date_day!=lubridate::today()) %>% 
   filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)") %>% 
   group_by(record_date_day) %>% 
   count %>% 
@@ -74,22 +75,84 @@ export %>%
 
 ggsave("country_cov.png",width = 6,height=3)
 
-# need to produce leader board
-
-export %>% 
-  group_by(ra_name) %>% 
-  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)",
-         RecordedDate>ymd("2020-04-04"),
-         RecordedDate<ymd("2020-04-11")) %>% 
-  count %>% 
-  arrange(desc(n)) %>% 
-  select(Name="ra_name",`Count of Records`="n") %>% 
-  write_csv("data/ra_leader_board.csv")
-
 # house competition info
 
 hogwarts <- sheets_get("https://docs.google.com/spreadsheets/d/1nhPGi7GD6RwsI2pZ5SOCRHg4mICqc5nByWZl7UgDjys/edit?usp=sharing") %>% 
   sheets_read(sheet="Sheet1")
+
+# need to produce leader board
+
+leaders <- export %>% 
+  group_by(ra_name) %>% 
+  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)",
+         RecordedDate>start_week,
+         RecordedDate<end_week) %>% 
+  count %>% 
+  arrange(desc(n)) %>% 
+  select(Name="ra_name",`Count of Records`="n") 
+  
+leaders <- leaders %>% left_join(hogwarts,by=c("Name"="ra_name")) 
+
+leaders %>% write_sheet(ss=sheets_get("https://docs.google.com/spreadsheets/d/1INmpDvIne76qqmlucMABaJxeaZ-xpoypc0s_S0tUyto/edit?usp=sharing"),
+                                                                        sheet="Leaderboard")
+
+# add up point totals from leader board
+
+lead_pts <- slice(ungroup(leaders),c(1:10)) %>% 
+  mutate(points=c(50,25,15,rep(10,7))) %>% 
+  group_by(house) %>% 
+  summarize(lead_pts=sum(points,na.rm=T))
+
+# see how many we can match
+
+hogwarts <- left_join(hogwarts,export)
+
+# records by day by house
+
+hogwarts %>% 
+  ungroup %>% 
+  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)",
+         RecordedDate>start_week,
+         RecordedDate<end_week,
+         !is.na(house)) %>% 
+  group_by(record_date_day,house) %>% 
+  count %>% 
+  ungroup %>% 
+  group_by(house) %>% 
+  arrange(record_date_day) %>% 
+  mutate(n_cum=cumsum(n)) %>% 
+  ggplot(aes(y=n_cum,x=record_date_day)) +
+  geom_line(aes(colour=house)) +
+  theme_minimal() +
+  theme(panel.grid=element_blank()) +
+  ylab("Count of Records (Excluding Corrections)") +
+  xlab("") +
+  ggtitle("Number of Records by Hogwarts House")
+
+ggsave('hogwarts.png')
+
+# calculate overall standings
+
+standings <- group_by(hogwarts,house) %>% 
+  filter(entry_type!="Correction to Existing Entry (type in Record ID in text box)",
+         RecordedDate>start_week,
+         RecordedDate<end_week,
+         !is.na(house)) %>% 
+  summarize(count_policies=length(unique(record_id)))
+
+# addin point bonus
+
+standings <- left_join(standings,lead_pts,by="house") %>% 
+  mutate(Total=count_policies+lead_pts)
+
+standings %>% 
+  select(House="house",
+         `Count of Policies`="count_policies",
+         `Player Bonus`="lead_pts",
+         Total) %>% 
+  write_sheet(ss=sheets_get("https://docs.google.com/spreadsheets/d/1INmpDvIne76qqmlucMABaJxeaZ-xpoypc0s_S0tUyto/edit?usp=sharing"),
+              sheet="Overall Standings")
+
 
 # need 
 
