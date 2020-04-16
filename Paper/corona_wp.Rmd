@@ -37,6 +37,11 @@ abstract: "As the COVID-19 pandemic spreads around the world, governments have i
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,tinytex.verbose = TRUE)
 
+# to compile with pandoc
+# do brew install pandoc pandoc-citeproc
+# then add this line to a .Renviron file in the project folder:
+# PATH="/usr/local/Cellar/pandoc/2.9.2.1/bin/:${PATH}"
+
 require(dplyr)
 require(tidyr)
 require(ggplot2)
