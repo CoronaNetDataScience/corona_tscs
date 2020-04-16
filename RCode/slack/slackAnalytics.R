@@ -3,7 +3,7 @@ library(dplyr)
 library(magrittr)
 library(ggplot2)
 library(forcats)
-
+library(tidyr)
 # load data
 
 pathData = "data"
