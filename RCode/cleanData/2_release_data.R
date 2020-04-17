@@ -32,8 +32,8 @@ covid_test <- read_csv("~/covid19_tests/data_snapshots/covid_tests_last.csv") %>
 
 cases <- read_csv("~/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv") %>% 
   select(-Lat, -Long,country="Country/Region") %>% 
-  gather(key="date_announced",value="confirmed_cases",-`Province/State`,-country) %>% 
-  mutate(date_announced=mdy(date_announced),
+  gather(key="date_start",value="confirmed_cases",-`Province/State`,-country) %>% 
+  mutate(date_start=mdy(date_start),
          country=recode(country,Czechia="Czech Republic",
                         `Hong Kong`="China",
                         `US`="United States of America",
@@ -52,12 +52,12 @@ cases <- read_csv("~/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_
                         `Cabo Verde`="Cape Verde",
                         `West Bank and Gaza`="Palestine",
                         `Eswatini`="Swaziland")) %>% 
-  group_by(date_announced,country) %>% 
+  group_by(date_start,country) %>% 
   summarize(confirmed_cases=sum(confirmed_cases,na.rm=T))
 deaths <- read_csv("~/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv") %>% 
   select(-Lat, -Long,country="Country/Region") %>% 
-  gather(key="date_announced",value="deaths",-`Province/State`,-country) %>% 
-  mutate(date_announced=mdy(date_announced),
+  gather(key="date_start",value="deaths",-`Province/State`,-country) %>% 
+  mutate(date_start=mdy(date_start),
          country=recode(country,Czechia="Czech Republic",
                         `Hong Kong`="China",
                         `US`="United States of America",
@@ -76,12 +76,12 @@ deaths <- read_csv("~/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time
                         `Cabo Verde`="Cape Verde",
                         `West Bank and Gaza`="Palestine",
                         `Eswatini`="Swaziland")) %>% 
-  group_by(date_announced,country) %>% 
+  group_by(date_start,country) %>% 
   summarize(deaths=sum(deaths,na.rm=T))
 recovered <- read_csv("~/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv") %>% 
   select(-Lat, -Long,country="Country/Region") %>% 
-  gather(key="date_announced",value="recovered",-`Province/State`,-country) %>% 
-  mutate(date_announced=mdy(date_announced),
+  gather(key="date_start",value="recovered",-`Province/State`,-country) %>% 
+  mutate(date_start=mdy(date_start),
          country=recode(country,Czechia="Czech Republic",
                         `Hong Kong`="China",
                         `US`="United States of America",
@@ -100,7 +100,7 @@ recovered <- read_csv("~/COVID-19/csse_covid_19_data/csse_covid_19_time_series/t
                         `Cabo Verde`="Cape Verde",
                         `West Bank and Gaza`="Palestine",
                         `Eswatini`="Swaziland")) %>% 
-  group_by(date_announced,country) %>% 
+  group_by(date_start,country) %>% 
   summarize(recovered=sum(recovered,na.rm=T))
 
 # niehaus data
@@ -127,7 +127,7 @@ sev_data <- summary(severity) %>%
   select(country="Person",severity_index_5perc=`Low Posterior Interval`,
          severity_index_median="Posterior Median",
          severity_index_95perc=`High Posterior Interval`,
-         date_announced="Time_Point") %>% 
+         date_start="Time_Point") %>% 
   mutate(country=recode(country,Czechia="Czech Republic",
                 `Hong Kong`="China",
                 `United States`="United States of America",
@@ -164,7 +164,7 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target
          date_announced=lubridate::mdy(date_announced),
          date_start=lubridate::mdy(date_start),
          date_end=lubridate::mdy(date_end)) %>% 
-  filter(!is.na(date_announced),
+  filter(!is.na(date_start),
          recorded_date<(today()-days(5)))
 
 # recode records
@@ -226,11 +226,11 @@ write_csv(release,"data/CoronaNet/coronanet_release.csv")
 
 # merge with other files
 
-release_combined <- left_join(cases,deaths, by=c("country","date_announced")) %>% 
-  left_join(recovered,by=c("country","date_announced")) %>% 
-  left_join(release,by=c("country","date_announced")) %>% 
+release_combined <- left_join(cases,deaths, by=c("country","date_start")) %>% 
+  left_join(recovered,by=c("country","date_start")) %>% 
+  full_join(release,by=c("country","date_start")) %>% 
   left_join(covid_test,by=c(ISO_A3="ISO3",
-                                                      date_announced="Date")) %>% 
+                                                      date_start="Date")) %>% 
   left_join(niehaus,by=c("country"))
 
 write_csv(release_combined,"data/CoronaNet/coronanet_release_allvars.csv")
