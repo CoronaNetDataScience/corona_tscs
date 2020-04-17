@@ -24,7 +24,7 @@ output:
   #bookdown::word_document2
   bookdown::pdf_document2:
     keep_tex: true
-    #latex_engine: xelatex
+    latex_engine: xelatex
     includes:
       in_header:
           preamble.tex
@@ -99,9 +99,11 @@ More specifically, the CoronaNet database collects data on government policy act
 + The compliance with the policy action (e.g. mandatory, voluntary)
 + The timing of the policy action (e.g. date announced, date implemented)
 
-Data on government reactions the COVID-19 pandemic can not only help us understand which policies are more effective in addressing the spread and health outcomes of COVID-19, it can also forward our knowledge of, inter alia, the relative responsiveness of different political regime types [@przeworski1999democracy], the politics of crisis management [@boin2016politics], the development of financial crises [@kindleberger2011manias] and, the sociology of natural disasters [@tierney2007margins]. Meanwhile, governments react to the COVID-19 epidemic will have long-lasting implications on a wide-range of social phenomena, from political institutions, [@pierson2000increasing] economic development [@nunn2009importance]  to environmental outcomes [@dasgupta2002confronting]. Given its exogenous timing, government policies made in reaction to the COVID-19 pandemic constitute the single largest natural experiment in recent memory, allowing researchers to improve causal inference in any number of fields. While scholars have always sought to understand how large-scale historical events have shaped contemporary phenomena, modern technological tools allow us to document such events more quickly and more precisely than ever before. 
+Data on government reactions the COVID-19 pandemic can not only help us understand which policies are more effective in addressing the spread and health outcomes of COVID-19, it can also forward our knowledge of, inter alia, the relative responsiveness of different political regime types [@przeworski1999democracy], the politics of crisis management [@boin2016politics], the development of financial crises [@kindleberger2011manias] and, the sociology of natural disasters [@tierney2007margins]. Moreover, given the exogenous timing of the initial COVID-19 outbreak in China, government policies made in reaction to the COVID-19 pandemic constitute the single largest natural experiment in recent memory, allowing researchers to improve causal inference in any number of fields. Indeed, how governments react to the COVID-19 epidemic will have long-lasting implications on a wide-range of social phenomena, from political institutions, [@pierson2000increasing] economic development [@nunn2009importance]  to environmental outcomes [@dasgupta2002confronting]. While scholars have always sought to understand how large-scale historical events have shaped contemporary phenomena, modern technological tools allow us to document such events more quickly and more precisely than ever before. 
  
-In what follows, we provide a description of the data, as well the application of our data in modeling the stringency of measures over time. Using a Bayesian dynamic item-response theory model, we produce a statistically valid index that ranks countries in terms of their response to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented. We then outline the methodology we used to collect the data. 
+In what follows, we provide a description of the data, as well the application of our data in modeling the level of government policy activity over time. Using a Bayesian dynamic item-response theory model, we produce a statistically valid index that ranks countries in terms of their response to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented. We then outline the methodology we used to collect the data. 
+
+
 
 # Dataset Overview
 
@@ -114,6 +116,100 @@ Here we present some descriptive statistics to illustrate the type of data that 
    c. who the policy applies towards^[E.g. The quarantine used to apply to people of all ages and now it only applies to the elderly.]
 
 A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g. policy type, targeted country.
+
+```{r table2, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+
+
+`Type` = c('This variable documents the policy action initiated. It can take on only one of the following values:',
+                  'Declaraction of Emergency',
+                  'Quarantine',
+                  'External Border Restrictions',
+                  'Internal Border Restrictions',
+                  'Restrictions of Mass Gatherings',
+                  'Closure of Schools',
+                  'Restriction of Non-Essential Government Services',
+                  'Restriction of Non-Essential Businesses',
+                  'Health Monitoring',
+                  'Health Testing',
+                  'Health Resource',
+                  'Public Awareness Campaigns',
+                  'New Task Force or Bureau')
+
+Country = c('This variable documents the country from which a policy initiates, where applicable, and can take on only one of the following values:',
+            'National',
+            'Provincial/State',
+            'Municipality/City',
+            'Other governmental unit')
+
+`Target Geographic Level` = c('This variable documents the geographical target of the policy. It can take on of the following variables (The exact geographical targets are also documented in other variables in the dataset):',
+                     'All countries',
+                     'One or more countries and one or more regional groupings',
+                     'One or more countries, but not all countries',
+                     'One or more regional groupings',
+                     'A geographical or administrative unit within a country')
+
+`Target Who What` = c('This variable documents the human or material targets of a policy, where applicable, and can take on only one of the following values:',
+                      'All (Travelers + Residents)',
+                      'All Travelers (Citizen Travelers + Foreign Travelers)',
+                      'Citizen Travelers',
+                      'Foreign Travelers',
+                      'All Residents (Citizen Residents + Foreign Residents)',
+                      'Citizen Residents',
+                      'Foreign Residents',
+                      'All Foreign Nationals',
+                      'All Citizens',
+                      'Health Staff',
+                      'Health-related Supplies' )
+
+`Target Direction` = c('This variable documents the direction of travel a policy targets, where applicable, and can take on only one of the following values:',
+                       'Inbound', 
+                       'Outbound',
+                       'Inbound/Outbound')
+
+`Travel Mechanism` = c('This variable documents the mode of travel a policy targets, where applicable, and can take on one or more of the following values:',
+                       'All Mechansims (except visa restrictions)',
+                       'Flights',
+                       'Land Border',
+                       'Trains',
+                       'Buses',
+                       'Seaports',
+                       'Ferries',
+                       'Cruises',
+                       'Visas')
+
+Compliance = c('This variable documents degree to which a policy must be complied with and can take on one or more of the following values:',
+'Mandatory with Legal Penalties',
+               'Mandatory with Fines',
+               'Mandatory with Excpetions',
+               'Recommended/Voluntary')
+
+Enforcer = c('This variable documents the entity enforcing a policy and can take on one or more of the following values:',
+            'National Government',
+             'Ministry/Department of Health',
+             'Military',
+             'Provincial/State Government',
+             'Municipal/City Government',
+             'Police',
+              'Other')
+
+Date = c('The following are separate variables in the dataset which document when a policy is announced, starts and ends repsectively: ', 'Date Announced', 'Date Starts', 'Date Ends')
+varDf = list(`Type`, 
+             Country, 
+             `Target Geographic Level` , 
+             `Target Who What`, 
+             `Target Direction`, 
+             `Travel Mechanism` ,
+             Compliance,
+             Enforcer,
+             Date)
+
+attributes(varDf) = list(names = names(varDf),
+                         row.names=1:max(unlist(lapply(varDf, length))), class='data.frame')
+
+varDf
+ # output the table in a format good for HTML/PDF/docx conversion
+```
+
 
 Table \@ref(tab:desctab) shows the number of records for each policy type, the number of unique countries for each policy type, and also how many countries are targeted in total by each policy type.^[Future versions of the dataset will also include more detailed information for some policy categories. For example, among other things, we are also collecting information on the types of 'health resources' (e.g. masks, hospitals, doctors ) and types of 'restrictions of non-essential business activities' (e.g. retail businesses, restaurants/bars). Where applicable, we are also collecting information on the volume of a certain policy (e.g. the number of masks, hospitals and doctors.). We will also be including a variable which documents which institution is responsible for enforcing a certain policy (e.g. national government, military).] We note that these are cumulative totals for these different categories in the data.
 

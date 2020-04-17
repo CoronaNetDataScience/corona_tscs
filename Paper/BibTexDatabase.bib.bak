@@ -14425,4 +14425,54 @@
   url          = {https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/report-13-europe-npi-impact/},
 }
 
+@Article{longabaugh2012,
+  author    = {Longabaugh, William JR},
+  title     = {Combing the hairball with BioFabric: a new approach for visualization of large networks},
+  journal   = {BMC bioinformatics},
+  year      = {2012},
+  volume    = {13},
+  number    = {1},
+  pages     = {275},
+  publisher = {BioMed Central},
+}
+
+@Article{nunn2009importance,
+  author    = {Nunn, Nathan},
+  title     = {The importance of history for economic development},
+  journal   = {Annu. Rev. Econ.},
+  year      = {2009},
+  volume    = {1},
+  number    = {1},
+  pages     = {65--92},
+  publisher = {Annual Reviews},
+}
+
+@Article{tierney2007margins,
+  author    = {Tierney, Kathleen J},
+  title     = {From the margins to the mainstream? Disaster research at the crossroads},
+  journal   = {Annu. Rev. Sociol.},
+  year      = {2007},
+  volume    = {33},
+  pages     = {503--525},
+  publisher = {Annual Reviews},
+}
+
+@Article{pierson2000increasing,
+  author    = {Pierson, Paul},
+  title     = {Increasing returns, path dependence, and the study of politics},
+  journal   = {American political science review},
+  year      = {2000},
+  volume    = {94},
+  number    = {2},
+  pages     = {251--267},
+  publisher = {Cambridge University Press},
+}
+
+@Book{thibaut:1936,
+  author    = {Thibaut, John W},
+  title     = {The social psychology of groups},
+  year      = {1936},
+  publisher = {Routledge},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
