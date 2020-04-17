@@ -111,7 +111,7 @@ source("RCode/validation/recode_records.R")
 # replace entries with documented corrected entries as necessary ----------------------------------
 
 # make vector of ids that need to be corrected
-correction_record_ids = qualtrics[which(qualtrics$entry_type == 'Correction to Existing Entry (type in Record ID in text box)'), 'entry_type_2_TEXT']
+correction_record_ids = qualtrics[which(grepl(x=qualtrics$entry_type,pattern='Correction to Existing Entry')), 'entry_type_2_TEXT']
 
 # note that there are some un-matched records; check them out later
 matched_corrections = qualtrics$record_id[which(qualtrics$record_id %in% correction_record_ids$entry_type_2_TEXT)]
@@ -143,7 +143,7 @@ if (sum(is.na(qualtrics$correct_record_match)) > 0) {
 
 # link updated policy(ies) with original entry with variable 'policy_id' ----------------------------------
 
-updated_record_ids = qualtrics[which(qualtrics$entry_type == 'Update on Existing Entry (type in Record ID in text box)'), 'entry_type_3_TEXT']
+updated_record_ids = qualtrics[which(grepl(x=qualtrics$entry_type,pattern='Update on Existing Entry')), 'entry_type_3_TEXT']
 
 matched_updates = qualtrics$record_id[which(qualtrics$record_id %in% updated_record_ids$entry_type_3_TEXT)]
 (unmatched_updates = setdiff(updated_record_ids$entry_type_3_TEXT, matched_updates)) # need to take a closer look later
