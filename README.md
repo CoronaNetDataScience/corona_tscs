@@ -24,6 +24,17 @@ speed and scale with which it was collected means that we cannot
 validate all of it. If you find an error in the data, please file an
 issue on this Github page.**
 
+The format of the data is in country-day-policy record (`record_id`)
+format. Some entries are marked as `New Entry` in the `entry_type` field
+for when a policy of that type was first implemented in the country.
+Later updates to those policies are marked as updates in `entry_type`.
+To see how policies are connected, look at the `policy_id` field for all
+policies from the first entry through updates for a given
+country/province/city. If an entry was corrected after initial data
+collection, it will read corrected in the `entry_type` field (the
+original incorrect data has already been replaced with the corrected
+data).
+
 1.  **`data/CoronaNet/coronanet_release.csv`** This file contains
     variables from the CoronaNet government response project,
     representing national and sub-national policy event data from more
@@ -48,42 +59,39 @@ issue on this Github page.**
 
 ## `coronanet_release.csv` Field Dictionary
 
-1.  `record_id` Unique identifier for each policy record
-2.  `entry_type` Whether the record is new, meaning no restriction had
+1.  `record_id` Unique identifier for each unique policy record
+2.  `policy_id` Identifier linking new policies with subsequent updates
+    to policies
+3.  `recorded_date` When the record was entered into our data
+4.  `date_announced` When the policy is announced
+5.  `date_start` When the policy goes into effect
+6.  `date_end` When the policy ends (if it has an explicit end date)
+7.  `entry_type` Whether the record is new, meaning no restriction had
     been in place before, or an update (restriction was in place but
     changed). Corrections are corrections to previous entries.
-3.  `event_description` A short description of the policy change
-4.  `type` The category of the policy
-5.  `country` The country initiating the policy
-6.  `date_announced` When the policy is announced
-7.  `date_start` When the policy goes into effect
-8.  `date_end` When the policy ends (if it has an explicit end date)
-9.  `init_country_level` Whether the policy came from the national level
+8.  `event_description` A short description of the policy change
+9.  `type` The category of the policy
+10. `country` The country initiating the policy
+11. `init_country_level` Whether the policy came from the national level
     or a sub-national unit
-10. `index_prov` The ID of the sub-national unit
-11. `target_country` Which foreign country a policy is targeted at
+12. `province` Name of sub-national unit
+13. `target_country` Which foreign country a policy is targeted at
     (i.e. travel policies)
-12. `target_geog_level` Whether the target of the policy is a country as
+14. `target_geog_level` Whether the target of the policy is a country as
     a whole or a sub-national unit of that country
-13. `target_who_what` Who the policy is targeted at
-14. `recorded_date` When the record was entered into our data
-15. `target_direction` Whether a travel-related policy affects people
+15. `target_who_what` Who the policy is targeted at
+16. `target_direction` Whether a travel-related policy affects people
     coming in (Inbound) or leaving (Outbound)
-16. `travel_mechanism` If a travel policy, what kind of transportation
+17. `travel_mechanism` If a travel policy, what kind of transportation
     it affects
-17. `compliance` Whether the policy is voluntary or mandatory
-18. `enforcer` What unit in the country is responsible for enforcement
-19. `link` A link to at least one source for the policy
-20. `ISO_A3` 3-digit ISO country codes
-21. `ISO_A2` 2-digit ISO country codes
-22. `severity_index_5perc` 5% posterior low estimate (i.e. lower bound
-    of uncertainty interval) for severity index
-23. `severity_index_median` posterior median estimate (point estimate)
-    for severity index, which comes from a Bayesian latent variable
-    model aggregating across policy types to measure country-level
-    policy severity (see paper on our website)
-24. `severity_index_5perc` 95% posterior high estimate (i.e. upper bound
-    of uncertainty interval) for severity index
+18. `compliance` Whether the policy is voluntary or mandatory
+19. `enforcer` What unit in the country is responsible for enforcement
+20. `link` A link to at least one source for the policy
+21. `ISO_A3` 3-digit ISO country codes
+22. `ISO_A2` 2-digit ISO country codes
+    <!-- 22. `severity_index_5perc` 5% posterior low estimate (i.e. lower bound of uncertainty interval) for severity index -->
+    <!-- 23. `severity_index_median` posterior median estimate (point estimate) for severity index, which comes from a Bayesian latent variable model aggregating across policy types to measure country-level policy severity (see paper on our website) -->
+    <!-- 24. `severity_index_5perc` 95% posterior high estimate (i.e. upper bound of uncertainty interval) for severity index -->
 
 ## `coronanet_release_allvars.csv` Field Dictionary
 

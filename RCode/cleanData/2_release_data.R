@@ -115,7 +115,7 @@ niehaus <- read_csv("data/data_niehaus/03_21_20_0105am_wep.csv") %>%
 
 # load cleaned data
 
-clean_data <- readRDS("data/CoronaNet/coranaNetData_clean.rds")
+clean_data <- readRDS("data/CoronaNet/coranaNetData_clean_wide.rds")
 
 # severity index
 
@@ -144,7 +144,7 @@ sev_data <- summary(severity) %>%
 
 
 release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target_other) | target_other=="") %>% 
-              select(record_id,entry_type,event_description,type,country="init_country",
+              select(record_id,policy_id,entry_type,event_description,type,country="init_country",
                      date_announced,
                      date_start,
                      date_end,
@@ -160,13 +160,10 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target
                      enforcer,
                      link="sources_matrix_1_2") %>% 
   mutate(province=ifelse(country=="Hong Kong","Hong Kong",province),
+         province=ifelse(country=="Macau","Macau",province),
          date_announced=lubridate::mdy(date_announced),
          date_start=lubridate::mdy(date_start),
-         date_end=lubridate::mdy(date_end),
-         entry_type=recode(entry_type,
-                           `1`="New Entry",
-                           `Correction`="Correction to Existing Entry (type in Record ID in text box)",
-                           `Update`="Update on Existing Entry (type in Record ID in text box) ")) %>% 
+         date_end=lubridate::mdy(date_end)) %>% 
   filter(!is.na(date_announced),
          recorded_date<(today()-days(5)))
 
@@ -174,6 +171,7 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target
 
 release$country <- recode(release$country,Czechia="Czech Republic",
                            `Hong Kong`="China",
+                          Macau="China",
                            `United States`="United States of America",
                            `Bahamas`="The Bahamas",
                            `Tanzania`="United Republic of Tanzania",
@@ -216,7 +214,10 @@ if(nrow(missing)>0 && !(all(missing$country=="European Union"))) {
 
 # Add in severity index
 
-release <- left_join(release,sev_data,by=c("country","date_announced"))
+#release <- left_join(release,sev_data,by=c("country","date_announced"))
+
+release <- select(release,record_id,policy_id,recorded_date,date_announced,date_start,date_end,
+                  everything())
 
 # now output raw data for sharing
 
@@ -225,11 +226,11 @@ write_csv(release,"data/CoronaNet/coronanet_release.csv")
 
 # merge with other files
 
-release_combined <- left_join(release,covid_test,by=c(ISO_A3="ISO3",
-                                                      date_announced="Date")) %>% 
-  left_join(deaths,by=c("country","date_announced")) %>% 
-  left_join(cases,by=c("country","date_announced")) %>% 
+release_combined <- left_join(cases,deaths, by=c("country","date_announced")) %>% 
   left_join(recovered,by=c("country","date_announced")) %>% 
+  left_join(release,by=c("country","date_announced")) %>% 
+  left_join(covid_test,by=c(ISO_A3="ISO3",
+                                                      date_announced="Date")) %>% 
   left_join(niehaus,by=c("country"))
 
 write_csv(release_combined,"data/CoronaNet/coronanet_release_allvars.csv")

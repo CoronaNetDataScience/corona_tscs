@@ -44,8 +44,6 @@
 
 # setup -----------------------------
 
-path = '/cloud/project'
-
 ## load packages and functions
 
 library(tidyr)
@@ -81,9 +79,14 @@ capwords <- function(s, strict = FALSE) {
 # because the TUM has not purchased one
 # .csv downloads it is!
 
-country_regions = read_csv(file = paste0(path, '/data/regions/country_region_clean.csv'))
-regions_df = read_csv(file = paste0(path, '/data/regions/country_regional_groups_concordance.csv'))
-qualtrics = read_survey(paste0(path, '/data/CoronaNet/coronanet_raw_latest.csv'))
+country_regions = read_csv(file = 'data/regions/country_region_clean.csv')
+regions_df = read_csv(file = 'data/regions/country_regional_groups_concordance.csv')
+qualtrics = read_survey('data/CoronaNet/coronanet_raw_latest.csv') %>% 
+  mutate(entry_type=recode(entry_type,
+                           `1`="New Entry",
+                           `Correction`="Correction to Existing Entry (type in Record ID in text box)",
+                           `Update`="Update on Existing Entry (type in Record ID in text box) ")) %>% 
+  filter(Progress>98)
 
 # text entry cleaning ----------------------------------
 ## do this first before filtering out bad records/recoding values so that all text values have diacritics removed from them
@@ -97,12 +100,12 @@ qualtrics$target_city[which(qualtrics$target_city == 'bogota')] = "Bogota"
 
 
 # This script filters out bad records (need to remove/fix these manually so we don't do this)
-source(paste0(path, "/RCode/validation/filter_bad_records.R"))
+source("RCode/validation/filter_bad_records.R")
 
 # This script manually recodes values
 # Also should be fixed so we don't do this
  
-source(paste0(path, "/RCode/validation/recode_records.R"))
+source("RCode/validation/recode_records.R")
 
 
 # replace entries with documented corrected entries as necessary ----------------------------------
@@ -117,7 +120,7 @@ unmatched_corrections = setdiff(correction_record_ids$entry_type_2_TEXT, matched
 # make a variable called correct_record_match: if entry is corrected, fill in the corresponding record id entered in entry_type_2_TEXT,
 #  if an entry was not corrected, fill in with original record id
 qualtrics$correct_record_match = ifelse(
-  qualtrics$entry_type == 'Correction to Existing Entry (type in Record ID in text box)',
+  grepl(x=qualtrics$entry_type,pattern='Correction to Existing Entry'),
   trimws(qualtrics$entry_type_2_TEXT),
   qualtrics$record_id
 )
@@ -135,11 +138,8 @@ if (sum(is.na(qualtrics$correct_record_match)) > 0) {
   
 }
 
-# remove old entries
-qualtrics = qualtrics %>% filter(!record_id %in% correction_record_ids)
-
 # replace old entries with corrected entries
-qualtrics$record_id = qualtrics$correct_record_match
+#qualtrics$record_id = qualtrics$correct_record_match
 
 # link updated policy(ies) with original entry with variable 'policy_id' ----------------------------------
 
@@ -152,10 +152,39 @@ matched_updates = qualtrics$record_id[which(qualtrics$record_id %in% updated_rec
 #  if an entry was not updated, fill in with original record id
 
 qualtrics$policy_id = ifelse(
-  qualtrics$entry_type == 'Update on Existing Entry (type in Record ID in text box)',
+  grepl(x=qualtrics$entry_type,pattern='Update on Existing Entry'),
   qualtrics$entry_type_3_TEXT,
   qualtrics$record_id
 )
+
+# recode types
+# this is due to a recent bug with manually corrected/updated entries
+
+# check only for vars with missing
+
+miss_vars <- names(qualtrics)[sapply(qualtrics, function(c) any(is.na(c)))]
+
+qualtrics <- group_by(qualtrics,policy_id) %>% 
+  arrange(policy_id,StartDate) %>% 
+  fill(miss_vars,.direction=c("down")) %>% 
+  group_by(correct_record_match) %>% 
+  arrange(correct_record_match,StartDate) %>% 
+  fill(miss_vars,.direction="down")
+  
+  # remove old entries
+  #qualtrics = qualtrics %>% filter(!record_id %in% correction_record_ids)
+  
+  qualtrics <- group_by(qualtrics,correct_record_match) %>% 
+  arrange(correct_record_match,desc(StartDate)) %>% 
+  slice(1)
+  
+  
+  # will need to exclude these dud records for now
+  
+  qualtrics <- filter(qualtrics, !is.na(type),
+                      !is.na(init_country))
+
+  
 
 
 # rename variables ----------------------------------
@@ -186,9 +215,13 @@ names(qualtrics)[grep(
 
 # let's do this in tidy format
 # slower but easier to debug
+
+old_row_num <- nrow(qualtrics)
  
 qualtrics <- gather(qualtrics,key="province",value="prov_num",matches("init\\_province")) %>% 
-  mutate(index_prov=paste0(init_country,str_extract(prov_num,"[0-9]+"))) %>% 
+  mutate(index_prov=ifelse(is.na(str_extract(prov_num,"[0-9]+")),
+                           "",
+                           paste0(init_country,str_extract(prov_num,"[0-9]+")))) %>% 
   select(-prov_num,-province)
  
 # reshape country_regions data to long format
@@ -217,41 +250,16 @@ qualtrics = qualtrics %>%
   else is.na(init_prov)) %>%
   ungroup()
 
- 
-# rename/link names for provinces back to the country
-# changed as the code wasn't working
-# names(qualtrics)[grep('init_province', names(qualtrics))]  = paste0("init_prov_", gsub(" |\\-", '', c(
-#   'European Union', country_regions$Country
-# )))
+# more fixing provinces
 
-# remove empty columns ----------------------------------
-# find empty columns, only delete empty columns of provinces or sources
-# empty_columns = names(which(apply(qualtrics, 2, function(x) {
-#   all(is.na(x))
-# })))
-# (empty_columns  = empty_columns[grep('prov|source', empty_columns)])
-# 
-# qualtrics = dplyr::select(qualtrics,-empty_columns)
+qualtrics <- filter(qualtrics, !(grepl(x=init_country_level,
+                                       pattern="province") & index_prov==""),
+                    !(grepl(x=init_country_level,
+                            pattern="national") & index_prov!=""))
 
-#  combining columns ----------------------------------
-
-###------  combine columns for init_provinces ----- ###
-# qualtrics = qualtrics %>%
-#   # first change all of the NA's in the init_prov column to ""
-#   mutate_at(vars(matches("init\\_prov")),
-#             list( ~ replace(., is.na(.), ""))) %>%
-#   
-#   # then combine all the init_prov columns together into one column called 'prov'
-#   unite(index_prov, contains('init_prov'), sep = '') %>%
-#   
-#   # remove init_prov_[country name] columns now that they are made redundant by the 'prov' variable
-#   select(-contains("init_prov")) %>%
-#   
-#   # keep only the number which indexes the province and combine it with the country name to make a province index
-#   mutate(index_prov = ifelse(index_prov != "", paste0(
-#     init_country, gsub("[^0-9]", "", index_prov)
-#   ), ""))
-
+# if(!(old_row_num==nrow(qualtrics))) {
+#   stop("You done screwed up the merge moron.")
+# }
  
 # combining info on target countries --------------------
 
@@ -278,10 +286,23 @@ if (all (is.na(qualtrics[which(qualtrics$target_geog_level == "All countries"), 
   )
 }
  
-saveRDS(distinct(qualtrics),
-        file = paste0(path, "/data/CoronaNet/coranaNetData_recode_records_countries.rds"))
+# saveRDS(distinct(qualtrics),
+#         file = paste0(path, "/data/CoronaNet/coranaNetData_recode_records_countries.rds"))
 
-source(paste0(path, "/RCode/validation/recode_records_countries.R"))
+source("RCode/validation/recode_records_countries.R")
+
+# save as wide clean file ---------------
+
+# remove records with duplicate provinces per record ID. 
+# these are some issue we haven't yet resolved
+
+qualtrics <- group_by(qualtrics,record_id) %>% filter(n()==1)
+
+
+saveRDS(distinct(qualtrics),
+        file = "data/CoronaNet/coranaNetData_clean_wide.rds")
+
+
 #### Clean the 'other countries' text entries
 ## !!! NOTE that until April 2, it wasn't possible to do text entry for this, so we've lost this data for now
 # its only 4 entries however, and should be straightforward to look in the original sources to get that info
@@ -320,17 +341,6 @@ qualtrics  = qualtrics  %>%
             list( ~ replace(., is.na(.), ""))) %>%
   unite(target_regions_disagg, contains('regions'), sep = ',') %>%
  mutate(target_regions_disagg = gsub('\\,\\,|\\,$', "", target_regions_disagg))
-
-# separate out disaggregated target countries into separate rows
-qualtrics  = qualtrics %>% separate_rows(target_regions_disagg, sep = ',')
-
-## add additional rows for target countries/regional groupings
-qualtrics = qualtrics %>%
-  mutate_at(vars("target_country", "target_regions_disagg"),
-            list( ~ replace(., is.na(.), ""))) %>%
-  unite(target_country, c(target_country, target_regions_disagg), sep = ',') %>%
-  mutate(target_country = gsub("\\,$|^\\,", "", target_country)) %>%
-  separate_rows(target_country, sep = ',')
 
 
 # replace  empty rows in [target_country] with disagregated 'All countries' from [target_geog_level]
@@ -649,10 +659,21 @@ qualtrics$target_country = str_trim(qualtrics$target_country)
   ), c('type_sub_cat_other')] = NA
   
   
-  # save as long clean file ---------------
+  # add one row for each target country
   
+  # separate out disaggregated target countries into separate rows
+  qualtrics  = qualtrics %>% separate_rows(target_regions_disagg, sep = ',')
+  
+  ## add additional rows for target countries/regional groupings
+  qualtrics = qualtrics %>%
+    mutate_at(vars("target_country", "target_regions_disagg"),
+              list( ~ replace(., is.na(.), ""))) %>%
+    unite(target_country, c(target_country, target_regions_disagg), sep = ',') %>%
+    mutate(target_country = gsub("\\,$|^\\,", "", target_country)) %>%
+    separate_rows(target_country, sep = ',')
   
   saveRDS(distinct(qualtrics),
-          file = paste0(path, "/data/CoronaNet/coranaNetData_clean.rds"))
+          file = "data/CoronaNet/coranaNetData_clean_long.rds")
+  
 
 
