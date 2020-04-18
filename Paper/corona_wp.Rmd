@@ -99,11 +99,7 @@ More specifically, the CoronaNet database collects data on government policy act
 + The compliance with the policy action (e.g. mandatory, voluntary)
 + The timing of the policy action (e.g. date announced, date implemented)
 
-<<<<<<< HEAD
 Data on government reactions the COVID-19 pandemic can not only help us understand which policies are more effective in addressing the spread and health outcomes of COVID-19, it can also forward our knowledge of, inter alia, the relative responsiveness of different political regime types [@przeworski1999democracy], the politics of crisis management [@boin2016politics], the development of financial crises [@kindleberger2011manias] and, the sociology of natural disasters [@tierney2007margins]. Moreover, given the exogenous timing of the initial COVID-19 outbreak in China, government policies made in reaction to the COVID-19 pandemic constitute the single largest natural experiment in recent memory, allowing researchers to improve causal inference in any number of fields. Indeed, how governments react to the COVID-19 epidemic will have long-lasting implications on a wide-range of social phenomena, from political institutions, [@pierson2000increasing] economic development [@nunn2009importance]  to environmental outcomes [@dasgupta2002confronting]. While scholars have always sought to understand how large-scale historical events have shaped contemporary phenomena, modern technological tools allow us to document such events more quickly and more precisely than ever before. 
-=======
-Data on government reactions the COVID-19 pandemic can not only help us understand which policies are more effective in addressing the spread and health outcomes of COVID-19, it can also forward our knowledge of, inter alia, the relative responsiveness of different political regime types [@przeworski1999democracy], the politics of crisis management [@boin2016politics], the development of financial crises [@kindleberger2011manias] and, the sociology of natural disasters [@tierney2007margins]. Meanwhile, governments reaction to the COVID-19 epidemic will have long-lasting implications on a wide-range of social phenomena, from political institutions, [@pierson2000increasing] economic development [@nunn2009importance]  to environmental outcomes [@dasgupta2002confronting]. Given its exogenous timing, government policies made in reaction to the COVID-19 pandemic constitute the single largest natural experiment in recent memory, allowing researchers to improve causal inference in any number of fields. While scholars have always sought to understand how large-scale historical events have shaped contemporary phenomena, modern technological tools allow us to document such events more quickly and more precisely than ever before. 
->>>>>>> a2e4547db3347e403340e948d28f08ebef82c4f9
  
 In what follows, we provide a description of the data, as well the application of our data in modeling the level of government policy activity over time. Using a Bayesian dynamic item-response theory model, we produce a statistically valid index that ranks countries in terms of their response to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented. We then outline the methodology we used to collect the data. 
 
@@ -111,7 +107,144 @@ In what follows, we provide a description of the data, as well the application o
 
 # Dataset Overview
 
-Here we present some descriptive statistics to illustrate the type of data that the CoronaNet project is able to provide. First, however, we clarify the unit of analysis for each documented policies. Of the `r length(unique(clean_data$record_id))` events in the dataset, we have identified `r length(unique(clean_data$record_id[clean_data$entry_type %in% c("1","New Entry")]))` unique events. That is, some events in the database are updates or changes to existing policies. We link such events overtime using a unique ID (`record_id`). An event counts as an update if it deals with a change in either the:
+Here we describe the variables that the CoronaNet project is able to provide and then present some descriptive statistics to illustrate the distribution of some key variables in the dataset. Each policy records at the minimum, the following monadic information : the policy type (`type`), the name of the country from which a policy orginiates (`country`)^[If the policy originates from a subnational unit of government, e.g. a province or city, that information is also documented.], the degree to which a policy must be complied with (`compliance`), the entity enforcing the policy (`enforcer`), and the date a policy is announced (`date_annouced`), implemented (`date_start`) and ends (`date_end`).^[Note that sometimes policies are announced without a pre-determined end date. In those cases, this field is left blank] When a policy is dyadic in nature, the database further documents information about the geographic target of the policy (`target_geog_level`; `target_region`,  `target_country`)^[Future versions of the dataset will also include information about if the target was a province or state (`target_province`),  a city or municipality (`target_city`), or another subnational unit (e.g. county, university)], the human or material target of a policy (`target_who_what`), the directional flow of the policy (`target_direction`), and the mechanism of travel (`target_mechanism`). Where applicable, all of the information documented above is also provided qualitatively in the `event_description` variable and each record is identified by a unique `record_id`. Table \@ref(tab:vardesc) provides an overview of the different variables in our dataset, a brief description of what underyling concept each variable aims to capture, and the values that each variable can take on.^[Note that while Table \@ref(tab:vardesc) provides an overview of the version of the dataset we have currently made available, future versions of the dataset will also include more detailed information for some policy categories. For example, among other things, we are also collecting information on the types of 'health resources' (e.g. masks, hospitals, doctors ) and types of 'restrictions of non-essential business activities' (e.g. retail businesses, restaurants/bars). Where applicable, we are also collecting information on the volume of a certain policy (e.g. the number of masks, hospitals and doctors.)]
+<!---We will also be including a variable which documents which institution is responsible for enforcing a certain policy (e.g. national government, military).
+--->
+ 
+
+```{r vardesc, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+
+`Record ID` = c('record_id', 'A unique identifier for each policy record', 'This variable takes on a numeric value. A unique record ID is given for the following unit of analysis: country-type-date_announced')
+
+`Policy ID` = c('policy_id', 'A unique identifier for each policy record as it is updated over time', 'This variable takes on a numeric value. A unique policy ID encompasses different record IDs that change over time with regards to either the strength or time duration of the underlying policy. ')
+
+`Event Description` = c('event_description', "This variable provides a qualtiative summary of the documented policy", "All qualitative descriptions document at a minimum the following information: the policy type (type), the name of the country from which a policy originates (country); the date a policy is implemented (date_start) and if applicable:  the country or region that a policy is targeted towards (target_country), the type of people or resources a policy is targeted towards (target_who_what), when a policy is slated to end (date_end)")
+
+Type = c("type", 'This variable documents the policy action initiated. It can take on only one of the following values:',
+         paste(c('Declaraction of Emergency',
+                 'Quarantine',
+                 'External Border Restrictions',
+                 'Internal Border Restrictions',
+                 'Restrictions of Mass Gatherings',
+                 'Social Distancing',
+                 'Curfew',
+                 'Closure of Schools',
+                 'Restriction of Non-Essential Government Services',
+                 'Restriction of Non-Essential Businesses',
+                 'Health Monitoring',
+                 'Health Testing',
+                 'Health Resource',
+                 'Public Awareness Campaigns',
+                 'New Task Force or Bureau', 
+                 'Other'), collapse = ", "))
+
+Country = c("country", 'This variable documents the country from which a policy initiates, where applicable, and can take on only one of the following values:',
+            paste(c('National',
+                    'Provincial/State',
+                    'Municipality/City',
+                    'Other governmental unit'), collapse = ', '))
+
+`Target Geographic Level` = c("target_geog_level", 
+                              'This variable documents the geographical target of the policy. It can take on of the following variables (The exact geographical targets are also documented in other variables* in the dataset):',
+                              paste(c('All countries',
+                                      'One or more countries and one or more regional groupings',
+                                      'One or more countries, but not all countries',
+                                      'One or more regional groupings',
+                                      'A geographical or administrative unit within a country'), collapse = ', '))
+
+`Target Who What` = c("target_who_what",  'This variable documents the human or material targets of a policy, where applicable, and can take on only one of the following values:',
+                      paste(c('All (Travelers + Residents)',
+                              'All Travelers (Citizen Travelers + Foreign Travelers)',
+                              'Citizen Travelers',
+                              'Foreign Travelers',
+                              'All Residents (Citizen Residents + Foreign Residents)',
+                              'Citizen Residents',
+                              'Foreign Residents',
+                              'All Foreign Nationals',
+                              'All Citizens',
+                              'Health Staff',
+                              'Health-related Supplies' ), collapse = ', '))
+
+`Target Direction` = c('target_direction', 'This variable documents the direction of travel a policy targets, where applicable, and can take on only one of the following values:',
+                       paste(c('Inbound', 
+                               'Outbound',
+                               'Inbound/Outbound'), collapse = ', '))
+
+`Travel Mechanism` = c('travel_mechanism', 'This variable documents the mode of travel a policy targets, where applicable, and can take on one or more of the following values:',
+                       paste(c('All Mechansims (except visa restrictions)',
+                               'Flights',
+                               'Land Border',
+                               'Trains',
+                               'Buses',
+                               'Seaports',
+                               'Ferries',
+                               'Cruises',
+                               'Visas'), collapse = ', '))
+
+Compliance = c('compliance',
+               'This variable documents degree to which a policy must be complied with and can take on one or more of the following values:',
+               paste(c('Mandatory with Legal Penalties',
+                       'Mandatory with Fines',
+                       'Mandatory with Excpetions',
+                       'Recommended/Voluntary'), collapse =', '))
+
+
+Enforcer = c('enforcer', 'This variable documents the entity enforcing a policy and can take on one or more of the following values:',
+             paste0(c('National Government',
+                      'Ministry/Department of Health',
+                      'Military',
+                      'Provincial/State Government',
+                      'Municipal/City Government',
+                      'Police',
+                      'Other'), collapse =', '))
+
+
+date_announced = c('date_announced', 'This variable documents the date when a policy was announced, it takes on the following format:', 'Month-Day-Year')
+
+date_start = c('date_start', 'This variable documents the date when a policy is implemented, it takes on the following format:', 'Month-Day-Year')
+
+date_end = c('date_end', 'This variable documents the date when a policy is slated to end, where applicable, it takes on the following format:', 'Month-Day-Year')
+
+ 
+varDf = rbind(`Record ID`,
+              `Policy ID` ,
+            `Event Description`,
+            Type ,
+            Country,
+            Compliance ,
+            Enforcer ,
+            date_announced,
+            date_start,
+            date_end,
+            `Target Geographic Level`,
+            `Target Who What` ,
+            `Target Direction`,
+            `Travel Mechanism`) %>% 
+            data.frame()
+
+names(varDf) = c('Variable Name', 'Description', "Values") 
+row.names(varDf) = NULL
+
+varDf%>% 
+  knitr::kable("latex",booktabs=T, longtable = T,
+               caption="Description of Variables in CoronaNet Government Reponse Dataset") %>%
+  kable_styling(latex_options = c("striped", "hold_position", "condensed"))%>% 
+   kable_styling(fixed_thead = T)%>% 
+   kable_styling(font_size = 10 )%>% 
+  column_spec(1,width="3.5cm", bold = TRUE) %>% 
+  column_spec(2,width="5cm")%>%
+  column_spec(3,width="8.5cm") %>%
+  row_spec(0,bold=TRUE) %>% 
+  pack_rows("Monadic Variables", 4, 10, label_row_css = "background-color: #666; color: #fff;") %>%
+  pack_rows("Dyadic Variables",11, 14, label_row_css = "background-color: #666; color: #fff;") %>%
+footnote(general = "Variables in the dataset not listed above include: record_date (when the record entered into our data), link (a link to at least one source for the policy), init_country_level (whether a policy came from a national level or sub-national unit)",
+         symbol = "The variables which document the exact geographical targets in the dataset are as follows: target_region (documents targeted regional grouping, e.g. Schengen region), target_country (documents targeted country), target_province (documents targeted province/state)",threeparttable = T,fixed_small_size = TRUE,footnote_as_chunk = T) 
+
+
+```
+
+
+There is a unique `record_id` for the following unit of analysis: `country` - `date_announced` - `type`.^[Note, this is the unit of analysis provided in the wide version of our dataset. The long verision of the dataset, labeled as file name: XXX, is organized by `country` - `target_country`- `date_announced` - `type`.] Of the `r length(unique(clean_data$record_id))` such events in the dataset, we have identified `r length(unique(clean_data$record_id[clean_data$entry_type %in% c("1","New Entry")]))` unique events. That is, some events in the database are updates or changes to existing policies. We link such events overtime using a unique ID (`policy_id`). An event counts as an update if it deals with a change in either the:
 
 1. Time duration or^[E.g. A country lengthens its quarantine to 28 days from 14 days.]
 2. Strength of an existing policy in terms of either:
@@ -119,103 +252,7 @@ Here we present some descriptive statistics to illustrate the type of data that 
    b. compliance rules for the policy^[E.g The quarantine used to be voluntary but now its mandatory] 
    c. who the policy applies towards^[E.g. The quarantine used to apply to people of all ages and now it only applies to the elderly.]
 
-A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g. policy type, targeted country.
-
-```{r table2, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
-
-
-`Type` = c('This variable documents the policy action initiated. It can take on only one of the following values:',
-                  'Declaraction of Emergency',
-                  'Quarantine',
-                  'External Border Restrictions',
-                  'Internal Border Restrictions',
-                  'Restrictions of Mass Gatherings',
-                  'Closure of Schools',
-                  'Restriction of Non-Essential Government Services',
-                  'Restriction of Non-Essential Businesses',
-                  'Health Monitoring',
-                  'Health Testing',
-                  'Health Resource',
-                  'Public Awareness Campaigns',
-                  'New Task Force or Bureau')
-
-Country = c('This variable documents the country from which a policy initiates, where applicable, and can take on only one of the following values:',
-            'National',
-            'Provincial/State',
-            'Municipality/City',
-            'Other governmental unit')
-
-`Target Geographic Level` = c('This variable documents the geographical target of the policy. It can take on of the following variables (The exact geographical targets are also documented in other variables in the dataset):',
-                     'All countries',
-                     'One or more countries and one or more regional groupings',
-                     'One or more countries, but not all countries',
-                     'One or more regional groupings',
-                     'A geographical or administrative unit within a country')
-
-`Target Who What` = c('This variable documents the human or material targets of a policy, where applicable, and can take on only one of the following values:',
-                      'All (Travelers + Residents)',
-                      'All Travelers (Citizen Travelers + Foreign Travelers)',
-                      'Citizen Travelers',
-                      'Foreign Travelers',
-                      'All Residents (Citizen Residents + Foreign Residents)',
-                      'Citizen Residents',
-                      'Foreign Residents',
-                      'All Foreign Nationals',
-                      'All Citizens',
-                      'Health Staff',
-                      'Health-related Supplies' )
-
-`Target Direction` = c('This variable documents the direction of travel a policy targets, where applicable, and can take on only one of the following values:',
-                       'Inbound', 
-                       'Outbound',
-                       'Inbound/Outbound')
-
-`Travel Mechanism` = c('This variable documents the mode of travel a policy targets, where applicable, and can take on one or more of the following values:',
-                       'All Mechansims (except visa restrictions)',
-                       'Flights',
-                       'Land Border',
-                       'Trains',
-                       'Buses',
-                       'Seaports',
-                       'Ferries',
-                       'Cruises',
-                       'Visas')
-
-Compliance = c('This variable documents degree to which a policy must be complied with and can take on one or more of the following values:',
-'Mandatory with Legal Penalties',
-               'Mandatory with Fines',
-               'Mandatory with Excpetions',
-               'Recommended/Voluntary')
-
-Enforcer = c('This variable documents the entity enforcing a policy and can take on one or more of the following values:',
-            'National Government',
-             'Ministry/Department of Health',
-             'Military',
-             'Provincial/State Government',
-             'Municipal/City Government',
-             'Police',
-              'Other')
-
-Date = c('The following are separate variables in the dataset which document when a policy is announced, starts and ends repsectively: ', 'Date Announced', 'Date Starts', 'Date Ends')
-varDf = list(`Type`, 
-             Country, 
-             `Target Geographic Level` , 
-             `Target Who What`, 
-             `Target Direction`, 
-             `Travel Mechanism` ,
-             Compliance,
-             Enforcer,
-             Date)
-
-attributes(varDf) = list(names = names(varDf),
-                         row.names=1:max(unlist(lapply(varDf, length))), class='data.frame')
-
-varDf
- # output the table in a format good for HTML/PDF/docx conversion
-```
-
-
-Table \@ref(tab:desctab) shows the number of records for each policy type, the number of unique countries for each policy type, and also how many countries are targeted in total by each policy type.^[Future versions of the dataset will also include more detailed information for some policy categories. For example, among other things, we are also collecting information on the types of 'health resources' (e.g. masks, hospitals, doctors ) and types of 'restrictions of non-essential business activities' (e.g. retail businesses, restaurants/bars). Where applicable, we are also collecting information on the volume of a certain policy (e.g. the number of masks, hospitals and doctors.). We will also be including a variable which documents which institution is responsible for enforcing a certain policy (e.g. national government, military).] We note that these are cumulative totals for these different categories in the data.
+A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g. policy type, targeted country. Table \@ref(tab:desctab) shows the number of records for each policy type, the number of unique countries for each policy type, and also how many countries are targeted in total by each policy type. We note that these are cumulative totals for these different categories in the data.
 
 ```{r desctab}
 
@@ -227,6 +264,7 @@ clean_data %>%
             `% With Mandatory Enforcement`=round(mean(grepl(x=compliance,pattern="Mandatory")*100,na.rm=T),0)) %>% 
   select(Type="type",everything()) %>% 
   filter(!is.na(Type)) %>% 
+  ungroup()%>%
   knitr::kable("latex",booktabs=T,
                caption="Descriptive Information about the CoronaNet Government Response Dataset") %>% 
   kable_styling(latex_options = c("striped", "hold_position")) %>% 
@@ -245,7 +283,7 @@ clean_data %>%
   summarize(Policies=length(unique(record_id))) %>% 
   arrange(type,date_announced) %>% 
   mutate(Policies=cumsum(Policies)) %>% 
-  ungroup %>% 
+  ungroup() %>% 
         mutate( type=recode(type,
                      `Public Awareness Campaigns`="Public\nAwareness\nCampaigns",
                      `External Border Restrictions`="External\nBorder\nRestrictions",
@@ -269,9 +307,9 @@ clean_data %>%
 ```
 
 
-We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g. 'external border restrictions', 'quarantine'). For example, in Figure \@ref(fig:biofabric_europe), we map a network of bans on inbound flights to European countries initiated by European countries^[In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican] as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied.^[[See @longabaugh2012 for more information on how to interpret this plot. ]] For instance, the figure shows that by March 15, 2020, the governments of Poland and San Marino had banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira, Portugal had banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland.
+We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g. 'external border restrictions', 'quarantine'). For example, in Figure \@ref(fig:biofabric_europe), we map a network of bans on inbound flights to European countries initiated by European countries^[In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican] as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied.^[[See @longabaugh2012 for more information on how to interpret this plot. ]] The figure shows that by March 15, 2020, the governments of Poland and San Marino had banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira, Portugal had banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland. Meanwhile, according to our data, no other countries in Europe had banned inbound flights from other countries. 
 
-```{r biofabric_europe,fig.cap="Network Map of Bans on Inbound Flights by European Countries as of March 15, 2020"}
+```{r biofabric_europe, fig.cap="Network Map of Bans on Inbound Flights by European Countries as of March 15, 2020"}
 
 # add region variable
 clean_data$region = regions_df$regions[match(clean_data$init_country, regions_df$country)] 
@@ -316,7 +354,7 @@ plotBioGraph = function(regionName,
     sub_data = sub_data %>% filter(target_who_what %in% c("All (Travelers + Residents)", "All Travelers (Citizen Travelers + Foreign Travelers )") )
     }
   
-  ## Note, the following entry is not 'wrong', but is not sweeping travel bans
+  ## Note, the following entry is not 'wrong', but it is not a sweeping travel ban
   # Macau, not travel ban but health declaration doesn't fit into existing categories
   sub_data = sub_data %>% filter(record_id %!in% c(4638284 ))
   
@@ -381,17 +419,18 @@ plotBioGraph = function(regionName,
 }
 
 plotBioGraph("Europe", "External Border Restrictions", "2020-03-15")
-
 ```
+
+
 <!---
 ```{r biofabric_asia,fig.cap="Network Map of Bans on Inbound Flights by Asian Countries as of March 15, 2020"}
 plotBioGraph("Asia", "External Border Restrictions", "2020-03-15")
 ```
 -->
 
-# Government Response Severity Index
+# Government Policy Activity Index
 
-In this section we briefly present our new index for tracking the relative intensity of government policies targeting COVID-19 across countries and over time. The model is a version of item-response theory that incorporates over-time trends [@kubinec2019ideal], permitting inference on how a latent construct, in this case policy stringency, is responding to changes in the pandemic. To fit the model, the different policy types shown in Table \@ref(tab:desctab) were coded dichotomously, with a value of 1 if enforcement of the policy was mandatory, and 0 otherwise. As a result, the model estimates whether mandatory policies for each category exist for each country on each day. The country-level stringency score is allowed to vary over time in a random-walk process with a country-specific variance parameter (i.e., to incorporate heteroskedasticity). 
+In this section we briefly present our new index for tracking how relatively active governments are in addressing COVID-19 across countries and over time. The model is a version of item-response theory that incorporates over-time trends [@kubinec2019ideal], permitting inference on how a latent construct, in this case policy stringency, is responding to changes in the pandemic. To fit the model, the different policy types shown in Table \@ref(tab:desctab) were coded dichotomously, with a value of 1 if enforcement of the policy was mandatory, and 0 otherwise. As a result, the model estimates whether mandatory policies for each category exist for each country on each day. The country-level stringency score is allowed to vary over time in a random-walk process with a country-specific variance parameter (i.e., to incorporate heteroskedasticity). 
 
 The advantage of employing a statistical model, rather than simply summing across policies, is that the index ends up as a weighted average, where the weights are derived from the probability that a certain policy is enforced. In other words, while many countries set up task forces, relatively few imposed curfews at an early stage. As a result, the model adjusts for these distinctions, producing a score that aggregates across the patterns in the data. Because over-time trends are explicitly included and jointly estimated with the latent parameters, the model will implicitly up-weight countries that took harsher measures earlier.
 
@@ -432,7 +471,9 @@ get_est_sum <- get_est %>%
             high_est=quantile(estimate,.95),
             low_est=quantile(estimate,.05)) %>% 
   group_by(date_announced) %>% 
-  mutate(`Country Rank`=rank(med_est))
+  mutate(`Country Rank`=rank(med_est))%>%
+  ungroup()%>%
+  ungroup()
 
 list_countries <- c("United States",
                     "United Kingdom",
@@ -581,11 +622,11 @@ ggplot(slack %>% filter(var %in% c("Project members present on Slack", "Project 
 
 ## Post-Data Collection Validation Checks
 
-Recent work in political science has demonstrated the reliability of internet-based crowdsourcing efforts to construct large-N datasets [@benoitetal2016]. In addition to the steps taken above in the data collection process, we also implement the following processes to validate the quality of the dataset:
+Lastly, we take the following steps in order to validate the quality of the resulting data collected:
 
-1. Double-coding. We randomly sample 10% of the dataset using the source of the data (e.g. newspaper article, government press release) as our unit of randomization. We use the source as our unit of randomization because one source may detail many different policy types. We then provide this source to a fully independent RA and ask her to code for the government policy based on ranomdly selected sources in a separate, but identical, survey instrument. If the source is in a language the RA cannot read, then a new source is drawn. Following this strategy of double-coding, we are able to provide a direct assessment of the reliability of our measures and report cross-coder reliability scores.
+1. Double-coding. We randomly sample 10% of the dataset using the source of the data (e.g. newspaper article, government press release) as our unit of randomization. We use the source as our unit of randomization because one source may detail many different policy types. We then provide this source to a fully independent RA and ask her to code for the government policy based on ranomdly selected sources in a separate, but virtually identical, survey instrument. If the source is in a language the RA cannot read, then a new source is drawn. Following this strategy of double-coding, we are able to provide a direct assessment of the reliability of our measures and report cross-coder reliability scores.
 
-2. Evaluation. We then check for discrepancies between the originally coded data and the second coding of the data. If there are no discrepancies, then we consider the data valid. If a discrepancy exists, a third RA or PI evaluates between the first and second entries to determine whether the first, second, or a combination of both is most accurate. Reconciled policies are then entered into the dataset as a correction for full transparency. If an RA was found to have made a coding mistake, then we sample 3 entries which correspond to the type of mistake made (e.g. if the RA incorrectly codes an 'External Border Restriction' as a 'Quarantine', we sample 3 entries where the RA has coded a policy as being about a 'Quarantine') and randomly sample 3 more entries, to ascertain whether the mistake was systematic or not. If systematic errors are found, entries coded by that individual will be entirely recoded by a new RA.
+2. Evaluation. We then check for discrepancies between the originally coded data and the second coding of the data in terms of the content of what is coded. If there are no discrepancies, then we consider the data valid. If an RA was found to have made a mistake, then we sample 3 entries which correspond to the type of mistake made (e.g. if the RA incorrectly codes an 'External Border Restriction' as a 'Quarantine', we sample 3 entries where the RA has coded a policy as being about a 'Quarantine') and randomly sample 3 more entries, to ascertain whether the mistake was systematic in nature or not.
 
 # Conclusion
 
