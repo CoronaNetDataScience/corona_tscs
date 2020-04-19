@@ -106,7 +106,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-As the COVID-19 pandemic spreads around the world, governments have implemented a broad set of policies to limit the spread of the pandemic. In this paper we present an initial release of a large hand-coded dataset of more than 4,500 separate policy announcements from governments around the world. This data is being made publicly available, in combination with other data that we have collected (including COVID-19 tests, cases, and deaths) as well as a number of country-level covariates. Due to the speed of the COVID-19 outbreak, we will be releasing this data on a daily basis with a 5-day lag for record validity checking. In a truly global effort, our team is comprised of more than 190 research assistants across 18 time zones and makes use of cloud-based managerial and data collection technology in addition to machine learning coding of news sources. We analyze the dataset with a Bayesian time-varying ideal point model showing the quick acceleration of more harsh policies across countries beginning in mid-March and continuing to the present. While some relatively low-cost policies like task forces and health monitoring began early, countries generally adopted more harsh measures within a narrow time window, suggesting strong policy diffusion effects.\footnote{We thank the very large number of research assistants who coded this data. Their names and affiliations are listed in the appendix. We also thank the Chair of International Relations at the Hochschule für Politik at the Technical University of Munich (TUM) for their support of this project. For the most current, up to date version of the dataset, please visit \url{http://coronanet-project.org} and also our Github page at \url{https://github.com/saudiwin/corona_tscs}. For more information on the exact variables collected, please see our publicly available codebook \href{https://docs.google.com/document/d/1zvNMpwj0onFvUZ_gLl4RRjqS-clbHv3TIX6EOHofsME/edit?usp=sharing}{at this link}.}
+As the COVID-19 pandemic spreads around the world, governments have implemented a broad set of policies to limit the spread of the pandemic. In this paper we present an initial release of a large hand-coded dataset of more than 6,500 separate policy announcements from governments around the world. This data is being made publicly available, in combination with other data that we have collected (including COVID-19 tests, cases, and deaths) as well as a number of country-level covariates. Due to the speed of the COVID-19 outbreak, we will be releasing this data on a daily basis with a 5-day lag for record validity checking. In a truly global effort, our team is comprised of more than 190 research assistants across 18 time zones and makes use of cloud-based managerial and data collection technology in addition to machine learning coding of news sources. We analyze the dataset with a Bayesian time-varying ideal point model showing the quick acceleration of more harsh policies across countries beginning in mid-March and continuing to the present. While some relatively low-cost policies like task forces and health monitoring began early, countries generally adopted more harsh measures within a narrow time window, suggesting strong policy diffusion effects.\footnote{We thank the very large number of research assistants who coded this data. Their names and affiliations are listed in the appendix. We also thank the Chair of International Relations at the Hochschule für Politik at the Technical University of Munich (TUM) for their support of this project. For the most current, up to date version of the dataset, please visit \url{http://coronanet-project.org} and also our Github page at \url{https://github.com/saudiwin/corona_tscs}. For more information on the exact variables collected, please see our publicly available codebook \href{https://docs.google.com/document/d/1zvNMpwj0onFvUZ_gLl4RRjqS-clbHv3TIX6EOHofsME/edit?usp=sharing}{at this link}.}
 \end{abstract}
 
 \textsuperscript{1} Hochschule für Politik at the Technical University of Munich (TUM) and TUM School of Governance\\
@@ -118,7 +118,7 @@ As the COVID-19 pandemic spreads around the world, governments have implemented 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-Governments all around the world have implemented an astonishing variety of policies in reaction to the COVID-19 pandemic. Policy makers and researchers however, have to date lacked access to the quality, up-to-date data they need for conducting rigorous analyses of whether, how, or to what degree these fast changing policies have worked in brunting the health, political and economic effects of the coronavirus. To address this concern, in this paper we present the CoronaNet COVID-19 Government Response Database, which provides fine-grained, dyadic data on policy actions taken by governments across the world since the Chinese government reported the COVID-19 outbreak on December 31, 2019. The dataset presented here covers all policy actions for 193 of countries\footnote{Note, we will include additional countries in future versions of the dataset.} up until 2020-04-13, for a total of 6802 events.
+Governments all around the world have implemented an astonishing variety of policies in reaction to the COVID-19 pandemic. Policy makers and researchers however, have to date lacked access to the quality, up-to-date data they need for conducting rigorous analyses of whether, how, or to what degree these fast changing policies have worked in brunting the health, political and economic effects of the coronavirus. To address this concern, in this paper we present the CoronaNet COVID-19 Government Response Database, which provides fine-grained, dyadic data on policy actions taken by governments across the world since the Chinese government reported the COVID-19 outbreak on December 31, 2019. The dataset presented here covers all policy actions for 193 of countries\footnote{Note, we will include additional countries in future versions of the dataset.} up until 2020-04-14, for a total of 6816 events.
 
 With the help of a team of over 190 research assistants in 18 time zones, we are releasing the data on a daily basis with a five-day lag between data collection and release to provide validation. We have further implemented ongoing evaluation of coding efforts on random samples of the data to ensure the best possible quality given the considerable time constraints. More specifically, the CoronaNet database collects data on government policy actions taken against the coronavirus across the following dimensions on a daily basis:
 
@@ -193,7 +193,7 @@ policy\_id & A unique identifier for each policy record as it is updated over ti
 \end{ThreePartTable}
 \endgroup{}
 
-There is a unique \texttt{record\_id} for the following unit of analysis: \texttt{country} - \texttt{date\_announced} - \texttt{type}.\footnote{Note, this is the unit of analysis provided in the wide version of our dataset. The long verision of the dataset, labeled as file name: XXX, is organized by \texttt{country} - \texttt{target\_country}- \texttt{date\_announced} - \texttt{type}.} Of the 6802 such events in the dataset, we have identified 5797 unique events. That is, some events in the database are updates or changes to existing policies. We link such events over time using a unique ID (\texttt{policy\_id}). An event counts as an update if it deals with a change in either the:
+There is a unique \texttt{record\_id} for the following unit of analysis: \texttt{country} - \texttt{date\_announced} - \texttt{type}.\footnote{Note, this is the unit of analysis provided in the wide version of our dataset. The long verision of the dataset, labeled as file name: XXX, is organized by \texttt{country} - \texttt{target\_country}- \texttt{date\_announced} - \texttt{type}.} Of the 6816 such events in the dataset, we have identified 5811 unique events. That is, some events in the database are updates or changes to existing policies. We link such events over time using a unique ID (\texttt{policy\_id}). An event counts as an update if it deals with a change in either the:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -220,7 +220,7 @@ A policy counts as a new entry and not an update if it deals with a change in an
 \hypertarget{dataset-descriptive-statistics}{%
 \subsection{Dataset Descriptive Statistics}\label{dataset-descriptive-statistics}}
 
-Here we present some descritptive statistics for key variables available from the CoronaNet database. Table \ref{tab:desctab} shows the number of records for each policy type, the number of unique countries for each policy type as well as how many countries are targeted in total by each policy type. We note that these are cumulative totals for these different categories in the data. According to the CoronaNet data, the most common government policy implemented in reaction to COVID-19 is external border restrictions, that is policies that seek to limit access to ports of entry or exit across different governmental jurisdictions. We find that 178 countries have implemented 4061 such policies since December 31, 2019. Meanwhile, the second policy that most countries, by our count 157, have implemented is `Closure of Schools', of which we document 1250 such policies. This is followed closely by the 145 countries that have instituted `Quarantine/Lockdown' policies, of which we document 2842. However we note that a strict comparison of policy types by this metric is not perfect, given that, for example, there may be more opportunities to impose external border restrictions (given the number of countries against which one can restrict travel access) as opposed to closing schools.
+Here we present some descritptive statistics for key variables available from the CoronaNet database. Table \ref{tab:desctab} shows the number of records for each policy type, the number of unique countries for each policy type as well as how many countries are targeted in total by each policy type. We note that these are cumulative totals for these different categories in the data. According to the CoronaNet data, the most common government policy implemented in reaction to COVID-19 is external border restrictions, that is policies that seek to limit access to ports of entry or exit across different governmental jurisdictions. We find that 178 countries have implemented 4061 such policies since December 31, 2019. Meanwhile, the second policy that most countries, by our count 157, have implemented is `Closure of Schools', of which we document 1250 such policies. This is followed closely by the 145 countries that have instituted `Quarantine/Lockdown' policies, of which we document 2845. However we note that a strict comparison of policy types by this metric is not perfect, given that, for example, there may be more opportunities to impose external border restrictions (given the number of countries against which one can restrict travel access) as opposed to closing schools.
 
 \begin{table}[!h]
 
@@ -234,16 +234,16 @@ Type & Total Number of Policies & Number of Countries & Number of Targeted Count
 Curfew & 177 & 88 & 21 & 97\\
 \rowcolor{gray!6}  Declaration of Emergency & 320 & 109 & 1 & 82\\
 External Border Restrictions & 4061 & 178 & 201 & 90\\
-\rowcolor{gray!6}  Health Monitoring & 607 & 99 & 198 & 75\\
+\rowcolor{gray!6}  Health Monitoring & 610 & 100 & 198 & 75\\
 \addlinespace
-Health Resources & 1346 & 128 & 125 & 54\\
+Health Resources & 1358 & 130 & 127 & 54\\
 \rowcolor{gray!6}  Health Testing & 253 & 76 & 100 & 77\\
-Internal Border Restrictions & 256 & 105 & 95 & 87\\
+Internal Border Restrictions & 259 & 105 & 95 & 87\\
 \rowcolor{gray!6}  New Task Force or Bureau & 218 & 90 & 1 & 49\\
-Other Policy Not Listed Above & 559 & 119 & 1 & 61\\
+Other Policy Not Listed Above & 560 & 120 & 1 & 61\\
 \addlinespace
 \rowcolor{gray!6}  Public Awareness Campaigns & 396 & 115 & 1 & 24\\
-Quarantine/Lockdown & 2842 & 145 & 202 & 80\\
+Quarantine/Lockdown & 2845 & 145 & 202 & 80\\
 \rowcolor{gray!6}  Restriction of Non-Essential Businesses & 1247 & 125 & 1 & 92\\
 Restriction of Non-Essential Government Services & 207 & 84 & 1 & 83\\
 \rowcolor{gray!6}  Restrictions of Mass Gatherings & 522 & 149 & 2 & 86\\
@@ -289,7 +289,7 @@ Finally, we note in Figure \ref{fig:plotindex} the strong evidence of policy dif
 
 As researchers learn more about the various health, economic, and social effects of the coronavirus pandemic, it is crucial that they have access to data that is reliable, valid, and timely (to the greatest extent possible). We have adopted a data collection methodology that we believe optimizes over all three of these constraints.
 
-To collect the data, we recruited more than 190 research assistants (RAs) from colleges and universities around the world, representing 18 out of the 24 time zones.\footnote{For more information on the individual RAs, please visit \url{http://coronanet-project.org/}} Data collection started on March 28, 2020 and has proceeded very rapidly, reaching 6802 records as of the date of this article. Each RA is responsible for tracking government policy actions for at least one country. RAs were allocated depending on their background, language skills and expressed interest in certain countries.\footnote{Note depending on the level of policy coordination at the national level, certain countries were assigned multiple RAs, e.g.~the United States, Germany, or France.}
+To collect the data, we recruited more than 190 research assistants (RAs) from colleges and universities around the world, representing 18 out of the 24 time zones.\footnote{For more information on the individual RAs, please visit \url{http://coronanet-project.org/}} Large social scientific datasets typically rely on experts, coders, or crowd-sourcing to input data. The literature has shown that common coding tasks can be completed via crowd-sourcing (Benoit et al. 2016; Sumner, Farris, and Holman 2019), but that there also limitations to the wisdom of crowds when specific contextual or subject knowledge is required (Marquardt et al. 2017). We decided to train current students to code our entries, leveraging the benefits of wide-spread recrutiment and a diverse pool of country-specific knowledge from across the globe. Data collection started on March 28, 2020 and has proceeded rapidly, reaching 6816 records as of the date of this article. Each RA is responsible for tracking government policy actions for at least one country. RAs were allocated depending on their background, language skills and expressed interest in certain countries (Horn 2019).\footnote{Note depending on the level of policy coordination at the national level, certain countries were assigned multiple RAs, e.g.~the United States, Germany, or France.}
 
 We have also partnered with the machine learning company Jataware to automate the collection of more than 200,000 news articles from around the world related to COVID-19.\footnote{We thank Brandon Rose and Jataware for making the news database available to this project.} Jataware employs a natural language processing (NLP) classifier using Bidirectional Encoder Representations from Transformers (BERT) to detect whether a given article is indicative of a governmental policy intervention related to COVID-19. They then apply a secondary NLP classifier to categorize the type of policy intervention (e.g.~``state of emergency'', ``shelter-in-place'', ``quarantine'', ``travel restrictions'', etc). Next, Jataware extracts the geospatial and temporal extent of the policy intervention (e.g.~``Washington DC'' and ``March 15, 2020'') whenever possible. The resulting list of news sources is then provided to our RAs for manual coding and further data validation.
 
@@ -317,7 +317,7 @@ There are many additional benefits of using a survey instrument for data collect
 \item
   \emph{Reduction of missing data.} We are able to reduce the amount of missing data in the dataset by using the forced response option in Qualtrics. Where there is truly missing data due, there is a text entry at the end of the survey where RAs can describe what difficulties they encountered in collecting information for a particular policy event.
 \item
-  \emph{Reliability of the responses.} We increase the reliability of the documentation for each policy by embedding descriptions of different possible responses within the survey. For example, in the survey question where RAs are asked to identify the policy type (`type' variable, see Codebook), the survey question includes pop-up buttons which allow RAs to easily get descriptions and examples of each possible policy type. Such pop-up buttons were also made available for the survey questions which code for the people or materials a policy was targed at (`target\_who\_what') and whether the policy was inbound, outbound or both (`target\_direction'). Embedding such information in the dataset both clarifies the distinction between different answer choices and increases the efficiency of the policy documentation process (as RAs are not obliged to refer back and forth from the survey to the codebook).
+  \emph{Reliability of the responses.} We increase the reliability of the documentation for each policy by embedding descriptions of different possible responses within the survey. For example, in the survey question where RAs are asked to identify the policy type (\texttt{type} variable, see Codebook), the survey question includes pop-up buttons which allow RAs to easily get descriptions and examples of each possible policy type. Such pop-up buttons were also made available for the survey questions which code for the people or materials a policy was targed at (\texttt{target\_who\_what}) and whether the policy was inbound, outbound or both (\texttt{target\_direction}). Embedding such information in the dataset both clarifies the distinction between different answer choices and increases the efficiency of the policy documentation process (as RAs are not obliged to refer back and forth from the survey to the codebook).
 \item
   \emph{Linking observations.} The use of a survey instrument allows us to easily link policy events together over time should there be updates to existing policies. Once coded, each policy is given a unique Record ID, which RAs can easily look up, reference and link to if they need to update a particular policy.
 \end{enumerate}
@@ -363,15 +363,19 @@ Once an RA joins the project, they can pose their questions on a CoronaNet Slack
 \hypertarget{post-data-collection-validation-checks}{%
 \subsection{Post-Data Collection Validation Checks}\label{post-data-collection-validation-checks}}
 
-Recent work in political science has demonstrated the reliability of internet-based crowdsourcing efforts to construct large-N datasets (Benoit et al. 2016). In addition to the steps taken above in the data collection process, we also implement the following processes to validate the quality of the dataset:
+In addition to the steps taken above in the data collection process, we also implement the following processes to validate the quality of the dataset:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Double-coding. We randomly sample 10\% of the dataset using the source of the data (e.g.~newspaper article, government press release) as our unit of randomization. We use the source as our unit of randomization because one source may detail many different policy types. We then provide this source to a fully independent RA and ask her to code for the government policy based on ranomdly selected sources in a separate, but identical, survey instrument. If the source is in a language the RA cannot read, then a new source is drawn. Following this strategy of double-coding, we are able to provide a direct assessment of the reliability of our measures and report cross-coder reliability scores.
+  Cleaning. Before validation, we use a team of RAs to check the raw data for logical inconsistencies and typographical errors.
 \item
-  Evaluation. We then check for discrepancies between the originally coded data and the second coding of the data. If there are no discrepancies, then we consider the data valid. If a discrepancy exists, a third RA or PI evaluates between the first and second entries to determine whether the first, second, or a combination of both is most accurate. Reconciled policies are then entered into the dataset as a correction for full transparency. If an RA was found to have made a coding mistake, then we sample 3 entries which correspond to the type of mistake made (e.g.~if the RA incorrectly codes an `External Border Restriction' as a `Quarantine', we sample 3 entries where the RA has coded a policy as being about a `Quarantine') and randomly sample 3 more entries, to ascertain whether the mistake was systematic or not. If systematic errors are found, entries coded by that individual will be entirely recoded by a new RA.
+  Multiple Coding for Validation. Others have shown that the random allocation of tasks and the validation of labels by more than one coder are among the best ways to improve the quality of a dataset (Sheng, Provost, and Ipeirotis 2008; Amazon.com 2011). We randomly sample 10\% of the dataset using the source of the data (e.g.~newspaper article, government press release) as our unit of randomization. We use the source as our unit of randomization because one source may detail many different policy types. We then provide this source to a fully independent RA and ask her to code for the government policy contained in the sampled source in a separate, but identical, survey instrument. If the source is in a language the RA cannot read, then a new source is drawn. The RA then codes all policies in the given source. This practice is repeated a third time by a third independent coder. Given the fact that each source in the sample is coded three times, we can assess the reliability of our measures and report the reliability score of each coder.
+\item
+  Evaluation and Reconciliation. We then check for discrepancies between the originally coded data and the second and third coding of the data through two primary methods. First, we use majority-voting to establish a consensus for policy labels. Using the majority label as an estimate of the ``hidden true label'' is a common method to address classification problems (Raykar et al. 2009). One issue with this approach is that it assumes that all coders are equally competent (Raykar et al. 2010). This criticism is generally levied at data creation with crowd-sourced laborers. We mitigate this problem by training our RAs in the data collection process and prioritizing RA country-knowledge and language skills, and therefore ensuring a more equal baseline for RA quality. We provide RA ID codes that will allow users to evaluate coder accuracy.
 \end{enumerate}
+
+If the majority achieves consensus, then we consider the entry valid. If a discrepancy exists, a fourth RA or PI evaluates between the three entries to determine whether one, some, a combination of all three is most accurate. Reconciled policies are then entered into the dataset as a correction for full transparency. If an RA was found to have made a coding mistake, then we sample six of their previous entries: 3 entries which correspond to the type of mistake made\footnote{e.g.~if the RA incorrectly codes an `External Border Restriction' as a `Quarantine', we sample 3 entries where the RA has coded a policy as being about a `Quarantine')} and randomly sample 3 more entries to ascertain whether the mistake was systematic or not. If systematic errors are found, entries coded by that individual will be entirely recoded by a new RA.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
@@ -649,6 +653,9 @@ Xian Jin & Technical University of Munich & China & \\
 \addcontentsline{toc}{section}{References}
 
 \hypertarget{refs}{}
+\leavevmode\hypertarget{ref-MTurk2011}{}%
+Amazon.com, Inc. 2011. ``Amazon Mechanical Turk Requester Best Practices Guide.'' User Guide. Amazon.com, Inc. \url{https://mturkpublic.s3.amazonaws.com/docs/MTURK_BP.pdf}.
+
 \leavevmode\hypertarget{ref-benoitetal2016}{}%
 Benoit, Kenneth, Drew Conway, Benjamin E. Lauderdale, Michael Laver, and Slava Mikhaylov. 2016. ``Crowd-Sourced Text Analysis: Reproduceable and Agile Production of Political Data.'' \emph{American Political Science Review} 110 (2): 278--95.
 
@@ -673,6 +680,9 @@ Galea, Sandro, David Vlahov, Heidi Resnick, Jennifer Ahern, Ezra Susser, Joel Go
 \leavevmode\hypertarget{ref-gifford2014environmental}{}%
 Gifford, Robert. 2014. ``Environmental Psychology Matters.'' \emph{Annual Review of Psychology} 65: 541--79.
 
+\leavevmode\hypertarget{ref-Horn2019}{}%
+Horn, Alexander. 2019. ``Can the Online Crowd Match Real Expert Judgments? How Task Complexity and Coder Location Affect the Validity of Crowd-Coded Data.'' \emph{European Journal of Political Research} 58: 236--47.
+
 \leavevmode\hypertarget{ref-kilian2009not}{}%
 Kilian, Lutz. 2009. ``Not All Oil Price Shocks Are Alike: Disentangling Demand and Supply Shocks in the Crude Oil Market.'' \emph{American Economic Review} 99 (3): 1053--69.
 
@@ -688,6 +698,9 @@ Kubinec, Robert. 2019. ``Generalized Ideal Point Models for Time-Varying and Mis
 \leavevmode\hypertarget{ref-longabaugh2012}{}%
 Longabaugh, William JR. 2012. ``Combing the Hairball with Biofabric: A New Approach for Visualization of Large Networks.'' \emph{BMC Bioinformatics} 13 (1): 275.
 
+\leavevmode\hypertarget{ref-marquardtetal2017}{}%
+Marquardt, Kyle L., Daniel Pemstein, Constanza Sanhueza Petrarca, Brigitte Seim, Steven Lloyd Wilson, Michael Bernhard, Michael Coppedge, and Staffan I. Lindberg. 2017. ``Experts, Coders, and Crowds: An Analysis of Substitutability.'' Working Paper. V-Dem Working Paper 2017:53. \url{http://dx.doi.org/10.2139/ssrn.3046462}.
+
 \leavevmode\hypertarget{ref-noy2009macroeconomic}{}%
 Noy, Ilan. 2009. ``The Macroeconomic Consequences of Disasters.'' \emph{Journal of Development Economics} 88 (2): 221--31.
 
@@ -699,6 +712,18 @@ Pierson, Paul. 2000. ``Increasing Returns, Path Dependence, and the Study of Pol
 
 \leavevmode\hypertarget{ref-przeworski1999democracy}{}%
 Przeworski, Adam, Susan C Stokes, and Bernard Manin. 1999. \emph{Democracy, Accountability, and Representation}. Vol. 2. Cambridge University Press.
+
+\leavevmode\hypertarget{ref-Raykar2009}{}%
+Raykar, Vikas C., Shipeng Yu, Linda H. Zhao, Anna Jerebko, Charles Florin, Gerardo Hermosillo Valadez, Luca Bogoni, and Linda Moy. 2009. ``Supervised Learning from Multiple Experts: Whom to Trust When Everyone Lies a Bit.'' \url{https://doi.org/10.1145/1553374.1553488}.
+
+\leavevmode\hypertarget{ref-Raykar2010}{}%
+Raykar, Vikas C., Shipeng Yu, Linda H. Zhao, Gerardo Hermosillo Valadez, Charles Florin, and Luca Bogoni, and Linda Moy. 2010. ``Learning from Crowds.'' \emph{Journal of Machine Learning Research} 11 (43): 1297--1322.
+
+\leavevmode\hypertarget{ref-Sheng2008}{}%
+Sheng, Victor S., Foster Provost, and Panagiotis G. Ipeirotis. 2008. ``Get Another Label? Improving Data Quality and Data Mining Using Multiple, Noisy Labelers.'' \url{https://dl.acm.org/doi/abs/10.1145/1401890.1401965}.
+
+\leavevmode\hypertarget{ref-sumneretal2019}{}%
+Sumner, Jane Lawrence, Emily M. Farris, and Mirya R. Holman. 2019. ``Crowdsourcing Reliable Local Data.'' \emph{Political Analysis} 28 (2): 244--62.
 
 \leavevmode\hypertarget{ref-svolik2012politics}{}%
 Svolik, Milan W. 2012. \emph{The Politics of Authoritarian Rule}. Cambridge University Press.
