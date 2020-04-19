@@ -302,22 +302,22 @@ Figure \@ref(fig:plotindex) shows the estimated index scores for the `r length(u
 Figure \@ref(fig:plotindex) shows the estimated index scores for the `r length(unique(clean_data$country))` countries in our dataset at present. Of course, a caveat with the index is that we may be missing some possible policy measures that have occurred due to the difficulty in finding them in published sources. However, there is still clear differentiation within the index in terms of when policies were imposed, with some countries starting to impose policies much earlier than others. Furthermore, there is a clear break about March 1st when countries began to impose more stringent policies across the world.
 
 ```{r plotindex,fig.cap="CoronaNet Time-Varying Index of National Policy Activity of Measures Opposing COVID-19 Pandemic"}
-# 
-# severity_fit <- readRDS("../data/severity_fit_collapse.rds")
-# 
-# all_lev <- as.character(unique(clean_data$init_country))
-# 
-# all_lev <- all_lev[all_lev!="Chad"]
-# 
-# get_est <- as.data.frame(severity_fit@stan_samples,"L_tp1") %>%
-#   mutate(iter=1:n()) %>%
-#   gather(key="parameter",value="estimate",-iter) %>%
-#   mutate(date_announced=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?[0-9]?0?")),
-#          country=as.numeric(str_extract(parameter,"[1-9][0-9]?[0-9]?0?(?=\\])")),
-#          country=factor(country,labels=levels(severity_fit@score_data@score_matrix$person_id)),
-#          date_announced=factor(date_announced,labels=as.character(sort(unique(severity_fit@score_data@score_matrix$time_id)))))
-# 
-# saveRDS(get_est,"../data/get_est.rds")
+
+severity_fit <- readRDS("../data/severity_fit_collapse.rds")
+
+all_lev <- as.character(unique(clean_data$init_country))
+
+all_lev <- all_lev[all_lev!="Chad"]
+
+get_est <- as.data.frame(severity_fit@stan_samples,"L_tp1") %>%
+  mutate(iter=1:n()) %>%
+  gather(key="parameter",value="estimate",-iter) %>%
+  mutate(date_announced=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?[0-9]?0?")),
+         country=as.numeric(str_extract(parameter,"[1-9][0-9]?[0-9]?0?(?=\\])")),
+         country=factor(country,labels=levels(severity_fit@score_data@score_matrix$person_id)),
+         date_announced=factor(date_announced,labels=as.character(sort(unique(severity_fit@score_data@score_matrix$time_id)))))
+
+saveRDS(get_est,"../data/get_est.rds")
 
 get_est <- readRDS("../data/get_est.rds")
   
