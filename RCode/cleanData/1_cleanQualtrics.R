@@ -88,6 +88,8 @@ qualtrics = read_survey('data/CoronaNet/coronanet_raw_latest.csv') %>%
                            `Update`="Update on Existing Entry (type in Record ID in text box) ")) %>% 
   filter(Progress>98)
 
+ 
+
 # text entry cleaning ----------------------------------
 ## do this first before filtering out bad records/recoding values so that all text values have diacritics removed from them
 ## !!! NOTE probably should do this for all text entries
@@ -157,19 +159,23 @@ qualtrics$policy_id = ifelse(
   qualtrics$record_id
 )
 
+qualtrics= qualtrics[-which(is.na(qualtrics$policy_id)),]
+ 
 # recode types
 # this is due to a recent bug with manually corrected/updated entries
 
 # check only for vars with missing
 
 miss_vars <- names(qualtrics)[sapply(qualtrics, function(c) any(is.na(c)))]
-
+ 
 qualtrics <- group_by(qualtrics,policy_id) %>% 
   arrange(policy_id,StartDate) %>% 
-  fill(miss_vars,.direction=c("down")) %>% 
+  fill(miss_vars,.direction=c("down"))%>% 
   group_by(correct_record_match) %>% 
   arrange(correct_record_match,StartDate) %>% 
-  fill(miss_vars,.direction="down")
+  fill(miss_vars,.direction="down")%>%
+  ungroup()
+ 
   
   # remove old entries
   #qualtrics = qualtrics %>% filter(!record_id %in% correction_record_ids)
@@ -185,7 +191,7 @@ qualtrics <- group_by(qualtrics,policy_id) %>%
                       !is.na(init_country))
 
   
-
+ 
 
 # rename variables ----------------------------------
 
@@ -262,7 +268,7 @@ qualtrics <- filter(qualtrics, !(grepl(x=init_country_level,
 # }
  
 # combining info on target countries --------------------
-
+qualtrics[which(qualtrics$target_country_sub != "" & qualtrics$target_country !=""), 'notes_update'] %>% data.frame()
 
 # double check to make sure 'target_country' is empty when 'target_country_sub' has a value
 if (length(qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'] %>% table()) == 0) {
@@ -276,6 +282,8 @@ if (length(qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'
   stop("Error: Problem with target_country recoding.")
 }
 
+qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'] %>% table()
+qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country'] %>% table()
 # double check to make sure 'target_country' is empty when 'all countries' is selected
 if (all (is.na(qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country']))) {
   qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country'] = "All countries"
@@ -296,7 +304,10 @@ source("RCode/validation/recode_records_countries.R")
 # remove records with duplicate provinces per record ID. 
 # these are some issue we haven't yet resolved
 
-qualtrics <- group_by(qualtrics,record_id) %>% filter(n()==1)
+qualtrics <- group_by(qualtrics,record_id) %>% 
+                        filter(n()==1) %>%
+                          ungroup()
+                
 
 
 saveRDS(distinct(qualtrics),

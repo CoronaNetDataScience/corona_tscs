@@ -1,0 +1,27 @@
+<link href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" /><script src="//code.jquery.com/jquery-1.12.4.js"></script><script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script><script>
+                            jQuery("[id*='dialog']" ).dialog({ autoOpen: false});  
+                            jQuery('body').on('click','.ui-widget-overlay',function(){ jQuery("[id*='dialog']").dialog('close'); });
+                            </script>
+<link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" /><script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+
+<div id="Buttons" role="navigation"><input id="PreviousButton" name="PreviousButton" title="Back" type="submit" value="←" /> <input id="NextButton" name="NextButton" title="Next" type="submit" value=" → " />
+<style type="text/css">
+</style>
+</div>
+<script>
+Qualtrics.SurveyEngine.addOnReady(function()
+{
+    let that  = this;
+    jQuery('#PreviousButton').on('click', function(){
+        that.clickPreviousButton();
+    })
+    jQuery('#NextButton').on('click', function(){
+        that.clickNextButton();
+    })
+});
+</script>
+
+
+   

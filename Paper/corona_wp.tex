@@ -118,7 +118,7 @@ As the COVID-19 pandemic spreads around the world, governments have implemented 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-Governments all around the world have implemented an astonishing variety of policies in reaction to the COVID-19 pandemic. Policy makers and researchers however, have to date lacked access to the quality, up-to-date data they need for conducting rigorous analyses of whether, how, or to what degree these fast changing policies have worked in brunting the health, political and economic effects of the coronavirus. To address this concern, we present in this paper the CoronaNet COVID-19 Government Response Database, which provides fine-grained, dyadic data on policy actions taken by governments across the world since the Chinese government reported the COVID-19 outbreak on December 31, 2019. The dataset presented here covers all policy actions for 193 of countries\footnote{Note, we will include additional countries in future versions of the dataset.} up until 2020-04-11, for a total of 6755 events.
+Governments all around the world have implemented an astonishing variety of policies in reaction to the COVID-19 pandemic. Policy makers and researchers however, have to date lacked access to the quality, up-to-date data they need for conducting rigorous analyses of whether, how, or to what degree these fast changing policies have worked in brunting the health, political and economic effects of the coronavirus. To address this concern, we present in this paper the CoronaNet COVID-19 Government Response Database, which provides fine-grained, dyadic data on policy actions taken by governments across the world since the Chinese government reported the COVID-19 outbreak on December 31, 2019. The dataset presented here covers all policy actions for 193 of countries\footnote{Note, we will include additional countries in future versions of the dataset.} up until 2020-04-12, for a total of 6782 events.
 
 With the help of a team of over 190 research assistants in 18 time zones, we are releasing the data on a daily basis with a five-day lag between data collection and release to provide validation. We have further implemented ongoing random evaluation of coding efforts to ensure the best possible quality given the considerable time constraints. We believe that this data will permit crucial inference on both the determinants of these policies and their effects on societies, economies and the disease's spread.
 
@@ -151,7 +151,47 @@ In what follows, we provide a description of the data, as well the application o
 \hypertarget{dataset-overview}{%
 \section{Dataset Overview}\label{dataset-overview}}
 
-Here we present some descriptive statistics to illustrate the type of data that the CoronaNet project is able to provide. First, however, we clarify the unit of analysis for each documented policies. Of the 6755 events in the dataset, we have identified 5750 unique events. That is, some events in the database are updates or changes to existing policies. We link such events overtime using a unique ID (\texttt{record\_id}). An event counts as an update if it deals with a change in either the:
+Here we describe the variables that the CoronaNet project is able to provide and then present some descriptive statistics to illustrate the distribution of some key variables in the dataset. Each policy records at the minimum, the following monadic information : the policy type (\texttt{type}), the name of the country from which a policy orginiates (\texttt{country})\footnote{If the policy originates from a subnational unit of government, e.g.~a province or city, that information is also documented.}, the degree to which a policy must be complied with (\texttt{compliance}), the entity enforcing the policy (\texttt{enforcer}), and the date a policy is announced (\texttt{date\_annouced}), implemented (\texttt{date\_start}) and ends (\texttt{date\_end}).\footnote{Note that sometimes policies are announced without a pre-determined end date. In those cases, this field is left blank} When a policy is dyadic in nature, the database further documents information about the geographic target of the policy (\texttt{target\_geog\_level}; \texttt{target\_region}, \texttt{target\_country})\footnote{Future versions of the dataset will also include information about if the target was a province or state (\texttt{target\_province}), a city or municipality (\texttt{target\_city}), or another subnational unit (e.g.~county, university)}, the human or material target of a policy (\texttt{target\_who\_what}), the directional flow of the policy (\texttt{target\_direction}), and the mechanism of travel (\texttt{target\_mechanism}). Where applicable, all of the information documented above is also provided qualitatively in the \texttt{event\_description} variable and each record is identified by a unique \texttt{record\_id}. Table \ref{tab:vardesc} provides an overview of the different variables in our dataset, a brief description of what underyling concept each variable aims to capture, and the values that each variable can take on.\footnote{Note that while Table \ref{tab:vardesc} provides an overview of the version of the dataset we have currently made available, future versions of the dataset will also include more detailed information for some policy categories. For example, among other things, we are also collecting information on the types of `health resources' (e.g.~masks, hospitals, doctors ) and types of `restrictions of non-essential business activities' (e.g.~retail businesses, restaurants/bars). Where applicable, we are also collecting information on the volume of a certain policy (e.g.~the number of masks, hospitals and doctors.)}
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{ThreePartTable}
+\begin{TableNotes}[para]
+\small
+\item \textit{Note: } 
+\item Variables in the dataset not listed above include: record\_date (when the record entered into our data), link (a link to at least one source for the policy), init\_country\_level (whether a policy came from a national level or sub-national unit)
+\item[*] The variables which document the exact geographical targets in the dataset are as follows: target\_region (documents targeted regional grouping, e.g. Schengen region), target\_country (documents targeted country), target\_province (documents targeted province/state)
+\end{TableNotes}
+\begin{longtable}{>{\bfseries\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{5cm}>{\raggedright\arraybackslash}p{8.5cm}}
+\caption{\label{tab:vardesc}Description of Variables in CoronaNet Government Reponse Dataset}\\
+\toprule
+\textbf{Variable Name} & \textbf{Description} & \textbf{Values}\\
+\midrule
+\rowcolor{gray!6}  record\_id & A unique identifier for each policy record & This variable takes on a numeric value. A unique record ID is given for the following unit of analysis: country-type-date\_announced\\
+policy\_id & A unique identifier for each policy record as it is updated over time & This variable takes on a numeric value. A unique policy ID encompasses different record IDs that change over time with regards to either the strength or time duration of the underlying policy.\\
+\rowcolor{gray!6}  event\_description & This variable provides a qualtiative summary of the documented policy & All qualitative descriptions document at a minimum the following information: the policy type (type), the name of the country from which a policy originates (country); the date a policy is implemented (date\_start) and if applicable:  the country or region that a policy is targeted towards (target\_country), the type of people or resources a policy is targeted towards (target\_who\_what), when a policy is slated to end (date\_end)\\
+\addlinespace[0.3em]
+\multicolumn{3}{l}{\textbf{Monadic Variables}}\\
+\hspace{1em}type & This variable documents the policy action initiated. It can take on only one of the following values: & Declaraction of Emergency, Quarantine, External Border Restrictions, Internal Border Restrictions, Restrictions of Mass Gatherings, Social Distancing, Curfew, Closure of Schools, Restriction of Non-Essential Government Services, Restriction of Non-Essential Businesses, Health Monitoring, Health Testing, Health Resource, Public Awareness Campaigns, New Task Force or Bureau, Other\\
+\rowcolor{gray!6}  \hspace{1em}country & This variable documents the country from which a policy initiates, where applicable, and can take on only one of the following values: & National, Provincial/State, Municipality/City, Other governmental unit\\
+\hspace{1em}compliance & This variable documents degree to which a policy must be complied with and can take on one or more of the following values: & Mandatory with Legal Penalties, Mandatory with Fines, Mandatory with Excpetions, Recommended/Voluntary\\
+\rowcolor{gray!6}  \hspace{1em}enforcer & This variable documents the entity enforcing a policy and can take on one or more of the following values: & National Government, Ministry/Department of Health, Military, Provincial/State Government, Municipal/City Government, Police, Other\\
+\hspace{1em}date\_announced & This variable documents the date when a policy was announced, it takes on the following format: & Month-Day-Year\\
+\rowcolor{gray!6}  \hspace{1em}date\_start & This variable documents the date when a policy is implemented, it takes on the following format: & Month-Day-Year\\
+\hspace{1em}date\_end & This variable documents the date when a policy is slated to end, where applicable, it takes on the following format: & Month-Day-Year\\
+\rowcolor{gray!6}  \addlinespace[0.3em]
+\multicolumn{3}{l}{\textbf{Dyadic Variables}}\\
+\hspace{1em}target\_geog\_level & This variable documents the geographical target of the policy. It can take on of the following variables (The exact geographical targets are also documented in other variables* in the dataset): & All countries, One or more countries and one or more regional groupings, One or more countries, but not all countries, One or more regional groupings, A geographical or administrative unit within a country\\
+\hspace{1em}target\_who\_what & This variable documents the human or material targets of a policy, where applicable, and can take on only one of the following values: & All (Travelers + Residents), All Travelers (Citizen Travelers + Foreign Travelers), Citizen Travelers, Foreign Travelers, All Residents (Citizen Residents + Foreign Residents), Citizen Residents, Foreign Residents, All Foreign Nationals, All Citizens, Health Staff, Health-related Supplies\\
+\rowcolor{gray!6}  \hspace{1em}target\_direction & This variable documents the direction of travel a policy targets, where applicable, and can take on only one of the following values: & Inbound, Outbound, Inbound/Outbound\\
+\hspace{1em}travel\_mechanism & This variable documents the mode of travel a policy targets, where applicable, and can take on one or more of the following values: & All Mechansims (except visa restrictions), Flights, Land Border, Trains, Buses, Seaports, Ferries, Cruises, Visas\\
+\bottomrule
+\insertTableNotes
+\end{longtable}
+\end{ThreePartTable}
+\endgroup{}
+
+There is a unique \texttt{record\_id} for the following unit of analysis: \texttt{country} - \texttt{date\_announced} - \texttt{type}.\footnote{Note, this is the unit of analysis provided in the wide version of our dataset. The long verision of the dataset, labeled as file name: XXX, is organized by \texttt{country} - \texttt{target\_country}- \texttt{date\_announced} - \texttt{type}.} Of the 6782 such events in the dataset, we have identified 5777 unique events. That is, some events in the database are updates or changes to existing policies. We link such events overtime using a unique ID (\texttt{policy\_id}). An event counts as an update if it deals with a change in either the:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -173,144 +213,7 @@ Here we present some descriptive statistics to illustrate the type of data that 
   \end{enumerate}
 \end{enumerate}
 
-A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g.~policy type, targeted country.
-
-1 This variable documents the policy action initiated. It can take on only one of the following values:
-2 Declaraction of Emergency
-3 Quarantine
-4 External Border Restrictions
-5 Internal Border Restrictions
-6 Restrictions of Mass Gatherings
-7 Closure of Schools
-8 Restriction of Non-Essential Government Services
-9 Restriction of Non-Essential Businesses
-10 Health Monitoring
-11 Health Testing
-12 Health Resource
-13 Public Awareness Campaigns
-14 New Task Force or Bureau
-
-1 This variable documents the country from which a policy initiates, where applicable, and can take on only one of the following values:
-2 National
-3 Provincial/State
-4 Municipality/City
-5 Other governmental unit
-6
-7
-8
-9
-10
-11
-12
-13
-14
-
-1 This variable documents the geographical target of the policy. It can take on of the following variables (The exact geographical targets are also documented in other variables in the dataset):
-2 All countries
-3 One or more countries and one or more regional groupings
-4 One or more countries, but not all countries
-5 One or more regional groupings
-6 A geographical or administrative unit within a country
-7
-8
-9
-10
-11
-12
-13
-14
-
-1 This variable documents the human or material targets of a policy, where applicable, and can take on only one of the following values:
-2 All (Travelers + Residents)
-3 All Travelers (Citizen Travelers + Foreign Travelers)
-4 Citizen Travelers
-5 Foreign Travelers
-6 All Residents (Citizen Residents + Foreign Residents)
-7 Citizen Residents
-8 Foreign Residents
-9 All Foreign Nationals
-10 All Citizens
-11 Health Staff
-12 Health-related Supplies
-13
-14
-
-1 This variable documents the direction of travel a policy targets, where applicable, and can take on only one of the following values:
-2 Inbound
-3 Outbound
-4 Inbound/Outbound
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-
-1 This variable documents the mode of travel a policy targets, where applicable, and can take on one or more of the following values:
-2 All Mechansims (except visa restrictions)
-3 Flights
-4 Land Border
-5 Trains
-6 Buses
-7 Seaports
-8 Ferries
-9 Cruises
-10 Visas
-11
-12
-13
-14
-
-1 This variable documents degree to which a policy must be complied with and can take on one or more of the following values:
-2 Mandatory with Legal Penalties
-3 Mandatory with Fines
-4 Mandatory with Excpetions
-5 Recommended/Voluntary
-6
-7
-8
-9
-10
-11
-12
-13
-14
-
-1 This variable documents the entity enforcing a policy and can take on one or more of the following values:
-2 National Government
-3 Ministry/Department of Health
-4 Military
-5 Provincial/State Government
-6 Municipal/City Government
-7 Police
-8 Other
-9
-10
-11
-12
-13
-14
-
-1 The following are separate variables in the dataset which document when a policy is announced, starts and ends repsectively:
-2 Date Announced
-3 Date Starts
-4 Date Ends
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-
-Table \ref{tab:desctab} shows the number of records for each policy type, the number of unique countries for each policy type, and also how many countries are targeted in total by each policy type.\footnote{Future versions of the dataset will also include more detailed information for some policy categories. For example, among other things, we are also collecting information on the types of `health resources' (e.g.~masks, hospitals, doctors ) and types of `restrictions of non-essential business activities' (e.g.~retail businesses, restaurants/bars). Where applicable, we are also collecting information on the volume of a certain policy (e.g.~the number of masks, hospitals and doctors.). We will also be including a variable which documents which institution is responsible for enforcing a certain policy (e.g.~national government, military).} We note that these are cumulative totals for these different categories in the data.
+A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g.~policy type, targeted country. Table \ref{tab:desctab} shows the number of records for each policy type, the number of unique countries for each policy type, and also how many countries are targeted in total by each policy type. We note that these are cumulative totals for these different categories in the data.
 
 \begin{table}[!h]
 
@@ -320,21 +223,21 @@ Table \ref{tab:desctab} shows the number of records for each policy type, the nu
 \toprule
 Type & Total Number of Policies & Number of Countries & Number of Targeted Countries & \% With Mandatory Enforcement\\
 \midrule
-\rowcolor{gray!6}  Closure of Schools & 1248 & 157 & 3 & 86\\
+\rowcolor{gray!6}  Closure of Schools & 1250 & 157 & 3 & 86\\
 Curfew & 175 & 87 & 21 & 97\\
 \rowcolor{gray!6}  Declaration of Emergency & 318 & 109 & 1 & 82\\
 External Border Restrictions & 4061 & 178 & 201 & 90\\
 \rowcolor{gray!6}  Health Monitoring & 607 & 99 & 198 & 75\\
 \addlinespace
-Health Resources & 1331 & 128 & 125 & 54\\
-\rowcolor{gray!6}  Health Testing & 249 & 76 & 100 & 78\\
-Internal Border Restrictions & 253 & 104 & 94 & 87\\
-\rowcolor{gray!6}  New Task Force or Bureau & 217 & 90 & 1 & 49\\
-Other Policy Not Listed Above & 555 & 119 & 1 & 61\\
+Health Resources & 1342 & 128 & 125 & 54\\
+\rowcolor{gray!6}  Health Testing & 251 & 76 & 100 & 78\\
+Internal Border Restrictions & 255 & 104 & 94 & 87\\
+\rowcolor{gray!6}  New Task Force or Bureau & 218 & 90 & 1 & 49\\
+Other Policy Not Listed Above & 556 & 119 & 1 & 61\\
 \addlinespace
-\rowcolor{gray!6}  Public Awareness Campaigns & 392 & 115 & 1 & 24\\
-Quarantine/Lockdown & 2828 & 145 & 202 & 80\\
-\rowcolor{gray!6}  Restriction of Non-Essential Businesses & 1240 & 125 & 1 & 92\\
+\rowcolor{gray!6}  Public Awareness Campaigns & 394 & 115 & 1 & 24\\
+Quarantine/Lockdown & 2841 & 145 & 202 & 80\\
+\rowcolor{gray!6}  Restriction of Non-Essential Businesses & 1241 & 125 & 1 & 92\\
 Restriction of Non-Essential Government Services & 206 & 84 & 1 & 83\\
 \rowcolor{gray!6}  Restrictions of Mass Gatherings & 521 & 148 & 2 & 86\\
 \addlinespace
@@ -351,14 +254,18 @@ In addition, we can look at the cumulative incidence of different types of polic
 \caption{\label{fig:overtime}Cumulative Incidence of Policy Event Types Over Time}
 \end{figure}
 
-We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g.~`external border restrictions', `quarantine'). For example, in Figure @ref(fig:biofabric\_europe), we map a network of bans on inbound flights to European countries initiated by European countries\footnote{In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican} as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied.\footnote{(See Longabaugh 2012 for more information on how to interpret this plot.)} For instance, the figure shows that by March 15, 2020, the governments of Poland and San Marino had banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira, Portugal had banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland.
+We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g.~`external border restrictions', `quarantine'). For example, in Figure @ref(fig:biofabric\_europe), we map a network of bans on inbound flights to European countries initiated by European countries\footnote{In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican} as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied.\footnote{(See Longabaugh 2012 for more information on how to interpret this plot.)} The figure shows that by March 15, 2020, the governments of Poland and San Marino had banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira, Portugal had banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland. Meanwhile, according to our data, no other countries in Europe had banned inbound flights from other countries.
 
+\begin{figure}
+\centering
 \includegraphics{corona_wp_files/figure-latex/biofabric_europe-1.pdf}
+\caption{(\#fig:biofabric\_europe)Network Map of Bans on Inbound Flights by European Countries as of March 15, 2020}
+\end{figure}
 
-\hypertarget{government-response-severity-index}{%
-\section{Government Response Severity Index}\label{government-response-severity-index}}
+\hypertarget{government-policy-activity-index}{%
+\section{Government Policy Activity Index}\label{government-policy-activity-index}}
 
-In this section we briefly present our new index for tracking the relative intensity of government policies targeting COVID-19 across countries and over time. The model is a version of item-response theory that incorporates over-time trends (Kubinec 2019), permitting inference on how a latent construct, in this case policy stringency, is responding to changes in the pandemic. To fit the model, the different policy types shown in Table \ref{tab:desctab} were coded dichotomously, with a value of 1 if enforcement of the policy was mandatory, and 0 otherwise. As a result, the model estimates whether mandatory policies for each category exist for each country on each day. The country-level stringency score is allowed to vary over time in a random-walk process with a country-specific variance parameter (i.e., to incorporate heteroskedasticity).
+In this section we briefly present our new index for tracking how relatively active governments are in addressing COVID-19 across countries and over time. The model is a version of item-response theory that incorporates over-time trends (Kubinec 2019), permitting inference on how a latent construct, in this case policy stringency, is responding to changes in the pandemic. To fit the model, the different policy types shown in Table \ref{tab:desctab} were coded dichotomously, with a value of 1 if enforcement of the policy was mandatory, and 0 otherwise. As a result, the model estimates whether mandatory policies for each category exist for each country on each day. The country-level stringency score is allowed to vary over time in a random-walk process with a country-specific variance parameter (i.e., to incorporate heteroskedasticity).
 
 The advantage of employing a statistical model, rather than simply summing across policies, is that the index ends up as a weighted average, where the weights are derived from the probability that a certain policy is enforced. In other words, while many countries set up task forces, relatively few imposed curfews at an early stage. As a result, the model adjusts for these distinctions, producing a score that aggregates across the patterns in the data. Because over-time trends are explicitly included and jointly estimated with the latent parameters, the model will implicitly up-weight countries that took harsher measures earlier.
 
@@ -612,7 +519,7 @@ Finally, we note in Figure \ref{fig:plotindex} the strong evidence of policy dif
 \hypertarget{methodology}{%
 \section{Methodology}\label{methodology}}
 
-To collect the data, we recruited more than 190 research assistants (RAs) from colleges and universities around the world, representing 18 out of the 24 time zones.\footnote{For more information on the individual RAs, please visit \url{http://coronanet-project.org/}} Data collection started on March 28, 2020 and has proceeded very rapidly, reaching 6755 records as of the date of this article. Each RA is responsible for tracking government policy actions for at least one country. RAs were allocated depending on their background, language skills and expressed interest in certain countries.\footnote{Note depending on the level of policy coordination at the national level, certain countries were assigned multiple RAs, e.g.~the United States, Germany, or France.}
+To collect the data, we recruited more than 190 research assistants (RAs) from colleges and universities around the world, representing 18 out of the 24 time zones.\footnote{For more information on the individual RAs, please visit \url{http://coronanet-project.org/}} Data collection started on March 28, 2020 and has proceeded very rapidly, reaching 6782 records as of the date of this article. Each RA is responsible for tracking government policy actions for at least one country. RAs were allocated depending on their background, language skills and expressed interest in certain countries.\footnote{Note depending on the level of policy coordination at the national level, certain countries were assigned multiple RAs, e.g.~the United States, Germany, or France.}
 
 We have also partnered with the machine learning company Jataware to automate the collection of more than 200,000 news articles from around the world related to COVID-19.\footnote{We thank Brandon Rose and Jataware for making the news database available to this project.} Jataware employs a natural language processing (NLP) classifier using Bidirectional Encoder Representations from Transformers (BERT) to detect whether a given article is indicative of a governmental policy intervention related to COVID-19. They then apply a secondary NLP classifier to categorize the type of policy intervention (e.g.~``state of emergency'', ``shelter-in-place'', ``quarantine'', ``travel restrictions'', etc). Next, Jataware extracts the geospatial and temporal extent of the policy intervention (e.g.~``Washington DC'' and ``March 15, 2020'') whenever possible. The resulting list of news sources is then provided to our RAs for manual coding and further data validation.
 
