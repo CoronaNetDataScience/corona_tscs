@@ -1,4 +1,5 @@
 % Encoding: UTF-8
+<<<<<<< HEAD
 
 @Conference{nguyen2015,
   author     = {Viet{-}An Nguyen and Jordan L. Boyd{-}Graber and Philip Resnik and Kristina Miler},
@@ -15,6 +16,52 @@
   timestamp  = {Sun, 02 Aug 2015 19:26:07 +0200},
 }
 {marquardtetal2017,
+=======
+@Report{marquardtetal2017,
+  author =      {Amazon.com, Inc},
+  title =       {Amazon Mechanical Turk Requester Best Practices Guide},
+  type =        {User Guide}
+  institution = {Amazon.com, Inc},
+  year =        {2011},
+  url =         {https://mturkpublic.s3.amazonaws.com/docs/MTURK_BP.pdf},
+  owner =       {Allison},
+  timestamp = {2020.04.20}
+}
+@Conference{Sheng2008,
+  author     = {Victor S. Sheng and Foster Provost and Panagiotis G. Ipeirotis},
+  title      = {Get another label? Improving data quality and data mining using multiple, noisy labelers},
+  booktitle  = {KDD '08: Proceedings of the 14th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, {KDD}, August 2008},
+  year       = {2008},
+  pages      = {614--622},
+  url        = {https://dl.acm.org/doi/abs/10.1145/1401890.1401965},
+  owner      = {Allison},
+  timestamp  = {2020-04-20},
+}
+@Article{Raykar2010,
+  author     = {Vikas C. Raykar and Shipeng Yu and Linda H. Zhao and Gerardo Hermosillo Valadez and Charles Florin and  and Luca Bogoni and Linda Moy},
+  title      = {Learning From Crowds},
+   year =      {2010},
+  volume =    {11},
+  number =    {43},
+  pages =     {1297--1322},
+  journal =   {Journal of Machine Learning Research},
+  owner =     {Allison},
+  timestamp = {2020.04.20}
+}
+
+@Conference{Raykar2009,
+  author     = {Vikas C. Raykar and Shipeng Yu and Linda H. Zhao and Anna Jerebko and Charles Florin and Gerardo Hermosillo Valadez and Luca Bogoni and Linda Moy},
+  title      = {Supervised learning from multiple experts: whom to trust when everyone lies a bit},
+  booktitle  = {ICML '09: Proceedings of the 26th Annual International Conference on Machine Learning, {ICML}, June 2009},
+  year       = {2009},
+  pages      = {889--896},
+  url        = {https://doi.org/10.1145/1553374.1553488},
+  owner      = {Allison},
+  timestamp  = {2020-04-20},
+}
+
+@Report{marquardtetal2017,
+>>>>>>> 7c4fe7d4ce75365ce22d5c11f6e42140122bbdd1
   author =      {Kyle L. Marquardt and Daniel Pemstein and Constanza Sanhueza Petrarca and Brigitte Seim and Steven Lloyd Wilson and Michael Bernhard and Michael Coppedge and Staffan I. Lindberg},
   title =       {Experts, Coders, and Crowds: An Analysis of Substitutability},
   type =        {Working Paper}
