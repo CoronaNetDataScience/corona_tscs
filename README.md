@@ -71,24 +71,32 @@ data).
     changed). Corrections are corrections to previous entries.
 8.  `event_description` A short description of the policy change
 9.  `type` The category of the policy
-10. `country` The country initiating the policy
-11. `init_country_level` Whether the policy came from the national level
+10. `type_sub_cat` The sub-category of the policy (if one exists)
+11. `country` The country initiating the policy
+12. `init_country_level` Whether the policy came from the national level
     or a sub-national unit
-12. `province` Name of sub-national unit
-13. `target_country` Which foreign country a policy is targeted at
+13. `province` Name of sub-national unit
+14. `target_country` Which foreign country a policy is targeted at
     (i.e. travel policies)
-14. `target_geog_level` Whether the target of the policy is a country as
+15. `target_geog_level` Whether the target of the policy is a country as
     a whole or a sub-national unit of that country
-15. `target_who_what` Who the policy is targeted at
-16. `target_direction` Whether a travel-related policy affects people
+16. `target_region` The name of a regional grouping (like ASEAN) that is
+    a target of the policy (if any)
+17. `target_province` The name of a province targeted by the policy (if
+    any)
+18. `target_city` The name of a city targeted by the policy (if any)
+19. `target_other` Any geographical entity that does not fit into the
+    targeted categories mentioned above
+20. `target_who_what` Who the policy is targeted at
+21. `target_direction` Whether a travel-related policy affects people
     coming in (Inbound) or leaving (Outbound)
-17. `travel_mechanism` If a travel policy, what kind of transportation
+22. `travel_mechanism` If a travel policy, what kind of transportation
     it affects
-18. `compliance` Whether the policy is voluntary or mandatory
-19. `enforcer` What unit in the country is responsible for enforcement
-20. `link` A link to at least one source for the policy
-21. `ISO_A3` 3-digit ISO country codes
-22. `ISO_A2` 2-digit ISO country codes
+23. `compliance` Whether the policy is voluntary or mandatory
+24. `enforcer` What unit in the country is responsible for enforcement
+25. `link` A link to at least one source for the policy
+26. `ISO_A3` 3-digit ISO country codes
+27. `ISO_A2` 2-digit ISO country codes
     <!-- 22. `severity_index_5perc` 5% posterior low estimate (i.e. lower bound of uncertainty interval) for severity index -->
     <!-- 23. `severity_index_median` posterior median estimate (point estimate) for severity index, which comes from a Bayesian latent variable model aggregating across policy types to measure country-level policy severity (see paper on our website) -->
     <!-- 24. `severity_index_5perc` 95% posterior high estimate (i.e. upper bound of uncertainty interval) for severity index -->
@@ -184,7 +192,8 @@ data).
     dataset) Electoral democracy index
 
 31. `news_WB` (most recent year available from Niehaus dataset) Daily
-    newspapers (per 1,000 people)
+    newspapers (per 1,000
+people)
 
 # A Retrospective Bayesian Model for Measuring Covariate Effects Data and Code
 
