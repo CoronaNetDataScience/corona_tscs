@@ -179,7 +179,6 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target
                                    `Yes, it is at the city/municipal level`="Provincial"),
          date_announced=lubridate::mdy(date_announced),
          date_start=lubridate::mdy(date_start),
-         date_end=lubridate::mdy(date_end),
          type_sub_cat=coalesce(type_quarantine,type_business),
          type_sub_cat=coalesce(type_sub_cat,type_schools),
          type_sub_cat=coalesce(type_sub_cat,type_ext_restrict),
