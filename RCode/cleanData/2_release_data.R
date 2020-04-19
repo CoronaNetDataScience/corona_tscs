@@ -163,12 +163,7 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target
          province=ifelse(country=="Macau","Macau",province),
          date_announced=lubridate::mdy(date_announced),
          date_start=lubridate::mdy(date_start),
-         date_end=lubridate::mdy(date_end),
-         entry_type=recode(entry_type,
-                           `Correction to Existing Entry for record ID ${e://Field/record_id} (<- if no record ID listed, type in Record ID in text box)`="correction",
-                           `Update on Existing Entry (type in Record ID in text box)`="update",
-                           `Update on Existing Entry for record ID ${e://Field/record_id} (<- if no record ID listed, type in Record ID in text box)`="update",
-                           `New Entry`="new_entry")) %>% 
+         date_end=lubridate::mdy(date_end)) %>% 
   filter(!is.na(date_start),
          recorded_date<(today()-days(5)))
 
