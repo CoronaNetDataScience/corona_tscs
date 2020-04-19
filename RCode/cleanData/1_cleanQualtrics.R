@@ -167,7 +167,13 @@ qualtrics= qualtrics[-which(is.na(qualtrics$policy_id)),]
 # check only for vars with missing
 
 miss_vars <- names(qualtrics)[sapply(qualtrics, function(c) any(is.na(c)))]
+<<<<<<< HEAD
  
+=======
+
+miss_vars <- miss_vars[!(miss_vars %in% c("policy_id"))]
+
+>>>>>>> d7438a47fcf5fa95add9dbd70877c58facbca097
 qualtrics <- group_by(qualtrics,policy_id) %>% 
   arrange(policy_id,StartDate) %>% 
   fill(miss_vars,.direction=c("down"))%>% 
@@ -268,15 +274,23 @@ qualtrics <- filter(qualtrics, !(grepl(x=init_country_level,
 # }
  
 # combining info on target countries --------------------
+<<<<<<< HEAD
 qualtrics[which(qualtrics$target_country_sub != "" & qualtrics$target_country !=""), 'notes_update'] %>% data.frame()
+=======
+
+# replace 'target_country' with 'target_country_sub' when target_country_sub has a value, then remove 'target_country_sub'
+# this is because 'target_country_sub' records the country for when a policy is targeted toward a region inside a country
+qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'] = qualtrics[which(qualtrics$target_country_sub !=
+                                                                                           ""), 'target_country_sub']
+qualtrics = qualtrics[, -which(names(qualtrics) == 'target_country_sub')]
+
+qualtrics$target_country[qualtrics$target_geog_level == "All countries"] <- "All countries"
+
+>>>>>>> d7438a47fcf5fa95add9dbd70877c58facbca097
 
 # double check to make sure 'target_country' is empty when 'target_country_sub' has a value
 if (length(qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'] %>% table()) == 0) {
-  # replace 'target_country' with 'target_country_sub' when target_country_sub has a value, then remove 'target_country_sub'
-  # this is because 'target_country_sub' records the country for when a policy is targeted toward a region inside a country
-  qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'] = qualtrics[which(qualtrics$target_country_sub !=
-                                                                                             ""), 'target_country_sub']
-  qualtrics = qualtrics[, -which(names(qualtrics) == 'target_country_sub')]
+  
   print('All Good')
 } else{
   stop("Error: Problem with target_country recoding.")
@@ -285,14 +299,14 @@ if (length(qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'
 qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'] %>% table()
 qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country'] %>% table()
 # double check to make sure 'target_country' is empty when 'all countries' is selected
-if (all (is.na(qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country']))) {
-  qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country'] = "All countries"
-  print('All Good')
-} else{
-  stop(
-    "Error: double check to make sure 'target_country' is empty when 'all countries' is selected"
-  )
-}
+# if (all (is.na(qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country']))) {
+# 
+#   print('All Good')
+# } else{
+#   stop(
+#     "Error: double check to make sure 'target_country' is empty when 'all countries' is selected"
+#   )
+# }
  
 # saveRDS(distinct(qualtrics),
 #         file = paste0(path, "/data/CoronaNet/coranaNetData_recode_records_countries.rds"))
