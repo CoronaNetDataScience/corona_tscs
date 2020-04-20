@@ -139,10 +139,12 @@ With the help of a team of over 190 research assistants in 18 time zones, we are
 \item
   The compliance with the policy action (e.g.~mandatory, voluntary)
 \item
+  The enforcer of the policy action (e.g.~national government, military)
+\item
   The timing of the policy action (e.g.~date announced, date implemented)
 \end{itemize}
 
-Data on government reactions the COVID-19 pandemic will not only help policy makers and researchers understand which policies are more effective in addressing the spread and health outcomes of COVID-19, it will also forward collective knowledge of its effects on societies and econnomies, including, inter alia, the relative responsiveness of different political regime types (Przeworski, Stokes, and Manin 1999; Gailmard and Patty 2019), the politics of crisis management (Boin et al. 2016), the development of financial crises (Kindleberger and Aliber 2011), and the sociology of natural disasters (Tierney 2007). Meanwhile, government reactions to the COVID-19 epidemic will have long-lasting implications on a wide-range of social phenomena, from the evolution of political institutions (Pierson 2000; Svolik 2012; Kitschelt, Wilkinson, and others 2007) to the progression of economic development (Nunn 2009; Kilian 2009; Noy 2009) to say nothing of its potential ramifications for environmental outcomes (Dasgupta et al. 2002; Folke 2006), mental health (Galea et al. 2003; Gifford 2014), or disaster preparedness (Blaikie et al. 2014). Given the exogenous timing of its initial outbreak in China, government policies made in reaction to the COVID-19 pandemic constitute the single largest natural experiment in recent memory, allowing researchers to improve causal inference in any number of fields. While scholars have always sought to understand how large-scale historical events have shaped contemporary phenomena, modern technological tools allow us to document such events more quickly and more precisely than ever before.
+Data on government reactions the COVID-19 pandemic will not only help policy makers and researchers understand which policies are more effective in addressing the spread and health outcomes of COVID-19 (Seth Flaxman 2020), it will also forward collective knowledge of its effects on societies and econnomies, including, inter alia, the relative responsiveness of different political regime types (Przeworski, Stokes, and Manin 1999; Gailmard and Patty 2019), the politics of crisis management (Boin et al. 2016), the development of financial crises (Kindleberger and Aliber 2011), and the sociology of natural disasters (Tierney 2007). Meanwhile, government reactions to the COVID-19 epidemic will have long-lasting implications on a wide-range of social phenomena, from the evolution of political institutions (Pierson 2000; Svolik 2012; Kitschelt, Wilkinson, and others 2007) to the progression of economic development (Nunn 2009; Kilian 2009; Noy 2009) to say nothing of its potential ramifications for environmental outcomes (Dasgupta et al. 2002; Folke 2006), mental health (Galea et al. 2003; Gifford 2014), or disaster preparedness (Blaikie et al. 2014). Given the exogenous timing of the initial outbreak in China, government policies made in reaction to the COVID-19 pandemic constitute the single largest natural experiment in recent memory, allowing researchers to improve causal inference in any number of fields. While scholars have always sought to understand how large-scale historical events have shaped contemporary phenomena, modern technological tools allow us to document such events more quickly and more precisely than ever before.
 
 In what follows, we provide a description of the data, as well the application of our data in modeling government policy activity over time. Using a Bayesian dynamic item-response theory model, we produce a statistically valid index that ranks countries in terms of their response to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented. We then outline the methodology we used to collect the data.
 
@@ -161,8 +163,7 @@ Each policy records at the minimum, the following monadic information : the poli
 \begin{ThreePartTable}
 \begin{TableNotes}[para]
 \small
-\item \textit{Note: } 
-\item *The variables which document the exact geographical initiators of a policy are as follows:  country (documents the country from which a policy is initiated from), init\_prov (documents the province from which a policy is initated from). The variables which document the exact geographical targets in the dataset are as follows: target\_region (documents targeted regional grouping, e.g. Schengen region), target\_country (documents targeted country), target\_province (documents targeted province/state). Other variables in the dataset not listed above include: record\_date (when the record entered into our data) and link (a link to at least one source for the policy)
+\item[*] The variables which document the exact geographical initiators of a policy are as follows:  country (documents the country from which a policy is initiated from), init\_prov (documents the province from which a policy is initated from). The variables which document the exact geographical targets in the dataset are as follows: target\_region (documents targeted regional grouping, e.g. Schengen region), target\_country (documents targeted country), target\_province (documents targeted province/state). Other variables in the dataset not listed above include: record\_date (when the record entered into our data) and link (a link to at least one source for the policy)
 \end{TableNotes}
 \begin{longtable}{>{\bfseries\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{5cm}>{\raggedright\arraybackslash}p{8.5cm}}
 \caption{\label{tab:vardesc}Description of Variables in CoronaNet Government Reponse Dataset}\\
@@ -193,7 +194,7 @@ policy\_id & A unique identifier for each policy record as it is updated over ti
 \end{ThreePartTable}
 \endgroup{}
 
-There is a unique \texttt{record\_id} for the following unit of analysis: \texttt{country} - \texttt{date\_announced} - \texttt{type}.\footnote{Note, this is the unit of analysis provided in the wide version of our dataset. The long verision of the dataset, labeled as file name: XXX, is organized by \texttt{country} - \texttt{target\_country}- \texttt{date\_announced} - \texttt{type}.} Of the 6816 such events in the dataset, we have identified 5811 unique events. That is, some events in the database are updates or changes to existing policies. We link such events over time using a unique ID (\texttt{policy\_id}). An event counts as an update if it deals with a change in either the:
+There is a unique \texttt{record\_id} for the following unit of analysis: \texttt{country} - \texttt{date\_announced} - \texttt{type}.\footnote{Note, this is the unit of analysis provided in the wide version of our dataset, labeled as file: XXX. The long verision of the dataset, labeled as file name: XXX, is organized by \texttt{country} - \texttt{target\_country}- \texttt{date\_announced} - \texttt{type}.} Of the 6816 such events in the dataset, we have identified 5811 unique events. That is, some events in the database are updates or changes to existing policies. We link such events over time using a unique ID (\texttt{policy\_id}). An event counts as an update if it deals with a change in either the:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -263,7 +264,11 @@ In addition, we can look at the cumulative incidence of different types of polic
 
 We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g.~`external border restrictions', `quarantine'). For example, in Figure @ref(fig:biofabric\_europe), we map a network of bans on inbound flights to European countries initiated by European countries\footnote{In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican} as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied.\footnote{See Longabaugh (2012) for more information on how to interpret this plot. } The figure shows that by March 15, 2020, the governments of Poland and San Marino had banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira, Portugal had banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland. Additionally, the government of Italy banned incoming flights from China while the government of Albania banned incoming flights from Greece. According to our data, no other countries in Europe had banned inbound flights from other countries.
 
+\begin{figure}
+\centering
 \includegraphics{corona_wp_files/figure-latex/biofabric_europe-1.pdf}
+\caption{(\#fig:biofabric\_europe)Network Map of Bans on Inbound Flights by European Countries as of March 15, 2020}
+\end{figure}
 
 \hypertarget{government-policy-activity-index}{%
 \section{Government Policy Activity Index}\label{government-policy-activity-index}}
@@ -718,6 +723,9 @@ Raykar, Vikas C., Shipeng Yu, Linda H. Zhao, Anna Jerebko, Charles Florin, Gerar
 
 \leavevmode\hypertarget{ref-Raykar2010}{}%
 Raykar, Vikas C., Shipeng Yu, Linda H. Zhao, Gerardo Hermosillo Valadez, Charles Florin, and Luca Bogoni, and Linda Moy. 2010. ``Learning from Crowds.'' \emph{Journal of Machine Learning Research} 11 (43): 1297--1322.
+
+\leavevmode\hypertarget{ref-flaxman2020}{}%
+Seth Flaxman, Axel Gandy, Swapnil Mishra. 2020. ``Estimating the Number of Infections and the Impact of Non-Pharmaceutical Interventions on Covid-19 in 11 European Countries.'' \emph{Working Paper}. \url{https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/report-13-europe-npi-impact/}.
 
 \leavevmode\hypertarget{ref-Sheng2008}{}%
 Sheng, Victor S., Foster Provost, and Panagiotis G. Ipeirotis. 2008. ``Get Another Label? Improving Data Quality and Data Mining Using Multiple, Noisy Labelers.'' \url{https://dl.acm.org/doi/abs/10.1145/1401890.1401965}.

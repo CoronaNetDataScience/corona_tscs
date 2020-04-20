@@ -93,12 +93,13 @@ With the help of a team of over 190 research assistants in 18 time zones, we are
 + The directionality of the policy action, if applicable (e.g. inbound, outbound, both)
 + The mechanism of travel that the policy action targets, if applicable (e.g. flights, trains)
 + The compliance with the policy action (e.g. mandatory, voluntary)
++ The enforcer of the policy action (e.g. national government, military)
 + The timing of the policy action (e.g. date announced, date implemented)
 
 <!-- The rapid and devastating spread of the SARS-CoV-2 virus has put in stark relief the previously invisible connections among different countries and people. Our dataset illuminates a countervailing kind of network --- it documents not only what actions governments have taken against COVID-19, but how these actions have targeted other geographical regions and the people and resources within them over time. The data, which is publicly available, will allow us to understand among other things, how the effectiveness of different government policies may vary over time or depending on policy actions taken by other governments.  -->
 
 
-Data on government reactions the COVID-19 pandemic will not only help policy makers and researchers understand which policies are more effective in addressing the spread and health outcomes of COVID-19, it will also forward collective knowledge of its effects on societies and econnomies, including, inter alia, the relative responsiveness of different political regime types [@przeworski1999democracy; @gailmard2019preventing], the politics of crisis management [@boin2016politics], the development of financial crises [@kindleberger2011manias], and the sociology of natural disasters [@tierney2007margins]. Meanwhile, government reactions to the COVID-19 epidemic will have long-lasting implications on a wide-range of social phenomena, from the evolution of political institutions [@pierson2000increasing; @svolik2012politics; @kitschelt2007patrons] to the progression of economic development [@nunn2009importance; @kilian2009not; @noy2009macroeconomic]  to say nothing of its potential ramifications for environmental outcomes [@dasgupta2002confronting; @folke2006resilience], mental health [@galea2003trends; @gifford2014environmental], or disaster preparedness [@blaikie2014risk]. Given the exogenous timing of its initial outbreak in China, government policies made in reaction to the COVID-19 pandemic constitute the single largest natural experiment in recent memory, allowing researchers to improve causal inference in any number of fields. While scholars have always sought to understand how large-scale historical events have shaped contemporary phenomena, modern technological tools allow us to document such events more quickly and more precisely than ever before.  
+Data on government reactions the COVID-19 pandemic will not only help policy makers and researchers understand which policies are more effective in addressing the spread and health outcomes of COVID-19 [@flaxman2020], it will also forward collective knowledge of its effects on societies and econnomies, including, inter alia, the relative responsiveness of different political regime types [@przeworski1999democracy; @gailmard2019preventing], the politics of crisis management [@boin2016politics], the development of financial crises [@kindleberger2011manias], and the sociology of natural disasters [@tierney2007margins]. Meanwhile, government reactions to the COVID-19 epidemic will have long-lasting implications on a wide-range of social phenomena, from the evolution of political institutions [@pierson2000increasing; @svolik2012politics; @kitschelt2007patrons] to the progression of economic development [@nunn2009importance; @kilian2009not; @noy2009macroeconomic]  to say nothing of its potential ramifications for environmental outcomes [@dasgupta2002confronting; @folke2006resilience], mental health [@galea2003trends; @gifford2014environmental], or disaster preparedness [@blaikie2014risk]. Given the exogenous timing of the initial outbreak in China, government policies made in reaction to the COVID-19 pandemic constitute the single largest natural experiment in recent memory, allowing researchers to improve causal inference in any number of fields. While scholars have always sought to understand how large-scale historical events have shaped contemporary phenomena, modern technological tools allow us to document such events more quickly and more precisely than ever before.  
 
 In what follows, we provide a description of the data, as well the application of our data in modeling government policy activity  over time. Using a Bayesian dynamic item-response theory model, we produce a statistically valid index that ranks countries in terms of their response to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented. We then outline the methodology we used to collect the data. 
 
@@ -234,11 +235,11 @@ Each policy records at the minimum, the following monadic information : the poli
    row_spec(0,bold=TRUE) %>% 
    pack_rows("Monadic Variables", 4, 10, label_row_css = "background-color: #666; color: #fff;") %>%
    pack_rows("Dyadic Variables",11, 14, label_row_css = "background-color: #666; color: #fff;") %>%
- footnote(general = "*The variables which document the exact geographical initiators of a policy are as follows:  country (documents the country from which a policy is initiated from), init_prov (documents the province from which a policy is initated from). The variables which document the exact geographical targets in the dataset are as follows: target_region (documents targeted regional grouping, e.g. Schengen region), target_country (documents targeted country), target_province (documents targeted province/state). Other variables in the dataset not listed above include: record_date (when the record entered into our data) and link (a link to at least one source for the policy)",threeparttable = T,fixed_small_size = TRUE,footnote_as_chunk = T) 
+ footnote(symbol = "The variables which document the exact geographical initiators of a policy are as follows:  country (documents the country from which a policy is initiated from), init_prov (documents the province from which a policy is initated from). The variables which document the exact geographical targets in the dataset are as follows: target_region (documents targeted regional grouping, e.g. Schengen region), target_country (documents targeted country), target_province (documents targeted province/state). Other variables in the dataset not listed above include: record_date (when the record entered into our data) and link (a link to at least one source for the policy)",threeparttable = T,fixed_small_size = TRUE,footnote_as_chunk = T) 
 ```
 
 
- There is a unique `record_id` for the following unit of analysis: `country` - `date_announced` - `type`.^[Note, this is the unit of analysis provided in the wide version of our dataset. The long verision of the dataset, labeled as file name: XXX, is organized by `country` - `target_country`- `date_announced` - `type`.] Of the `r length(unique(clean_data$record_id))` such events in the dataset, we have identified `r length(unique(clean_data$record_id[clean_data$entry_type %in% c("1","New Entry")]))` unique events. That is, some events in the database are updates or changes to existing policies. We link such events over time using a unique ID (`policy_id`). An event counts as an update if it deals with a change in either the:
+ There is a unique `record_id` for the following unit of analysis: `country` - `date_announced` - `type`.^[Note, this is the unit of analysis provided in the wide version of our dataset, labeled as file: XXX. The long verision of the dataset, labeled as file name: XXX, is organized by `country` - `target_country`- `date_announced` - `type`.] Of the `r length(unique(clean_data$record_id))` such events in the dataset, we have identified `r length(unique(clean_data$record_id[clean_data$entry_type %in% c("1","New Entry")]))` unique events. That is, some events in the database are updates or changes to existing policies. We link such events over time using a unique ID (`policy_id`). An event counts as an update if it deals with a change in either the:
 
 1. Time duration or^[E.g. A country lengthens its quarantine to 28 days from 14 days.]
 2. Strength of an existing policy in terms of either:
@@ -307,7 +308,7 @@ clean_data %>%
 
 We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g. 'external border restrictions', 'quarantine'). For example, in Figure \@ref(fig:biofabric_europe), we map a network of bans on inbound flights to European countries initiated by European countries^[In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican] as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied.^[See @longabaugh2012 for more information on how to interpret this plot. ] The figure shows that by March 15, 2020, the governments of Poland and San Marino had banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira, Portugal had banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland. Additionally, the government of Italy banned incoming flights from China while the government of Albania banned incoming flights from Greece. According to our data, no other countries in Europe had banned inbound flights from other countries. 
 
-```{r biofabric_europe, fig.cap="Network Map of Bans on Inbound Flights by European Countries as of March 15, 2020"}
+```{r, results='hide'}
 
 # add region variable
 clean_data$region = regions_df$regions[match(clean_data$init_country, regions_df$country)] 
@@ -412,18 +413,20 @@ plotBioGraph = function(regionName,
   plotHeight <- plotWidth * (aspect * 1.2)
 
   # make biofabric plot
-  bioFabric(passthroughNodeOrder(sub_data_net) )
+ bioFabric(passthroughNodeOrder(sub_data_net) )
   
 }
 
-plotBioGraph("Europe", "External Border Restrictions", "2020-03-15")
 
 ```
-<!---
-```{r biofabric_asia,fig.cap="Network Map of Bans on Inbound Flights by Asian Countries as of March 15, 2020"}
-plotBioGraph("Asia", "External Border Restrictions", "2020-03-15")
+
+```{r biofabric_europe,fig.cap="Network Map of Bans on Inbound Flights by European Countries as of March 15, 2020"}
+
+plotBioGraph("Europe", "External Border Restrictions", "2020-03-15") 
 ```
--->
+
+
+
 
 # Government Policy Activity Index
 
