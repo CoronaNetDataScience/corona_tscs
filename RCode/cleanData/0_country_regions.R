@@ -17,7 +17,7 @@ library(tidyr)
 library(stringr)
 library(magrittr)
 library(countrycode)
- 
+library(dplyr)
 
 # -----------------------------
 # Clean region data
@@ -86,7 +86,7 @@ country_regions = country_regions[,c('Country', 'region_number', 'region_name_cl
 countries = codelist
 countries = countries[which(!is.na(countries$cowc) ), c('iso.name.en', 'iso2c')]
 countries = countries[which(!is.na(countries$iso2c) ), ]
-
+ 
 add_countries_1 =country_regions[which(country_regions$Country %in% c('Serbia', 'Kosovo', 'Palestinian Territory')), c('Country', 'ISO2')]
 names(add_countries_1 ) = names(countries )
 countries = rbind(countries, add_countries_1) 
@@ -112,7 +112,7 @@ country_regions_clean[which(country_regions_clean$Country == 'Palestinian Territ
 
 # per RA Cheng-Hao, change entries for Philippines to provinces instead
 # of autonomous regions as currently given by geonames
-philippines = read.csv(paste0(pathData, '/data/regions/List of Provinces of the Philippines.csv'), stringsAsFactors = FALSE, header = FALSE)
+philippines = read.csv(paste0(pathData, '/regions/List of Provinces of the Philippines.csv'), stringsAsFactors = FALSE, header = FALSE)
 country_regions_clean[which(country_regions_clean$Country == 'Philippines'), -c(1, 2)] = c(philippines$V1, NA, NA)
  
 
@@ -135,13 +135,16 @@ country_regions_clean[which(country_regions_clean$Country == 'South Sudan'), -c(
                                                                                     "Western Equatoria", rep(NA, c(dim(country_regions_clean)[2] - 2 - 12)))
                                                                                   
 
+# add Northern Cyprus
 
+country_regions_clean  = country_regions_clean %>% add_row(Country = 'Northern Cyprus')  
 
-
-  
+ 
 
 # reorder 
 country_regions_clean = country_regions_clean[order(country_regions_clean$Country),]
+ 
+
 write.csv(country_regions_clean , file = paste0(pathData, '/regions/country_region_clean.csv'), row.names = FALSE, na= "") 
 
 write.csv(data.frame(Country = country_regions_clean$Country) , file = paste0(pathData, '/regions/all_countries.csv'), row.names = FALSE, na= "") 
