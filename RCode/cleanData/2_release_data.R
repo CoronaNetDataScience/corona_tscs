@@ -174,7 +174,7 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target
                      link="sources_matrix_1_2") %>% 
   mutate(province=ifelse(country=="Hong Kong","Hong Kong",province),
          province=ifelse(country=="Macau","Macau",province),
-         init_country_level=recode(`No, it is at the national level`="National",
+         init_country_level=recode(init_country_level,`No, it is at the national level`="National",
                                    `Yes, it is at the city/municipal level`="Municipal",
                                    `Yes, it is at the city/municipal level`="Provincial"),
          date_announced=lubridate::mdy(date_announced),
