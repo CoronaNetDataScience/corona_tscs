@@ -7,8 +7,8 @@ require(tidyr)
 require(googlesheets4)
 require(lubridate)
 
-start_week <- ymd("2020-04-11")
-end_week <- ymd("2020-04-19")
+start_week <- ymd("2020-04-19")
+end_week <- ymd("2020-04-26")
 
 sheets_auth()
 
