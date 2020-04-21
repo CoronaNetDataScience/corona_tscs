@@ -15,6 +15,30 @@
   timestamp  = {Sun, 02 Aug 2015 19:26:07 +0200},
 }
 
+@Article{Horn2019,
+  author =    {Alexander Horn},
+  title =     {Can the online crowd match real expert judgments? How task complexity and coder location affect the validity of crowd-coded data},
+  year =      {2019},
+  volume =    {58},
+  pages =     {236-247},
+  journal =   {European Journal of Political Research},
+  owner =     {Allison},
+  timestamp = {2020.04.20}
+}
+
+@Article{benoitetal2016,
+  author =       {Kenneth Benoit and Drew Conway and Benjamin E. Lauderdale and Michael Laver and Slava Mikhaylov},
+  title =        {Crowd-sourced Text Analysis: Reproduceable and Agile Production of Political Data},
+  journaltitle = {American Political Science Review},
+  year =         {2016},
+  volume =       {110},
+  number =       {2},
+  pages =        {278-295},
+  keywords =     {Validation},
+  owner =        {Allison},
+  timestamp =    {2020.04.17}
+}
+
 @Article{77,
   author =      {Michael D. Ward and Andreas Beger and Josh Cutler and Matt Dickenson and Cassy Dorff and Ben Radford},
   title =       {Comparing GDELT and ICEWS Event Data},
@@ -14468,11 +14492,186 @@
   publisher = {Cambridge University Press},
 }
 
-@Book{thibaut:1936,
+@Book{thibaut1936,
   author    = {Thibaut, John W},
   title     = {The social psychology of groups},
   year      = {1936},
   publisher = {Routledge},
 }
+
+@Book{kindleberger2011manias,
+  author    = {Kindleberger, Charles P and Aliber, Robert Z},
+  title     = {Manias, panics and crashes: a history of financial crises},
+  year      = {2011},
+  publisher = {Palgrave Macmillan},
+}
+
+@Article{dasgupta2002confronting,
+  author  = {Dasgupta, Susmita and Laplante, Benoit and Wang, Hua and Wheeler, David},
+  title   = {Confronting the environmental Kuznets curve},
+  journal = {Journal of economic perspectives},
+  year    = {2002},
+  volume  = {16},
+  number  = {1},
+  pages   = {147--168},
+}
+
+@Book{boin2016politics,
+  author    = {Boin, Arjen and Stern, Eric and Sundelius, Bengt and others},
+  title     = {The politics of crisis management: Public leadership under pressure},
+  year      = {2016},
+  publisher = {Cambridge University Press},
+}
+
+@Book{przeworski1999democracy,
+  author    = {Przeworski, Adam and Stokes, Susan Carol Stokes and Stokes, Susan C and Manin, Bernard},
+  title     = {Democracy, accountability, and representation},
+  year      = {1999},
+  volume    = {2},
+  publisher = {Cambridge University Press},
+}
+
+@Article{galea2003trends,
+  author    = {Galea, Sandro and Vlahov, David and Resnick, Heidi and Ahern, Jennifer and Susser, Ezra and Gold, Joel and Bucuvalas, Michael and Kilpatrick, Dean},
+  title     = {Trends of probable post-traumatic stress disorder in New York City after the September 11 terrorist attacks},
+  journal   = {American Journal of Epidemiology},
+  year      = {2003},
+  volume    = {158},
+  number    = {6},
+  pages     = {514--524},
+  publisher = {Oxford University Press},
+}
+
+@Book{blaikie2014risk,
+  author    = {Blaikie, Piers and Cannon, Terry and Davis, Ian and Wisner, Ben},
+  title     = {At risk: natural hazards, people's vulnerability and disasters},
+  year      = {2014},
+  publisher = {Routledge},
+}
+
+@Article{kilian2009not,
+  author  = {Kilian, Lutz},
+  title   = {Not all oil price shocks are alike: Disentangling demand and supply shocks in the crude oil market},
+  journal = {American Economic Review},
+  year    = {2009},
+  volume  = {99},
+  number  = {3},
+  pages   = {1053--69},
+}
+
+@Article{noy2009macroeconomic,
+  author    = {Noy, Ilan},
+  title     = {The macroeconomic consequences of disasters},
+  journal   = {Journal of Development economics},
+  year      = {2009},
+  volume    = {88},
+  number    = {2},
+  pages     = {221--231},
+  publisher = {Elsevier},
+}
+
+@Article{folke2006resilience,
+  author    = {Folke, Carl},
+  title     = {Resilience: The emergence of a perspective for social--ecological systems analyses},
+  journal   = {Global environmental change},
+  year      = {2006},
+  volume    = {16},
+  number    = {3},
+  pages     = {253--267},
+  publisher = {Elsevier},
+}
+
+@Article{gailmard2019preventing,
+  author    = {Gailmard, Sean and Patty, John W},
+  title     = {Preventing prevention},
+  journal   = {American Journal of Political Science},
+  year      = {2019},
+  volume    = {63},
+  number    = {2},
+  pages     = {342--352},
+  publisher = {Wiley Online Library},
+}
+
+@Book{svolik2012politics,
+  author    = {Svolik, Milan W},
+  title     = {The politics of authoritarian rule},
+  year      = {2012},
+  publisher = {Cambridge University Press},
+}
+
+@Book{kitschelt2007patrons,
+  author    = {Kitschelt, Herbert and Wilkinson, Steven I and others},
+  title     = {Patrons, clients and policies: Patterns of democratic accountability and political competition},
+  year      = {2007},
+  publisher = {Cambridge University Press},
+}
+
+@Article{gifford2014environmental,
+  author    = {Gifford, Robert},
+  title     = {Environmental psychology matters},
+  journal   = {Annual review of psychology},
+  year      = {2014},
+  volume    = {65},
+  pages     = {541--579},
+  publisher = {Annual Reviews},
+}
+
+
+@Article{Raykar2010,
+  author    = {Vikas C. Raykar and Shipeng Yu and Linda H. Zhao and Gerardo Hermosillo Valadez and Charles Florin and and Luca Bogoni and Linda Moy},
+  title     = {Learning From Crowds},
+  journal   = {Journal of Machine Learning Research},
+  year      = {2010},
+  volume    = {11},
+  number    = {43},
+  pages     = {1297--1322},
+  owner     = {Allison},
+  timestamp = {2020.04.20},
+}
+
+@Conference{Raykar2009,
+  author    = {Vikas C. Raykar and Shipeng Yu and Linda H. Zhao and Anna Jerebko and Charles Florin and Gerardo Hermosillo Valadez and Luca Bogoni and Linda Moy},
+  title     = {Supervised learning from multiple experts: whom to trust when everyone lies a bit},
+  booktitle = {ICML '09: Proceedings of the 26th Annual International Conference on Machine Learning, {ICML}, June 2009},
+  year      = {2009},
+  pages     = {889--896},
+  url       = {https://doi.org/10.1145/1553374.1553488},
+  owner     = {Allison},
+  timestamp = {2020-04-20},
+}
+{marquardtetal2017,
+  author =      {Amazon.com, Inc},
+  title =       {Amazon Mechanical Turk Requester Best Practices Guide},
+  type =        {User Guide}
+  institution = {Amazon.com, Inc},
+  year =        {2011},
+  url =         {https://mturkpublic.s3.amazonaws.com/docs/MTURK_BP.pdf},
+  owner =       {Allison},
+  timestamp = {2020.04.20}
+}
+
+@Conference{Sheng2008,
+  author    = {Victor S. Sheng and Foster Provost and Panagiotis G. Ipeirotis},
+  title     = {Get another label? Improving data quality and data mining using multiple, noisy labelers},
+  booktitle = {KDD '08: Proceedings of the 14th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, {KDD}, August 2008},
+  year      = {2008},
+  pages     = {614--622},
+  url       = {https://dl.acm.org/doi/abs/10.1145/1401890.1401965},
+  owner     = {Allison},
+  timestamp = {2020-04-20},
+}
+
+@Article{sumneretal2019,
+  author    = {Jane Lawrence Sumner and Emily M. Farris and Mirya R. Holman},
+  title     = {Crowdsourcing Reliable Local Data},
+  journal   = {Political Analysis},
+  year      = {2019},
+  volume    = {28},
+  number    = {2},
+  pages     = {244-262},
+  owner     = {Allison},
+  timestamp = {2020.04.20},
+}
+
 
 @Comment{jabref-meta: databaseType:biblatex;}

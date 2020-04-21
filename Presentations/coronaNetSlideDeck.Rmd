@@ -1,0 +1,112 @@
+---
+title: "CoronaNet Research Project"
+author: Joan Barceló, Cindy Cheng,  Allison Spencer Hartnett, Robert Kubinec,Luca Messerschmidt
+date: "https://coronanet-project.org"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,tinytex.verbose = TRUE)
+
+# to compile with pandoc
+# do brew install pandoc pandoc-citeproc
+# then add this line to a .Renviron file in the project folder:
+# PATH="/usr/local/Cellar/pandoc/2.9.2.1/bin/:${PATH}"
+
+require(dplyr)
+require(tidyr)
+require(ggplot2)
+require(lubridate)
+require(stringr)
+require(kableExtra)
+require(ggrepel)
+library(readr)
+library(knitr)
+library(readxl)
+require(gghighlight)
+
+
+library(devtools)
+library(igraph)
+library(remotes)
+#remotes::install_github("wjrl/RBioFabric")
+library(RBioFabric)
+library(xtable)
+library(Hmisc)
+# let's load some data!
+# run RCode/cleanData/cleanQualtrics_short.R
+
+clean_data <- readRDS("../data/CoronaNet/coranaNetData_clean.rds") %>% 
+  mutate(date_announced=mdy(date_announced)) %>% 
+  filter(date_announced<(today()-days(5)),!is.na(init_country),is.na(init_other),is.na(target_other) | target_other=="")
+
+# run /RCode/slack/slackAnalytics.R"
+
+slack <- readRDS("../data/slack/corona_govt_response_slack_latest_clean.rds")
+
+# run /RCode/country_regions.R
+regions_df = read.csv( "../data/regions/country_regional_groups_concordance.csv", stringsAsFactors = FALSE)
+countries = read.csv('../data/regions/all_countries.csv', stringsAsFactors = FALSE)
+```
+
+# CoronaNet COVID-19 Government Response Database Overview 
+
+Database of government policy actions directed toward addressing the COVID-19 pandemic
+
+- Coverage
+    + 193 countries
+    + 6,816 policy events
+    + Time range: December 31, 2019 to April 14, 2020
+- Availability
+  + Publicly available at https://coronanet-project.org
+  + Updated daily with a 5-day lag for record validity checking
+- Collaborators
+  + Project Investigators: Joan Barceló, Cindy Cheng,  Allison Spencer Hartnett, Robert Kubinec,Luca Messerschmidt
+  + Over 200 Research Assistants across 18 time zones collecting data
+  
+#  Variables 
+
+
+- The type of government policy implemented (e.g. quarantine [16 total] )
+- The level of government initiating the action (e.g. national, provincial )
+- The geographical target of the policy action, if applicable (e.g. national, provincial)
+- The human or material target of the policy action, if applicable (e.g. travelersf)
+- The directionality of the policy action, if applicable (e.g. inbound, outbound, both)
+- The mechanism of travel that the policy action targets, if applicable (e.g. flights )
+- The compliance with the policy action (e.g. mandatory, voluntary)
+- The enforcer of the policy action (e.g. national government, military)
+- The timing of the policy action (e.g. date announced, date implemented)
+
+
+```{r overtime,fig.cap="Cumulative Incidence of Policy Event Types Over Time"}
+
+clean_data %>% 
+  filter(!is.na(type)) %>% 
+  group_by(type,date_announced) %>% 
+  summarize(Policies=length(unique(record_id))) %>% 
+  arrange(type,date_announced) %>% 
+  mutate(Policies=cumsum(Policies)) %>% 
+  ungroup %>% 
+        mutate( type=recode(type,
+                     `Public Awareness Campaigns`="Public\nAwareness\nCampaigns",
+                     `External Border Restrictions`="External\nBorder\nRestrictions",
+                     `Other Policy Not Listed Above`="Other",
+                     `Restriction of Non-Essential Businesses`="Restriction of\nNon-Essential\nBusinesses",
+                     `Restrictions of Mass Gatherings`="Restrictions of\nMass Gatherings",
+                     `Restriction of Non-Essential Government Services`="Restriction of\nNon-Essential\nGovernment Services",
+                     `Declaration of Emergency`="Declaration of\nEmergency",
+                     `Internal Border Restrictions`="Internal\nBorder Restrictions",
+                     `External Border Restrictions`="External\nBorder Restrictions",
+                     `Public Awareness Campaigns`="Public\nAwareness Campaigns",
+                     `New Task Force or Bureau`="New Task Force")) %>% 
+  ggplot(aes(y=Policies,x=date_announced)) +
+  geom_area() +
+  theme_minimal() +
+  theme(panel.grid = element_blank(),
+        strip.background = element_blank()) +
+  xlab("") +
+  facet_wrap(~type)
+
+```
+
+

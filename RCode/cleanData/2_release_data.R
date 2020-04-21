@@ -179,11 +179,15 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target
                                    `Yes, it is at the city/municipal level`="Provincial"),
          date_announced=lubridate::mdy(date_announced),
          date_start=lubridate::mdy(date_start),
+<<<<<<< HEAD
+         date_end=lubridate::mdy(date_end),
+=======
          type_sub_cat=coalesce(type_quarantine,type_business),
          type_sub_cat=coalesce(type_sub_cat,type_schools),
          type_sub_cat=coalesce(type_sub_cat,type_ext_restrict),
          type_sub_cat=coalesce(type_sub_cat,type_health_resource),
          type_sub_cat=coalesce(type_sub_cat,type_other),
+>>>>>>> d7438a47fcf5fa95add9dbd70877c58facbca097
          entry_type=recode(entry_type,
                            `Correction to Existing Entry for record ID ${e://Field/record_id} (<- if no record ID listed, type in Record ID in text box)`="correction",
                            `Update on Existing Entry (type in Record ID in text box)`="update",
