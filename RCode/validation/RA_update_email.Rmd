@@ -1,0 +1,180 @@
+---
+title: "CoronaNet Update Email"
+author: "Robert Kubinec"
+date: "4/19/2020"
+output: blastula::blastula_email 
+params: 
+  ra_name: Lea Clara Frömchen-Zwick
+  ra_email: bobkubinec@gmail.com
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE,message=FALSE)
+
+# send RA update emails
+
+require(googlesheets4)
+require(dplyr)
+require(blastula)
+require(ggplot2)
+require(readr)
+require(stringr)
+require(lubridate)
+require(qualtRics)
+require(kableExtra)
+require(tidyr)
+
+
+# load qualtrics data 
+
+qdata <- read_survey("../../data/CoronaNet/RA/ra_data_pull.csv")
+
+
+```
+
+![](https://coronanet-project.org/img/header_wide.png){width=250px}
+
+Dear `r params$ra_name`,
+
+*If the email's edges are cut off, please scroll down and click on See All Message.*
+
+This is your weekly update email from CoronaNet. Thank you so much for your participation in this project; it is making a difference to people around the world. This email contains information about the records you have submitted and also recent news items you should consider. We would like you to take some time to review your records and also current news sources, as well as to see if there are policy categories for your country/provinces you haven't done research on. After completing the review of this data, and also doing some searches on your own on your country/province, *you should fill out the survey link at the end of the email* so we know the data is up to date. 
+
+# List of Records
+
+First, here is a list of all the records you have submitted to date, along with links if you want to correct or update any of them . *Scroll down to see all the entries*.
+
+```{r ra_table}
+qdata %>% 
+  filter(ra_name==params$ra_name) %>% 
+  mutate(entry_type=recode(entry_type,`1`="New Entry",
+                           `Correction`="Correction to Existing Entry (type in Record ID in text box)",
+                           `Update on Existing Entry for record ID ${e://Field/record_id} (<- if no record ID listed, type in Record ID in text box)`="Update",
+                           `Correction to Existing Entry for record ID ${e://Field/record_id} (<- if no record ID listed, type in Record ID in text box)`="Correction"),
+         Correct=paste0('<a href="https://tummgmt.eu.qualtrics.com/jfe/form/SV_bf6YMWbTpYJAW4l?Q_R=',ResponseId,
+                            '&Q_R_DEL=1&record_id=',record_id,'&link_type=C"',' target="_blank">Correct</a>'),
+         Update=paste0('<a href="https://tummgmt.eu.qualtrics.com/jfe/form/SV_bf6YMWbTpYJAW4l?Q_R=',ResponseId,
+                            '&record_id=',record_id,'&link_type=U"',' target="_blank">Update</a>')) %>% 
+  select(-ResponseId,-ra_name,-RecipientEmail,-target_country) %>% 
+  arrange(init_country,date_announced) %>% 
+  #arrange(record_id) %>% 
+  knitr::kable(.,"html",escape=F) %>% 
+  kable_styling(font_size = 10) %>% 
+  scroll_box(height="500px")
+```
+
+# List of News Sources
+
+Below is a table showing you all of the recent news sources from Jataware, our machine learning partner, related to the countries you have done research on thus far. *Scroll down to see all the entries*.
+
+```{r jataware}
+
+# get list of spreadsheet info
+country_merge <- filter(qdata,ra_name==params$ra_name) %>% 
+  select(init_country) %>% 
+  distinct %>% 
+  filter(!is.na(init_country)) %>%
+  mutate(init_country=recode(init_country,Czechia="Czech Republic",
+         `United Republic of Tanzania`="Tanzania",
+         `Micronesia`="F.S. Micronesia",
+         `Timor Leste`="East Timor",
+         `Democratic Republic of the Congo`="DR Congo",
+         `Republic of the Congo`="Congo",
+         `Cabo Verde`="Cape Verde",
+         `Sao Tome and Principe`="São Tomé and Príncipe"))
+
+# we don't have any records for Liechtenstein
+
+country_merge <- filter(country_merge, !(init_country %in% c("Liechtenstein","Monaco",
+                                                             "Saint Kitts and Nevis",
+                                                             "Palau",
+                                                             "Dominica",
+                                                             "San Marino",
+                                                             "Tuvalu",
+                                                             "Nauru",
+                                                             "European Union",
+                                                             "Andorra",
+                                                             "Antigua and Barbuda",
+                                                             "Marshall Islands")))
+
+over_countries <- lapply(country_merge$init_country, function(c) {
+
+  readRDS(paste0("../../data/CoronaNet/RA/jat_",c,".rds")) %>% 
+    mutate(url=paste0('<a href="',url,'" target="_blank">','Link','</a>'),
+           publish_date=as.character(as_date(publish_date)),
+           policy=as.character(unlist(policy)))
+}) %>% bind_rows
+
+if(nrow(over_countries)>0) {
+  over_countries %>% 
+  select(-text,-policy) %>% 
+  mutate(date_added=as_date(mdy_hms(date_added))) %>% 
+  arrange(desc(date_added)) %>% 
+  knitr::kable(.,escape=F) %>% 
+  kable_styling(font_size = 10) %>% 
+  scroll_box(height="500px")
+} else {
+  print("Sorry, at present we do not have any news reports for your countries.")
+}
+
+
+
+```
+
+# Policy Categories
+
+What we also want to know is whether any categories are missing for your countries. The following table shows the most recent policies announced for each of the categories for the countries you've worked on. *Scroll down to see all entries.*
+
+
+```{r policycat}
+
+ra_countries <- unique(qdata$init_country[qdata$ra_name==params$ra_name])
+ra_countries <- ra_countries[!is.na(ra_countries)]
+
+qdata %>% select(init_country,type,date_announced,ra_name,record_id) %>% 
+  ungroup %>% 
+  complete(init_country,type) %>% 
+  filter(init_country %in% ra_countries) %>% 
+  distinct %>% 
+  select(-ra_name) %>% 
+  group_by(init_country, type) %>% 
+  arrange(desc(date_announced)) %>% 
+  slice(1) %>% 
+  arrange(init_country,date_announced) %>% 
+  filter(!is.na(type)) %>% 
+  knitr::kable(.) %>% 
+  kable_styling(font_size = 10) %>% 
+  scroll_box(height="500px")
+
+```
+
+Please note that if there is an NA in the date, that means we currently do not have a record for that policy type for that country, and it would be great to check and make sure that one does not exist yet. In addition, for health resources there are a lot of possible options. We are especially interested in policies about masks, ventilators, PPE, and other crucial resources. For COVID-19 tests we have a separate category (Health Tests).
+
+Please take some time to do some searches on those policy types for your countries and check other sources you have used such as government web pages. 
+
+**Remember too that we need to code the end/easing of policies as updates.**
+
+# Take the Survey
+
+When you have tackled these tasks and believe your country is up to date, please fill out the survey below so we know:
+
+`r add_cta_button("https://tummgmt.eu.qualtrics.com/jfe/form/SV_7PvvMTElF7Mey7X", "Take Survey", align = "center")`
+
+
+
+*You are amazing. Thank you for taking the time this week to track this data. You are making a difference.*
+
+All best,
+
+CoronaNet Research Team
+
+Joan Barcelo
+
+Cindy Cheng
+
+Allison Spencer Hartnett
+
+Robert Kubinec
+
+Luca Messerschmidt
+
