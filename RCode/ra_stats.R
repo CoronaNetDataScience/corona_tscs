@@ -67,6 +67,7 @@ export %>%
   summarize(n=sum(n_exists)) %>% 
   ggplot(aes(y=n,x=record_date_day)) +
   geom_area(fill="blue",alpha=0.5) +
+  geom_hline(yintercept=219,linetype=2) +
   theme_minimal() +
   theme(panel.grid=element_blank()) +
   ylab("Count of Countries") +
