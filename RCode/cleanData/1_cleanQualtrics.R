@@ -277,7 +277,6 @@ qualtrics = qualtrics[, -which(names(qualtrics) == 'target_country_sub')]
 
 qualtrics$target_country[qualtrics$target_geog_level == "All countries"] <- "All countries"
 
-
 # double check to make sure 'target_country' is empty when 'target_country_sub' has a value
 if (length(qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'] %>% table()) == 0) {
   

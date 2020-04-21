@@ -264,6 +264,7 @@ clean_data %>%
             `% With Mandatory Enforcement`=round(mean(grepl(x=compliance,pattern="Mandatory")*100,na.rm=T),0)) %>% 
   select(Type="type",everything()) %>% 
   filter(!is.na(Type)) %>% 
+ arrange(desc(`Total Number of Policies`))  %>% 
   knitr::kable("latex",booktabs=T,
                caption="Descriptive Information about the CoronaNet Government Response Dataset") %>% 
   kable_styling(latex_options = c("striped", "hold_position")) %>% 
