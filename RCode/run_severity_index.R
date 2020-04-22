@@ -211,7 +211,7 @@ combine_stan_mods <- rstan::sflist2stanfit(get_stan_mods)
 
 activity_fit[[1]]@stan_samples <- combine_stan_mods 
 
-saveRDS(activity_fit[[1]],"data/activity_fit_collapse.rds")
+saveRDS(activity_fit2,"data/activity_fit_collapse.rds")
 
 
 

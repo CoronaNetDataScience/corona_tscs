@@ -504,12 +504,12 @@ get_est_sum %>%
   #geom_ribbon(aes(ymin=low_est,ymax=high_est,group=country),alpha=0.2) +
   geom_line(aes(group=country),colour="red",alpha=0.5) +
   #scale_color_distiller(palette="Reds",direction=1) +
-  # gghighlight(country %in% list_countries,
-  #             label_params=list(size=3)) +
-  geom_text_repel(data=random_country,
-                   aes(label=country),
-             hjust="right",
-             size=3) +
+  gghighlight(country %in% list_countries,
+              label_params=list(size=3)) +
+  # geom_text_repel(data=random_country,
+  #                  aes(label=country),
+  #            hjust="right",
+  #            size=3) +
   theme_minimal() +
   theme(panel.grid = element_blank()) +
   labs(caption="Estimates are derived from Stan, a Markov Chain Monte Carlo sampler.\nThe intervals represent the median and 5% - 95% posterior density region.\nPlot shows one estimate per country per day.") +
@@ -529,7 +529,7 @@ Given this distribution of discrimination parameters, we believe the index is a 
 
 ```{r rankcount}
 
-# out_items <- summary(severity_fit,pars="items") %>% 
+# out_items <- summary(severity_fit,pars="items") %>%
 #   filter(`Item Type`=="Non-Inflated Discrimination")
 # 
 # saveRDS(out_items,'../data/out_items.rds')
