@@ -224,6 +224,7 @@ release_long <- left_join(release_long,select(cats,-vals_id),by=c(extra="type_va
 # merge back down
 
 release_long <- distinct(release_long,record_id,policy_id,new_id,.keep_all = T) %>% 
+  ungroup %>% 
   mutate(record_id=paste0(record_id,new_id)) %>% 
   select(-new_id,-discard,-extra,-type_sub_cat) %>% 
   select(everything(),type_sub_cat="vals") %>% 

@@ -518,12 +518,12 @@ get_est_sum %>%
   #geom_ribbon(aes(ymin=low_est,ymax=high_est,group=country),alpha=0.2) +
   geom_line(aes(group=country),colour="red",alpha=0.5) +
   #scale_color_distiller(palette="Reds",direction=1) +
-  # gghighlight(country %in% list_countries,
-  #             label_params=list(size=3)) +
-  geom_text_repel(data=random_country,
-                   aes(label=country),
-             hjust="right",
-             size=3) +
+  gghighlight(country %in% list_countries,
+              label_params=list(size=3)) +
+  # geom_text_repel(data=random_country,
+  #                  aes(label=country),
+  #            hjust="right",
+  #            size=3) +
   theme_minimal() +
   theme(panel.grid = element_blank()) +
   labs(caption="Estimates are derived from Stan, a Markov Chain Monte Carlo sampler.\nThe intervals represent the median and 5% - 95% posterior density region.\nPlot shows one estimate per country per day.") +
@@ -540,6 +540,7 @@ Table \@ref(tab:rankcount) shows the discrimination parameters from the underlyi
 Surprisingly, at the top of the index we see school closure as the most difficult/costly policy to implement. Closure of pre-schools, though, as opposed to other school types, appears to be relatively less costly for states to undertake, perhaps because pre-schools do not operate on a full-time basis. Generally speaking, the next most difficult policies are various business closure policies and mandatory social distancing policies. Internal border restrictions are considered more difficult to implement than external border restrictions, while relatively straightforward policies like public awareness campaigns, health monitoring and opening new task forces or bureaus are near the bottom ofthe index. 
 
 Given this distribution of discrimination parameters, we believe the index is a valid representation of the underlying process by which states progressively impose more difficult policies. As states relax policies, we will further gain information about which policies appear to be more costly as we can factor in the duration for which these policies were implemented. In validation of our method, we see that the announced relaxation policies happening in European countries primarily center on businesses and school openings, suggesting that these policies are uniquely costly to keep in place compared to travel restrictions.^[See https://www.theguardian.com/world/2020/apr/19/the-exit-strategy-how-countries-around-the-world-are-preparing-for-life-after-covid-19.]
+
 
  ```{r rankcount}
 
@@ -595,6 +596,60 @@ Given this distribution of discrimination parameters, we believe the index is a 
    column_spec(2:5,width="2.5cm")
 
  ```
+
+```{r rankcount}
+
+# out_items <- summary(severity_fit,pars="items") %>%
+#   filter(`Item Type`=="Non-Inflated Discrimination")
+# 
+# saveRDS(out_items,'../data/out_items.rds')
+
+out_items <- readRDS("../data/out_items.rds")
+
+out_items %>% 
+  mutate(`Item Name`=recode(`Item Name`, `Closure of Schools`="All Schools",
+                `Closure of Schools_type_highered`="Higher Ed Closure",
+                `Closure of Schools_type_preschool`="Pre-school Closure",
+                `Closure of Schools_type_primaryschool`="Primary School Closure",
+                `Closure of Schools_type_secondschool`="High School Closure",
+                `External Border Restrictions_type_screenings`="Border Health Screenings",
+                `Health Resources`="General Health Resources",
+                `Health Resources_type_health_masks`="Masks Policies",
+                `Health Resources_type_health_other`="Other Health Resources",
+                `Health Resources_type_health_staff`="Health Staff",
+                `Health Resources_type_sanitizer`="Sanitizer Policies",
+                `Health Resources_type_temporary`="Temporary Medical Units",
+                `Health Resources_type_testing`="Test Production",
+                `Quarantine/Lockdown`="Other Quarantines",
+                `Quarantine/Lockdown_type_govt_quar`="Quarantine in Govt. Facility",
+                `Quarantine/Lockdown_type_quar_restrict`="Limited Quarantine",
+                `Quarantine/Lockdown_type_screenings`="Quarantine Screenings",
+                `Quarantine/Lockdown_type_self_quarantine`="Quarantine At Home",
+                `Restriction of Non-Essential Businesses`="General Business Restrictions",
+                `Restriction of Non-Essential Businesses_type_bars`="Closure of Restaurants",
+                `Restriction of Non-Essential Businesses_type_grooming`="Closure of Personal Grooming",
+                `Restriction of Non-Essential Businesses_type_retail`="Closure of Retail Stores",
+                `Restriction of Non-Essential Businesses_type_shopping`="Closure of Shopping Malls")) %>% 
+  select(Policy="Item Name",`5% Low Estimate`="Low Posterior Interval",
+         `Median Estimate`="Posterior Median",
+         `95% High Estimate`="High Posterior Interval") %>%
+  mutate(`Median Estimate`=ifelse(Policy=="Closure of Restaurants",
+                                  `Median Estimate`*-1,
+                                  `Median Estimate`),
+         `5% Low Estimate`=ifelse(Policy=="Closure of Restaurants",
+                                  `5% Low Estimate`*-1,
+                                  `5% Low Estimate`),
+         `95% High Estimate`=ifelse(Policy=="Closure of Restaurants",
+                                  `95% High Estimate`*-1,
+                                  `95% High Estimate`)) %>% 
+  arrange(desc(`Median Estimate`)) %>%
+  mutate_at(c("5% Low Estimate","Median Estimate","95% High Estimate"),~round(.,1)) %>%
+    knitr::kable("latex",booktabs=T,longtable=T,
+               caption="Discrimination of Item Parameters (Policies) in Policy Activity Index") %>%
+  kable_styling(latex_options = c("striped", "hold_position")) %>%
+  column_spec(1,width="4cm") %>%
+  column_spec(2:5,width="2.5cm")
+>>>>>>> 7a568730773eaa028b7698443b9d0ea33a105fa0
 
 Finally, we note in Figure \@ref(fig:plotindex) the strong evidence of policy diffusion effects. While information about COVID-19 existed at least as early as January, we do not see large-scale changes occurring in activity scores until March. Furthermore, the trajectories are highly non-linear, with a large number of countries quickly transitioning from relatively low to relatively high scores. This tandem movement is a strong indication of policy diffusion as countries adopted similar policies across time and space as opposed to a more linear learning process.
 

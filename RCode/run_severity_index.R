@@ -169,10 +169,16 @@ comp_days <- distinct(clean_comp,date_start,total_day) %>%
 countries <- c("United States of America","Germany","Brazil","Switzerland","Israel")
 
 to_make <- ungroup(distinct(clean_comp)) %>% 
-  filter(country %in% countries) %>% 
-  filter(date_start<ymd("2020-04-10"),
-         date_start>ymd("2020-02-15"),
-         !(date_start %in% comp_days$date_start[comp_days$diff==0])) %>% 
+  group_by(country,combine_type) %>% 
+  arrange(country,combine_type,date_start) %>% 
+  mutate(num_pol_diff=combine_disc- dplyr::lag(combine_disc)) %>% 
+  group_by(country,date_start) %>% 
+  mutate(sum_diff=sum(num_pol_diff,na.rm=T)) %>% 
+  filter(!(sum_diff==0 & !is.na(num_pol_diff))) %>% 
+  # filter(country %in% countries) %>% 
+  # filter(date_start<ymd("2020-04-10"),
+  #        date_start>ymd("2020-02-15")) %>% 
+         #!(date_start %in% comp_days$date_start[comp_days$diff==0])) %>% 
            id_make(outcome_disc="combine_disc",
                    person_id="country",
                    ordered_id="ordered_id",
@@ -180,7 +186,7 @@ to_make <- ungroup(distinct(clean_comp)) %>%
 
 # note no missing data :)
 
-activity_fit <- id_estimate(to_make,vary_ideal_pts="random_walk",ncores=2,nchains=2,niters=500,
+activity_fit2 <- id_estimate(to_make,vary_ideal_pts="random_walk",ncores=2,nchains=2,niters=500,
                             warmup=300,
             fixtype="prefix",
             restrict_ind_high="Quarantine/Lockdown_type_self_quarantine",
@@ -205,7 +211,7 @@ combine_stan_mods <- rstan::sflist2stanfit(get_stan_mods)
 
 activity_fit[[1]]@stan_samples <- combine_stan_mods 
 
-saveRDS(activity_fit[[1]],"data/activity_fit_collapse.rds")
+saveRDS(activity_fit2,"data/activity_fit_collapse.rds")
 
 
 
