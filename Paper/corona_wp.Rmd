@@ -24,7 +24,7 @@ output:
   #bookdown::word_document2
   bookdown::pdf_document2:
     keep_tex: true
-    latex_engine: xelatex
+    # latex_engine: xelatex
     includes:
       in_header:
           preamble.tex
@@ -101,145 +101,146 @@ With the help of a team of over 190 research assistants in 18 time zones, we are
 
 Data on government reactions the COVID-19 pandemic will not only help policy makers and researchers understand which policies are more effective in addressing the spread and health outcomes of COVID-19 [@flaxman2020], it will also forward collective knowledge of its effects on societies and econnomies, including, inter alia, the relative responsiveness of different political regime types [@przeworski1999democracy; @gailmard2019preventing], the politics of crisis management [@boin2016politics], the development of financial crises [@kindleberger2011manias], and the sociology of natural disasters [@tierney2007margins]. Meanwhile, government reactions to the COVID-19 epidemic will have long-lasting implications on a wide-range of social phenomena, from the evolution of political institutions [@pierson2000increasing; @svolik2012politics; @kitschelt2007patrons] to the progression of economic development [@nunn2009importance; @kilian2009not; @noy2009macroeconomic]  to say nothing of its potential ramifications for environmental outcomes [@dasgupta2002confronting; @folke2006resilience], mental health [@galea2003trends; @gifford2014environmental], or disaster preparedness [@blaikie2014risk]. Given the exogenous timing of the initial outbreak in China, government policies made in reaction to the COVID-19 pandemic constitute the single largest natural experiment in recent memory, allowing researchers to improve causal inference in any number of fields. While scholars have always sought to understand how large-scale historical events have shaped contemporary phenomena, modern technological tools allow us to document such events more quickly and more precisely than ever before.  
 
-In what follows, we provide a description of the data, as well the application of our data in modeling the stringency of measures over time. Using a Bayesian dynamic item-response theory model, we produce a statistically valid index that ranks countries in terms of their response to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented. We then outline the methodology we used to collect the data. 
+In what follows, we provide a description of the data, as well the application of our data in modeling the policy activity of countries over time. Using a Bayesian dynamic item-response theory model, we produce a statistically valid index that summarizes countries in terms of their response to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented. In the appendix we provide a thorough discussion of the procedures used to collate and manage the 200 research assistants coding this data around the world in real time.
 
-# CoronaNet Dataset Overview
-In this section, we first describe the variables that the CoronaNet project is able to provide as well as how they are organized. We then present some descriptive statistics which illustrate how government policy toward COVID-19 has varied across these different variables. 
+# Dataset Overview
 
-## Dataset Schema
+In this section, we first describe the variables that our dataset is able to provide as well as how they are organized. We then present some descriptive statistics which illustrate how government policy toward COVID-19 has varied across these different variables. 
 
-Each policy records at the minimum, the following monadic information : the policy type (`type`), the name of the country from which a policy orginiates (`country`)^[If the policy originates from a province or state, that information is also documented in the `init_prov' variable. Future versions of the dataset will also include information on whether a policy was initiated from a city or municipality (`init_city`) or another level of government (`init_other`).], the degree to which a policy must be complied with (`compliance`), the entity enforcing the policy (`enforcer`), and the date a policy is announced (`date_annouced`), implemented (`date_start`) and ends (`date_end`).^[Note that sometimes policies are announced without a pre-determined end date. In those cases, this field is left blank]  When a policy is dyadic in nature, the database further documents information about the geographic target of the policy (`target_geog_level`; `target_region`,  `target_country`)^[Future versions of the dataset will also include information about if the target was a province or state (`target_province`),  a city or municipality (`target_city`), or another subnational unit  (`target_other`, e.g. county, university)], the human or material target of a policy (`target_who_what`), the directional flow of the policy (`target_direction`), and the mechanism of travel (`target_mechanism`). Where applicable, all of the information documented above is also provided qualitatively in the `event_description` variable. Additional meta-data that is available for all policies include when the record entered into the database (`record_date`) and a link for the informaton source for the policy (`link`). Table \@ref(tab:vardesc) provides an overview of the different variables in our dataset, a brief description of what underyling concept each variable aims to capture, and the values that each variable can take on.^[Note that while Table \@ref(tab:vardesc) provides an overview of the version of the dataset we have currently made available, future versions of the dataset will also include more detailed information for some policy categories. For example, among other things, we are also collecting information on the types of 'health resources' (e.g. masks, hospitals, doctors ) and types of 'restrictions of non-essential business activities' (e.g. retail businesses, restaurants/bars). Where applicable, we are also collecting information on the volume of a certain policy (e.g. the number of masks, hospitals and doctors.)]
+## Schema
+
+Each policy records at the minimum, the following monadic information : the policy type, the name of the country from which a policy orginiates,^[If the policy originates from a province or state, that information is also documented. Future versions of the dataset will also include information on whether a policy was initiated from a city or municipality or another level of government.] the degree to which a policy must be complied with, the entity enforcing the policy, and the date a policy is announced, implemented and ends.^[Note that sometimes policies are announced without a pre-determined end date. In those cases, this field is left blank]  When a policy is dyadic in nature, the database further documents information about the geographic target of the policy, such as the human or material target of a policy, the directional flow of the policy, and the mechanism of travel. Where applicable, all of the information documented above is also provided qualitatively via a textual policy description. Additional meta-data that is available for all policies include when the record entered into the database and a link for the informaton source for the policy. See the appendix for a list of currently available fields in the data, along with a list of external data variables such as country-level covariates that are added in to daily releases, including COVID-19 tests and cases. 
  <!---We will also be including a variable which documents which institution is responsible for enforcing a certain policy (e.g. national government, military).
  --->
 
 ```{r vardesc, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 
- `Record ID` = c('record_id', 'A unique identifier for each policy record', 'This variable takes on a numeric value. A unique record ID is given for the following unit of analysis: country-type-date_announced')
-
- `Policy ID` = c('policy_id', 'A unique identifier for each policy record as it is updated over time', 'This variable takes on a numeric value. A unique policy ID encompasses different record IDs that change over time with regards to either the strength or time duration of the underlying policy. ')
-
- `Event Description` = c('event_description', "This variable provides a qualtiative summary of the documented policy", "All qualitative descriptions document at a minimum the following information: the policy type (type), the name of the country from which a policy originates (country); the date a policy is implemented (date_start) and if applicable:  the country or region that a policy is targeted towards (target_country), the type of people or resources a policy is targeted towards (target_who_what), when a policy is slated to end (date_end)")
-
- Type = c("type", 'This variable documents the policy action initiated. It can take on only one of the following values:',
-          paste(c('Declaraction of Emergency',
-                  'Quarantine',
-                  'External Border Restrictions',
-                  'Internal Border Restrictions',
-                  'Restrictions of Mass Gatherings',
-                  'Social Distancing',
-                  'Curfew',
-                  'Closure of Schools',
-                  'Restriction of Non-Essential Government Services',
-                  'Restriction of Non-Essential Businesses',
-                  'Health Monitoring',
-                  'Health Testing',
-                  'Health Resource',
-                  'Public Awareness Campaigns',
-                  'New Task Force or Bureau', 
-                  'Other'), collapse = ", "))
-
- 'init_country_level' = c("init_country_level", 'This variable documents the level of government from which a policy initiates, where applicable, and can take on only one of the following values  (The exact geographical targets are also documented in other variables* in the dataset):',
-             paste(c('National',
-                     'Provincial/State'), collapse = ', '))
-
- `Target Geographic Level` = c("target_geog_level", 
-                               'This variable documents the geographical target of the policy. It can take on of the following variables (The exact geographical targets are also documented in other variables* in the dataset):',
-                               paste(c('All countries',
-                                       'One or more countries and one or more regional groupings',
-                                       'One or more countries, but not all countries',
-                                       'One or more regional groupings',
-                                       'A geographical or administrative unit within a country'), collapse = ', '))
-
- `Target Who What` = c("target_who_what",  'This variable documents the human or material targets of a policy, where applicable, and can take on only one of the following values:',
-                       paste(c('All (Travelers + Residents)',
-                               'All Travelers (Citizen Travelers + Foreign Travelers)',
-                               'Citizen Travelers',
-                               'Foreign Travelers',
-                               'All Residents (Citizen Residents + Foreign Residents)',
-                               'Citizen Residents',
-                               'Foreign Residents',
-                               'All Foreign Nationals',
-                               'All Citizens',
-                               'Health Staff',
-                               'Health-related Supplies' ), collapse = ', '))
-
- `Target Direction` = c('target_direction', 'This variable documents the direction of travel a policy targets, where applicable, and can take on only one of the following values:',
-                        paste(c('Inbound', 
-                                'Outbound',
-                                'Inbound/Outbound'), collapse = ', '))
-
- `Travel Mechanism` = c('travel_mechanism', 'This variable documents the mode of travel a policy targets, where applicable, and can take on one or more of the following values:',
-                        paste(c('All Mechansims (except visa restrictions)',
-                                'Flights',
-                                'Land Border',
-                                'Trains',
-                                'Buses',
-                                'Seaports',
-                                'Ferries',
-                                'Cruises',
-                                'Visas'), collapse = ', '))
-
- Compliance = c('compliance',
-                'This variable documents degree to which a policy must be complied with and can take on one or more of the following values:',
-                paste(c('Mandatory with Legal Penalties',
-                        'Mandatory with Fines',
-                        'Mandatory with Excpetions',
-                        'Recommended/Voluntary'), collapse =', '))
-
-
- Enforcer = c('enforcer', 'This variable documents the entity enforcing a policy and can take on one or more of the following values:',
-              paste0(c('National Government',
-                       'Ministry/Department of Health',
-                       'Military',
-                       'Provincial/State Government',
-                       'Municipal/City Government',
-                       'Police',
-                       'Other'), collapse =', '))
-
-
- date_announced = c('date_announced', 'This variable documents the date when a policy was announced, it takes on the following format:', 'Month-Day-Year')
-
- date_start = c('date_start', 'This variable documents the date when a policy is implemented, it takes on the following format:', 'Month-Day-Year')
-
- date_end = c('date_end', 'This variable documents the date when a policy is slated to end, where applicable, it takes on the following format:', 'Month-Day-Year')
-
-  
- varDf = rbind(`Record ID`,
-               `Policy ID` ,
-             `Event Description`,
-             Type ,
-            init_country_level,
-             Compliance ,
-             Enforcer ,
-             date_announced,
-             date_start,
-             date_end,
-             `Target Geographic Level`,
-             `Target Who What` ,
-             `Target Direction`,
-             `Travel Mechanism`) %>% 
-             data.frame()
-
- names(varDf) = c('Variable Name', 'Description', "Values") 
- row.names(varDf) = NULL
-
- varDf%>% 
-   knitr::kable("latex",booktabs=T, longtable = T,
-                caption="Description of Variables in CoronaNet Government Reponse Dataset") %>%
-   kable_styling(latex_options = c("striped", "hold_position", "condensed"))%>% 
-    kable_styling(fixed_thead = T)%>% 
-    kable_styling(font_size = 10 )%>% 
-   column_spec(1,width="3.5cm", bold = TRUE) %>% 
-   column_spec(2,width="5cm")%>%
-   column_spec(3,width="8.5cm") %>%
-   row_spec(0,bold=TRUE) %>% 
-   pack_rows("Monadic Variables", 4, 10, label_row_css = "background-color: #666; color: #fff;") %>%
-   pack_rows("Dyadic Variables",11, 14, label_row_css = "background-color: #666; color: #fff;") %>%
- footnote(symbol = "The variables which document the exact geographical initiators of a policy are as follows:  country (documents the country from which a policy is initiated from), init_prov (documents the province from which a policy is initated from). The variables which document the exact geographical targets in the dataset are as follows: target_region (documents targeted regional grouping, e.g. Schengen region), target_country (documents targeted country), target_province (documents targeted province/state). Other variables in the dataset not listed above include: record_date (when the record entered into our data) and link (a link to at least one source for the policy)",threeparttable = T,fixed_small_size = TRUE,footnote_as_chunk = T) 
+ # `Record ID` = c('record_id', 'A unique identifier for each policy record', 'This variable takes on a numeric value. A unique record ID is given for the following unit of analysis: country-type-date_announced')
+ # 
+ # `Policy ID` = c('policy_id', 'A unique identifier for each policy record as it is updated over time', 'This variable takes on a numeric value. A unique policy ID encompasses different record IDs that change over time with regards to either the strength or time duration of the underlying policy. ')
+ # 
+ # `Event Description` = c('event_description', "This variable provides a qualtiative summary of the documented policy", "All qualitative descriptions document at a minimum the following information: the policy type (type), the name of the country from which a policy originates (country); the date a policy is implemented (date_start) and if applicable:  the country or region that a policy is targeted towards (target_country), the type of people or resources a policy is targeted towards (target_who_what), when a policy is slated to end (date_end)")
+ # 
+ # Type = c("type", 'This variable documents the policy action initiated. It can take on only one of the following values:',
+ #          paste(c('Declaraction of Emergency',
+ #                  'Quarantine',
+ #                  'External Border Restrictions',
+ #                  'Internal Border Restrictions',
+ #                  'Restrictions of Mass Gatherings',
+ #                  'Social Distancing',
+ #                  'Curfew',
+ #                  'Closure of Schools',
+ #                  'Restriction of Non-Essential Government Services',
+ #                  'Restriction of Non-Essential Businesses',
+ #                  'Health Monitoring',
+ #                  'Health Testing',
+ #                  'Health Resource',
+ #                  'Public Awareness Campaigns',
+ #                  'New Task Force or Bureau', 
+ #                  'Other'), collapse = ", "))
+ # 
+ # 'init_country_level' = c("init_country_level", 'This variable documents the level of government from which a policy initiates, where applicable, and can take on only one of the following values  (The exact geographical targets are also documented in other variables* in the dataset):',
+ #             paste(c('National',
+ #                     'Provincial/State'), collapse = ', '))
+ # 
+ # `Target Geographic Level` = c("target_geog_level", 
+ #                               'This variable documents the geographical target of the policy. It can take on of the following variables (The exact geographical targets are also documented in other variables* in the dataset):',
+ #                               paste(c('All countries',
+ #                                       'One or more countries and one or more regional groupings',
+ #                                       'One or more countries, but not all countries',
+ #                                       'One or more regional groupings',
+ #                                       'A geographical or administrative unit within a country'), collapse = ', '))
+ # 
+ # `Target Who What` = c("target_who_what",  'This variable documents the human or material targets of a policy, where applicable, and can take on only one of the following values:',
+ #                       paste(c('All (Travelers + Residents)',
+ #                               'All Travelers (Citizen Travelers + Foreign Travelers)',
+ #                               'Citizen Travelers',
+ #                               'Foreign Travelers',
+ #                               'All Residents (Citizen Residents + Foreign Residents)',
+ #                               'Citizen Residents',
+ #                               'Foreign Residents',
+ #                               'All Foreign Nationals',
+ #                               'All Citizens',
+ #                               'Health Staff',
+ #                               'Health-related Supplies' ), collapse = ', '))
+ # 
+ # `Target Direction` = c('target_direction', 'This variable documents the direction of travel a policy targets, where applicable, and can take on only one of the following values:',
+ #                        paste(c('Inbound', 
+ #                                'Outbound',
+ #                                'Inbound/Outbound'), collapse = ', '))
+ # 
+ # `Travel Mechanism` = c('travel_mechanism', 'This variable documents the mode of travel a policy targets, where applicable, and can take on one or more of the following values:',
+ #                        paste(c('All Mechansims (except visa restrictions)',
+ #                                'Flights',
+ #                                'Land Border',
+ #                                'Trains',
+ #                                'Buses',
+ #                                'Seaports',
+ #                                'Ferries',
+ #                                'Cruises',
+ #                                'Visas'), collapse = ', '))
+ # 
+ # Compliance = c('compliance',
+ #                'This variable documents degree to which a policy must be complied with and can take on one or more of the following values:',
+ #                paste(c('Mandatory with Legal Penalties',
+ #                        'Mandatory with Fines',
+ #                        'Mandatory with Excpetions',
+ #                        'Recommended/Voluntary'), collapse =', '))
+ # 
+ # 
+ # Enforcer = c('enforcer', 'This variable documents the entity enforcing a policy and can take on one or more of the following values:',
+ #              paste0(c('National Government',
+ #                       'Ministry/Department of Health',
+ #                       'Military',
+ #                       'Provincial/State Government',
+ #                       'Municipal/City Government',
+ #                       'Police',
+ #                       'Other'), collapse =', '))
+ # 
+ # 
+ # date_announced = c('date_announced', 'This variable documents the date when a policy was announced, it takes on the following format:', 'Month-Day-Year')
+ # 
+ # date_start = c('date_start', 'This variable documents the date when a policy is implemented, it takes on the following format:', 'Month-Day-Year')
+ # 
+ # date_end = c('date_end', 'This variable documents the date when a policy is slated to end, where applicable, it takes on the following format:', 'Month-Day-Year')
+ # 
+ #  
+ # varDf = rbind(`Record ID`,
+ #               `Policy ID` ,
+ #             `Event Description`,
+ #             Type ,
+ #            init_country_level,
+ #             Compliance ,
+ #             Enforcer ,
+ #             date_announced,
+ #             date_start,
+ #             date_end,
+ #             `Target Geographic Level`,
+ #             `Target Who What` ,
+ #             `Target Direction`,
+ #             `Travel Mechanism`) %>% 
+ #             data.frame()
+ # 
+ # names(varDf) = c('Variable Name', 'Description', "Values") 
+ # row.names(varDf) = NULL
+ # 
+ # varDf%>% 
+ #   knitr::kable("latex",booktabs=T, longtable = T,
+ #                caption="Description of Variables in CoronaNet Government Reponse Dataset") %>%
+ #   kable_styling(latex_options = c("striped", "hold_position", "condensed"))%>% 
+ #    kable_styling(fixed_thead = T)%>% 
+ #    kable_styling(font_size = 10 )%>% 
+ #   column_spec(1,width="3.5cm", bold = TRUE) %>% 
+ #   column_spec(2,width="5cm")%>%
+ #   column_spec(3,width="8.5cm") %>%
+ #   row_spec(0,bold=TRUE) %>% 
+ #   pack_rows("Monadic Variables", 4, 10, label_row_css = "background-color: #666; color: #fff;") %>%
+ #   pack_rows("Dyadic Variables",11, 14, label_row_css = "background-color: #666; color: #fff;") %>%
+ # footnote(symbol = "The variables which document the exact geographical initiators of a policy are as follows:  country (documents the country from which a policy is initiated from), init_prov (documents the province from which a policy is initated from). The variables which document the exact geographical targets in the dataset are as follows: target_region (documents targeted regional grouping, e.g. Schengen region), target_country (documents targeted country), target_province (documents targeted province/state). Other variables in the dataset not listed above include: record_date (when the record entered into our data) and link (a link to at least one source for the policy)",threeparttable = T,fixed_small_size = TRUE,footnote_as_chunk = T) 
 ```
 
 
- There is a unique `record_id` for the following unit of analysis: `country` - `date_announced` - `type`.^[Note, this is the unit of analysis provided in the wide version of our dataset, labeled as file: XXX. The long verision of the dataset, labeled as file name: XXX, is organized by `country` - `target_country`- `date_announced` - `type`.] Of the `r length(unique(clean_data$record_id))` such events in the dataset, we have identified `r length(unique(clean_data$record_id[clean_data$entry_type %in% c("1","New Entry")]))` unique events. That is, some events in the database are updates or changes to existing policies. We link such events over time using a unique ID (`policy_id`). An event counts as an update if it deals with a change in either the:
+ There is a unique record ID for each unique policy announcement, which we code at the policy sub category type. Of the `r length(unique(clean_data$record_id))` such events in the dataset, we have identified `r length(unique(clean_data$record_id[clean_data$entry_type %in% c("1","New Entry")]))` unique events. That is, some events in the database are updates or changes to existing policies. We link such events over time using a unique ID, which we term the policy ID as opposed to the record ID. An event counts as an update if it deals with a change in either the:
 
 1. Time duration or^[E.g. A country lengthens its quarantine to 28 days from 14 days.]
 2. Strength of an existing policy in terms of either:
@@ -250,9 +251,9 @@ Each policy records at the minimum, the following monadic information : the poli
 A policy counts as a new entry and not an update if it deals with a change in any other dimension, e.g. policy type, targeted country.
 
 
-## Dataset Descriptive Statistics
+## Descriptive Statistics
 
-Here we present some descritptive statistics for key variables available from the CoronaNet database. Table \@ref(tab:desctab) shows the number of records for each policy type, the number of unique countries for each policy type as well as how many countries are targeted in total by each policy type. We note that these are cumulative totals for these different categories in the data. According to the CoronaNet data, the most common government policy implemented in reaction to COVID-19 is external border restrictions, that is policies that seek to limit access to ports of entry or exit across different governmental jurisdictions. We find that `r clean_data %>% filter(type == 'External Border Restrictions') %>% select(init_country) %>% summarize(length(unique(init_country)))` countries have implemented `r clean_data %>% filter(type == 'External Border Restrictions') %>% select(type) %>% summarize(n())` such policies since December 31, 2019. Meanwhile, the second policy that most countries, by our count `r clean_data %>% filter(type == 'Closure of Schools') %>% select(init_country) %>% summarize(length(unique(init_country)))`, have implemented is 'Closure of Schools', of which we document `r clean_data %>% filter(type == 'Closure of Schools') %>% select(type) %>% summarize(n())` such policies. This is followed closely by the  `r clean_data %>% filter(type == 'Quarantine/Lockdown')  %>% select(init_country) %>% summarize(length(unique(init_country)))` countries that have instituted 'Quarantine/Lockdown' policies, of which we document `r clean_data %>% filter(type == 'Quarantine/Lockdown')  %>% select(type) %>% summarize(n())`.  However we note that a strict comparison of policy types by this metric is not perfect, given that, for example, there may be more opportunities to impose external border restrictions (given the number of countries against which one can restrict travel access) as opposed to closing schools. 
+Here we present some descritptive statistics for key variables available from the data. Table \@ref(tab:desctab) shows the number of records for each policy type, the number of unique countries for each policy type as well as how many countries are targeted in total by each policy type. We note that these are cumulative totals for these different categories in the data. According to our data, the most common government policy implemented in reaction to COVID-19 is external border restrictions, that is policies that seek to limit access to ports of entry or exit across different governmental jurisdictions. We find that `r clean_data %>% filter(type == 'External Border Restrictions') %>% select(init_country) %>% summarize(length(unique(init_country)))` countries have implemented `r clean_data %>% filter(type == 'External Border Restrictions') %>% select(type) %>% summarize(n())` such policies since December 31, 2019. Meanwhile, the second policy that most countries, by our count `r clean_data %>% filter(type == 'Closure of Schools') %>% select(init_country) %>% summarize(length(unique(init_country)))`, have implemented is 'Closure of Schools', of which we document `r clean_data %>% filter(type == 'Closure of Schools') %>% select(type) %>% summarize(n())` such policies. This is followed closely by the  `r clean_data %>% filter(type == 'Quarantine/Lockdown')  %>% select(init_country) %>% summarize(length(unique(init_country)))` countries that have instituted 'Quarantine/Lockdown' policies, of which we document `r clean_data %>% filter(type == 'Quarantine/Lockdown')  %>% select(type) %>% summarize(n())`.  However we note that a strict comparison of policy types by this metric is not perfect, given that, for example, there may be more opportunities to impose external border restrictions (given the number of countries against which one can restrict travel access) as opposed to closing schools. 
 
 ```{r desctab}
 
@@ -307,7 +308,7 @@ clean_data %>%
 ```
 
 
-We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g. 'external border restrictions', 'quarantine'). For example, in Figure \@ref(fig:biofabric_europe), we map a network of bans on inbound flights to European countries initiated by European countries^[In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican] as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied.^[[See @longabaugh2012 for more information on how to interpret this plot. ]] The figure shows that by March 15, 2020, the governments of Poland and San Marino had banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira, Portugal had banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland. Additionally, the government of Italy banned incoming flights from China while the government of Albania banned incoming flights from Greece. According to our data, no other countries in Europe had banned inbound flights from other countries. 
+We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g. 'external border restrictions', 'quarantine'). For example, in Figure \@ref(fig:biofe), we map a network of bans on inbound flights to European countries initiated by European countries^[In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican] as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied.^[[See @longabaugh2012 for more information on how to interpret this plot. ]] The figure shows that by March 15, 2020, the governments of Poland and San Marino had banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira, Portugal had banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland. Additionally, the government of Italy banned incoming flights from China while the government of Albania banned incoming flights from Greece. According to our data, no other countries in Europe had banned inbound flights from other countries. 
 
 ```{r, results='hide'}
 
@@ -421,7 +422,7 @@ plotBioGraph = function(regionName,
 
 ```
 
-```{r biofabric_europe,fig.cap="Network Map of Bans on Inbound Flights by European Countries as of March 15, 2020"}
+```{r biofe,fig.cap="Network Map of Bans on Inbound Flights by European Countries as of March 15, 2020"}
 
 plotBioGraph("Europe", "External Border Restrictions", "2020-03-15") 
 ```
@@ -431,118 +432,167 @@ plotBioGraph("Europe", "External Border Restrictions", "2020-03-15")
 
 # Government Policy Activity Index
 
-In this section we briefly present our new index for tracking the relative government activity with regards to policies targeting COVID-19 across countries and over time. The model is a version of item-response theory that incorporates over-time trends [@kubinec2019ideal], permitting inference on how a latent construct, in this case policy stringency, is responding to changes in the pandemic. To fit the model, the different policy types shown in Table \@ref(tab:desctab) were coded dichotomously, with a value of 1 if enforcement of the policy was mandatory, and 0 otherwise. As a result, the model estimates whether mandatory policies for each category exist for each country on each day. The country-level stringency score is allowed to vary over time in a random-walk process with a country-specific variance parameter (i.e., to incorporate heteroskedasticity). 
+In this section we briefly present our new index for tracking the relative government activity with regards to policies targeting COVID-19 across countries and over time. The model is a version of item-response theory known as ideal point modeling that incorporates over-time trends [@kubinec2019ideal;@jackman2004;@gelman2005;@quinn2002], permitting inference on how a latent construct, in this case total policy activity, is responding to changes in the pandemic. To fit the model, the different policy types shown in Table \@ref(tab:desctab) were coded in ordinal values, with lower values for sub-national targets of policies and larger values for policies applying to the entire country, or in the case of external border restrictions, to one or more external countries. For internal country policies, three possible values were coded as no policy, sub-national policy, or policy covering the whole country. For external border restrictions, four possible values were coded as no policy, policy targeting one other country, policy targeting multiple countries, and policy targeting all countries in the world (i.e, border closure).  
 
-The advantage of employing a statistical model, rather than simply summing across policies, is that the index ends up as a weighted average, where the weights are derived from the probability that a certain policy is enforced. In other words, while many countries set up task forces, relatively few imposed curfews at an early stage. As a result, the model adjusts for these distinctions, producing a score that aggregates across the patterns in the data. Because over-time trends are explicitly included and jointly estimated with the latent parameters, the model will implicitly up-weight countries that took harsher measures earlier.
+The reason that ideal point modeling was employed is because it can be given a latent utility interpretation [@@jackman2004]. The model assumes that the countries are located in a latent space in which distance between countries and policies represents the relative cost of imposing different policies. As countries are more willing to pay these costs, i.e. their ideal points/policy activity score rises, they then subsequently implement more policies. This interpretation is similar to the traditional item-response theory approach for analyzing test questions in which students who answer more questions on a test are considered to have higher "ability" [@takane1986; @reckase2009]. In either case, we are able to estimate latent country scores that represent the readiness of a country to impose a set number of policies. The cost of policies is estimated via discrimination parameters, which indicate how strongly policies discriminate between countries (in other words, are an indication of relative cost).
+
+The country-level policy activity score is further allowed to vary over time in a random-walk process with a country-specific variance parameter to incorporate heteroskedasticity [@quinn2002]. Incorporating over-time trends explicitly is very important for the index to capture the nuances of policy implementation over time. For example, countries that impose more restrictive policies at an earlier date will be rewarded with higher policy activity scores compared to those who impose such policies at a later date. Imposing a given policy when most countries have already imposed them will result in little if any change in the policy activity score. 
+
+The advantage of employing a statistical model, rather than simply summing across policies, is that the index ends up as a weighted average, where the weights are derived from the probability that a certain policy is enforced. In other words, while many countries set up task forces, relatively few imposed curfews at an early stage. As a result, the model adjusts for these distinctions, producing a score that aggregates across the patterns in the data. 
 
 Furthermore, because the model is stochastic, it is robust to coding errors of the kind that often occur in these types of datasets. As we discuss in our validation section, while we are continuing to validate the data on a daily basis, the massive speed and scope of data collection means that we cannot identify all issues with the data in real time. However, the measurement model employed only requires us to assume that on average the policy codings are correct, not that they are correct for each instance. Coding error, such as incorrectly selecting a policy type, will propagate through the model as higher uncertainty intervals, but will not affect average posterior estimates. As our data quality improves, and we are able to collect more data over time, the model will produce more variegated estimates with smaller uncertainty intervals.
 
 Figure \@ref(fig:plotindex) shows the estimated index scores for the `r length(unique(clean_data$country))` countries in our dataset at present. Of course, a caveat with the index is that we may be missing some possible policy measures that have occurred due to the difficulty in finding them in published sources. However, there is still clear differentiation within the index in terms of when policies were imposed, with some countries starting to impose policies much earlier than others. Furthermore, there is a clear break about March 1st when countries began to impose more stringent policies across the world.
 
-Figure \@ref(fig:plotindex) shows the estimated index scores for the `r length(unique(clean_data$country))` countries in our dataset at present. Of course, a caveat with the index is that we may be missing some possible policy measures that have occurred due to the difficulty in finding them in published sources. However, there is still clear differentiation within the index in terms of when policies were imposed, with some countries starting to impose policies much earlier than others. Furthermore, there is a clear break about March 1st when countries began to impose more stringent policies across the world.
+Figure \@ref(fig:plotindex) shows the estimated index scores for 28 countries in our dataset. Of course, a caveat with the index is that we may be missing some possible policy measures that have occurred due to the difficulty in finding them in published sources. However, there is still clear differentiation within the index in terms of when policies were imposed, with some countries starting to impose policies much earlier than others. Furthermore, there is a clear break about March 1st when countries began to impose more stringent policies across the world.
 
 
 
-<!-- ```{r plotindex,fig.cap="CoronaNet Time-Varying Index of National Policy Activity of Measures Opposing COVID-19 Pandemic"} -->
+```{r plotindex,fig.cap="CoronaNet Time-Varying Index of National Policy Activity of Measures Opposing COVID-19 Pandemic"}
 
-<!-- severity_fit <- readRDS("../data/severity_fit_collapse.rds") -->
+# severity_fit <- readRDS("../data/activity_fit_collapse.rds")
+# 
+# all_lev <- as.character(unique(clean_data$init_country))
+# 
+# all_lev <- all_lev[all_lev!="Chad"]
+# 
+# get_est <- as.data.frame(severity_fit@stan_samples,"L_tp1") %>%
+#   mutate(iter=1:n()) %>%
+#   gather(key="parameter",value="estimate",-iter) %>%
+#   mutate(date_announced=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?[0-9]?0?")),
+#          country=as.numeric(str_extract(parameter,"[1-9][0-9]?[0-9]?0?(?=\\])")),
+#          country=factor(country,labels=levels(severity_fit@score_data@score_matrix$person_id)),
+#          date_announced=factor(date_announced,labels=as.character(sort(unique(severity_fit@score_data@score_matrix$time_id)))))
+# 
+# saveRDS(get_est,"../data/get_est.rds")
 
-<!-- all_lev <- as.character(unique(clean_data$init_country)) -->
-
-<!-- all_lev <- all_lev[all_lev!="Chad"] -->
-
-<!-- get_est <- as.data.frame(severity_fit@stan_samples,"L_tp1") %>% -->
-<!--   mutate(iter=1:n()) %>% -->
-<!--   gather(key="parameter",value="estimate",-iter) %>% -->
-<!--   mutate(date_announced=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?[0-9]?0?")), -->
-<!--          country=as.numeric(str_extract(parameter,"[1-9][0-9]?[0-9]?0?(?=\\])")), -->
-<!--          country=factor(country,labels=levels(severity_fit@score_data@score_matrix$person_id)), -->
-<!--          date_announced=factor(date_announced,labels=as.character(sort(unique(severity_fit@score_data@score_matrix$time_id))))) -->
-
-<!-- saveRDS(get_est,"../data/get_est.rds") -->
-
-<!-- get_est <- readRDS("../data/get_est.rds") -->
-
-
-<!-- get_est_sum <- get_est %>%   -->
-<!--             ungroup %>%  -->
-<!--   filter(country!="Chad") %>%  -->
-<!--             mutate(estimate=(estimate-min(estimate))/(max(estimate)-min(estimate))*100, -->
-<!--                    date_announced=ymd(as.character(date_announced))) %>%  -->
-<!--   group_by(country,date_announced) %>%  -->
-<!--   summarize(med_est=median(estimate), -->
-<!--             high_est=quantile(estimate,.95), -->
-<!--             low_est=quantile(estimate,.05)) %>%  -->
-<!--   group_by(date_announced) %>%  -->
-<!--   mutate(`Country Rank`=rank(med_est)) -->
-
-<!-- list_countries <- c("United States", -->
-<!--                     "United Kingdom", -->
-<!--                     "China", -->
-<!--                     "Taiwan", -->
-<!--                     "Singapore", -->
-<!--                     "Italy", -->
-<!--                     "France", -->
-<!--                     "South Korea", -->
-<!--                     "Gabon", -->
-<!--                     "Croatia", -->
-<!--                     "United Arab Emirates", -->
-<!--                     "Yemen", -->
-<!--                     "St. Lucia") -->
-
-<!-- get_est_sum %>%  -->
-<!--   ungroup %>%  -->
-<!--   ggplot(aes(y=med_est,x=date_announced)) + -->
-<!--   #geom_ribbon(aes(ymin=low_est,ymax=high_est,group=country),alpha=0.2) + -->
-<!--   geom_line(colour="red",aes(group=country)) + -->
-<!--   gghighlight(country %in% list_countries, -->
-<!--               label_params=list(size=3)) + -->
-<!--   # geom_text_repel(data=filter(ungroup(get_est_sum), -->
-<!--   #                              date_announced==max(date_announced), -->
-<!--   #                              country %in% list_countries), -->
-<!--   #                  aes(label=country), -->
-<!--   #            hjust="right", -->
-<!--   #            size=3) + -->
-<!--   theme_minimal() + -->
-<!--   theme(panel.grid = element_blank()) + -->
-<!--   labs(caption="Estimates are derived from Stan, a Markov Chain Monte Carlo sampler.\nThe intervals represent the median and 5% - 95% posterior density region.\nPlot shows one estimate per country per day.") + -->
-<!--   xlab("") + -->
-<!--   ylab("Policy Activity Index Scale (0 to 100)") -->
-
-<!-- ggsave("index.png") -->
-
-<!-- ``` -->
+get_est <- readRDS("../data/get_est.rds")
 
 
-Table \@ref(tab:rankcount) shows the rank of countries for the index at present. An important note about these results is that the rank only measures the posterior median, or most likely estimate, but the 5% - 95% uncertainty interval shows that substantial uncertainty exists in comparing neighboring countries in the index. More certain comparisons can be made between the top, middle and bottom third of countries, while within these categories the estimates are not precise enough to make finer-grained distinctions with confidence.
+get_est_sum <- get_est %>%
+            ungroup %>%
+  filter(country!="Chad") %>%
+            mutate(estimate=(estimate-min(estimate))/(max(estimate)-min(estimate))*100,
+                   date_announced=ymd(as.character(date_announced))) %>%
+  group_by(country,date_announced) %>%
+  summarize(med_est=median(estimate),
+            high_est=quantile(estimate,.95),
+            low_est=quantile(estimate,.05)) %>%
+  group_by(date_announced) %>%
+  mutate(`Country Rank`=rank(med_est))
 
-With this caveat in mind, San Marino occupies the highest position, likely because of harsh lockdowns imposed as a result of the outbreak in northern Italy that occurred relatively early. Slovenia has had a nationwide lockdown in place for several weeks, while Azerbaijan took early action to close its borders with Iran in February after the outbreak started. It is important to note the uncertainty in the index measures, as the top 10 countries cannot be distinguished from each other in severity except for San Marino. We believe these uncertainty intervals are important to capture the difficulty in using published policies to compare countries. However, we also see substantial value in this index, particularly in its ability to show change over time. 
+list_countries <- c("United States",
+                    "United Kingdom",
+                    "China",
+                    "Taiwan",
+                    "Singapore",
+                    "Italy",
+                    "France",
+                    "South Korea",
+                    "Gabon",
+                    "Croatia",
+                    "United Arab Emirates",
+                    "Yemen",
+                    "St. Lucia")
+
+random_country <- group_by(get_est_sum,country) %>% 
+  sample_n(1)
+
+get_est_sum %>%
+  ungroup %>%
+  ggplot(aes(y=med_est,x=date_announced)) +
+  #geom_ribbon(aes(ymin=low_est,ymax=high_est,group=country),alpha=0.2) +
+  geom_line(aes(group=country),colour="red",alpha=0.5) +
+  #scale_color_distiller(palette="Reds",direction=1) +
+  # gghighlight(country %in% list_countries,
+  #             label_params=list(size=3)) +
+  geom_text_repel(data=random_country,
+                   aes(label=country),
+             hjust="right",
+             size=3) +
+  theme_minimal() +
+  theme(panel.grid = element_blank()) +
+  labs(caption="Estimates are derived from Stan, a Markov Chain Monte Carlo sampler.\nThe intervals represent the median and 5% - 95% posterior density region.\nPlot shows one estimate per country per day.") +
+  xlab("") +
+  ylab("Policy Activity Index Scale (0 to 100)")
+
+ggsave("index.png")
+
+```
 
 
-<!-- ```{r rankcount} -->
+Table \@ref(tab:rankcount) shows the discrimination parameters from the underlying Bayesian model for each policy type. These parameters suggest which policies states find relatively difficult or costly to implement, and for that reason tend to separate more active from less active states in terms of response to COVID-19. Two of these policies (Closure of Restaurants and Quarantine at Home) were given fixed values in order to identify the direction and rotation of the latent scale, and so their discrimination parameters are not informative. However, the rest of the parameters were allowed to float, which provides inference as to which policies appear to be the most difficult/costly to implement.
 
-<!-- get_est_sum %>%  -->
-<!--   ungroup %>%  -->
-<!--   filter(date_announced==max(date_announced), -->
-<!--          !(country %in% c("European Union"))) %>%  -->
-<!--   select(Country="country",`Rank`="Country Rank",`5% Low Score`="low_est", -->
-<!--          `Median Score`="med_est", -->
-<!--          `95% High Score`="high_est") %>%  -->
-<!--   mutate(Rank=(max(Rank)+1)-Rank) %>%  -->
-<!--   arrange(Rank) %>%  -->
-<!--   mutate_at(c("5% Low Score","Median Score","95% High Score"),~round(.,1)) %>%  -->
-<!--     knitr::kable("latex",booktabs=T,longtable=T, -->
-<!--                caption="Rank of Countries by National Policy Activity Index as of April 3rd, 2020") %>%  -->
-<!--   kable_styling(latex_options = c("striped", "hold_position")) %>%  -->
-<!--   column_spec(1,width="4cm") %>%  -->
-<!--   column_spec(2:5,width="2.5cm") -->
+Surprisingly, at the top of the index we see school closure as the most difficult/costly policy to implement. Closure of pre-schools, though, as opposed to other school types, appears to be relatively less costly for states to undertake, perhaps because pre-schools do not operate on a full-time basis. Generally speaking, the next most difficult policies are various business closure policies and mandatory social distancing policies. Internal border restrictions are considered more difficult to implement than external border restrictions, while relatively straightforward policies like public awareness campaigns, health monitoring and opening new task forces or bureaus are near the bottom ofthe index. 
 
-<!-- ``` -->
+Given this distribution of discrimination parameters, we believe the index is a valid representation of the underlying process by which states progressively impose more difficult policies. As states relax policies, we will further gain information about which policies appear to be more costly as we can factor in the duration for which these policies were implemented. In validation of our method, we see that the announced relaxation policies happening in European countries primarily center on businesses and school openings, suggesting that these policies are uniquely costly to keep in place compared to travel restrictions.^[See https://www.theguardian.com/world/2020/apr/19/the-exit-strategy-how-countries-around-the-world-are-preparing-for-life-after-covid-19.]
+
+```{r rankcount}
+
+# out_items <- summary(severity_fit,pars="items") %>% 
+#   filter(`Item Type`=="Non-Inflated Discrimination")
+# 
+# saveRDS(out_items,'../data/out_items.rds')
+
+out_items <- readRDS("../data/out_items.rds")
+
+out_items %>% 
+  mutate(`Item Name`=recode(`Item Name`, `Closure of Schools`="All Schools",
+                `Closure of Schools_type_highered`="Higher Ed Closure",
+                `Closure of Schools_type_preschool`="Pre-school Closure",
+                `Closure of Schools_type_primaryschool`="Primary School Closure",
+                `Closure of Schools_type_secondschool`="High School Closure",
+                `External Border Restrictions_type_screenings`="Border Health Screenings",
+                `Health Resources`="General Health Resources",
+                `Health Resources_type_health_masks`="Masks Policies",
+                `Health Resources_type_health_other`="Other Health Resources",
+                `Health Resources_type_health_staff`="Health Staff",
+                `Health Resources_type_sanitizer`="Sanitizer Policies",
+                `Health Resources_type_temporary`="Temporary Medical Units",
+                `Health Resources_type_testing`="Test Production",
+                `Quarantine/Lockdown`="Other Quarantines",
+                `Quarantine/Lockdown_type_govt_quar`="Quarantine in Govt. Facility",
+                `Quarantine/Lockdown_type_quar_restrict`="Limited Quarantine",
+                `Quarantine/Lockdown_type_screenings`="Quarantine Screenings",
+                `Quarantine/Lockdown_type_self_quarantine`="Quarantine At Home",
+                `Restriction of Non-Essential Businesses`="General Business Restrictions",
+                `Restriction of Non-Essential Businesses_type_bars`="Closure of Restaurants",
+                `Restriction of Non-Essential Businesses_type_grooming`="Closure of Personal Grooming",
+                `Restriction of Non-Essential Businesses_type_retail`="Closure of Retail Stores",
+                `Restriction of Non-Essential Businesses_type_shopping`="Closure of Shopping Malls")) %>% 
+  select(Policy="Item Name",`5% Low Estimate`="Low Posterior Interval",
+         `Median Estimate`="Posterior Median",
+         `95% High Estimate`="High Posterior Interval") %>%
+  mutate(`Median Estimate`=ifelse(Policy=="Closure of Restaurants",
+                                  `Median Estimate`*-1,
+                                  `Median Estimate`),
+         `5% Low Estimate`=ifelse(Policy=="Closure of Restaurants",
+                                  `5% Low Estimate`*-1,
+                                  `5% Low Estimate`),
+         `95% High Estimate`=ifelse(Policy=="Closure of Restaurants",
+                                  `95% High Estimate`*-1,
+                                  `95% High Estimate`)) %>% 
+  arrange(desc(`Median Estimate`)) %>%
+  mutate_at(c("5% Low Estimate","Median Estimate","95% High Estimate"),~round(.,1)) %>%
+    knitr::kable("latex",booktabs=T,longtable=T,
+               caption="Discrimination of Item Parameters (Policies) in Policy Activity Index") %>%
+  kable_styling(latex_options = c("striped", "hold_position")) %>%
+  column_spec(1,width="4cm") %>%
+  column_spec(2:5,width="2.5cm")
+
+```
  
-Finally, we note in Figure \@ref(fig:plotindex) the strong evidence of policy diffusion effects. While information about COVID-19 existed at least as early as January, we do not see large-scale changes occurring in severity scores until March. Furthermore, the trajectories are highly non-linear, with a large number of countries quickly transitioning from relatively low to relatively high scores. This tandem movement is a strong indication of policy diffusion as countries adopted similar policies across time and space as opposed to a more linear learning process.
+Finally, we note in Figure \@ref(fig:plotindex) the strong evidence of policy diffusion effects. While information about COVID-19 existed at least as early as January, we do not see large-scale changes occurring in activity scores until March. Furthermore, the trajectories are highly non-linear, with a large number of countries quickly transitioning from relatively low to relatively high scores. This tandem movement is a strong indication of policy diffusion as countries adopted similar policies across time and space as opposed to a more linear learning process.
 
+# Conclusion
 
-# Methodology
+As policymakers, researchers and the broader public debate and compare how to succeed against the novel threats posed by COVID-19, they need real-time, traceable data on government policies in order to understand which of these policies are effective, and under what conditions.  This requires specific knowledge of the variation in policies and their implementation. The goal of the dataset and policy action index presented here is to provide this information. 
+
+We have tried to match our data collection efforts to keep up with the exponential speed with which the coronavirus has already upended global public health and the international economy while also maintaining high levels of quality. However, we will inevitably be refining, revising and updating our data to reflect new knowledge and trends as the pandemic unfolds. The data that we present in this first version of the dataset represents only the initial release of the data, and we will continue to validate and release data so long as governments continue to develop policies in response to the coronavirus.
+
+In future work, we intend to analyze the policy combinations that are best able to stymie the epidemic so as to contribute to the social science research community and provide urgently needed knowledge for policymakers and the wider global community.
+
+## Appendix A: Data Collection Methodology {-}
 
 As researchers learn more about the various health, economic, and social effects of the coronavirus pandemic, it is crucial that they have access to data that is reliable, valid, and timely (to the greatest extent possible). We have adopted a data collection methodology that we believe optimizes over all three of these constraints.
 
@@ -635,16 +685,89 @@ In addition to the steps taken above in the data collection process, we also imp
 
 If the majority achieves consensus, then we consider the entry valid. If a discrepancy exists, a fourth RA or PI evaluates between the three entries to determine whether one, some, a combination of all three is most accurate. Reconciled policies are then entered into the dataset as a correction for full transparency. If an RA was found to have made a coding mistake, then we sample six of their previous entries: 3 entries which correspond to the type of mistake made^[e.g. if the RA incorrectly codes an 'External Border Restriction' as a 'Quarantine', we sample 3 entries where the RA has coded a policy as being about a 'Quarantine.'] and randomly sample 3 more entries to ascertain whether the mistake was systematic or not. If systematic errors are found, entries coded by that individual will be entirely recoded by a new RA.
 
-# Conclusion
 
-As policymakers, researchers and the broader public debate and compare how to succeed against the novel threats posed by COVID-19, they need real-time, traceable data on government policies in order to understand which of these policies are effective, and under what conditions.  This requires specific knowledge of the variation in policies and their implementation. The goal of the dataset and policy action index presented here is to provide this information. 
+## Appendix B: Description of Dataset Fields {-}
 
-We have tried to match our data collection efforts to keep up with the exponential speed with which the coronavirus has already upended global public health and the international economy while also maintaining high levels of quality. However, we will inevitably be refining, revising and updating our data to reflect new knowledge and trends as the pandemic unfolds. The data that we present in this first version of the dataset represents only the initial release of the data, and we will continue to validate and release data so long as governments continue to develop policies in response to the coronavirus.
+The format of the data is in country-day-`record_id` format. Some `record_id` values have letters appended to indicate that the general policy category `type` also has a value for `type_sub_cat`, which contains more detail about the policy, such as whether health resources refers to masks, ventilators, or hospitals. Some entries are marked as `new_entry` in the `entry_type` field for when a policy of that type was first implemented in the country. Later updates to those policies are marked as updates in `entry_type`. To see how policies are connected, look at the `policy_id` field for all policies from the first entry through updates for a given country/province/city. If an entry was corrected after initial data collection, it will read corrected in the `entry_type` field (the original incorrect data has already been replaced with the corrected data). 
 
-In future work, we intend to analyze the policy combinations that are best able to stymie the epidemic so as to contribute to the social science research community and provide urgently needed knowledge for policymakers and the wider global community.
+1. **`coronanet_release.csv`** This file contains variables from the CoronaNet government response project, representing national and sub-national policy event data from more than 190 countries since January 1st, 2020. The data include source links, descriptions, targets (i.e. other countries), the type and level of enforcement, and a comprehensive set of policy types. For more detail on this data, you can see our [codebook here](https://docs.google.com/document/d/1zvNMpwj0onFvUZ_gLl4RRjqS-clbHv3TIX6EOHofsME).
 
+2. **`coronanet_release_allvars.csv`** This file contains the government response information from `coronanet_release.csv` along with the following datasets:
 
-## Appendix {-}
+    a. Tests from the CoronaNet testing database (see http://coronanet-project.org for more info);
+    b. Cases/deaths/recovered from the JHU data repository (https://github.com/CSSEGISandData/COVID-19);
+    c. Country-level covariates including GDP, V-DEM democracy scores, human rights indices, power-sharing indices, and press freedom indices from the Niehaus World Economics and Politics Dataverse (https://niehaus.princeton.edu/news/world-economics-and-politics-dataverse)
+    
+## `coronanet_release.csv` Field Dictionary {-}
+
+1. `record_id` Unique identifier for each unique policy record
+2. `policy_id` Identifier linking new policies with subsequent updates to policies
+3. `recorded_date` When the record was entered into our data 
+4. `date_announced` When the policy is announced
+5. `date_start` When the policy goes into effect
+6. `date_end` When the policy ends (if it has an explicit end date)
+7. `entry_type` Whether the record is new, meaning no restriction had been in place before, or an update (restriction was in place but changed). Corrections are corrections to previous entries.
+8. `event_description` A short description of the policy change
+9. `type` The category of the policy
+10. `type_sub_cat` The sub-category of the policy (if one exists)
+11. `type_text` Any additional information about the policy type (such as the number of ventilators/days of quarantine/etc.)
+12. `country` The country initiating the policy
+13. `init_country_level` Whether the policy came from the national level or a sub-national unit
+14. `province` Name of sub-national unit
+15. `target_country` Which foreign country a policy is targeted at (i.e. travel policies)
+16. `target_geog_level` Whether the target of the policy is a country as a whole or a sub-national unit of that country
+17. `target_region` The name of a regional grouping (like ASEAN) that is a target of the policy (if any)
+18. `target_province` The name of a province targeted by the policy (if any)
+19. `target_city` The name of a city targeted by the policy (if any)
+20. `target_other` Any geographical entity that does not fit into the targeted categories mentioned above
+21. `target_who_what` Who the policy is targeted at
+22. `target_direction` Whether a travel-related policy affects people coming in (Inbound) or leaving (Outbound)
+23. `travel_mechanism` If a travel policy, what kind of transportation it affects
+24. `compliance` Whether the policy is voluntary or mandatory
+25. `enforcer` What unit in the country is responsible for enforcement
+26. `link` A link to at least one source for the policy
+27. `ISO_A3` 3-digit ISO country codes
+28. `ISO_A2` 2-digit ISO country codes
+<!-- 22. `severity_index_5perc` 5% posterior low estimate (i.e. lower bound of uncertainty interval) for severity index -->
+<!-- 23. `severity_index_median` posterior median estimate (point estimate) for severity index, which comes from a Bayesian latent variable model aggregating across policy types to measure country-level policy severity (see paper on our website) -->
+<!-- 24. `severity_index_5perc` 95% posterior high estimate (i.e. upper bound of uncertainty interval) for severity index -->
+
+## `coronanet_release_allvars.csv` Field Dictionary {-}
+
+1. All of the fields listed above, plus
+2. `tests_daily_or_total` Whether a country reports the daily count of tests a cumulative total
+3. `tests_raw` The number of reported tests collected from host country websites or media reports
+4. `deaths` The number of COVID-19 deaths, aggregated to the country-day level (JHU CSSE data)
+5. `confirmed_cases` The number of confirmed cases of COVID-19, aggregated to the country-day level (JHU CSSE data)
+6. `recovered` The number of recoveries from COVID-19,  aggregated to the country-day level (JHU CSSE data)
+7. `ccode` The Correlates of War country code
+8. `ifs` IMF IFS country code
+
+9. `Rank_FP` (most recent year available from Niehaus dataset) Reporters without Borders Press Freedom Annual Ranking
+10. `Score_FP` (most recent year available from Niehaus dataset) Reporters with Borders Press Freedom Score
+11. `state_IDC` (most recent year available from Niehaus dataset) State/Provincial Governments Locally Elected
+12. `muni_IDC` (most recent year available from Niehaus dataset) Municipal Governments Locally Elected
+13. `dispersive_IDC` (most recent year available from Niehaus dataset) Dispersive Powersharing 
+14. `constraining_IDC` (most recent year available from Niehaus dataset) Constraining Powersharing 
+15. `inclusive_IDC` (most recent year available from Niehaus dataset) Inclusive powersharing 
+16. `sfi_SFI` (most recent year available from Niehaus dataset) State fragility index
+17. `ti_cpi_TI` (most recent year available from Niehaus dataset) Corruption perceptions index
+18. `pop_WDI_PW` (most recent year available from Niehaus dataset) World Bank population
+19. `gdp_WDI_PW` (most recent year available from Niehaus dataset) World Bank GDP (total)
+20. `gdppc_WDI_PW` (most recent year available from Niehaus dataset) World Bank GDP per capita
+21. `growth_WDI_PW` (most recent year available from Niehaus dataset) World Bank GDP growth percent
+22. `lnpop_WDI_PW` (most recent year available from Niehaus dataset) Log of World Bank population
+23. `lngdp_WDI_PW` (most recent year available from Niehaus dataset) Log of World Bank GDP
+24. `lngdppc_WDI_PW` (most recent year available from Niehaus dataset) Log of World Bank GDP per capita
+25. `disap_FA` (most recent year available from Niehaus dataset) 3 category, ordered variable for disappearances index
+26. `polpris_FA` (most recent year available from Niehaus dataset) 3 category, ordered variable for political imprisonment index
+27. `latentmean_FA` (most recent year available from Niehaus dataset) the posterior mean of the latent variable index for human rights protection)
+28. `transparencyindex_HR` (most recent year available from Niehaus dataset) Transparency Index
+29. `EmigrantStock_EMS` (most recent year available from Niehaus dataset) Total emmigrant stock from
+30. `v2x_polyarchy_VDEM` (most recent year available from Niehaus dataset) Electoral democracy index
+31. `news_WB` (most recent year available from Niehaus dataset) Daily newspapers (per 1,000 people)
+
+## Appendix C: List of Contributors to Dataset {-}
 
 ```{r ratable}
 

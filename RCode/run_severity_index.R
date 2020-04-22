@@ -166,12 +166,13 @@ comp_days <- distinct(clean_comp,date_start,total_day) %>%
 
 # do preliminary analysis
 
-countries <- c("United States of America","Germany","Brazil","Switzerland","Israel","Kenya","Hungary",
-               "Slovenia","Angola","Turkey")
+countries <- c("United States of America","Germany","Brazil","Switzerland","Israel")
 
 to_make <- ungroup(distinct(clean_comp)) %>% 
-  #filter(country %in% countries) %>% 
-  filter(date_start<ymd("2020-04-10")) %>% 
+  filter(country %in% countries) %>% 
+  filter(date_start<ymd("2020-04-10"),
+         date_start>ymd("2020-02-15"),
+         !(date_start %in% comp_days$date_start[comp_days$diff==0])) %>% 
            id_make(outcome_disc="combine_disc",
                    person_id="country",
                    ordered_id="ordered_id",
@@ -179,22 +180,22 @@ to_make <- ungroup(distinct(clean_comp)) %>%
 
 # note no missing data :)
 
-# activity_fit <- id_estimate(to_make,vary_ideal_pts="random_walk",ncores=4,nchains=4,niters=500,
-#                             warmup=300,
-#             fixtype="prefix",
-#             restrict_ind_high="gatherings",
-#             restrict_ind_low="Curfew_",
-#             id_refresh = 10,
-#             const_type="items")
+activity_fit <- id_estimate(to_make,vary_ideal_pts="random_walk",ncores=2,nchains=2,niters=500,
+                            warmup=300,
+            fixtype="prefix",
+            restrict_ind_high="Quarantine/Lockdown_type_self_quarantine",
+            restrict_ind_low="Restriction of Non-Essential Businesses_type_bars",
+            id_refresh = 10,
+            const_type="items")
 
-activity_fit <- parallel::mclapply(1:4, function(i) {
-  id_estimate(to_make,vary_ideal_pts="random_walk",ncores=1,nchains=1,niters=500,warmup=300,
-                            fixtype="prefix",
-                            restrict_ind_high="Quarantine/Lockdown_type_self_quarantine",
-                            restrict_ind_low="Restriction of Non-Essential Businesses_type_bars",
-                            id_refresh = 10,
-                            const_type="items")
-  },mc.cores=4)
+# activity_fit <- parallel::mclapply(1:4, function(i) {
+#   id_estimate(to_make,vary_ideal_pts="random_walk",ncores=1,nchains=1,niters=500,warmup=300,
+#                             fixtype="prefix",
+#                             restrict_ind_high="Quarantine/Lockdown_type_self_quarantine",
+#                             restrict_ind_low="Restriction of Non-Essential Businesses_type_bars",
+#                             id_refresh = 10,
+#                             const_type="items")
+#   },mc.cores=4)
 
 saveRDS(activity_fit,"data/activity_fit.rds")
 
