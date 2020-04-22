@@ -17,21 +17,21 @@ institute:
   - tum: Hochschule für Politik at the Technical University of Munich (TUM) and TUM School of Governance
   - nyuad: New York University Abu Dhabi
   - yale: Yale University
-date: "April 10th, 2020"
+date: "April 22th, 2020"
 toc: false
 bibliography: BibTexDatabase.bib
 output: 
   #bookdown::word_document2
   bookdown::pdf_document2:
     keep_tex: true
-    # latex_engine: xelatex
+    latex_engine: xelatex
     includes:
       in_header:
           preamble.tex
     pandoc_args:
       - '--lua-filter=scholarly-metadata.lua'
       - '--lua-filter=author-info-blocks.lua'
-abstract: "As the COVID-19 pandemic spreads around the world, governments have implemented a broad set of policies to limit the spread of the pandemic. In this paper we present an initial release of a large hand-coded dataset of more than 6,500 separate policy announcements from governments around the world. This data is being made publicly available, in combination with other data that we have collected (including COVID-19 tests, cases, and deaths) as well as a number of country-level covariates. Due to the speed of the COVID-19 outbreak, we will be releasing this data on a daily basis with a 5-day lag for record validity checking. In a truly global effort, our team is comprised of more than 190 research assistants across 18 time zones and makes use of cloud-based managerial and data collection technology in addition to machine learning coding of news sources. We analyze the dataset with a Bayesian time-varying ideal point model showing the quick acceleration of more harsh policies across countries beginning in mid-March and continuing to the present. While some relatively low-cost policies like task forces and health monitoring began early, countries generally adopted more harsh measures within a narrow time window, suggesting strong policy diffusion effects.^[We thank the very large number of research assistants who coded this data. Their names and affiliations are listed in the appendix. We also thank the Chair of International Relations at the Hochschule für Politik at the Technical University of Munich (TUM) for their support of this project. For the most current, up to date version of the dataset, please visit http://coronanet-project.org and also our Github page at https://github.com/saudiwin/corona_tscs. For more information on the exact variables collected, please see our publicly available codebook [at this link](https://docs.google.com/document/d/1zvNMpwj0onFvUZ_gLl4RRjqS-clbHv3TIX6EOHofsME/edit?usp=sharing).]"
+abstract: "From the timing of the initial report of COVID-19 in Wuhan, China to the World Health Organization to its devastating spread in Northern Italy, the  epidemiology of the COVID-19 pandemic has been shaped as much by its pathology as by the reactions of governments around the world to it. Indeed, the variety and rapidity of government policy made in response to COVID-19 arguably rivals any change in its underlying pathology. While much still remains unknown about the latter, we seek to address the former by presenting an initial release of a large hand-coded dataset of more than 6,500 separate policy announcements from governments around the world. This data is being made publicly available, in combination with other data that we have collected (including COVID-19 tests, cases, and deaths) as well as a number of country-level covariates. Due to the speed of the COVID-19 outbreak, we will be releasing this data on a daily basis with a 5-day lag for record validity checking. In a truly global effort, our team is comprised of more than 190 research assistants across 18 time zones and makes use of cloud-based managerial and data collection technology in addition to machine learning coding of news sources. We analyze the dataset with a Bayesian time-varying ideal point model showing the quick acceleration of more harsh policies across countries beginning in mid-March and continuing to the present. While some relatively low-cost policies like task forces and health monitoring began early, countries generally adopted more harsh measures within a narrow time window, suggesting strong policy diffusion effects.^[We thank the very large number of research assistants who coded this data. Their names and affiliations are listed in the appendix. We also thank the Chair of International Relations at the Hochschule für Politik at the Technical University of Munich (TUM) for their support of this project and the TUM School of Management for their help in providing access to Qualtrics. For the most current, up to date version of the dataset, please visit http://coronanet-project.org and also our Github page at https://github.com/saudiwin/corona_tscs. For more information on the exact variables collected, please see our publicly available codebook [at this link](https://docs.google.com/document/d/1zvNMpwj0onFvUZ_gLl4RRjqS-clbHv3TIX6EOHofsME/edit?usp=sharing).]"
 ---
 
 ```{r setup, include=FALSE}
@@ -101,7 +101,7 @@ With the help of a team of over 190 research assistants in 18 time zones, we are
 
 Data on government reactions the COVID-19 pandemic will not only help policy makers and researchers understand which policies are more effective in addressing the spread and health outcomes of COVID-19 [@flaxman2020], it will also forward collective knowledge of its effects on societies and econnomies, including, inter alia, the relative responsiveness of different political regime types [@przeworski1999democracy; @gailmard2019preventing], the politics of crisis management [@boin2016politics], the development of financial crises [@kindleberger2011manias], and the sociology of natural disasters [@tierney2007margins]. Meanwhile, government reactions to the COVID-19 epidemic will have long-lasting implications on a wide-range of social phenomena, from the evolution of political institutions [@pierson2000increasing; @svolik2012politics; @kitschelt2007patrons] to the progression of economic development [@nunn2009importance; @kilian2009not; @noy2009macroeconomic]  to say nothing of its potential ramifications for environmental outcomes [@dasgupta2002confronting; @folke2006resilience], mental health [@galea2003trends; @gifford2014environmental], or disaster preparedness [@blaikie2014risk]. Given the exogenous timing of the initial outbreak in China, government policies made in reaction to the COVID-19 pandemic constitute the single largest natural experiment in recent memory, allowing researchers to improve causal inference in any number of fields. While scholars have always sought to understand how large-scale historical events have shaped contemporary phenomena, modern technological tools allow us to document such events more quickly and more precisely than ever before.  
 
-In what follows, we provide a description of the data, as well the application of our data in modeling the policy activity of countries over time. Using a Bayesian dynamic item-response theory model, we produce a statistically valid index that summarizes countries in terms of their response to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented. In the appendix we provide a thorough discussion of the procedures used to collate and manage the 200 research assistants coding this data around the world in real time.
+In what follows, we provide a description of the data, as well the application of our data in modeling the policy activity of countries over time. Using a Bayesian dynamic item-response theory model, we produce a statistically valid index that summarizes countries in terms of their response to the pandemic, and also shows how quickly policy responses have changed over time. We document clear evidence of rapid policy diffusion of harsh measures opposing the virus, indicating some of the most extensive evidence of this type of diffusion ever documented. In the methodology section, we provide a thorough discussion of the procedures used to collate and manage the 200 research assistants coding this data around the world in real time.
 
 # Dataset Overview
 
@@ -308,7 +308,7 @@ clean_data %>%
 ```
 
 
-We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g. 'external border restrictions', 'quarantine'). For example, in Figure \@ref(fig:biofe), we map a network of bans on inbound flights to European countries initiated by European countries^[In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican] as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied.^[[See @longabaugh2012 for more information on how to interpret this plot. ]] The figure shows that by March 15, 2020, the governments of Poland and San Marino had banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira, Portugal had banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland. Additionally, the government of Italy banned incoming flights from China while the government of Albania banned incoming flights from Greece. According to our data, no other countries in Europe had banned inbound flights from other countries. 
+We can also explore the extent to which other countries are affected by policies that can have a geographic target outside the policy initiator (e.g. 'external border restrictions', 'quarantine'). For example, in Figure \@ref(fig:biofe), we map a network of bans on inbound flights to European countries initiated by European countries^[In this paper, the following countries are defined as being in Europe: Albania, Andorra, Armenia, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Georgia, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Liechtenstein, Lithuania, Luxembourg, Macedonia, Malta, Moldova, Monaco, Montenegro, Netherlands, Norway, Poland, Portugal, Romania, San Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom, and the Vatican] as of March 15, 2020. In the plot, each horizontal line represents a potential geographical target of a flight ban. The vertical lines denote whether there was such a flight ban and the arrow of the vertical line indicates the direction in which the ban is applied.^[See @longabaugh2012 for more information on how to interpret this plot.] The figure shows that by March 15, 2020, the governments of Poland and San Marino had banned all flights into Poland and San Marino respectively while the government of the autonomous region of Madeira, Portugal had banned flights from Denmark, Finland, France, Germany, Spain, and Switzerland. Additionally, the government of Italy banned incoming flights from China, Hong Kong, Macau and Taiwan; the government of Albania banned incoming flights from Italy and Greece. Greence and Romania both banned flights from Italy. According to our data, no other countries in Europe had banned inbound flights from other countries. 
 
 ```{r, results='hide'}
 
@@ -388,6 +388,20 @@ plotBioGraph = function(regionName,
   #Tunisia target who what should be 'other' for students
   sub_data = sub_data %>% filter(record_id %!in% c( 7066331))
   
+  # add data for italy's ban of inbound flights from Taiwan, Hong Kong and Macau
+  # currently not in the data but we should add these entries
+  # https://www.reuters.com/article/china-health-taiwan-italy/italy-says-taiwan-flight-resumption-request-noted-after-virus-ban-idUSL4N2A52YR
+  
+  sub_data = sub_data %>% add_row(init_country = 'Italy', target_country = 'Taiwan', type = 'External Border Restrictions', target_direction = 'Inbound', travel_mechanism = "Flights", date_start = as.Date("2020-02-02"), region = 'Europe')
+    sub_data = sub_data %>% add_row(init_country = 'Italy', target_country = 'Hong Kong', type = 'External Border Restrictions', target_direction = 'Inbound', travel_mechanism = "Flights", date_start = as.Date("2020-02-02"), region = 'Europe')
+     sub_data = sub_data %>% add_row(init_country = 'Italy', target_country = 'Macau', type = 'External Border Restrictions', target_direction = 'Inbound', travel_mechanism = "Flights", date_start = as.Date("2020-02-02"), region = 'Europe')
+
+     # add data for greece's ban of inbound/outbound flights from Italy
+     # https://www.reuters.com/article/us-health-coronavirus-greece-death/greece-reports-two-more-coronavirus-fatalities-suspends-all-flights-to-italy-idUSKBN2110H1
+       sub_data = sub_data %>% add_row(init_country = 'Greece', target_country = 'Italy', type = 'External Border Restrictions', target_direction = 'Inbound', travel_mechanism = "Flights", date_start = as.Date("2020-03-14"), region = 'Europe')
+     
+     
+  
   # expand dataset to include disaggregated country data when applicable
   sub_data[which(sub_data$target_country == 'All countries'), 'target_country'] = paste(cid$country_name, collapse = ',')
   sub_data = sub_data %>% separate_rows(target_country, sep = ',')
@@ -434,7 +448,7 @@ plotBioGraph("Europe", "External Border Restrictions", "2020-03-15")
 
 In this section we briefly present our new index for tracking the relative government activity with regards to policies targeting COVID-19 across countries and over time. The model is a version of item-response theory known as ideal point modeling that incorporates over-time trends [@kubinec2019ideal;@jackman2004;@gelman2005;@quinn2002], permitting inference on how a latent construct, in this case total policy activity, is responding to changes in the pandemic. To fit the model, the different policy types shown in Table \@ref(tab:desctab) were coded in ordinal values, with lower values for sub-national targets of policies and larger values for policies applying to the entire country, or in the case of external border restrictions, to one or more external countries. For internal country policies, three possible values were coded as no policy, sub-national policy, or policy covering the whole country. For external border restrictions, four possible values were coded as no policy, policy targeting one other country, policy targeting multiple countries, and policy targeting all countries in the world (i.e, border closure).  
 
-The reason that ideal point modeling was employed is because it can be given a latent utility interpretation [@@jackman2004]. The model assumes that the countries are located in a latent space in which distance between countries and policies represents the relative cost of imposing different policies. As countries are more willing to pay these costs, i.e. their ideal points/policy activity score rises, they then subsequently implement more policies. This interpretation is similar to the traditional item-response theory approach for analyzing test questions in which students who answer more questions on a test are considered to have higher "ability" [@takane1986; @reckase2009]. In either case, we are able to estimate latent country scores that represent the readiness of a country to impose a set number of policies. The cost of policies is estimated via discrimination parameters, which indicate how strongly policies discriminate between countries (in other words, are an indication of relative cost).
+Ideal point modeling was employed because it can be given a latent utility interpretation [@jackman2004]. The model assumes that the countries are located in a latent space in which distance between countries and policies represents the relative cost of imposing different policies. As countries are more willing to pay these costs, i.e. their ideal points/policy activity score rises, they then subsequently implement more policies. This interpretation is similar to the traditional item-response theory approach for analyzing test questions in which students who answer more questions on a test are considered to have higher "ability" [@takane1986; @reckase2009]. In either case, we are able to estimate latent country scores that represent the readiness of a country to impose a set number of policies. The cost of policies is estimated via discrimination parameters, which indicate how strongly policies discriminate between countries (in other words, are an indication of relative cost).
 
 The country-level policy activity score is further allowed to vary over time in a random-walk process with a country-specific variance parameter to incorporate heteroskedasticity [@quinn2002]. Incorporating over-time trends explicitly is very important for the index to capture the nuances of policy implementation over time. For example, countries that impose more restrictive policies at an earlier date will be rewarded with higher policy activity scores compared to those who impose such policies at a later date. Imposing a given policy when most countries have already imposed them will result in little if any change in the policy activity score. 
 
@@ -527,72 +541,65 @@ Surprisingly, at the top of the index we see school closure as the most difficul
 
 Given this distribution of discrimination parameters, we believe the index is a valid representation of the underlying process by which states progressively impose more difficult policies. As states relax policies, we will further gain information about which policies appear to be more costly as we can factor in the duration for which these policies were implemented. In validation of our method, we see that the announced relaxation policies happening in European countries primarily center on businesses and school openings, suggesting that these policies are uniquely costly to keep in place compared to travel restrictions.^[See https://www.theguardian.com/world/2020/apr/19/the-exit-strategy-how-countries-around-the-world-are-preparing-for-life-after-covid-19.]
 
-```{r rankcount}
+ ```{r rankcount}
 
-# out_items <- summary(severity_fit,pars="items") %>% 
-#   filter(`Item Type`=="Non-Inflated Discrimination")
-# 
-# saveRDS(out_items,'../data/out_items.rds')
+ # out_items <- summary(severity_fit,pars="items") %>%
+ #   filter(`Item Type`=="Non-Inflated Discrimination")
+ #
+ # saveRDS(out_items,'../data/out_items.rds')
 
-out_items <- readRDS("../data/out_items.rds")
+ out_items <- readRDS("../data/out_items.rds")
 
-out_items %>% 
-  mutate(`Item Name`=recode(`Item Name`, `Closure of Schools`="All Schools",
-                `Closure of Schools_type_highered`="Higher Ed Closure",
-                `Closure of Schools_type_preschool`="Pre-school Closure",
-                `Closure of Schools_type_primaryschool`="Primary School Closure",
-                `Closure of Schools_type_secondschool`="High School Closure",
-                `External Border Restrictions_type_screenings`="Border Health Screenings",
-                `Health Resources`="General Health Resources",
-                `Health Resources_type_health_masks`="Masks Policies",
-                `Health Resources_type_health_other`="Other Health Resources",
-                `Health Resources_type_health_staff`="Health Staff",
-                `Health Resources_type_sanitizer`="Sanitizer Policies",
-                `Health Resources_type_temporary`="Temporary Medical Units",
-                `Health Resources_type_testing`="Test Production",
-                `Quarantine/Lockdown`="Other Quarantines",
-                `Quarantine/Lockdown_type_govt_quar`="Quarantine in Govt. Facility",
-                `Quarantine/Lockdown_type_quar_restrict`="Limited Quarantine",
-                `Quarantine/Lockdown_type_screenings`="Quarantine Screenings",
-                `Quarantine/Lockdown_type_self_quarantine`="Quarantine At Home",
-                `Restriction of Non-Essential Businesses`="General Business Restrictions",
-                `Restriction of Non-Essential Businesses_type_bars`="Closure of Restaurants",
-                `Restriction of Non-Essential Businesses_type_grooming`="Closure of Personal Grooming",
-                `Restriction of Non-Essential Businesses_type_retail`="Closure of Retail Stores",
-                `Restriction of Non-Essential Businesses_type_shopping`="Closure of Shopping Malls")) %>% 
-  select(Policy="Item Name",`5% Low Estimate`="Low Posterior Interval",
-         `Median Estimate`="Posterior Median",
-         `95% High Estimate`="High Posterior Interval") %>%
-  mutate(`Median Estimate`=ifelse(Policy=="Closure of Restaurants",
-                                  `Median Estimate`*-1,
-                                  `Median Estimate`),
-         `5% Low Estimate`=ifelse(Policy=="Closure of Restaurants",
-                                  `5% Low Estimate`*-1,
-                                  `5% Low Estimate`),
-         `95% High Estimate`=ifelse(Policy=="Closure of Restaurants",
-                                  `95% High Estimate`*-1,
-                                  `95% High Estimate`)) %>% 
-  arrange(desc(`Median Estimate`)) %>%
-  mutate_at(c("5% Low Estimate","Median Estimate","95% High Estimate"),~round(.,1)) %>%
-    knitr::kable("latex",booktabs=T,longtable=T,
-               caption="Discrimination of Item Parameters (Policies) in Policy Activity Index") %>%
-  kable_styling(latex_options = c("striped", "hold_position")) %>%
-  column_spec(1,width="4cm") %>%
-  column_spec(2:5,width="2.5cm")
+ out_items %>%
+   mutate(`Item Name`=recode(`Item Name`, `Closure of Schools`="All Schools",
+                 `Closure of Schools_type_highered`="Higher Ed Closure",
+                 `Closure of Schools_type_preschool`="Pre-school Closure",
+                 `Closure of Schools_type_primaryschool`="Primary School Closure",
+                 `Closure of Schools_type_secondschool`="High School Closure",
+                 `External Border Restrictions_type_screenings`="Border Health Screenings",
+                 `Health Resources`="General Health Resources",
+                 `Health Resources_type_health_masks`="Masks Policies",
+                 `Health Resources_type_health_other`="Other Health Resources",
+                 `Health Resources_type_health_staff`="Health Staff",
+                 `Health Resources_type_sanitizer`="Sanitizer Policies",
+                 `Health Resources_type_temporary`="Temporary Medical Units",
+                 `Health Resources_type_testing`="Test Production",
+                 `Quarantine/Lockdown`="Other Quarantines",
+                 `Quarantine/Lockdown_type_govt_quar`="Quarantine in Govt. Facility",
+                 `Quarantine/Lockdown_type_quar_restrict`="Limited Quarantine",
+                 `Quarantine/Lockdown_type_screenings`="Quarantine Screenings",
+                 `Quarantine/Lockdown_type_self_quarantine`="Quarantine At Home",
+                 `Restriction of Non-Essential Businesses`="General Business Restrictions",
+                 `Restriction of Non-Essential Businesses_type_bars`="Closure of Restaurants",
+                 `Restriction of Non-Essential Businesses_type_grooming`="Closure of Personal Grooming",
+                 `Restriction of Non-Essential Businesses_type_retail`="Closure of Retail Stores",
+                 `Restriction of Non-Essential Businesses_type_shopping`="Closure of Shopping Malls")) %>%
+   select(Policy="Item Name",`5% Low Estimate`="Low Posterior Interval",
+          `Median Estimate`="Posterior Median",
+          `95% High Estimate`="High Posterior Interval") %>%
+   mutate(`Median Estimate`=ifelse(Policy=="Closure of Restaurants",
+                                   `Median Estimate`*-1,
+                                   `Median Estimate`),
+          `5% Low Estimate`=ifelse(Policy=="Closure of Restaurants",
+                                   `5% Low Estimate`*-1,
+                                   `5% Low Estimate`),
+          `95% High Estimate`=ifelse(Policy=="Closure of Restaurants",
+                                   `95% High Estimate`*-1,
+                                   `95% High Estimate`)) %>%
+   arrange(desc(`Median Estimate`)) %>%
+   mutate_at(c("5% Low Estimate","Median Estimate","95% High Estimate"),~round(.,1)) %>%
+     knitr::kable("latex",booktabs=T,longtable=T,
+                caption="Discrimination of Item Parameters (Policies) in Policy Activity Index") %>%
+   kable_styling(latex_options = c("striped", "hold_position")) %>%
+   column_spec(1,width="4cm") %>%
+   column_spec(2:5,width="2.5cm")
 
-```
- 
+ ```
+
 Finally, we note in Figure \@ref(fig:plotindex) the strong evidence of policy diffusion effects. While information about COVID-19 existed at least as early as January, we do not see large-scale changes occurring in activity scores until March. Furthermore, the trajectories are highly non-linear, with a large number of countries quickly transitioning from relatively low to relatively high scores. This tandem movement is a strong indication of policy diffusion as countries adopted similar policies across time and space as opposed to a more linear learning process.
 
-# Conclusion
 
-As policymakers, researchers and the broader public debate and compare how to succeed against the novel threats posed by COVID-19, they need real-time, traceable data on government policies in order to understand which of these policies are effective, and under what conditions.  This requires specific knowledge of the variation in policies and their implementation. The goal of the dataset and policy action index presented here is to provide this information. 
-
-We have tried to match our data collection efforts to keep up with the exponential speed with which the coronavirus has already upended global public health and the international economy while also maintaining high levels of quality. However, we will inevitably be refining, revising and updating our data to reflect new knowledge and trends as the pandemic unfolds. The data that we present in this first version of the dataset represents only the initial release of the data, and we will continue to validate and release data so long as governments continue to develop policies in response to the coronavirus.
-
-In future work, we intend to analyze the policy combinations that are best able to stymie the epidemic so as to contribute to the social science research community and provide urgently needed knowledge for policymakers and the wider global community.
-
-## Appendix A: Data Collection Methodology {-}
+## Data Collection Methodology {-}
 
 As researchers learn more about the various health, economic, and social effects of the coronavirus pandemic, it is crucial that they have access to data that is reliable, valid, and timely (to the greatest extent possible). We have adopted a data collection methodology that we believe optimizes over all three of these constraints.
 
@@ -600,15 +607,15 @@ To collect the data, we recruited more than 190 research assistants (RAs) from c
 
 We have also partnered with the machine learning company Jataware to automate the collection of more than 200,000 news articles from around the world related to COVID-19.^[We thank Brandon Rose and Jataware for making the news database available to this project.] Jataware employs a natural language processing (NLP) classifier using Bidirectional Encoder Representations from Transformers (BERT) to detect whether a given article is indicative of a governmental policy intervention related to COVID-19. They then apply a secondary NLP classifier to categorize the type of policy intervention (e.g. "state of emergency", "shelter-in-place", "quarantine", "travel restrictions", etc). Next, Jataware extracts the geospatial and temporal extent of the policy intervention (e.g. “Washington DC” and “March 15, 2020”) whenever possible. The resulting list of news sources is then provided to our RAs for manual coding and further data validation.
 
-In what follows, we describe in greater detail how RAs then document the policies that they find using our data collection softward instrument, our procedure for on-boarding and training RAs, our system for communicating and organizing RAs, and our post data-collection validation procedure. 
+In what follows, we describe in greater detail how RAs then document the policies that they find using our data collection software instrument, our procedure for on-boarding and training RAs, our system for communicating and organizing RAs, and our post data-collection validation procedure. 
 
 ## Data Collection Software Instrument
 
-We designed a Qualtrics survey with survey questions about different aspects of a government policy action to streamline the CoronaNet data collection effort. With this tool, RAs can easily and efficiently document different policy actions by answering the relevant questions posed in the survey. For example, instead of entering the country that initiated a policy action into a spreadsheet, RAs answer the following question in the survey: "From what country does this policy originate from?" and choose from the available options given in the survey.
+We designed a Qualtrics survey with survey questions about different aspects of a government policy action to streamline the CoronaNet data collection effort. With this tool, RAs can easily and efficiently document different policy actions by answering the relevant questions posed in the survey.^[See @buthe2020 for an example of a similar use of Qualtrics in collecting data.] For example, instead of entering the country that initiated a policy action into a spreadsheet, RAs answer the following question in the survey: "From what country does this policy originate from?" and choose from the available options given in the survey.
 
 By using a survey instrument to collect data, we are able to systematize the collection of very fine-grained data while avoiding coding errors common to tools like shared spreadsheets. The value of this approach of course, depends on the comprehensiveness of the questions posed in the survey, especially in terms of the universe of policy actions that countries have implemented against COVID-19. For example, if the survey only allowed RAs to select 'quarantines' as a government policy, it would not capture any data on 'external border restrictions', which would seriously reduce the value of the resulting data. 
 
-As such, to ensure the comprehensiveness of the data, before designing the survey, we collected in depth, over-time data on policy actions taken by one country, Taiwan, since the beginning of the outbreak as well as cross-national data on travel bans implemented by most countries for a total of 245 events.^[The specific data source the PI cross referenced for this effort was the March 20, 2020 version of the following New York Times article Salcedo, Andrea and Gina Cherelus, "Coronavirus Travel Restrictions, Across the Globe" *New York Times*, 20 March 2020, https://www.nytimes.com/article/coronavirus-travel-restrictions.html] We chose to focus on Taiwan on because of its relative success, as of March 28, 2020, in limiting the negative health consequences of the coronavirus within its borders.^[Beech, Hannah. "Tracking the Coronavirus: How Crowded Asian Cities Tackled an Epidemic." *New York Times* 18 March 2020 https://www.nytimes.com/2020/03/17/world/asia/coronavirus-singapore-hong-kong-taiwan.html] As such, it seems likely that other countries may choose to emulate some of the policy measures that Taiwan had implemented, which helps increase the comprehensiveness of the questions we ask in our survey. Meanwhile, by also investigating variation in how different countries around the world have implemented travel restrictions, we have also helped ensure that our survey is able to comprehensively document variation in how an important and commonly used policy tool is applied, e.g. restrictions of different methods of travel (e.g. flights, cruises), restrictions across borders and within borders, restrictions targeted toward people of different status (e.g. citizens, travelers).
+As such, to ensure the comprehensiveness of the data, before designing the survey, we collected in depth, over-time data on policy actions taken by one country, Taiwan, since the beginning of the outbreak as well as cross-national data on travel bans implemented by most countries for a total of 245 events.^[The specific data source we cross referenced for this effort was the March 20, 2020 version of the following New York Times article Salcedo, Andrea and Gina Cherelus, "Coronavirus Travel Restrictions, Across the Globe" *New York Times*, 20 March 2020, https://www.nytimes.com/article/coronavirus-travel-restrictions.html] We chose to focus on Taiwan on because of its relative success, as of March 28, 2020, in limiting the negative health consequences of the coronavirus within its borders.^[Beech, Hannah. "Tracking the Coronavirus: How Crowded Asian Cities Tackled an Epidemic." *New York Times* 18 March 2020 https://www.nytimes.com/2020/03/17/world/asia/coronavirus-singapore-hong-kong-taiwan.html] As such, it seems likely that other countries may choose to emulate some of the policy measures that Taiwan had implemented, which helps increase the comprehensiveness of the questions we ask in our survey. Meanwhile, by also investigating variation in how different countries around the world have implemented travel restrictions, we have also helped ensure that our survey is able to comprehensively document variation in how an important and commonly used policy tool is applied, e.g. restrictions of different methods of travel (e.g. flights, cruises), restrictions across borders and within borders, restrictions targeted toward people of different status (e.g. citizens, travelers).
 
 <!-- As a last step, the team also consulted the ACAPS COVID-19: Government Measures Dataset^[https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset] to validate the comprehensiveness of the policy measures considered in the survey instrument.  -->
 
@@ -685,8 +692,15 @@ In addition to the steps taken above in the data collection process, we also imp
 
 If the majority achieves consensus, then we consider the entry valid. If a discrepancy exists, a fourth RA or PI evaluates between the three entries to determine whether one, some, a combination of all three is most accurate. Reconciled policies are then entered into the dataset as a correction for full transparency. If an RA was found to have made a coding mistake, then we sample six of their previous entries: 3 entries which correspond to the type of mistake made^[e.g. if the RA incorrectly codes an 'External Border Restriction' as a 'Quarantine', we sample 3 entries where the RA has coded a policy as being about a 'Quarantine.'] and randomly sample 3 more entries to ascertain whether the mistake was systematic or not. If systematic errors are found, entries coded by that individual will be entirely recoded by a new RA.
 
+# Conclusion
 
-## Appendix B: Description of Dataset Fields {-}
+As policymakers, researchers and the broader public debate and compare how to succeed against the novel threats posed by COVID-19, they need real-time, traceable data on government policies in order to understand which of these policies are effective, and under what conditions.  This requires specific knowledge of the variation in policies and their implementation. The goal of the dataset and policy action index presented here is to provide this information. 
+
+We have tried to match our data collection efforts to keep up with the exponential speed with which the coronavirus has already upended global public health and the international economy while also maintaining high levels of quality. However, we will inevitably be refining, revising and updating our data to reflect new knowledge and trends as the pandemic unfolds. The data that we present in this first version of the dataset represents only the initial release of the data, and we will continue to validate and release data so long as governments continue to develop policies in response to the coronavirus.
+
+In future work, we intend to analyze the policy combinations that are best able to stymie the epidemic so as to contribute to the social science research community and provide urgently needed knowledge for policymakers and the wider global community.
+
+## Appendix A: Description of Dataset Fields {-}
 
 The format of the data is in country-day-`record_id` format. Some `record_id` values have letters appended to indicate that the general policy category `type` also has a value for `type_sub_cat`, which contains more detail about the policy, such as whether health resources refers to masks, ventilators, or hospitals. Some entries are marked as `new_entry` in the `entry_type` field for when a policy of that type was first implemented in the country. Later updates to those policies are marked as updates in `entry_type`. To see how policies are connected, look at the `policy_id` field for all policies from the first entry through updates for a given country/province/city. If an entry was corrected after initial data collection, it will read corrected in the `entry_type` field (the original incorrect data has already been replaced with the corrected data). 
 
@@ -767,7 +781,7 @@ The format of the data is in country-day-`record_id` format. Some `record_id` va
 30. `v2x_polyarchy_VDEM` (most recent year available from Niehaus dataset) Electoral democracy index
 31. `news_WB` (most recent year available from Niehaus dataset) Daily newspapers (per 1,000 people)
 
-## Appendix C: List of Contributors to Dataset {-}
+## Appendix B: List of Contributors to Dataset {-}
 
 ```{r ratable}
 
