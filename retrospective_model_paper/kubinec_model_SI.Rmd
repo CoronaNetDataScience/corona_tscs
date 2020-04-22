@@ -124,9 +124,8 @@ This model contains an unobserved latent process $I_{ct}$, and as such there are
 The most important restrictions are positivity constraints on the parameters $\beta_a$ and $\beta_q$ that govern the relationship between the infection rate and test and case counts.
 It is assumed that infection rates will increase both the number of tests and the number of cases relative to the number of tests, though at necessarily different rates.
 
-The other important restriction is to fix the intercept for the cases model $\alpha_3$ to a fixed value of 0.1, or -2.2 on the logit scale. The reason for this restriction is because the intercept necessarily equals the false positive rate of a COVID-19 test.
-While there is still ongoing research as to the false positive rate, it is clear that it is likely in the area of 1 in 10 false positives for rapid tests.^[For a discussion, see https://www.realclearpolitics.com/articles/2020/03/18/the_perils_of_mass_coronavirus_testing_142693.html.]
-As such, by pinning this value, we can lower-bound the number of cases we are likely to see given an infection rate of zero, providing a helpful lower-bound for the estimate.
+To add further indentification, it would be possible to fix or put an informative prior on $\alpha_3$ as the intercept necessarily equals the false positive rate of a COVID-19 test.
+The actual false positive rate of the tests being used for the virus are as yet unknown.^[For a discussion, see https://www.realclearpolitics.com/articles/2020/03/18/the_perils_of_mass_coronavirus_testing_142693.html.] For the purposes of this simulation, we will allow $\alpha_3$ to float as it will not affect identification of the sign of the covariates.
 
 As we will show, no other identification restrictions are necessary to estimate the model beyond weakly informative priors assigned to parameters.
 These are:
@@ -338,13 +337,13 @@ init_vals <- function() {
        finding = 1,
        poly = c(0, 0, 0),
        state_test = rnorm(num_state, 5, .25),
-       alpha = c(-7, 0),
+       alpha = c(-7, 0,-2),
        sigma_test_raw = 1)
 }
 
 sim_data <- list(time_all = time_points,
-                 num_state = num_state,
-                 state_pop = state_pop,
+                 num_country = num_state,
+                 country_pop = state_pop,
                  cases = check1$case_count,
                  S = 1,
                  phi_scale = 1/100,

@@ -66,7 +66,7 @@ parameters {
   row_vector[S] suppress_effect[2]; // suppression effect of govt. measures, cannot increase virus transmission rate
   vector<lower=0>[num_country] country_test_raw; // unobserved rate at which countries are willing to test vs. number of infected
   // we assume that as infection rates increase, more tests will be conducted
-  vector[2] alpha; // other intercepts
+  vector[3] alpha; // other intercepts
   vector<lower=0>[2] phi; // shape parameter for infected
   real<lower=0> sigma_test_raw; // estimate of between-state testing heterogeneity
 }
@@ -104,7 +104,7 @@ model {
     
     vector[num_country] mix_prop = inv_logit(num_infected_high[,t]);
     // locations for cases and tests
-    vector[num_country] mu_cases = inv_logit(-2.19 + finding*num_infected_high[,t]);
+    vector[num_country] mu_cases = inv_logit(alpha[3] + finding*num_infected_high[,t]);
     vector[num_country] mu_tests = inv_logit(alpha[1] + country_test_raw .* num_infected_high[,t]);
     
     tests[,t] ~ beta_binomial(country_pop,mu_tests*phi[1],(1-mu_tests)*phi[1]);
