@@ -115,7 +115,7 @@ niehaus <- read_csv("data/data_niehaus/03_21_20_0105am_wep.csv") %>%
 
 
 # load cleaned data
-
+ 
 clean_data <- readRDS("data/CoronaNet/coranaNetData_clean_wide.rds")
 
 # severity index
@@ -174,10 +174,11 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target
 type_vars <- names(release)[grepl(x=names(release),
                                   pattern="type\\_")]
 
-unique_vars <- lapply(type_vars, function(c) {
+unique_vars <- do.call(rbind, lapply(type_vars, function(c) {
   tibble(type_var=c,
          vals=unique(release[[c]]))
-}) %>% bind_rows
+}))
+ 
 
 # separate out free text entry
 
@@ -221,6 +222,7 @@ release_long <- gather(release,key="discard",value="type_text",
 release_long <- left_join(release_long,select(cats,-vals_id),by=c(extra="type_var",
                                                  "type_sub_cat"="orig_val"))
 
+
 # merge back down
 
 release_long <- distinct(release_long,record_id,policy_id,new_id,.keep_all = T) %>% 
@@ -248,8 +250,20 @@ release_long <- release_long %>%
          recorded_date<(today()-days(5))) %>% 
   mutate(type_sub_cat=ifelse(type_sub_cat=="None of the above",NA,type_sub_cat))
 
-# recode records
 
+## records that have a type_sub_cat are still 'duplicated'
+# e.g. if a policy sub type is 'Health screenings (e.g. temperature checks)" it has
+# two record_id: '[record_id]Ag' and '[record_id]NA'
+# remove the second one ('[record_id]NA')
+release_long = release_long %>% 
+  group_by(policy_id) %>%
+  filter(if (any(!is.na(type_sub_cat)))
+    !is.na(type_sub_cat)
+    else is.na(type_sub_cat)) %>%
+  ungroup()
+
+
+# recode records
 release_long$country <- recode(release_long$country,Czechia="Czech Republic",
                            `Hong Kong`="China",
                           Macau="China",
