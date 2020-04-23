@@ -88,8 +88,8 @@ qualtrics = read_survey('data/CoronaNet/coronanet_raw_latest.csv') %>%
                            `Update`="Update on Existing Entry (type in Record ID in text box) ")) %>% 
   filter(Progress>98)
 
- 
 
+ 
 # text entry cleaning ----------------------------------
 ## do this first before filtering out bad records/recoding values so that all text values have diacritics removed from them
 ## !!! NOTE probably should do this for all text entries
@@ -99,7 +99,7 @@ qualtrics = read_survey('data/CoronaNet/coronanet_raw_latest.csv') %>%
 # qualtrics$target_city  = stringi::stri_trans_general(qualtrics$target_city , "Latin-ASCII")
 # qualtrics$target_other  = stringi::stri_trans_general(qualtrics$target_other , "Latin-ASCII")
 qualtrics$target_city[which(qualtrics$target_city == 'bogota')] = "Bogota"
-
+ 
 
 # This script filters out bad records (need to remove/fix these manually so we don't do this)
 source("RCode/validation/filter_bad_records.R")
@@ -167,22 +167,23 @@ qualtrics= qualtrics[-which(is.na(qualtrics$policy_id)),]
 # check only for vars with missing
 
 miss_vars <- names(qualtrics)[sapply(qualtrics, function(c) any(is.na(c)))]
-
+ 
 qualtrics <- group_by(qualtrics,policy_id) %>% 
   arrange(policy_id,StartDate) %>% 
   fill(miss_vars,.direction=c("down"))%>% 
+  ungroup() %>%
   group_by(correct_record_match) %>% 
   arrange(correct_record_match,StartDate) %>% 
   fill(miss_vars,.direction="down")%>%
   ungroup()
- 
   
   # remove old entries
   #qualtrics = qualtrics %>% filter(!record_id %in% correction_record_ids)
   
   qualtrics <- group_by(qualtrics,correct_record_match) %>% 
   arrange(correct_record_match,desc(StartDate)) %>% 
-  slice(1)
+  slice(1) %>%
+  ungroup()
   
   
   # will need to exclude these dud records for now
@@ -190,8 +191,6 @@ qualtrics <- group_by(qualtrics,policy_id) %>%
   qualtrics <- filter(qualtrics, !is.na(type),
                       !is.na(init_country))
 
-  
- 
 
 # rename variables ----------------------------------
 
@@ -200,7 +199,7 @@ names(qualtrics)[which(names(qualtrics) %in% c("type_quarantine_days", "type_mas
 names(qualtrics)[grep(
   'type_health_resource_\\d_TEXT|type_health_resource_\\d\\d_TEXT',
   names(qualtrics)
-)] =  c(
+)] = c(
   'type_num_masks',
   'type_num_ventilators',
   'type_num_ppe',
@@ -216,7 +215,8 @@ names(qualtrics)[grep(
   'type_num_doctors',
   'type_num_nurses',
   'type_num_volunt',
-  'type_other_health_staff'
+  'type_other_health_staff',
+  'type_num_health_insurance'
 )
 
 # let's do this in tidy format
@@ -229,6 +229,7 @@ qualtrics <- gather(qualtrics,key="province",value="prov_num",matches("init\\_pr
                            "",
                            paste0(init_country,str_extract(prov_num,"[0-9]+")))) %>% 
   select(-prov_num,-province)
+
  
 # reshape country_regions data to long format
 country_regions_long = country_regions %>%
@@ -277,6 +278,8 @@ qualtrics = qualtrics[, -which(names(qualtrics) == 'target_country_sub')]
 
 qualtrics$target_country[qualtrics$target_geog_level == "All countries"] <- "All countries"
 
+
+
 # double check to make sure 'target_country' is empty when 'target_country_sub' has a value
 if (length(qualtrics[which(qualtrics$target_country_sub != ""), 'target_country'] %>% table()) == 0) {
   
@@ -301,6 +304,53 @@ qualtrics[which(qualtrics$target_geog_level == "All countries"), 'target_country
 #         file = paste0(path, "/data/CoronaNet/coranaNetData_recode_records_countries.rds"))
 
 source("RCode/validation/recode_records_countries.R")
+
+ 
+# check/clean monadic variables to be strictly monadic
+
+# create var domestic_policy which shows if init_country == target_country 
+# !!! NOTE: 'domestic_policy' is still has NA fields which need to be fixed
+# but for the purposes of cleaning/checking monadic variables, it is fine
+qualtrics = qualtrics %>% 
+  mutate(domestic_policy = if_else(init_country == target_country, 1, 0))
+
+monad_types = c('Closure of Schools',
+                'Curfew',
+                'Social Distancing',
+                'Restrictions of Mass Gatherings',
+                "Restriction of Non-Essential Government Services",
+                "Restriction of Non-Essential Businesses",
+                "New Task Force or Bureau",
+                'Declaration of Emergency') 
+ 
+ 
+
+if (dim(qualtrics %>% filter(type %in% monad_types & domestic_policy == 0))[1] == 0){
+  qualtrics = qualtrics %>% mutate(target_geog_level = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_geog_level),
+                                   target_country = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_country),
+                                   target_country_197_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_country_197_TEXT),
+                                   target_region = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_region),
+                                   target_region_14_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_region_14_TEXT),
+                                   target_geog_sublevel = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_geog_sublevel),
+                                   target_province = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_province),
+                                   target_city = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_city), 
+                                   target_other = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_other),
+                                   target_intl_org = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_intl_org),
+                                   target_who_what = ifelse(type %in% monad_types & domestic_policy == 1, "All Residents (Citizen Residents +Foreign Residents)", target_who_what),
+                                   target_who_what_10_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_who_what_10_TEXT),
+                                   target_direction = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_direction ),
+                                   travel_mechanism = ifelse(type %in% monad_types & domestic_policy == 1, NA, travel_mechanism),
+                                   travel_mechanism_9_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, travel_mechanism_9_TEXT)) 
+} else{ stop("Error: Problem with target countries for monadic policy types")}
+
+ 
+# code certain policy types to always have mandatory enforcement with legal penalties
+mandatory_types = c("Declaration of Emergency",
+                    "New Task Force or Bureau")
+
+qualtrics = qualtrics %>%
+      mutate(compliance = ifelse(type %in% mandatory_types, "Mandatory with Legal Penalties (Jail Time)", compliance))
+
 
 # save as wide clean file ---------------
 
@@ -440,7 +490,7 @@ qualtrics$target_country = str_trim(qualtrics$target_country)
     # !!! note should probably create code to clean all @'s from text entries before hand
     separate(type_sub_num, c("type_sub", 'type_sub_num'),  "@", fill = 'right')
   
-  
+ 
   # clean names so that they match what they originally were in the codebook
   qualtrics$type_sub  = gsub('type_num_', '', qualtrics$type_sub) %>% capwords()
   qualtrics$type_sub = qualtrics$type_sub %>% recode(
@@ -450,7 +500,8 @@ qualtrics$target_country = str_trim(qualtrics$target_country)
     Test_kits  = "Test Kits",
     QuaranCen = "Temporary Quarantine Centers",
     Research = "Health Research Facilities",
-    PubTest = "Public Testing Facilities (e.g. drive-in testing for COVID-19)"
+    PubTest = "Public Testing Facilities (e.g. drive-in testing for COVID-19)",
+    Health_insurance = 'Health Insturance'
   )
   
   # !!! NOTE still need to check if all the text entries for the number of a policy type make sense/find a standard format for them as much as possible
