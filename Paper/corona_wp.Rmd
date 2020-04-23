@@ -20,19 +20,19 @@ institute:
 date: "April 23th, 2020"
 toc: false
 bibliography: BibTexDatabase.bib
-#always_allow_html: yes
+always_allow_html: yes
 output: 
- # bookdown::word_document2:
-  bookdown::pdf_document2:
-    keep_tex: true
-    latex_engine: xelatex
-    includes:
-      in_header:
-          preamble.tex
+  bookdown::word_document2:
+  # bookdown::pdf_document2:
+  #   keep_tex: true
+  #   latex_engine: xelatex
+  #   includes:
+  #     in_header:
+  #         preamble.tex
     pandoc_args:
       - '--lua-filter=scholarly-metadata.lua'
       - '--lua-filter=author-info-blocks.lua'
-abstract: "From the timing of the initial report of COVID-19 in Wuhan, China to the World Health Organization to its devastating spread in Northern Italy, governments around the world have implemented a broad range of policies which have been highly influential in shaping the spread of the pandemic. In this paper, we present an initial release of a large hand-coded dataset of nearly 10,000 separate policy announcements from governments around the world. This data is being made publicly available, in combination with other data that we have collected (including COVID-19 tests, cases, and deaths) as well as a number of country-level covariates. Due to the speed of the COVID-19 outbreak, we will be releasing this data on a daily basis with a 5-day lag for record validity checking. In a truly global effort, our team is comprised of more than 220 research assistants across 18 time zones and makes use of cloud-based managerial and data collection technology in addition to machine learning coding of news sources. We analyze the dataset with a Bayesian time-varying ideal point model showing the quick acceleration of more harsh policies across countries beginning in mid-March and continuing to the present. While some relatively low-cost policies like task forces and health monitoring began early, countries generally adopted more harsh measures within a narrow time window, suggesting strong policy diffusion effects.^[We thank the very large number of research assistants who coded this data. Their names and affiliations are listed in the appendix. We also thank the Chair of International Relations at the Hochschule für Politik at the Technical University of Munich (TUM) for their support of this project and the TUM School of Management for their help in providing access to Qualtrics. For the most current, up to date version of the dataset, please visit http://coronanet-project.org and also our Github page at https://github.com/saudiwin/corona_tscs. For more information on the exact variables collected, please see our publicly available codebook [at this link](https://docs.google.com/document/d/1zvNMpwj0onFvUZ_gLl4RRjqS-clbHv3TIX6EOHofsME/edit?usp=sharing).]"
+abstract: "Governments everywhere have implemented a broad range of policies which have been highly influential in shaping the COVID-19 pandemic. We present an initial public release of a large hand-coded dataset of nearly 10,000 separate policy announcements which we are hereafter releasing daily, with a 5-day lag for validity checking. We currently document policies for more than 190 countries across numerous dimensions, including: what type of policy was implemented; which level of government initiated it; who, what and where the policy targets; how the policy is enforced and when the policy is implemented. We further analyze the dataset using a Bayesian time-varying ideal point model which shows the quick acceleration of high-cost policies across countries beginning in mid-March and continuing to the present. While some relatively low-cost policies like task forces and health monitoring began early, countries generally adopted harsher measures within a narrow time window, suggesting strong policy diffusion effects.^[We thank the very large number of research assistants who coded this data. Their names and affiliations are listed in the appendix. We also thank the Chair of International Relations at the Hochschule für Politik at the Technical University of Munich (TUM) for their support of this project and the TUM School of Management for their help in providing access to Qualtrics. For the most current, up to date version of the dataset, please visit http://coronanet-project.org and also our Github page at https://github.com/saudiwin/corona_tscs. For more information on the exact variables collected, please see our publicly available codebook [at this link](https://docs.google.com/document/d/1zvNMpwj0onFvUZ_gLl4RRjqS-clbHv3TIX6EOHofsME/edit?usp=sharing).]"
 ---
 
 ```{r setup, include=FALSE}
@@ -85,7 +85,7 @@ countries = read.csv('../data/regions/all_countries.csv', stringsAsFactors = FAL
 
 # Introduction
 
-Governments all around the world have implemented an astonishing variety of policies in reaction to the COVID-19 pandemic. Policy makers and researchers however, have to date lacked access to the quality, up-to-date data they need for conducting rigorous analyses of whether, how, or to what degree these fast changing policies have worked in brunting the health, political and economic effects of the coronavirus. To address this concern, in this paper we present the CoronaNet COVID-19 Government Response Database, which provides fine-grained, dyadic data on policy actions taken by governments across the world since the Chinese government reported the COVID-19 outbreak on December 31, 2019. The dataset presented here covers all policy actions for `r length(unique(clean_data$country))` of countries^[Note, we will include additional countries in future versions of the dataset.] up until `r max(clean_data$date_announced,na.rm=T)`, for a total of `r length(unique(clean_data$record_id))` events. 
+Governments all around the world have implemented an astonishing variety of policies in reaction to the COVID-19 pandemic. Policy makers and researchers however, have to date lacked access to the quality, up-to-date data they need for conducting rigorous analyses of whether, how, or to what degree these fast changing policies have worked in brunting the health, political and economic effects of the coronavirus. To address this concern, in this paper we present the CoronaNet COVID-19 Government Response Database, which provides fine-grained, dyadic data on policy actions taken by governments across the world since the Chinese government reported the COVID-19 outbreak on December 31, 2019. The dataset presented here covers all policy actions of `r length(unique(clean_data$country))` countries^[Note, we will include additional countries in future versions of the dataset.] up until `r max(clean_data$date_announced,na.rm=T)`, for a total of `r length(unique(clean_data$record_id))` events. 
 
 With the help of a team of over 220 research assistants in 18 time zones, we are releasing the data on a daily basis with a five-day lag between data collection and release to provide validation. We have further implemented ongoing evaluation of coding efforts on random samples of the data to ensure the best possible quality given the considerable time constraints.  More specifically, the CoronaNet database collects data on government policy actions taken against the coronavirus across the following dimensions on a daily basis:
 
@@ -488,8 +488,8 @@ Of course, a caveat with the index is that we may be missing some possible polic
 # saveRDS(get_est,"../data/get_est.rds")
 
 get_est <- readRDS("../data/get_est.rds")
-
-
+ 
+ 
 get_est_sum <- get_est %>%
             ungroup %>%
   filter(country!="Chad") %>%
@@ -501,43 +501,50 @@ get_est_sum <- get_est %>%
             low_est=quantile(estimate,.05)) %>%
   group_by(date_announced) %>%
   mutate(`Country Rank`=rank(med_est))
+ 
 
-list_countries <- c("United States",
-                    "United Kingdom",
+list_countries <- c("United States of America",
+                   # "United Kingdom",
                     "China",
                     "Taiwan",
+                    "Germany",
                     "Singapore",
                     "Italy",
                     "France",
                     "South Korea",
                     "Gabon",
-                    "Croatia",
+                   # "Croatia",
                     "United Arab Emirates",
-                    "Yemen",
-                    "St. Lucia")
+                    "Yemen"#,
+                   # "St. Lucia"
+                    )
 
 random_country <- group_by(get_est_sum,country) %>% 
   sample_n(1)
+
 
 get_est_sum %>%
   ungroup %>%
   ggplot(aes(y=med_est,x=date_announced)) +
   #geom_ribbon(aes(ymin=low_est,ymax=high_est,group=country),alpha=0.2) +
-  geom_line(aes(group=country),colour="red",alpha=0.5) +
+  geom_line(aes(group=country, colour = country),alpha=0.55, size = 1) +
   #scale_color_distiller(palette="Reds",direction=1) +
   gghighlight(country %in% list_countries,
-              label_params=list(size=3)) +
-  # geom_text_repel(data=random_country,
-  #                  aes(label=country),
-  #            hjust="right",
-  #            size=3) +
+              label_params=list(size=3),
+              aes(colour = country),
+              unhighlighted_params = list(size = .5, colour = alpha("grey", 0.3))) +
+  scale_color_manual(name="Country",values=c('#00CC33','#E69F00','#CC0000',"#FF99FF","#99CCFF","#006699","#990099","orangered1","#9933FF","yellow3", "blue1" ))+
   theme_minimal() +
   theme(panel.grid = element_blank()) +
   labs(caption="Estimates are derived from Stan, a Markov Chain Monte Carlo sampler.\nThe intervals represent the median and 5% - 95% posterior density region.\nPlot shows one estimate per country per day.") +
   xlab("") +
   ylab("Policy Activity Index Scale (0 to 100)")
 
+
 ggsave("index.png")
+
+
+
 
 ```
 
