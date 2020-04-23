@@ -37,4 +37,7 @@ qualtrics[which(qualtrics$record_id== 6511463),"entry_type_3_TEXT"]  = 3083058
  
 qualtrics[which(qualtrics$record_id== 5501189),"type_ext_restrict"]  = c("Health Certificates")
 
+# record id 645445 should be recoded as either declaration of emergency or quarantine but not curfew; asana is being super slow, putting this here for now
+# record id 384499 should be recoded as restriciton of businesses; asana is being super slow, putting this here for now
+
 
