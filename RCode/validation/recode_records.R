@@ -40,4 +40,31 @@ qualtrics[which(qualtrics$record_id== 5501189),"type_ext_restrict"]  = c("Health
 # record id 645445 should be recoded as either declaration of emergency or quarantine but not curfew; asana is being super slow, putting this here for now
 # record id 384499 should be recoded as restriciton of businesses; asana is being super slow, putting this here for now
 
+# coder coded as internal border restriction when it should be external border restriction
+qualtrics[which(qualtrics$record_id %in% c(1004681,
+                                           1034745,
+                                           2575122,
+                                           4920569,
+                                           6556074,
+                                           6884924,
+                                           4743134,
+                                           1049744,
+                                           361563,
+                                           1352371,
+                                           2281761,
+                                           3130519,
+                                           3514992,
+                                           4583902,
+                                           192041)),"type"] = 'External Border Restrictions'
 
+
+# coder coded as internal border restriction when it should be quarantine
+qualtrics[which(qualtrics$record_id %in% c(3650646,
+                                           7760322,
+                                           9699354,
+                                           4564754)),"type"] = 'Quarantine/Lockdown'
+
+
+# coder coded as internal border restriction when it should be restriction of businesses
+qualtrics[which(qualtrics$record_id %in% c(7053515)),"type"] = "Restriction of Non-Essential Businesses"
+7053515

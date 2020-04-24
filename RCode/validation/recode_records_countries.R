@@ -68,6 +68,40 @@ qualtrics[which(qualtrics$record_id %in% c(995919,
 qualtrics[which(qualtrics$record_id %in% c(6641788)), 'target_country'] = NA  
 
 
+# policy type is internal border restriction Some coder entered the 'target country' as 'All countries' or multiple other countries. Change this to NA
+# note that the display logic is now such that this type of mistake no longer happens
+qualtrics[which(qualtrics$record_id %in% c(1114496,
+                                           2259687,
+                                           4068132,
+                                           43087,
+                                           4776325,
+                                           5023350,
+                                           533354,
+                                           5456275,
+                                           5531975,
+                                           652979,
+                                           6749694,
+                                           6982157,
+                                           7289228,
+                                           8045550,
+                                           8237557,
+                                           8300784,
+                                           8650624,
+                                           8843623,
+                                           921390,
+                                           9278478,
+                                           9465488,
+                                           4782967,
+                                           7053515,
+                                           2449990)), 'target_country'] = NA  
+
+# policy type is quarntine Some coder entered the 'target country' as 'All countries' or multiple other countries when this is about a domestic measure. Change this to NA
+qualtrics[which(qualtrics$record_id %in% c(9699354,
+                                           3650646,
+                                           7760322,
+                                           9699354,
+                                           4564754)), 'target_country'] = NA 
+
 # RA corrected wrong entry; remove for now, properly fix later
 qualtrics = qualtrics %>% filter(record_id !=  9938399 )  
 qualtrics = qualtrics %>% filter(record_id !=  4418813) 
