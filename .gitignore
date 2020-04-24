@@ -3,7 +3,6 @@
 .Rhistory
 .RData
 .Ruserdata
-*.png
 *.html
 *DS*
 *.aux
