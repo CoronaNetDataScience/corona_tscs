@@ -317,6 +317,7 @@ qualtrics = qualtrics %>%
 monad_types = c('Closure of Schools',
                 'Curfew',
                 'Social Distancing',
+                'Internal Border Restrictions',
                 'Restrictions of Mass Gatherings',
                 "Restriction of Non-Essential Government Services",
                 "Restriction of Non-Essential Businesses",
