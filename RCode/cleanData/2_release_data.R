@@ -118,28 +118,21 @@ niehaus <- read_csv("data/data_niehaus/03_21_20_0105am_wep.csv") %>%
  
 clean_data <- readRDS("data/CoronaNet/coranaNetData_clean_wide.rds")
 
-# severity index
+# activity index
 
-# severity <- readRDS("data/severity_fit.rds")
-# 
-# # output by countries
-# 
-# sev_data <- summary(severity) %>% 
-#   select(country="Person",severity_index_5perc=`Low Posterior Interval`,
-#          severity_index_median="Posterior Median",
-#          severity_index_95perc=`High Posterior Interval`,
-#          date_start="Time_Point") %>% 
-#   mutate(country=recode(country,Czechia="Czech Republic",
-#                 `Hong Kong`="China",
-#                 `United States`="United States of America",
-#                 `Bahamas`="The Bahamas",
-#                 `Tanzania`="United Republic of Tanzania",
-#                 `North Macedonia`="Macedonia",
-#                 `Micronesia`="Federated States of Micronesia",
-#                 `Timor Leste`="East Timor",
-#                 `Republic of the Congo`="Republic of Congo",
-#                 `Cabo Verde`="Cape Verde",
-#                 `Eswatini`="Swaziland"))
+get_est <- readRDS("data/get_est.rds")
+
+
+get_est_sum <- get_est %>%
+  ungroup %>%
+  mutate(estimate=(estimate-min(estimate))/(max(estimate)-min(estimate))*100,
+         date_start=ymd(as.character(date_announced))) %>%
+  group_by(country,date_start) %>%
+  summarize(index_med_est=median(estimate),
+            index_high_est=quantile(estimate,.95),
+            index_low_est=quantile(estimate,.05)) %>%
+  group_by(date_start) %>%
+  mutate(index_country_rank=rank(index_med_est))
 
 # select only columns we need
 
@@ -275,10 +268,13 @@ release_long$country <- recode(release_long$country,Czechia="Czech Republic",
                            `Timor Leste`="East Timor",
                            `Republic of the Congo`="Republic of Congo",
                            `Cabo Verde`="Cape Verde",
-                           `Eswatini`="Swaziland")
+                           `Eswatini`="Swaziland",
+                          `Serbia`="Republic of Serbia",
+                          `Guinea-Bissau`="Guinea Bissau")
 
 release_long$target_country <- recode(release_long$target_country,Czechia="Czech Republic",
                                   `Hong Kong`="China",
+                                  `Serbia`="Republic of Serbia",
                                   `United States`="United States of America",
                                   `Bahamas`="The Bahamas",
                                   `Tanzania`="United Republic of Tanzania",
@@ -287,7 +283,8 @@ release_long$target_country <- recode(release_long$target_country,Czechia="Czech
                                   `Timor Leste`="East Timor",
                                   `Republic of the Congo`="Republic of Congo",
                                   `Cabo Verde`="Cape Verde",
-                                  `Eswatini`="Swaziland")
+                                  `Eswatini`="Swaziland",
+                                  `Guinea-Bissau`="Guinea Bissau")
 
 release_long <- mutate(release_long,init_country_level=ifelse(province %in% c("Hong Kong","Macau"),"No, it is at the national level",
                                                     init_country_level))
@@ -310,12 +307,16 @@ if(nrow(missing)>0 && !(all(missing$country=="European Union"))) {
   
 }
 
-# Add in severity index
+# Add in activity index
 
-#release_long <- left_join(release_long,sev_data,by=c("country","date_announced"))
+release_long <- left_join(release_long,get_est_sum,by=c("country","date_start"))
 
 release_long <- select(release_long,record_id,policy_id,recorded_date,date_announced,date_start,date_end,
                   entry_type,event_description,type,type_sub_cat,type_text,
+                  index_high_est,
+                  index_med_est,
+                  index_low_est,
+                  index_country_rank,
                   everything())
 
 # now output raw data for sharing

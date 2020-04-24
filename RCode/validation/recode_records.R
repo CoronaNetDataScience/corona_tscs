@@ -68,3 +68,8 @@ qualtrics[which(qualtrics$record_id %in% c(3650646,
 # coder coded as internal border restriction when it should be restriction of businesses
 qualtrics[which(qualtrics$record_id %in% c(7053515)),"type"] = "Restriction of Non-Essential Businesses"
 7053515
+
+# remove test records
+
+qualtrics <- filter(qualtrics, !(record_id %in% c(1703790,
+                                                  9241261)))

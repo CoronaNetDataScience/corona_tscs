@@ -1,17 +1,77 @@
 ---
 title: "README"
 author: "CoronaNet Project Team"
-date: "April 9th, 2020"
+date: "April 24th, 2020"
 output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message = FALSE)
+require(gghighlight)
+require(dplyr)
+require(tidyr)
+require(stringr)
+require(lubridate)
 ```
 
 ## About This Repository
 
 This repository contains data from the [CoronaNet data collection project](http://coronanet-project.org)  and also data and code to fit the model described in "A Retrospective Bayesian Model for Measuring Covariate Effects on Observed COVID-19 Test and Case Counts", [link here](https://osf.io/preprints/socarxiv/jp4wk). Following is first a list of data for the CoronaNet project, with data dictionary, and subsequently a list of files relevant to "A Retrospective Bayesian Model for Measuring Covariate Effects on Observed COVID-19 Test and Case Counts".
+
+The following plot shows our politcy activity index, a set of scores produced by a dynamic measurement model from our data. It is also included in the data release and is a helpful way to reduce the data to a single score. It also permits more straightforward inter-country comparisons.
+
+```{r index_view}
+
+get_est <- readRDS("data/get_est.rds")
+ 
+ 
+get_est_sum <- get_est %>%
+            ungroup %>%
+  filter(country!="Chad") %>%
+            mutate(estimate=(estimate-min(estimate))/(max(estimate)-min(estimate))*100,
+                   date_announced=ymd(as.character(date_announced))) %>%
+  group_by(country,date_announced) %>%
+  summarize(med_est=median(estimate),
+            high_est=quantile(estimate,.95),
+            low_est=quantile(estimate,.05)) %>%
+  group_by(date_announced) %>%
+  mutate(`Country Rank`=rank(med_est))
+ 
+
+list_countries <- c("United States of America",
+                   # "United Kingdom",
+                    "China",
+                    "Taiwan",
+                    "Germany",
+                    "Singapore",
+                    "Italy",
+                    "France",
+                    "South Korea",
+                    "Gabon",
+                   # "Croatia",
+                    "United Arab Emirates",
+                    "Yemen")
+
+random_country <- group_by(get_est_sum,country) %>% 
+  sample_n(1)
+
+
+get_est_sum %>%
+  ungroup %>%
+  ggplot(aes(y=med_est,x=date_announced)) +
+  #geom_ribbon(aes(ymin=low_est,ymax=high_est,group=country),alpha=0.2) +
+  geom_line(aes(group=country),alpha=0.55, size = 1) +
+  #scale_color_distiller(palette="Reds",direction=1) +
+  gghighlight(country %in% list_countries) +
+  theme_minimal() +
+  theme(panel.grid = element_blank()) +
+  labs(caption="Estimates are derived from Stan, a Markov Chain Monte Carlo sampler.\nThe intervals represent the median and 5% - 95% posterior density region.\nPlot shows one estimate per country per day.") +
+  xlab("") +
+  ylab("Policy Activity Index Scale (0 to 100)")
+
+
+```
+
 
 # CoronaNet Data
 
@@ -42,23 +102,27 @@ The format of the data is in country-day-`record_id` format. Some `record_id` va
 9. `type` The category of the policy
 10. `type_sub_cat` The sub-category of the policy (if one exists)
 11. `type_text` Any additional information about the policy type (such as the number of ventilators/days of quarantine/etc.)
-12. `country` The country initiating the policy
-13. `init_country_level` Whether the policy came from the national level or a sub-national unit
-14. `province` Name of sub-national unit
-15. `target_country` Which foreign country a policy is targeted at (i.e. travel policies)
-16. `target_geog_level` Whether the target of the policy is a country as a whole or a sub-national unit of that country
-17. `target_region` The name of a regional grouping (like ASEAN) that is a target of the policy (if any)
-18. `target_province` The name of a province targeted by the policy (if any)
-19. `target_city` The name of a city targeted by the policy (if any)
-20. `target_other` Any geographical entity that does not fit into the targeted categories mentioned above
-21. `target_who_what` Who the policy is targeted at
-22. `target_direction` Whether a travel-related policy affects people coming in (Inbound) or leaving (Outbound)
-23. `travel_mechanism` If a travel policy, what kind of transportation it affects
-24. `compliance` Whether the policy is voluntary or mandatory
-25. `enforcer` What unit in the country is responsible for enforcement
-26. `link` A link to at least one source for the policy
-27. `ISO_A3` 3-digit ISO country codes
-28. `ISO_A2` 2-digit ISO country codes
+12. `index_high_est` The high (95% posterior density) estimate of the country policy activity score (0-100)
+13. `index_med_est` The median (most likely) estimate of the country policy activity score (0-100)
+14. `index_low_est` The low (95% posterior density) estimate of the country policy activity score (0-100)
+15. `index_country_rank` The relative rank by each day for each country on the policy activity score
+16. `country` The country initiating the policy
+17. `init_country_level` Whether the policy came from the national level or a sub-national unit
+18. `province` Name of sub-national unit
+19. `target_country` Which foreign country a policy is targeted at (i.e. travel policies)
+20. `target_geog_level` Whether the target of the policy is a country as a whole or a sub-national unit of that country
+21. `target_region` The name of a regional grouping (like ASEAN) that is a target of the policy (if any)
+22. `target_province` The name of a province targeted by the policy (if any)
+23. `target_city` The name of a city targeted by the policy (if any)
+24. `target_other` Any geographical entity that does not fit into the targeted categories mentioned above
+25. `target_who_what` Who the policy is targeted at
+26. `target_direction` Whether a travel-related policy affects people coming in (Inbound) or leaving (Outbound)
+27. `travel_mechanism` If a travel policy, what kind of transportation it affects
+28. `compliance` Whether the policy is voluntary or mandatory
+29. `enforcer` What unit in the country is responsible for enforcement
+30. `link` A link to at least one source for the policy
+31. `ISO_A3` 3-digit ISO country codes
+32. `ISO_A2` 2-digit ISO country codes
 <!-- 22. `severity_index_5perc` 5% posterior low estimate (i.e. lower bound of uncertainty interval) for severity index -->
 <!-- 23. `severity_index_median` posterior median estimate (point estimate) for severity index, which comes from a Bayesian latent variable model aggregating across policy types to measure country-level policy severity (see paper on our website) -->
 <!-- 24. `severity_index_5perc` 95% posterior high estimate (i.e. upper bound of uncertainty interval) for severity index -->

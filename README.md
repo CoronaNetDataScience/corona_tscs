@@ -1,7 +1,7 @@
 README
 ================
 CoronaNet Project Team
-April 9th, 2020
+April 24th, 2020
 
 ## About This Repository
 
@@ -14,6 +14,14 @@ list of data for the CoronaNet project, with data dictionary, and
 subsequently a list of files relevant to “A Retrospective Bayesian Model
 for Measuring Covariate Effects on Observed COVID-19 Test and Case
 Counts”.
+
+The following plot shows our politcy activity index, a set of scores
+produced by a dynamic measurement model from our data. It is also
+included in the data release and is a helpful way to reduce the data to
+a single score. It also permits more straightforward inter-country
+comparisons.
+
+![](README_files/figure-gfm/index_view-1.png)<!-- -->
 
 # CoronaNet Data
 
@@ -77,31 +85,39 @@ replaced with the corrected data).
 10. `type_sub_cat` The sub-category of the policy (if one exists)
 11. `type_text` Any additional information about the policy type (such
     as the number of ventilators/days of quarantine/etc.)
-12. `country` The country initiating the policy
-13. `init_country_level` Whether the policy came from the national level
+12. `index_high_est` The high (95% posterior density) estimate of the
+    country policy activity score (0-100)
+13. `index_med_est` The median (most likely) estimate of the country
+    policy activity score (0-100)
+14. `index_low_est` The low (95% posterior density) estimate of the
+    country policy activity score (0-100)
+15. `index_country_rank` The relative rank by each day for each country
+    on the policy activity score
+16. `country` The country initiating the policy
+17. `init_country_level` Whether the policy came from the national level
     or a sub-national unit
-14. `province` Name of sub-national unit
-15. `target_country` Which foreign country a policy is targeted at
+18. `province` Name of sub-national unit
+19. `target_country` Which foreign country a policy is targeted at
     (i.e. travel policies)
-16. `target_geog_level` Whether the target of the policy is a country as
+20. `target_geog_level` Whether the target of the policy is a country as
     a whole or a sub-national unit of that country
-17. `target_region` The name of a regional grouping (like ASEAN) that is
+21. `target_region` The name of a regional grouping (like ASEAN) that is
     a target of the policy (if any)
-18. `target_province` The name of a province targeted by the policy (if
+22. `target_province` The name of a province targeted by the policy (if
     any)
-19. `target_city` The name of a city targeted by the policy (if any)
-20. `target_other` Any geographical entity that does not fit into the
+23. `target_city` The name of a city targeted by the policy (if any)
+24. `target_other` Any geographical entity that does not fit into the
     targeted categories mentioned above
-21. `target_who_what` Who the policy is targeted at
-22. `target_direction` Whether a travel-related policy affects people
+25. `target_who_what` Who the policy is targeted at
+26. `target_direction` Whether a travel-related policy affects people
     coming in (Inbound) or leaving (Outbound)
-23. `travel_mechanism` If a travel policy, what kind of transportation
+27. `travel_mechanism` If a travel policy, what kind of transportation
     it affects
-24. `compliance` Whether the policy is voluntary or mandatory
-25. `enforcer` What unit in the country is responsible for enforcement
-26. `link` A link to at least one source for the policy
-27. `ISO_A3` 3-digit ISO country codes
-28. `ISO_A2` 2-digit ISO country codes
+28. `compliance` Whether the policy is voluntary or mandatory
+29. `enforcer` What unit in the country is responsible for enforcement
+30. `link` A link to at least one source for the policy
+31. `ISO_A3` 3-digit ISO country codes
+32. `ISO_A2` 2-digit ISO country codes
     <!-- 22. `severity_index_5perc` 5% posterior low estimate (i.e. lower bound of uncertainty interval) for severity index -->
     <!-- 23. `severity_index_median` posterior median estimate (point estimate) for severity index, which comes from a Bayesian latent variable model aggregating across policy types to measure country-level policy severity (see paper on our website) -->
     <!-- 24. `severity_index_5perc` 95% posterior high estimate (i.e. upper bound of uncertainty interval) for severity index -->
@@ -197,8 +213,7 @@ replaced with the corrected data).
     dataset) Electoral democracy index
 
 31. `news_WB` (most recent year available from Niehaus dataset) Daily
-    newspapers (per 1,000
-people)
+    newspapers (per 1,000 people)
 
 # A Retrospective Bayesian Model for Measuring Covariate Effects Data and Code
 

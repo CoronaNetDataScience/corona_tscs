@@ -325,24 +325,34 @@ monad_types = c('Closure of Schools',
                 'Declaration of Emergency') 
  
  
+  qualtrics <- mutate(qualtrics,
+                      target_country = ifelse(type %in% monad_types & domestic_policy==0 & !is.na(target_country), init_country, target_country),
+                      target_who_what = ifelse(type %in% monad_types & domestic_policy == 1, "All Residents (Citizen Residents +Foreign Residents)", target_who_what),
+                      target_who_what_10_TEXT = ifelse(type %in% monad_types, NA, target_who_what_10_TEXT),
+                      target_direction = ifelse(type %in% monad_types, NA, target_direction ),
+                      travel_mechanism = ifelse(type %in% monad_types, NA, travel_mechanism),
+                      travel_mechanism_9_TEXT = ifelse(type %in% monad_types, NA, travel_mechanism_9_TEXT)) 
 
-if (dim(qualtrics %>% filter(type %in% monad_types & domestic_policy == 0))[1] == 0){
-  qualtrics = qualtrics %>% mutate(target_geog_level = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_geog_level),
-                                   target_country = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_country),
-                                   target_country_197_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_country_197_TEXT),
-                                   target_region = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_region),
-                                   target_region_14_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_region_14_TEXT),
-                                   target_geog_sublevel = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_geog_sublevel),
-                                   target_province = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_province),
-                                   target_city = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_city), 
-                                   target_other = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_other),
-                                   target_intl_org = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_intl_org),
-                                   target_who_what = ifelse(type %in% monad_types & domestic_policy == 1, "All Residents (Citizen Residents +Foreign Residents)", target_who_what),
-                                   target_who_what_10_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_who_what_10_TEXT),
-                                   target_direction = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_direction ),
-                                   travel_mechanism = ifelse(type %in% monad_types & domestic_policy == 1, NA, travel_mechanism),
-                                   travel_mechanism_9_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, travel_mechanism_9_TEXT)) 
-} else{ stop("Error: Problem with target countries for monadic policy types")}
+  # qualtrics = qualtrics %>% mutate(target_geog_level = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_geog_level),
+  #                                  target_country = ifelse(type %in% monad_types, init_country, target_country),
+  #                                  target_country_197_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_country_197_TEXT),
+  #                                  target_region = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_region),
+  #                                  target_region_14_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_region_14_TEXT),
+  #                                  target_geog_sublevel = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_geog_sublevel),
+  #                                  target_province = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_province),
+  #                                  target_city = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_city), 
+  #                                  target_other = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_other),
+  #                                  target_intl_org = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_intl_org),
+  #                                  target_who_what = ifelse(type %in% monad_types & domestic_policy == 1, "All Residents (Citizen Residents +Foreign Residents)", target_who_what),
+  #                                  target_who_what_10_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_who_what_10_TEXT),
+  #                                  target_direction = ifelse(type %in% monad_types & domestic_policy == 1, NA, target_direction ),
+  #                                  travel_mechanism = ifelse(type %in% monad_types & domestic_policy == 1, NA, travel_mechanism),
+  #                                  travel_mechanism_9_TEXT = ifelse(type %in% monad_types & domestic_policy == 1, NA, travel_mechanism_9_TEXT)) 
+
+  
+  # if (nrow(qualtrics %>% filter(type %in% monad_types & domestic_policy == 0)) >0){
+  #   stop("Error: Problem with target countries for monadic policy types")
+  # } 
 
  
 # code certain policy types to always have mandatory enforcement with legal penalties
@@ -358,9 +368,9 @@ qualtrics = qualtrics %>%
 # remove records with duplicate provinces per record ID. 
 # these are some issue we haven't yet resolved
 
-qualtrics <- group_by(qualtrics,record_id) %>% 
-                        filter(n()==1) %>%
-                          ungroup()
+# qualtrics <- group_by(qualtrics,record_id) %>% 
+#                         filter(n()==1) %>%
+#                           ungroup()
                 
 
 
