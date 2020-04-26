@@ -186,7 +186,7 @@ to_make <- ungroup(distinct(clean_comp)) %>%
 
 # note no missing data :)
 
-activity_fit2 <- id_estimate(to_make,vary_ideal_pts="random_walk",ncores=2,nchains=2,niters=500,
+activity_fit <- id_estimate(to_make,vary_ideal_pts="random_walk",ncores=2,nchains=2,niters=500,
                             warmup=300,
             fixtype="prefix",
             restrict_ind_high="Quarantine/Lockdown_type_self_quarantine",
@@ -205,13 +205,30 @@ activity_fit2 <- id_estimate(to_make,vary_ideal_pts="random_walk",ncores=2,nchai
 
 saveRDS(activity_fit,"data/activity_fit.rds")
 
-get_stan_mods <- lapply(activity_fit,function(s) s@stan_samples)
 
-combine_stan_mods <- rstan::sflist2stanfit(get_stan_mods)
+all_lev <- as.character(unique(clean_data$init_country))
 
-activity_fit[[1]]@stan_samples <- combine_stan_mods 
+all_lev <- all_lev[all_lev!="Chad"]
 
-saveRDS(activity_fit2,"data/activity_fit_collapse.rds")
+get_est <- as.data.frame(activity_fit@stan_samples,"L_tp1") %>%
+  mutate(iter=1:n()) %>%
+  gather(key="parameter",value="estimate",-iter) %>%
+  mutate(date_announced=as.numeric(str_extract(parameter,"(?<=\\[)[1-9][0-9]?[0-9]?0?")),
+         country=as.numeric(str_extract(parameter,"[1-9][0-9]?[0-9]?0?(?=\\])")),
+         country=factor(country,labels=levels(severity_fit@score_data@score_matrix$person_id)),
+         date_announced=factor(date_announced,labels=as.character(sort(unique(severity_fit@score_data@score_matrix$time_id)))))
+
+saveRDS(get_est,"data/get_est.rds")
+
+system("cp data/get_est.rds ~/CoronaNet/data")
+
+# get_stan_mods <- lapply(activity_fit,function(s) s@stan_samples)
+# 
+# combine_stan_mods <- rstan::sflist2stanfit(get_stan_mods)
+# 
+# activity_fit[[1]]@stan_samples <- combine_stan_mods 
+# 
+# saveRDS(activity_fit2,"data/activity_fit_collapse.rds")
 
 
 
