@@ -144,6 +144,7 @@ release <- filter(clean_data,!is.na(init_country),is.na(init_other),is.na(target
                      date_start,
                      date_end,
                      init_country_level,
+                     domestic_policy,
                      province="init_prov",
                      city="init_city",
                      matches("type"),
@@ -312,7 +313,7 @@ if(nrow(missing)>0 && !(all(missing$country=="European Union"))) {
 release_long <- left_join(release_long,get_est_sum,by=c("country","date_start"))
 
 release_long <- select(release_long,record_id,policy_id,recorded_date,date_announced,date_start,date_end,
-                  entry_type,event_description,type,type_sub_cat,type_text,
+                  entry_type,event_description,domestic_policy,type,type_sub_cat,type_text,
                   index_high_est,
                   index_med_est,
                   index_low_est,

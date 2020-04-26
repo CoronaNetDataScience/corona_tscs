@@ -83,9 +83,11 @@ country_regions = read_csv(file = 'data/regions/country_region_clean.csv')
 regions_df = read_csv(file = 'data/regions/country_regional_groups_concordance.csv')
 qualtrics = read_survey('data/CoronaNet/coronanet_raw_latest.csv') %>% 
   mutate(entry_type=recode(entry_type,
-                           `1`="New Entry",
-                           `Correction`="Correction to Existing Entry (type in Record ID in text box)",
-                           `Update`="Update on Existing Entry (type in Record ID in text box) ")) %>% 
+                           `1`="new_entry",
+                           `New Entry`="new_entry",
+                           `Correction to Existing Entry for record ID ${e://Field/record_id} (<- if no record ID listed, type in Record ID in text box)`="correction",
+                           `Update on Existing Entry (type in Record ID in text box)`="update",
+                           `Update on Existing Entry for record ID ${e://Field/record_id} (<- if no record ID listed, type in Record ID in text box)`="update")) %>% 
   filter(Progress>98)
 
 
@@ -113,7 +115,7 @@ source("RCode/validation/recode_records.R")
 # replace entries with documented corrected entries as necessary ----------------------------------
 
 # make vector of ids that need to be corrected
-correction_record_ids = qualtrics[which(qualtrics$entry_type == 'Correction to Existing Entry (type in Record ID in text box)'), 'entry_type_2_TEXT']
+correction_record_ids = qualtrics[which(qualtrics$entry_type == 'correction'), 'entry_type_2_TEXT']
 
 # note that there are some un-matched records; check them out later
 matched_corrections = qualtrics$record_id[which(qualtrics$record_id %in% correction_record_ids$entry_type_2_TEXT)]
@@ -122,30 +124,30 @@ unmatched_corrections = setdiff(correction_record_ids$entry_type_2_TEXT, matched
 # make a variable called correct_record_match: if entry is corrected, fill in the corresponding record id entered in entry_type_2_TEXT,
 #  if an entry was not corrected, fill in with original record id
 qualtrics$correct_record_match = ifelse(
-  grepl(x=qualtrics$entry_type,pattern='Correction to Existing Entry'),
+  grepl(x=qualtrics$entry_type,pattern='correction'),
   trimws(qualtrics$entry_type_2_TEXT),
   qualtrics$record_id
 )
 
 # check for nas; there shouldn't be any
-if (sum(is.na(qualtrics$correct_record_match)) > 0) {
-  warning("Code cleaning failed. Missing records in the correct_record_match column.")
-  
-  print(paste0("These record IDs are corrections without original record referenced: ",
-               qualtrics$record_id[is.na(qualtrics$correct_record_match)]))
-  
-  # remove these records
-  
-  qualtrics <- filter(qualtrics,!is.na(correct_record_match))
-  
-}
+# if (sum(is.na(qualtrics$correct_record_match)) > 0) {
+#   warning("Code cleaning failed. Missing records in the correct_record_match column.")
+#   
+#   print(paste0("These record IDs are corrections without original record referenced: ",
+#                qualtrics$record_id[is.na(qualtrics$correct_record_match)]))
+#   
+#   # remove these records
+#   
+#   qualtrics <- filter(qualtrics,!is.na(correct_record_match))
+#   
+# }
 
 # replace old entries with corrected entries
 #qualtrics$record_id = qualtrics$correct_record_match
 
 # link updated policy(ies) with original entry with variable 'policy_id' ----------------------------------
 
-updated_record_ids = qualtrics[which(qualtrics$entry_type == 'Update on Existing Entry (type in Record ID in text box)'), 'entry_type_3_TEXT']
+updated_record_ids = qualtrics[which(qualtrics$entry_type == 'update'), 'entry_type_3_TEXT']
 
 matched_updates = qualtrics$record_id[which(qualtrics$record_id %in% updated_record_ids$entry_type_3_TEXT)]
 (unmatched_updates = setdiff(updated_record_ids$entry_type_3_TEXT, matched_updates)) # need to take a closer look later
@@ -153,24 +155,26 @@ matched_updates = qualtrics$record_id[which(qualtrics$record_id %in% updated_rec
 # make a variable called correct_record_match: if entry is updated, fill in the corresponding original record id entered in entry_type_3_TEXT,
 #  if an entry was not updated, fill in with original record id
 
-qualtrics$policy_id = ifelse(
-  grepl(x=qualtrics$entry_type,pattern='Update on Existing Entry'),
-  qualtrics$entry_type_3_TEXT,
-  qualtrics$record_id
-)
+qualtrics <- group_by(qualtrics, record_id) %>% mutate(
+                    policy_id=case_when(entry_type=="update" & !is.na(entry_type_3_TEXT)~entry_type_3_TEXT,
+                                        TRUE~record_id))
 
-qualtrics= qualtrics[-which(is.na(qualtrics$policy_id)),]
+#qualtrics= qualtrics[-which(is.na(qualtrics$policy_id)),]
  
 # recode types
 # this is due to a recent bug with manually corrected/updated entries
 
 # check only for vars with missing
 
+qualtrics <- filter(qualtrics, !is.na(record_id))
+
 miss_vars <- names(qualtrics)[sapply(qualtrics, function(c) any(is.na(c)))]
+
+miss_vars <- miss_vars[miss_vars!="correct_record_match"]
  
 qualtrics <- group_by(qualtrics,policy_id) %>% 
   arrange(policy_id,StartDate) %>% 
-  fill(miss_vars,.direction=c("down"))%>% 
+  fill(all_of(miss_vars),.direction=c("down"))%>% 
   ungroup() %>%
   group_by(correct_record_match) %>% 
   arrange(correct_record_match,StartDate) %>% 
@@ -196,15 +200,30 @@ qualtrics <- group_by(qualtrics,policy_id) %>%
 
 # rename all type questions that ask extra detail about the 'number' of a policy using the same variable name format
 names(qualtrics)[which(names(qualtrics) %in% c("type_quarantine_days", "type_mass_gathering"))] = c('type_num_quarantine_days', 'type_num_mass_gathering')
-names(qualtrics)[grep(
-  'type_health_resource_\\d_TEXT|type_health_resource_\\d\\d_TEXT',
-  names(qualtrics)
-)] = c(
+names(qualtrics)[names(qualtrics) %in% c("type_health_resource_1_TEXT",
+                                         "type_health_resource_2_TEXT",
+                                         "type_health_resource_3_TEXT",
+                                         "type_health_resource_18_TEXT",
+                                         "type_health_resource_19_TEXT",
+                                         "type_health_resource_21_TEXT",
+                                         "type_health_resource_13_TEXT",
+                                         "type_health_resource_4_TEXT",
+                                         "type_health_resource_5_TEXT",
+                                         "type_health_resource_6_TEXT",
+                                         "type_health_resource_7_TEXT",
+                                         "type_health_resource_8_TEXT",
+                                         "type_health_resource_15_TEXT",
+                                         "type_health_resource_9_TEXT",
+                                         "type_health_resource_10_TEXT",
+                                         "type_health_resource_11_TEXT",
+                                         "type_health_resource_17_TEXT",
+                                         "type_health_resource_20_TEXT")] = c(
   'type_num_masks',
   'type_num_ventilators',
   'type_num_ppe',
   'type_num_hand_sanit',
   'type_num_test_kits',
+  'type_num_vaccines',
   'type_other_health_materials',
   'type_num_hospitals',
   'type_num_quaranCen',
@@ -250,19 +269,17 @@ qualtrics <- distinct(qualtrics)
 # e.g. if a policy comes out of Alaska it currently has
 # two index_provs: 'United States3' and 'United StatesNA'
 # remove the second one ('United StatesNA')
-qualtrics = qualtrics %>% 
-  group_by(record_id) %>%
-    filter(if (any(!is.na(init_prov)))
-      !is.na(init_prov)
-  else is.na(init_prov)) %>%
-  ungroup()
+# qualtrics = qualtrics %>% 
+#   group_by(record_id) %>%
+#     filter(if (any(!is.na(init_prov)))
+#       !is.na(init_prov)
+#   else is.na(init_prov)) %>%
+#   ungroup()
 
 # more fixing provinces
 
 qualtrics <- filter(qualtrics, !(grepl(x=init_country_level,
-                                       pattern="province") & index_prov==""),
-                    !(grepl(x=init_country_level,
-                            pattern="national") & index_prov!=""))
+                                       pattern="province") & index_prov==""))
 
 # if(!(old_row_num==nrow(qualtrics))) {
 #   stop("You done screwed up the merge moron.")
@@ -312,7 +329,12 @@ source("RCode/validation/recode_records_countries.R")
 # !!! NOTE: 'domestic_policy' is still has NA fields which need to be fixed
 # but for the purposes of cleaning/checking monadic variables, it is fine
 qualtrics = qualtrics %>% 
-  mutate(domestic_policy = if_else(init_country == target_country, 1, 0))
+  mutate(domestic_policy = case_when(type=="External Border Restrictions"~0,
+                                     init_country == target_country~1,
+                                     is.na(target_country) & is.na(target_geog_level)~1,
+                                     type=="Internal Border Restrictions"~1,
+                                           TRUE~0),
+         target_country=ifelse(domestic_policy,init_country,target_country))
 
 monad_types = c('Closure of Schools',
                 'Curfew',
@@ -360,7 +382,7 @@ mandatory_types = c("Declaration of Emergency",
                     "New Task Force or Bureau")
 
 qualtrics = qualtrics %>%
-      mutate(compliance = ifelse(type %in% mandatory_types, "Mandatory with Legal Penalties (Jail Time)", compliance))
+      mutate(compliance = ifelse(type %in% mandatory_types, "Mandatory (Unspecified/Implied)", compliance))
 
 
 # save as wide clean file ---------------
