@@ -20,7 +20,7 @@ repository](https://github.com/saudiwin/corona_index).
 
 If you do want to see the data in policy record format, which includes
 more information than what is released in our wide data, please see
-below for more information about what is in this repository.
+below for more information about what is in this repository. More information about the fields are available in our [PDF Codebook](https://www.coronanet-project.org/assets/CoronaNet_Codebook.pdf?) and [Online Codebook](https://www.coronanet-project.org/taxonomy.html?). 
 
 # CoronaNet Raw Data
 
@@ -86,56 +86,85 @@ replaced with the corrected data).
 1.  `record_id` Unique identifier for each unique policy record
 2.  `policy_id` Identifier linking new policies with subsequent updates
     to policies
-3.  `recorded_date` When the record was entered into our data
-4.  `date_updated` When we can confirm the country - policy type was
-    last checked/updated (we can only confirm policy type for a given
-    country is up to date as of this date)
-5.  `date_announced` When the policy is announced
-6.  `date_start` When the policy goes into effect
-7.  `date_end` When the policy ends (if it has an explicit end date)
-8.  `entry_type` Whether the record is new, meaning no restriction had
+3. `entry_type` Whether the record is new, meaning no restriction had
     been in place before, or an update (restriction was in place but
     changed). Corrections are corrections to previous entries.
-9.  `event_description` A short description of the policy change
-10. `domestic_policy` Indicates where policy targets an area within the
+4.  `update_type` Whether an update as recorded as ongoing ("Change of Policy") or ending ("End of Policy")
+5.  `update_level_var`: What dimension of a policy is being updated (e.g. timing, compliance) and how (i.e., strengthening or relaxing)
+6.  `description` A short textual description of the policy change
+7.  `date_announced` When the policy is announced
+8.  `date_start` When the policy goes into effect
+9.  `date_end_spec` Qualtiative information on a policy's end date
+10.  `date_end` When the policy ends (if it has an explicit end date)
+11.  `country` The country where a policy was initiated
+12. `ISO_A3` 3-digit ISO country codes for the country where a policy was initiated
+13. `ISO_A2` 2-digit ISO country codes for the country where a policy was initiated
+14. `init_country_level` The level of government that initiated a policy (e.g. national, provincial)
+15. `domestic_policy` Indicates where policy targets an area within the
     initiating country (i.e. is domestic in nature)
-11. `type` The category of the policy
-12. `type_sub_cat` The sub-category of the policy (if one exists)
-13. `type_text` Any additional information about the policy type (such
+16. `province` The province where a policy was initiated, if applicable
+17. `ISO_L2` ISO province codes for the province where a policy was initiated, if applicable
+18. `city` The city where a policy was initiated, if applicable    
+19. `type` The category of the policy
+20. `type_sub_cat` The sub-category of the policy (if one exists)
+21. `type_new_admin_coop` The type of cooperation governments undertake, if applicable
+22. `type_vac_cat` The particular vaccine (e.g. Pfizer) for which a policy is being made
+23. `type_vac_mix` Whether mixing of different vaccines is allowed
+24. `type_vac_reg` Regulatory status of a vaccine
+25. `type_vac_purchase` Conditions under which a vaccine is purchased
+26. `type_vac_group` Criteria for deciding how to administer vaccinations
+27. `type_vac_group_rank` The number of groups given preferential treatment for vaccine access, if applicable
+28. `type_vac_who_pays` The financial responisbility for paying for a vaccine
+29. `type_vac_dist_admin` Entity in charge of distributing vaccines
+30. `type_vac_loc` Where vaccination is taking place
+31. `type_vac_cost_num` Monetary resources devoted for a given vaccine policy (number) 
+32. `type_vac_cost_scale` Monetary resources devoted for a given vaccine policy (scale, e.g. millions, billions) 
+33. `type_vac_cost_unit` Monetary resources devoted for a given vaccine policy (unit, e.g. currency type) 
+34. `type_vac_cost_gov_perc` Monetary resources devoted for a given vaccine policy (gov perc: contribution covered by the government) 
+35. `type_vac_amt_num` Material resources devoted for a given vaccine policy (number) 
+36. `type_vac_amt_scale` Material resources devoted for a given vaccine policy (scale, e.g. milions, billions) 
+37. `type_vac_amt_unit`  Material resources devoted for a given vaccine policy (unit, e.g. doses) 
+38. `type_vac_amt_gov_perc`  Material resources devoted for a given vaccine policy (gov perc: contribution covered by the government) 
+39. `type_text` Any additional information about the policy type (such
     as the number of ventilators/days of quarantine/etc.)
-14. `index_high_est` The high (95% posterior density) estimate of the
-    country policy activity score (0-100)
-15. `index_med_est` The median (most likely) estimate of the country
-    policy activity score (0-100)
-16. `index_low_est` The low (95% posterior density) estimate of the
-    country policy activity score (0-100)
-17. `index_country_rank` The relative rank by each day for each country
-    on the policy activity score
-18. `country` The country initiating the policy
-19. `init_country_level` Whether the policy came from the national level
-    or a sub-national unit
-20. `province` Name of sub-national unit
-21. `target_country` Which foreign country a policy is targeted at
+40. `institution_cat` Whether the business or government service is deemed as essential, non-essential or no information is provided
+41. `institution_status` Whether a school, business or government service is open, open with conditions or closed
+42. `institution_conditions` If a school, business or government service are open with conditions, records the conditions
+43. `target_init_same` Whether the policy initiator is the same as the policy target
+44. `target_country` Which foreign country a policy is targeted at
     (i.e. travel policies)
-22. `target_geog_level` Whether the target of the policy is a country as
+45. `target_geog_level` Whether the target of the policy is a country as
     a whole or a sub-national unit of that country
-23. `target_region` The name of a regional grouping (like ASEAN) that is
+46. `target_region` The name of a regional grouping (like ASEAN) that is
     a target of the policy (if any)
-24. `target_province` The name of a province targeted by the policy (if
+47. `target_province` The name of a province targeted by the policy (if
     any)
-25. `target_city` The name of a city targeted by the policy (if any)
-26. `target_other` Any geographical entity that does not fit into the
+48. `target_city` The name of a city targeted by the policy (if any)
+49. `target_intl_org` The international org targeted by the policy (if any)
+50. `target_other` Any geographical entity that does not fit into the
     targeted categories mentioned above
-27. `target_who_what` Who the policy is targeted at
-28. `target_direction` Whether a travel-related policy affects people
+51. `target_who_what` The travel or residency status of who the policy is targeted at
+52. `target_who_gen` Special populations the policy is targeted at (e.g. asylum seekers/refugees)
+53. `target_direction` Whether a travel-related policy affects people
     coming in (Inbound) or leaving (Outbound)
-29. `travel_mechanism` If a travel policy, what kind of transportation
+54. `travel_mechanism` If a travel policy, what kind of transportation
     it affects
-30. `compliance` Whether the policy is voluntary or mandatory
-31. `enforcer` What unit in the country is responsible for enforcement
-32. `link` A link to at least one source for the policy
-33. `ISO_A3` 3-digit ISO country codes
-34. `ISO_A2` 2-digit ISO country codes
+55. `compliance` Whether the policy is voluntary or mandatory
+56. `enforcer` What unit in the country is responsible for enforcement
+57. `dist_index_high_est` The high (95% posterior density) estimate of the
+    country social distancing score (0-100)
+58. `dist_index_med_est` The median (most likely) estimate of the country
+    social distancing score (0-100)
+59. `dist_index_low_est` The low (95% posterior density) estimate of the
+    country social distancing score (0-100)
+60. `dist_index_country_rank` The relative rank by each day for each country
+    on the social distancing score
+61. `pdf_link` Permanent pdf link for at least one source for the policy
+62. `link` A link to at least one source for the policy
+63. `date_updated` When we can confirm the country - policy type was
+64. `recorded_date` When the record was entered into our data
+
+    last checked/updated (we can only confirm policy type for a given country is up to date as of this date)
     <!-- 22. `severity_index_5perc` 5% posterior low estimate (i.e. lower bound of uncertainty interval) for severity index -->
     <!-- 23. `severity_index_median` posterior median estimate (point estimate) for severity index, which comes from a Bayesian latent variable model aggregating across policy types to measure country-level policy severity (see paper on our website) -->
     <!-- 24. `severity_index_5perc` 95% posterior high estimate (i.e. upper bound of uncertainty interval) for severity index -->
