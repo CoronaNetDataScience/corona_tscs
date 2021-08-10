@@ -1,7 +1,9 @@
 README
 ================
 CoronaNet Project Team
-May 5th, 2021
+July, 2021
+
+<a href="https://sandbox.zenodo.org/badge/latestdoi/248495856"><img src="https://sandbox.zenodo.org/badge/248495856.svg" alt="DOI"></a>
 
 ## About This Repository
 
