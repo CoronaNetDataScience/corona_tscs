@@ -3,7 +3,7 @@ README
 CoronaNet Project Team
 July, 2021
 
-<a href="https://sandbox.zenodo.org/badge/latestdoi/248495856"><img src="https://sandbox.zenodo.org/badge/248495856.svg" alt="DOI"></a>
+<a href="https://doi.org/10.5281/zenodo.5201766"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5201766.svg" alt="DOI"></a>
 
 ## About This Repository
 
