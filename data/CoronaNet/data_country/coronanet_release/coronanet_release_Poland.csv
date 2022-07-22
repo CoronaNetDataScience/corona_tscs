@@ -1,5 +1,7 @@
 record_id,policy_id,entry_type,update_type,update_level,update_level_var,description,date_announced,date_start,date_end,date_end_spec,country,ISO_A3,ISO_A2,init_country_level,domestic_policy,province,ISO_L2,city,type,type_sub_cat,type_new_admin_coop,type_vac_cat,type_vac_mix,type_vac_reg,type_vac_purchase,type_vac_group,type_vac_group_rank,type_vac_who_pays,type_vac_dist_admin,type_vac_loc,type_vac_cost_num,type_vac_cost_scale,type_vac_cost_unit,type_vac_cost_gov_perc,type_vac_amt_num,type_vac_amt_scale,type_vac_amt_unit,type_vac_amt_gov_perc,type_text,institution_cat,institution_status,institution_conditions,target_init_same,target_country,target_geog_level,target_region,target_province,target_city,target_intl_org,target_other,target_who_what,target_who_gen,target_direction,travel_mechanism,compliance,enforcer,dist_index_high_est,dist_index_med_est,dist_index_low_est,dist_index_country_rank,pdf_link,link,date_updated,recorded_date
 R_xl3bYOQlEZS2PTzBf,7552320,new_entry,,,"","September 14, 2020: With Bulletin N. 262, the Italian Ministry of Health announced that the Italian Minister of Health, Roberto Speranza, has attended the 70th session of the WHO Regional Committee for Europe (RC70), organised by the WHO Regional Office for Europe, on September 14 and 15, 2020. Representatives of 53 countries in the WHO European Region have attended. Representatives of WHO partners such as United Nations agencies and other intergovernmental organisations and regional networks, were also present. Non-State actors (NSAs) in official relations with WHO and regional NSAs accredited by the Regional Committee, have followed the webstream and had the opportunity to submit video and written statements in advance. The key health issues and future plans have been discussed, particularly on themes regarding the response to the COVID-19 pandemic and lessons learned from the pandemic, both globally and regionally.",2020-09-14,2020-09-14,,The policy has a clear end date,"Albania,Andorra,Armenia,Austria,Azerbaijan,Belarus,Belgium,Bosnia and Herzegovina,Bulgaria,Croatia,Cyprus,Czechia,Denmark,Estonia,Finland,France,Georgia,Germany,Greece,Hungary,Iceland,Ireland,Israel,Italy,Kazakhstan,Kyrgyzstan,Latvia,Lithuania,Luxembourg,Malta,Moldova,Monaco,Montenegro,Netherlands,North Macedonia,Norway,Poland,Portugal,Romania,Russia,San Marino,Serbia,Slovakia,Slovenia,Spain,Sweden,Switzerland,Tajikistan,Turkey,Turkmenistan,Ukraine,United Kingdom,Uzbekistan",,,National,1,,,,"New Task Force, Bureau or Administrative Configuration",Cooperation among different jurisdictional entities (e.g. treaties or agreements among countries or provinces),Sharing information,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Italy,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),Ministry/Department of Health,,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_SNuQoepgbNRNX0t,http://www.salute.gov.it/portale/nuovocoronavirus/dettaglioComunicatiNuovoCoronavirus.jsp?lingua=italiano&menu=salastampa&p=comunicatistampa&id=5646 ; https://www.euro.who.int/en/about-us/governance/regional-committee-for-europe/70th-session/on-the-agenda,2021-04-11,2021-04-11T10:32:02Z
+R_1LUMHChPSjPtwZ5Bf,141874,new_entry,,,"","On April 7, New Zealand government announced the country will enter into transit arrangements with a range of countries to make it easier for each other’s citizens to get home.",2020-04-07,2020-04-07,,The policy’s end date is unknown or unreported,"Argentina,Austria,Belgium,Brazil,Bulgaria,Canada,China,Croatia,Czechia,Denmark,Ecuador,Finland,France,Germany,Italy,Japan,Malaysia,Mexico,Netherlands,North Macedonia,Norway,Philippines,Poland,Qatar,Singapore,Slovakia,Slovenia,South Korea,Spain,Sweden,Switzerland,United Kingdom,United States,Uruguay",,,National,1,,,,"New Task Force, Bureau or Administrative Configuration",Cooperation among different jurisdictional entities (e.g. treaties or agreements among countries or provinces),,"",,,,,,"","","","","","","","","","","",,,,"",No,"Argentina,Australia,Austria,Belgium,Brazil,Bulgaria,Canada,China,Croatia,Czechia,Denmark,Ecuador,Finland,France,Germany,Italy,Japan,Malaysia,Mexico,Netherlands,North Macedonia,Norway,Philippines,Poland,Qatar,Singapore,Slovakia,Slovenia,South Korea,Spain,Sweden,Switzerland,United Kingdom,United States,Uruguay","One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),,,,Mandatory (Unspecified/Implied),National Government,,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1K88XO2d5rw6LMP,https://www.immigration.govt.nz/about-us/covid-19/coronavirus-update-inz-response,2022-07-11,2022-07-11T23:59:59Z
+R_21oBkEwm8vELaUKBf,459710,new_entry,,,"","Austria, Slovenia and V4 countries such as Hungary, Poland, Czechia and Slovakia have decided to establish Standard entry regulations with the aim of prevention third country nationals to choose countries with the lowest epidemiological cases",2021-10-06,2021-10-06,,The policy’s end date is unknown or unreported,"Austria,Czechia,Hungary,Poland,Slovakia,Slovenia",,,National,1,,,,"New Task Force, Bureau or Administrative Configuration",Cooperation among different jurisdictional entities (e.g. treaties or agreements among countries or provinces),Sharing information,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Austria,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),Asylum/refugee seekers,,,Mandatory (Unspecified/Implied),National Government,,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_eJbkRvFesbK5O8m,https://www.schengenvisainfo.com/news/austria-slovenia-v4-countries-intend-to-establish-standard-covid-19-entry-rules-fight-possible-migration-crisis/,2022-07-12,2022-07-12T10:52:29Z
 R_3nINd96ZhmyVuxrBf,4354185,new_entry,,,"","March 11, 2020: With Bulletin N. 107, the Italian Ministry of Health announced that the Italian Minister of Health participated in a meeting with Health Ministers of other European countries including Austria, Denmark, France, Germany, The Netherlands, Poland, Spain, Sweden, Switzerland and UK. During the conference call, each State provided an update on the local epidemiological situation and outlined the measures adopted to fight the COVID-19 emergency.",2020-03-11,2020-03-11,2020-03-11,The policy has a clear end date,"Austria,Denmark,France,Germany,Italy,Netherlands,Poland,Spain,Sweden,Switzerland,United Kingdom",,,National,1,,,,"New Task Force, Bureau or Administrative Configuration",Cooperation among different jurisdictional entities (e.g. treaties or agreements among countries or provinces),Sharing information,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Italy,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),Ministry/Department of Health,,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3nkBTBHXBQrj0bo,http://www.salute.gov.it/portale/nuovocoronavirus/dettaglioComunicatiNuovoCoronavirus.jsp?lingua=italiano&menu=salastampa&p=comunicatistampa&id=5476,2021-04-22,2021-04-22T15:23:53Z
 R_1KqoBjczEhdpnrPNA,2818771,new_entry,,,"","The Polish Press Agency and GovTech Polska, the Polish government's technology agency, are launching the #FakeHunter app to fight disinformation about the corona epidemic on 8th of April 2020.",2020-04-08,2020-04-08,,,Poland,POL,PL,National,1,,,,Anti-Disinformation Measures,,,"",,,,,,"","","","","","","","","","","",,,,"",,Poland,,,,,,,All Residents (Citizen Residents + Foreign Residents),,,,Voluntary/Recommended but No Penalties,Other (Please specify in the text box),68.6108433538588,64.9537671305531,61.7296496212831,51,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_6fMbjk9FcMravJL,https://www.pap.pl/en/news/news%2C622373%2Cpap-govtech-polska-launch-fakehunter-app-fight-disinformation.html,2020-06-15,2020-06-15T20:53:08Z
 R_21msljU3VL4xnk4El,2672863El,new_entry,,,"","Poland is closing schools and universities for two weeks from thursday the 12th of March to the 15th of March. Speaking at a joint conference following a special meeting on coronavirus, the ministers said that pre-schools and schools would stop teaching on Thursday, but limited care would still be provided this week to the youngest children.",2020-03-11,2020-03-12,2020-03-25,The policy has a clear end date,Poland,POL,PL,National,1,,,,Closure and Regulation of Schools,Preschool or childcare facilities (generally for children ages 5 and below),,"",,,,,,"","","","","","","","","","","",,,Preschool or childcare facilities closed/locked down,"",,Poland,,,,,,,All Residents (Citizen Residents + Foreign Residents),,,,Mandatory with Legal Penalties (Jail Time),"National Government,Ministry/Department of Health,Other (Please specify in the text box)",50.8764088326475,46.6967805956317,42.1658355238016,105,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3Rl48qLjCEZ2Ckf,https://tvn24.pl/tvn24-news-in-english/coronavirus-crisis-polandshuts-all-schools-museums-cinemas-for-two-weeks-4346981,2020-03-28,2020-03-28T12:56:38Z
@@ -589,6 +591,70 @@ February 24th 2021
     West Pomeranian,
     Lesser Poland.
 ",2021-04-20,2021-04-26,2021-04-26,The policy has a clear end date,Poland,POL,PL,Provincial,1,Warmia-Masuria,CH-UR,,Closure and Regulation of Schools,Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,Primary Schools allowed to open with conditions,Full remote/distance learning (e.g. All teachers must tele-teach.),Yes,Poland,One or more provinces within one or more countries,,Warmia-Masuria,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1rP29NSrXI1ODQ5 ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3ndxfKDGWcek90S,NA ; http://web.archive.org/web/20210422070151/https://www.gov.pl/web/koronawirus/od-26-kwietnia-lagodzimy-obostrzenia-w-11-wojewodztwach-otwarte-salony-fryzjerskie-i-czesciowy-powrot-dzieci-do-szkol,2022-07-08,2022-07-08T11:01:43Z
+R_54NZENQ2w9ZlbX3El,5147939El,update,End of Policy,,"","Poland
+March 25th 2021
+
+""Nurseries and kindergartens only for medics
+
+For the safety of children and parents, nurseries and kindergartens will be closed . The exception will be the care for children of medical workers and law enforcement (including soldiers, police and fire brigades). "" UPDATE: It was decided on April 28th 2021 to, as long as corona numbers stay low, to reopen all education systems starting May 29th 2021.",2021-04-28,2021-05-01,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Closure and Regulation of Schools,Preschool or childcare facilities (generally for children ages 5 and below),,"",,,,,,"","","","","","","","","","","",,,Preschool or childcare facilities closed/locked down,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_AyvEgSZshfODlVn ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1gSdKKrD3BEImSs,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T10:41:50Z
+R_54NZENQ2w9ZlbX3Em,5147939Em,update,End of Policy,,"","Poland
+March 25th 2021
+
+""Nurseries and kindergartens only for medics
+
+For the safety of children and parents, nurseries and kindergartens will be closed . The exception will be the care for children of medical workers and law enforcement (including soldiers, police and fire brigades). "" UPDATE: It was decided on April 28th 2021 to, as long as corona numbers stay low, to reopen all education systems starting May 29th 2021.",2021-04-28,2021-05-01,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Closure and Regulation of Schools,Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,Primary Schools closed/locked down,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_AyvEgSZshfODlVn ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1gSdKKrD3BEImSs,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T10:41:50Z
+R_3MmxAoD0A5RrWfMEm,1756438Em,update,End of Policy,,"","Poland
+March 5th 2021
+
+Grades 1-3 in Pomerania will be a mix of hybrid mode UPDATE: On april 28th 2021 it was announced several policies would be relaxing on May 4th 2021, primary schools will be reopening",2021-04-28,2021-05-01,2021-05-04,The policy has a clear end date,Poland,POL,PL,National,1,,,,Closure and Regulation of Schools,Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,Primary Schools allowed to open with conditions,Partial remote/distance learning  (e.g. Teachers with certain health conditions can tele-teach),No,Poland,One or more provinces within one or more countries,,Pomerania,,,,All (Travelers + Residents),No special population targeted,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_PFe83494bUlXw7n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2f3mzWsgoeIKYBb,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T10:59:28Z
+R_2YQWolt3usS46W9Em,3141478Em,update,End of Policy,,"","Poland
+February 24th 2021
+""The epidemic situation in the Warmian-Masurian Voivodeship is particularly difficult...For security reasons, we also decided to return students from grades 1-3 to distance learning. "" UPDATE: On April 28th 2021 it was announced that several policies would be ending/relaxing on May 4th 2021 grades 1-3 will be reopened.",2021-04-28,2021-05-01,2021-05-04,The policy has a clear end date,Poland,POL,PL,Provincial,1,Warmia-Masuria,CH-UR,,Closure and Regulation of Schools,Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,Primary Schools allowed to open with conditions,Full remote/distance learning (e.g. All teachers must tele-teach.),Yes,Poland,One or more provinces within one or more countries,,Warmia-Masuria,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1rP29NSrXI1ODQ5 ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_21bJwkEtU3Bbdx6,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:19:37Z
+R_1o0VhqxV9a4AKlsEm,1123105Em,new_entry,,,"","Poland
+May 4th 2021
+
+""Education - primary schools :
+
+    full-time education for grades 1-3 of primary school
+    strict sanitary regime - incl. airing the rooms during breaks and disinfecting facilities at weekends""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Closure and Regulation of Schools,Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,Primary Schools allowed to open with conditions,Regular cleaning and sanitary procedures applied to classrooms (e.g. classrooms must be aired out after each class),Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_ahfADtCC9FRAjwB,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T13:46:46Z
+R_29rWHjJ4IYdBO71Em,3345060Em,new_entry,,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Closure and Regulation of Schools,Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,Primary Schools allowed to open with conditions,Partial remote/distance learning  (e.g. Teachers with certain health conditions can tele-teach),Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_291ifi1TWhqAj5I,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:23:32Z
+R_29rWHjJ4IYdBO71Fw,3345060Fw,new_entry,,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Closure and Regulation of Schools,Secondary Schools (generally for children ages 10 to 18),,"",,,,,,"","","","","","","","","","","",,,Secondary Schools allowed to open with conditions,Partial remote/distance learning  (e.g. Teachers with certain health conditions can tele-teach),Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_291ifi1TWhqAj5I,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:23:32Z
+R_1q9YwZXr4JIBhPGEm,3345060Em,update,End of Policy,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends"" UPDATE: On May 29th 2021 the policy will come to an end...
+
+""Education - primary and secondary schools:
+
+    full-time learning for all students
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-29,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Closure and Regulation of Schools,Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,Primary Schools allowed to open with conditions,Partial remote/distance learning  (e.g. Teachers with certain health conditions can tele-teach),Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1EUvvhphQGf3YcS,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:30:31Z
+R_1q9YwZXr4JIBhPGFw,3345060Fw,update,End of Policy,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends"" UPDATE: On May 29th 2021 the policy will come to an end...
+
+""Education - primary and secondary schools:
+
+    full-time learning for all students
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-29,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Closure and Regulation of Schools,Secondary Schools (generally for children ages 10 to 18),,"",,,,,,"","","","","","","","","","","",,,Secondary Schools allowed to open with conditions,Partial remote/distance learning  (e.g. Teachers with certain health conditions can tele-teach),Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1EUvvhphQGf3YcS,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:30:31Z
 R_1NE2nKOfWO7gVf1Ex,8771729,new_entry,,,"","Poland
 December 2nd 2020
 ""Contracts for the purchase of vaccines have been signed
@@ -948,7 +1014,7 @@ The Coordination Hospital will act as the main hospital in a given voivodeship. 
     movement of ""swab"" and transport ambulances,
     transfer of patients to isolatories.
 
-Thanks to the increase in the number of hospitals, the number of available beds will increase to 13.5 thousand. """,2020-10-08,2020-10-10,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,0,,,,Health Resources,Other Health Materials,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,,No special population targeted,,,Mandatory (Unspecified/Implied),"National Government,Ministry/Department of Health",45.8501539067454,41.8331649028229,37.4121719547353,14,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1Qozw6c6a7XlZtu,http://web.archive.org/web/20201008150030/https://www.gov.pl/web/koronawirus/rozszerzamy-zasady-bezpieczenstwa,2022-05-16,2022-05-16T15:37:51Z
+Thanks to the increase in the number of hospitals, the number of available beds will increase to 13.5 thousand. """,2020-10-08,2020-10-10,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,0,,,,Health Resources,Other Health Materials,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,,No special population targeted,,,Mandatory (Unspecified/Implied),"National Government,Ministry/Department of Health",45.8501539067454,41.8331649028229,37.4121719547353,14,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1Qozw6c6a7XlZtu,http://web.archive.org/web/20201008150030/https://www.gov.pl/web/koronawirus/rozszerzamy-zasady-bezpieczenstwa,2022-05-16,2022-05-16T15:37:51Z
 R_2E5zLzbwkdScqsnCf,2789090,new_entry,,,"","Poland
 October 8th 2020
 ""Hospital security is our priority in the fight against the coronavirus. We observe, analyze and react on an ongoing basis.
@@ -961,7 +1027,7 @@ The Coordination Hospital will act as the main hospital in a given voivodeship. 
     movement of ""swab"" and transport ambulances,
     transfer of patients to isolatories.
 
-Thanks to the increase in the number of hospitals, the number of available beds will increase to 13.5 thousand. """,2020-10-08,2020-10-10,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,0,,,,Health Resources,Hospitals,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,,No special population targeted,,,Mandatory (Unspecified/Implied),"National Government,Ministry/Department of Health",45.8501539067454,41.8331649028229,37.4121719547353,14,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1Qozw6c6a7XlZtu,http://web.archive.org/web/20201008150030/https://www.gov.pl/web/koronawirus/rozszerzamy-zasady-bezpieczenstwa,2022-05-16,2022-05-16T15:37:51Z
+Thanks to the increase in the number of hospitals, the number of available beds will increase to 13.5 thousand. """,2020-10-08,2020-10-10,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,0,,,,Health Resources,Hospitals,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,,No special population targeted,,,Mandatory (Unspecified/Implied),"National Government,Ministry/Department of Health",45.8501539067454,41.8331649028229,37.4121719547353,14,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1Qozw6c6a7XlZtu,http://web.archive.org/web/20201008150030/https://www.gov.pl/web/koronawirus/rozszerzamy-zasady-bezpieczenstwa,2022-05-16,2022-05-16T15:37:51Z
 R_3RfTzzKbrh6833BGg,1700355,new_entry,,,"","Poland
 October 19th 2020
 
@@ -1080,7 +1146,7 @@ The changes will also apply to provincial hospitals. Some of the internal medici
 R_RqzKqbpiDuMyzNDDt,5895560,new_entry,,,"","Poland
 November 5th 2020
 
-Government calls upon those recovered to donate Plasma",2020-11-05,2020-11-05,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,0,,,,Health Resources,Other Health Materials,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,,No special population targeted,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",65.3071711182317,61.1437802444644,57.8300644715539,93,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3QRFzWWJY8nnx6o,http://web.archive.org/web/20201105161209/https://www.gov.pl/web/koronawirus/chorowales-na-kororonawirusa-i-wyzdrowiales-oddaj-osocze-i-pomoz-innym,2022-05-31,2022-05-31T09:48:49Z
+Government calls upon those recovered to donate Plasma",2020-11-05,2020-11-05,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,0,,,,Health Resources,Other Health Materials,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,,No special population targeted,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",65.3071711182317,61.1437802444644,57.8300644715539,93,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3QRFzWWJY8nnx6o,http://web.archive.org/web/20201105161209/https://www.gov.pl/web/koronawirus/chorowales-na-kororonawirusa-i-wyzdrowiales-oddaj-osocze-i-pomoz-innym,2022-05-31,2022-05-31T09:48:49Z
 R_2pMGqEm81rMVGasDv,8698449,new_entry,,,"","Poland
 December 18th 2020
 
@@ -1127,7 +1193,7 @@ November 3rd 2020
 
 ""The pulse oximeter will monitor your health at home
 
-A pulse oximeter is a small electronic device. It is used for the non-invasive measurement of blood saturation. Soon, it will support medical services in monitoring the health of COVID-19 patients who have mild disease and have been qualified for medical home care. The data sent by the device will be analyzed by a special monitoring center. It will be a new unit to be established by the Ministry of Health. """,2020-11-03,2020-11-03,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,0,,,,Health Testing,Self-testing (e.g. at home),,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,,Symptomatic people,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",65.1129809978529,61.4944420611104,57.6347837990111,96,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_20PdzwsaED17bwh,http://web.archive.org/web/20201103163326/https://www.gov.pl/web/koronawirus/poszerzamy-strategie-walki-z-koronawirusem,2022-05-30,2022-05-30T12:51:36Z
+A pulse oximeter is a small electronic device. It is used for the non-invasive measurement of blood saturation. Soon, it will support medical services in monitoring the health of COVID-19 patients who have mild disease and have been qualified for medical home care. The data sent by the device will be analyzed by a special monitoring center. It will be a new unit to be established by the Ministry of Health. """,2020-11-03,2020-11-03,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,0,,,,Health Testing,Self-testing (e.g. at home),,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,,Symptomatic people,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",65.1129809978529,61.4944420611104,57.6347837990111,96,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_20PdzwsaED17bwh,http://web.archive.org/web/20201103163326/https://www.gov.pl/web/koronawirus/poszerzamy-strategie-walki-z-koronawirusem,2022-05-30,2022-05-30T12:51:36Z
 R_2Uh0BFsnPaMP5QQBl,5910389,new_entry,,,"","Poland
 January 9th 2021
 
@@ -1321,7 +1387,7 @@ New powers given to the minister of health include...
     3temporary limitation of the functioning of certain institutions or workplaces,
     4prohibition of organizing shows and other gatherings of people,
     5obligation to perform specific sanitary procedures, if their performance is related to the operation of specific production, service, commercial or other facilities,
-    6an order to make the real estate, premises, land available and to provide means of transport for anti-epidemic activities provided for by anti-epidemic plans.""",2020-03-23,2020-03-23,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,"New Task Force, Bureau or Administrative Configuration",Existing government entity given new powers,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),"National Government,Ministry/Department of Health",55.0732807486236,51.8121308500029,47.8295968302691,38,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_Uox3hZ33kvYM9qN,http://web.archive.org/web/20200324171820/https://www.gov.pl/web/koronawirus/wprowadzamy-stan-epidemii-w-polsce,2022-04-19,2022-04-19T09:58:34Z
+    6an order to make the real estate, premises, land available and to provide means of transport for anti-epidemic activities provided for by anti-epidemic plans.""",2020-03-23,2020-03-23,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,"New Task Force, Bureau or Administrative Configuration",Existing government entity given new powers,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),"National Government,Ministry/Department of Health",55.0732807486236,51.8121308500029,47.8295968302691,38,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_Uox3hZ33kvYM9qN,http://web.archive.org/web/20200324171820/https://www.gov.pl/web/koronawirus/wprowadzamy-stan-epidemii-w-polsce,2022-04-19,2022-04-19T09:58:34Z
 R_2SH0Ah0FUpHHwKpBr,428367,new_entry,,,"","Poland
 October 8th 2020
 ""
@@ -1371,7 +1437,7 @@ February 25th 2020
 
 or
 
-    report directly to the infectious diseases ward or observation and infectious ward, where further medical procedures will be determined.""",2020-02-25,2020-02-25,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),National Government,25.7018849017394,19.4378146169181,14.6359702261695,65,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_ONfAfWWng9JkuHf,http://web.archive.org/web/20200313025307/https://www.gov.pl/web/koronawirus/informacja-dla-osob-powracajacych-z-polnocnych-wloch,2022-04-12,2022-04-12T10:44:33Z
+    report directly to the infectious diseases ward or observation and infectious ward, where further medical procedures will be determined.""",2020-02-25,2020-02-25,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),National Government,25.7018849017394,19.4378146169181,14.6359702261695,65,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_ONfAfWWng9JkuHf,http://web.archive.org/web/20200313025307/https://www.gov.pl/web/koronawirus/informacja-dla-osob-powracajacych-z-polnocnych-wloch,2022-04-12,2022-04-12T10:44:33Z
 R_3ltr9cdTWiVx7cgBg,8362195,new_entry,,,"","Poland
 February 28th 2020
 ""
@@ -1389,7 +1455,7 @@ How to protect yourself against the coronavirus?
 The virus is spread by airborne droplets. There is currently no vaccine against the new coronavirus. However, other methods of preventing infection, as outlined below, can be used. These methods are also used in the prevention of other diseases transmitted by airborne droplets, such as seasonal flu (where the peak incidence is between January and March each year).
 Where have coronavirus infections been reported so far?
 
-The highest number of confirmed cases of infection with the new coronavirus was registered in China (99%), mainly in Hubei province. The remaining people ""dragged"" the virus to other countries in Asia, Europe, Oceania and North America and infected other people (eg in Germany, France, Great Britain).""",2020-02-28,2020-02-28,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,National Government,27.6988837542709,21.6807433939598,16.3764411630353,70,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_09zhdCqulhQoNgZ,http://web.archive.org/web/20200313025749/https://www.gov.pl/web/koronawirus/informacje,2022-04-12,2022-04-12T13:03:10Z
+The highest number of confirmed cases of infection with the new coronavirus was registered in China (99%), mainly in Hubei province. The remaining people ""dragged"" the virus to other countries in Asia, Europe, Oceania and North America and infected other people (eg in Germany, France, Great Britain).""",2020-02-28,2020-02-28,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,National Government,27.6988837542709,21.6807433939598,16.3764411630353,70,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_09zhdCqulhQoNgZ,http://web.archive.org/web/20200313025749/https://www.gov.pl/web/koronawirus/informacje,2022-04-12,2022-04-12T13:03:10Z
 R_31gx1jspDlfe84JBg,3918660,new_entry,,,"","Poland
 March 10th 2020
 The chief of Sanitary safety released the following safety guidelines for seniors...
@@ -1408,7 +1474,7 @@ Keep a safe distance from the interlocutor
 You should maintain a distance of at least 1-1.5 meters...
 When coughing and sneezing, cover your mouth and nose with a bent elbow or a tissue - throw the handkerchief into a closed bin as soon as possible and wash your hands using soap and water or disinfect them with alcohol-based agents...
 Eat healthy and remember to stay hydrated...
-Use proven sources of knowledge about the coronavirus...""",2020-03-10,2020-03-10,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),"National Government,Other (Please specify in the text box)",45.1984914949445,40.5619000313546,35.6569632402241,100,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2UYjlxPVW9ZcKug,http://web.archive.org/web/20200313032448/https://www.gov.pl/web/koronawirus/informacja-glownego-inspektora-sanitarnego-dla-seniorow,2022-04-13,2022-04-13T13:21:22Z
+Use proven sources of knowledge about the coronavirus...""",2020-03-10,2020-03-10,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),"National Government,Other (Please specify in the text box)",45.1984914949445,40.5619000313546,35.6569632402241,100,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2UYjlxPVW9ZcKug,http://web.archive.org/web/20200313032448/https://www.gov.pl/web/koronawirus/informacja-glownego-inspektora-sanitarnego-dla-seniorow,2022-04-13,2022-04-13T13:21:22Z
 R_Cf627IUIrMKpgPfBg,5470807,new_entry,,,"","Poland 
 March 14th 2020
 Poland releases a set of guidelines for how Polish people may return by flights when car is not possible, due to pandemic",2020-03-14,2020-03-14,2020-03-15,The policy is a one-time measure (e.g. publication of guidelines),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),"National Government,Other (Please specify in the text box)",53.6216079846248,49.6200394816953,45.5905147761585,102,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_x3pcSkyY0CeX2Kd,http://web.archive.org/web/20200316054212/https://www.gov.pl/web/koronawirus/jak-wrocic-do-polski-samolotem,2022-04-19,2022-04-19T09:08:37Z
@@ -1484,7 +1550,7 @@ It is up to us all to deal with the coronavirus epidemic. Therefore, let us be s
     collection of the parcel from the post office,
     taking a prescription.
 
-This little gesture can save a lot of people""",2020-10-10,2020-10-10,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),People of a certain age (please note age range in the text entry),,,Voluntary/Recommended but No Penalties,National Government,45.8501539067454,41.8331649028229,37.4121719547353,14,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_22s5IMi1Ptx3eQu,http://web.archive.org/web/20201010133912/https://www.gov.pl/web/koronawirus/badzmy-solidarni-odpowiedzialni-i-troszczmy-sie-o-naszych-seniorow,2022-05-19,2022-05-19T13:19:11Z
+This little gesture can save a lot of people""",2020-10-10,2020-10-10,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),People of a certain age (please note age range in the text entry),,,Voluntary/Recommended but No Penalties,National Government,45.8501539067454,41.8331649028229,37.4121719547353,14,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_22s5IMi1Ptx3eQu,http://web.archive.org/web/20201010133912/https://www.gov.pl/web/koronawirus/badzmy-solidarni-odpowiedzialni-i-troszczmy-sie-o-naszych-seniorow,2022-05-19,2022-05-19T13:19:11Z
 R_ClWSmpq0Oy8epZ7Bg,1728304,new_entry,,,"","Poland
 October 15th 2020
 ""Stay safe- follow DDMA principle...""
@@ -1533,7 +1599,7 @@ November 4th 2020
 The government releases some guidelines on what is quarantine and how to do it properly",2020-11-04,2020-11-04,2020-11-05,The policy is a one-time measure (e.g. publication of guidelines),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,National Government,65.0778008667905,61.6186711831433,58.1782098568144,96,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1E4Z0pnelkmFgt0,http://web.archive.org/web/20201105135604/https://www.gov.pl/web/koronawirus/wszystko-co-powinienes-wiedziec-o-kwarantannie,2022-05-31,2022-05-31T09:38:41Z
 R_21gH4Efp3hgknGDAw,7433505,new_entry,,,"","Poland
 November 7th 2020
-Government releases where to find accurate data regarding CORONA and how data is being collected and used.",2020-11-07,2020-11-07,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Both Disseminating and Gathering information related to COVID-19,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",64.8116683484444,61.3401197954248,58.258353293896,93,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_WqjTWUPQtZzEMdb,http://web.archive.org/web/20201108112213/https://www.gov.pl/web/koronawirus/dane-o-epidemii-to-dobro-publiczne-pomagajace-chronic-zdrowie-i-zycie-obywateli,2022-05-31,2022-05-31T10:27:31Z
+Government releases where to find accurate data regarding CORONA and how data is being collected and used.",2020-11-07,2020-11-07,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Both Disseminating and Gathering information related to COVID-19,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",64.8116683484444,61.3401197954248,58.258353293896,93,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_WqjTWUPQtZzEMdb,http://web.archive.org/web/20201108112213/https://www.gov.pl/web/koronawirus/dane-o-epidemii-to-dobro-publiczne-pomagajace-chronic-zdrowie-i-zycie-obywateli,2022-05-31,2022-05-31T10:27:31Z
 R_urYULwaQSFya5WNBg,6171558,new_entry,,,"","Poland
 November 9th 2020
 Information on what to do and how to receive benefits when your child is quarantined",2020-11-09,2020-11-09,2020-11-10,The policy is a one-time measure (e.g. publication of guidelines),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",64.8493845264004,61.5447671019371,58.0317398808482,93,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2uETGvHnmKROa8U,http://web.archive.org/web/20201204012139/https://www.gov.pl/web/koronawirus/twoje-dziecko-zostalo-objete-kwarantanna-dowiedz-sie-jak-postepowac,2022-05-31,2022-05-31T10:37:45Z
@@ -1598,7 +1664,7 @@ Details on Priority group 0, who is involved and how to get vaccianted, as well 
 R_z2JHRcwdYxKJk1rBg,7305766,new_entry,,,"","Poland
 December 27th 2020
 First person to be vaccinated in Poland
-",2020-12-27,2020-12-27,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",64.4437331789979,61.5060727368973,57.9065182964667,86,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3IQuJT25R96AwDa,http://web.archive.org/web/20201229210120/https://www.gov.pl/web/koronawirus/w-polsce-ruszyly-szczepienia-przeciw-covid-19--to-historyczny-moment,2022-06-09,2022-06-09T12:28:41Z
+",2020-12-27,2020-12-27,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",64.4437331789979,61.5060727368973,57.9065182964667,86,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3IQuJT25R96AwDa,http://web.archive.org/web/20201229210120/https://www.gov.pl/web/koronawirus/w-polsce-ruszyly-szczepienia-przeciw-covid-19--to-historyczny-moment,2022-06-09,2022-06-09T12:28:41Z
 R_1JJeOztTxro4fW6Bg,6236319,new_entry,,,"","Poland
 December 27th 2020
 
@@ -1623,7 +1689,7 @@ Guidelines for reopening grades 1-3",2021-01-09,2021-01-11,2021-01-12,The policy
 R_1HdkF2RZ8imRLknBg,2536096,new_entry,,,"","Poland
 January 15th 2021
 
-Public awareness of the vaccine campaign, how to register and the amount of people currently registered",2021-01-15,2021-01-15,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",46.3003286471098,40.9172913060009,35.4270468008491,72,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_zUqf6j0y6Q0IS09,http://web.archive.org/web/20210129220633/https://www.gov.pl/web/szczepimysie/ruszyla-rejestracja-na-szczepienia-dla-seniorow,2022-06-22,2022-06-22T11:18:35Z
+Public awareness of the vaccine campaign, how to register and the amount of people currently registered",2021-01-15,2021-01-15,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,"National Government,Ministry/Department of Health",46.3003286471098,40.9172913060009,35.4270468008491,72,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_zUqf6j0y6Q0IS09,http://web.archive.org/web/20210129220633/https://www.gov.pl/web/szczepimysie/ruszyla-rejestracja-na-szczepienia-dla-seniorow,2022-06-22,2022-06-22T11:18:35Z
 R_20Ojw0UlwWWTNmoBg,1393538,new_entry,,,"","Poland
 January 11th 2021
 
@@ -1664,6 +1730,9 @@ The offer depends on whether or not you received a message for a vaccine date of
 R_32ITSbu9EXiQ1CtBg,4275878,new_entry,,,"","Poland
 April 28th 2021
 Guidelines for how things will reopen if numbers stay low starting may 1st 2021",2021-04-28,2021-05-01,2021-05-02,The policy is a one-time measure (e.g. publication of guidelines),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),"National Government,Ministry/Department of Health,Ministry/Department of Education",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3G3bVd6zvfWvHVx,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-08,2022-07-08T11:14:40Z
+R_302lm7Lket3dvdPBg,3857085,new_entry,,,"","Poland
+May 12th 2021
+Reminders and edits to the restricitons",2021-05-12,2021-05-12,2021-05-13,The policy is a one-time measure (e.g. publication of guidelines),Poland,POL,PL,National,1,,,,Public Awareness Measures,Disseminating information related to COVID-19 to the public that is reliable and factually accurate,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,National Government,,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2wQs8J4JlrYxGBa,http://web.archive.org/web/20210517171658/https://www.gov.pl/web/koronawirus/przypominamy-majowy-harmonogram-lagodzenia-obostrzen,2022-07-15,2022-07-15T10:17:07Z
 R_Ui5VbZyHEr9DfIBBg,3918980,new_entry,,,"","Poland
 March 20th 2021
 
@@ -5033,7 +5102,7 @@ From March 27, the ban will also cover hairdressing, beauty and cosmetic salons 
 R_2DN4r1iABs0rAKEAm,5887587Am,new_entry,,,"","Poland
 March 25th 2021
 
-A general ""Work from home"" request was put into place, any jobs that can allow work from home, should.",2021-03-25,2021-03-27,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,All or unspecified businesses,,"",,,,,,"","","","","","","","","","","",,No information in the policy about whether the business is considered essential or non-essential,"This type of business  (""All or unspecified businesses"") is allowed to open with conditions",Other condition not specified above (please provide detail in the text entry),Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,National Government,,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_28Zg6pCqbdNQSO6,http://web.archive.org/web/20210325102518/https://www.gov.pl/web/koronawirus/od-27-marca-zmiany-w-zasadach-bezpieczenstwa,2022-07-04,2022-07-04T11:07:00Z
+A general ""Work from home"" request was put into place, any jobs that can allow work from home, should.",2021-03-25,2021-03-27,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,All or unspecified businesses,,"",,,,,,"","","","","","","","","","","",,No information in the policy about whether the business is considered essential or non-essential,"This type of business  (""All or unspecified businesses"") is allowed to open with conditions",Other condition not specified above (please provide detail in the text entry),Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Voluntary/Recommended but No Penalties,National Government,,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_28Zg6pCqbdNQSO6,http://web.archive.org/web/20210325102518/https://www.gov.pl/web/koronawirus/od-27-marca-zmiany-w-zasadach-bezpieczenstwa,2022-07-04,2022-07-04T11:07:00Z
 R_9nypiODjZZ24Vz3Ga,9704659Ga,update,Change of Policy,Strengthening,Volume of policy strengthening ; timing of policy strengthening,"Poland
 January 28th 2021
 ""Shopping malls, museums and art galleries reopen from February 1st
@@ -5936,6 +6005,235 @@ Activities suspended
     West Pomeranian,
     Lesser Poland.
 ",2021-04-20,2021-04-26,2021-04-26,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Other Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Other Businesses"") is closed/locked down","",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_BFhKi2bpsRQLB17,NA ; http://web.archive.org/web/20210422070151/https://www.gov.pl/web/koronawirus/od-26-kwietnia-lagodzimy-obostrzenia-w-11-wojewodztwach-otwarte-salony-fryzjerskie-i-czesciowy-powrot-dzieci-do-szkol,2022-07-08,2022-07-08T10:57:14Z
+R_2ZUZQUGceEQ1k85Bd,8606024Bd,update,End of Policy,,"","Poland
+February 12th 2021
+
+New conditions for business'
+
+""Hotels - available to everyone while maintaining the sanitary regime (50% of available rooms, meals only served in rooms, at guests' request. Hotel restaurants - closed)."" UPDATE: On April 28th 2021 it was announced that several policies would be relaxing or ending, on May 8th 2021 hotels will be opening back up to the general audience",2022-04-28,2021-05-01,2021-05-08,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Commercial Businesses"") is allowed to open with conditions",Restriction of number of customers,Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1NCwyrb6eINSWGT ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2CZoinAyG3DLwsG,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:31:54Z
+R_ULmqBdUz8xqIKxHBd,8756340Bd,update,End of Policy,,"","Poland
+February 12th 2021
+""Cinemas, theaters, operas and concert halls reopened - a maximum of 50% of the seats may be occupied during cultural events. Masks are obligatory. Prohibition of consumption. "" UPDATE: On april 28th 2021 it was announced that several policies would be ending or relaxing, by May 15th 2021 all cultural themed buildings will be reopened",2021-04-28,2021-05-01,2021-05-15,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Commercial Businesses"") is allowed to open with conditions",Restriction of number of customers,Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_231yuWrtTNfBbuG ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_PAMGdR7pQIKsMYV,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:35:05Z
+R_3eeqE9g5ukcUfRxBd,6190517Bd,update,End of Policy,,"","Poland
+March 25th 2021
+
+""
+    Large-format furniture and construction stores with an area of ​​more than 2,000 m2 will be closed.
+   
+
+Hairdressing and beauty salons
+
+From March 27, the ban will also cover hairdressing, beauty and cosmetic salons all over Poland."" UPDATE: On April 28th 2021 it was announced some restrictions would be lessened, starting on May 4th 2021 construction store may reopen again",2021-04-28,2021-05-01,2021-05-04,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Commercial Businesses"") is closed/locked down","",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2Pj3weUUNSAXkKt ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1n3F6MPgVhz3Tsx,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T10:44:02Z
+R_3eeqE9g5ukcUfRxEg,6190517Eg,update,End of Policy,,"","Poland
+March 25th 2021
+
+""
+    Large-format furniture and construction stores with an area of ​​more than 2,000 m2 will be closed.
+   
+
+Hairdressing and beauty salons
+
+From March 27, the ban will also cover hairdressing, beauty and cosmetic salons all over Poland."" UPDATE: On April 28th 2021 it was announced some restrictions would be lessened, starting on May 4th 2021 construction store may reopen again",2021-04-28,2021-05-01,2021-05-04,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Personal Grooming Businesses (e.g. hair salons),,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Personal Grooming Businesses"") is closed/locked down","",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2Pj3weUUNSAXkKt ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1n3F6MPgVhz3Tsx,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T10:44:02Z
+R_3MgRd5BGU019P1YDn,5229331Dn,update,End of Policy,,"","Poland
+March 11th 2021
+The following are suspended in Mazowieckie and Lubuskie...
+swimming pools, ski slopes, and sports facilities UPDATE: On April 28th 2021 it was announced some policies would be relaxing. On May  1st 2021 pools and other indoor sport facilities will be reopened.",2021-04-28,2021-05-01,2021-05-01,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Other Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Other Businesses"") is allowed to open with conditions",Other condition not specified above (please provide detail in the text entry),No,Poland,One or more provinces within one or more countries,,"Lubusz,Mazovia",,,,All (Travelers + Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3MlkYAi0uIw3BjG ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_AiGJWHMtoLxFyvf,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T10:48:52Z
+R_3smNcbtTD4NDE3ZGa,3739150Ga,update,End of Policy,,"","Poland
+Pomeranian
+March 5th 2021
+
+The following are suspended...
+
+""shopping malls - with the exception of: grocery stores, pharmacies and drugstores, press salons, bookstores, pet stores and DIY stores. In shopping malls, they will still be able to operate, among others hairdressing, optics, banking, laundry services.
+ 
+hotels (except for workers' hotels, as well as accommodation provided as part of business trips - the exact catalog of exceptions together with the required confirmation of a business trip will be included in the regulation); 
+
+fitness clubs and gyms 
+
+saunas, solariums, Turkish baths, slimming salons, casinos"" UPDATE: On April 28th 2021 it was announced some policies would be relaxed. On May  4th 2021 shopping malls will be reopened.",2021-04-28,2021-05-01,2021-05-04,The policy has a clear end date,Poland,POL,PL,Provincial,1,Pomerania,,,Restriction and Regulation of Businesses,Shopping Centers,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Shopping Centers"") is allowed to open with conditions",Other condition not specified above (please provide detail in the text entry),Yes,Poland,One or more provinces within one or more countries,,Pomerania,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1dETs5GxG7BHWOY ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_pt1UnSt31Qb7IFH,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:03:40Z
+R_3smNcbtTD4NDE3ZEg,3739150Eg,update,End of Policy,,"","Poland
+Pomeranian
+March 5th 2021
+
+The following are suspended...
+
+""shopping malls - with the exception of: grocery stores, pharmacies and drugstores, press salons, bookstores, pet stores and DIY stores. In shopping malls, they will still be able to operate, among others hairdressing, optics, banking, laundry services.
+ 
+hotels (except for workers' hotels, as well as accommodation provided as part of business trips - the exact catalog of exceptions together with the required confirmation of a business trip will be included in the regulation); 
+
+fitness clubs and gyms 
+
+saunas, solariums, Turkish baths, slimming salons, casinos"" UPDATE: On April 28th 2021 it was announced some policies would be relaxed. On May  4th 2021 shopping malls will be reopened.",2021-04-28,2021-05-01,2021-05-04,The policy has a clear end date,Poland,POL,PL,Provincial,1,Pomerania,,,Restriction and Regulation of Businesses,Personal Grooming Businesses (e.g. hair salons),,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Personal Grooming Businesses"") is closed/locked down","",Yes,Poland,One or more provinces within one or more countries,,Pomerania,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1dETs5GxG7BHWOY ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_pt1UnSt31Qb7IFH,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:03:40Z
+R_3smNcbtTD4NDE3ZEd,3739150Ed,update,End of Policy,,"","Poland
+Pomeranian
+March 5th 2021
+
+The following are suspended...
+
+""shopping malls - with the exception of: grocery stores, pharmacies and drugstores, press salons, bookstores, pet stores and DIY stores. In shopping malls, they will still be able to operate, among others hairdressing, optics, banking, laundry services.
+ 
+hotels (except for workers' hotels, as well as accommodation provided as part of business trips - the exact catalog of exceptions together with the required confirmation of a business trip will be included in the regulation); 
+
+fitness clubs and gyms 
+
+saunas, solariums, Turkish baths, slimming salons, casinos"" UPDATE: On April 28th 2021 it was announced some policies would be relaxed. On May  4th 2021 shopping malls will be reopened.",2021-04-28,2021-05-01,2021-05-04,The policy has a clear end date,Poland,POL,PL,Provincial,1,Pomerania,,,Restriction and Regulation of Businesses,Paid lodgings (e.g. hotels; motels),,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Paid lodgings (e.g. hotels; motels)"") is allowed to open with conditions",Other condition not specified above (please provide detail in the text entry),Yes,Poland,One or more provinces within one or more countries,,Pomerania,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1dETs5GxG7BHWOY ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_pt1UnSt31Qb7IFH,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:03:40Z
+R_3smNcbtTD4NDE3ZDn,3739150Dn,update,End of Policy,,"","Poland
+Pomeranian
+March 5th 2021
+
+The following are suspended...
+
+""shopping malls - with the exception of: grocery stores, pharmacies and drugstores, press salons, bookstores, pet stores and DIY stores. In shopping malls, they will still be able to operate, among others hairdressing, optics, banking, laundry services.
+ 
+hotels (except for workers' hotels, as well as accommodation provided as part of business trips - the exact catalog of exceptions together with the required confirmation of a business trip will be included in the regulation); 
+
+fitness clubs and gyms 
+
+saunas, solariums, Turkish baths, slimming salons, casinos"" UPDATE: On April 28th 2021 it was announced some policies would be relaxed. On May  4th 2021 shopping malls will be reopened.",2021-04-28,2021-05-01,2021-05-04,The policy has a clear end date,Poland,POL,PL,Provincial,1,Pomerania,,,Restriction and Regulation of Businesses,Other Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Other Businesses"") is closed/locked down","",Yes,Poland,One or more provinces within one or more countries,,Pomerania,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1dETs5GxG7BHWOY ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_pt1UnSt31Qb7IFH,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:03:40Z
+R_1opCzNRK1sgpELJDn,8219280Dn,update,End of Policy,,"","Poland
+March 5th 2021
+In Pomerania the following will be suspended March 13th 2021 to March 20th 2021...
+""swimming pools (except for swimming pools in entities performing medical activity and for members of the national team); 
+ski slopes 
+sports facilities"" UPDATE: On April 28th 2021 it was announced policies would be relaxed. On May 1st 2021 pools and other indoor gym activities will be reopened.",2021-04-28,2021-05-01,2021-05-04,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Other Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Other Businesses"") is allowed to open with conditions",Other condition not specified above (please provide detail in the text entry),No,Poland,One or more provinces within one or more countries,,Pomerania,,,,All (Travelers + Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1ig7IoOZftQBjTb ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1gtoEsYHepL88JS,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:17:07Z
+R_T17dJcwHmyyF33zGa,4347519Ga,update,End of Policy,,"","Poland
+February 24th 2021
+""The epidemic situation in the Warmian-Masurian Voivodeship is particularly difficult. 1/3 of the results of tests performed in the voivodship gives a positive result, therefore we are tightening the safety rules in this region. From February 27, hotels, shopping malls, cinemas, theaters, museums, art galleries, swimming pools and tennis courts will be closed. "" UPDATE: On April 28th 2021 it was announced that several policies would be relaxing or ending, on May 8th 2021 hotels will be opening back up to the general audience",2021-04-28,2021-05-01,2022-05-08,The policy has a clear end date,Poland,POL,PL,Provincial,1,Warmia-Masuria,CH-UR,,Restriction and Regulation of Businesses,Shopping Centers,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Shopping Centers"") is closed/locked down","",Yes,Poland,One or more provinces within one or more countries,,Warmia-Masuria,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_ugE80yXJLBnDhCN ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_TvizpwU7S9l17Kp,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:31:55Z
+R_T17dJcwHmyyF33zBd,4347519Bd,update,End of Policy,,"","Poland
+February 24th 2021
+""The epidemic situation in the Warmian-Masurian Voivodeship is particularly difficult. 1/3 of the results of tests performed in the voivodship gives a positive result, therefore we are tightening the safety rules in this region. From February 27, hotels, shopping malls, cinemas, theaters, museums, art galleries, swimming pools and tennis courts will be closed. "" UPDATE: On April 28th 2021 it was announced that several policies would be relaxing or ending, on May 8th 2021 hotels will be opening back up to the general audience",2021-04-28,2021-05-01,2022-05-08,The policy has a clear end date,Poland,POL,PL,Provincial,1,Warmia-Masuria,CH-UR,,Restriction and Regulation of Businesses,Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Commercial Businesses"") is closed/locked down","",Yes,Poland,One or more provinces within one or more countries,,Warmia-Masuria,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_ugE80yXJLBnDhCN ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_TvizpwU7S9l17Kp,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:31:55Z
+R_1GNfm2ITB2vA1TlGa,1623102Ga,new_entry,,,"","Poland
+May 4th 2021
+""Trade - open construction and furniture stores, shopping malls
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Shopping Centers,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Shopping Centers"") is allowed to open with conditions",Restriction of number of customers,Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1rqCApMHGzReEae,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T10:49:26Z
+R_1GNfm2ITB2vA1TlBd,1623102Bd,new_entry,,,"","Poland
+May 4th 2021
+""Trade - open construction and furniture stores, shopping malls
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Commercial Businesses"") is allowed to open with conditions",Restriction of number of customers,Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1rqCApMHGzReEae,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T10:49:26Z
+R_33C6d0WYx9umJkxEd,3988993Ed,new_entry,,,"","Poland
+May 8th 2021
+""Hotels - open to guests:
+
+    max 50 percent occupancy of the facility
+    closed restaurants and wellness & spa area""",2021-04-28,2021-05-08,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Paid lodgings (e.g. hotels; motels),,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Paid lodgings (e.g. hotels; motels)"") is allowed to open with conditions",Restriction of number of customers,Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_AtiOAKbpyWkvzJ7,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T14:10:47Z
+R_8GoIdqBo7Nm9WohFh,1737128Fh,new_entry,,,"","Poland
+May 15th 2021
+
+""Outdoor gastronomy (in the open air) - open restaurant gardens:
+
+    activities in a strict sanitary regime - incl. safe distance between the tables and the limit of people per table""",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Restaurants,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Restaurants"") is allowed to open with conditions",Other condition not specified above (please provide detail in the text entry),Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3KU7CAMmoFWhZmg,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T14:14:25Z
+R_3dSQgsMBCVVUzPKFh,1429446Fh,update,End of Policy,,"","Poland
+November 27th 2020
+
+""
+    Gastronomy - only ""take-away"" and ""take-away"" activities.
+
+    Hairdressing and beauty salons - functioning in the sanitary regime - at least 1.5 m distance between stands and no more than 1 person per 1 service stand, except for the service. 
+
+Activities suspended
+
+    Cultural events and cinemas - with the exception of activities necessary for the preparation of artistic events such as rehearsals and exercises, phonographic and audiovisual recordings and events transmitted by means of direct distance communication - without the participation of the public.
+    Hotels - with the exception of guests on a business trip, athletes, medical staff as well as patients and their carers.
+    Trade fairs and events - only in the on-line form.
+    Weddings, communions and consoles
+    Theme parks
+    Gyms, fitness clubs and water parks
+    Discos and nightclubs"" UPDATE: On april 28th 2021 it was announced the ending or relaxing of several policies. With that Starting May 15th 2021 Outdoor restaurants may reopen and May 29th 2021 indoor restaurants may reopen",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Restaurants,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Restaurants"") is allowed to open with conditions",Delivery and Takeaway Only,Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3dXSAKUMuiD4qaC,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:40:47Z
+R_3dSQgsMBCVVUzPKAu,1429446Au,update,End of Policy,,"","Poland
+November 27th 2020
+
+""
+    Gastronomy - only ""take-away"" and ""take-away"" activities.
+
+    Hairdressing and beauty salons - functioning in the sanitary regime - at least 1.5 m distance between stands and no more than 1 person per 1 service stand, except for the service. 
+
+Activities suspended
+
+    Cultural events and cinemas - with the exception of activities necessary for the preparation of artistic events such as rehearsals and exercises, phonographic and audiovisual recordings and events transmitted by means of direct distance communication - without the participation of the public.
+    Hotels - with the exception of guests on a business trip, athletes, medical staff as well as patients and their carers.
+    Trade fairs and events - only in the on-line form.
+    Weddings, communions and consoles
+    Theme parks
+    Gyms, fitness clubs and water parks
+    Discos and nightclubs"" UPDATE: On april 28th 2021 it was announced the ending or relaxing of several policies. With that Starting May 15th 2021 Outdoor restaurants may reopen and May 29th 2021 indoor restaurants may reopen",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Bars,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Bars"") is allowed to open with conditions",Delivery and Takeaway Only,Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3dXSAKUMuiD4qaC,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:40:47Z
+R_3dSQgsMBCVVUzPKEg,1429446Eg,update,End of Policy,,"","Poland
+November 27th 2020
+
+""
+    Gastronomy - only ""take-away"" and ""take-away"" activities.
+
+    Hairdressing and beauty salons - functioning in the sanitary regime - at least 1.5 m distance between stands and no more than 1 person per 1 service stand, except for the service. 
+
+Activities suspended
+
+    Cultural events and cinemas - with the exception of activities necessary for the preparation of artistic events such as rehearsals and exercises, phonographic and audiovisual recordings and events transmitted by means of direct distance communication - without the participation of the public.
+    Hotels - with the exception of guests on a business trip, athletes, medical staff as well as patients and their carers.
+    Trade fairs and events - only in the on-line form.
+    Weddings, communions and consoles
+    Theme parks
+    Gyms, fitness clubs and water parks
+    Discos and nightclubs"" UPDATE: On april 28th 2021 it was announced the ending or relaxing of several policies. With that Starting May 15th 2021 Outdoor restaurants may reopen and May 29th 2021 indoor restaurants may reopen",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Personal Grooming Businesses (e.g. hair salons),,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Personal Grooming Businesses"") is allowed to open with conditions",Restriction of number of customers,Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3dXSAKUMuiD4qaC,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:40:47Z
+R_3dSQgsMBCVVUzPKBd,1429446Bd,update,End of Policy,,"","Poland
+November 27th 2020
+
+""
+    Gastronomy - only ""take-away"" and ""take-away"" activities.
+
+    Hairdressing and beauty salons - functioning in the sanitary regime - at least 1.5 m distance between stands and no more than 1 person per 1 service stand, except for the service. 
+
+Activities suspended
+
+    Cultural events and cinemas - with the exception of activities necessary for the preparation of artistic events such as rehearsals and exercises, phonographic and audiovisual recordings and events transmitted by means of direct distance communication - without the participation of the public.
+    Hotels - with the exception of guests on a business trip, athletes, medical staff as well as patients and their carers.
+    Trade fairs and events - only in the on-line form.
+    Weddings, communions and consoles
+    Theme parks
+    Gyms, fitness clubs and water parks
+    Discos and nightclubs"" UPDATE: On april 28th 2021 it was announced the ending or relaxing of several policies. With that Starting May 15th 2021 Outdoor restaurants may reopen and May 29th 2021 indoor restaurants may reopen",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Commercial Businesses"") is closed/locked down","",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3dXSAKUMuiD4qaC,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:40:47Z
+R_3dSQgsMBCVVUzPKEd,1429446Ed,update,End of Policy,,"","Poland
+November 27th 2020
+
+""
+    Gastronomy - only ""take-away"" and ""take-away"" activities.
+
+    Hairdressing and beauty salons - functioning in the sanitary regime - at least 1.5 m distance between stands and no more than 1 person per 1 service stand, except for the service. 
+
+Activities suspended
+
+    Cultural events and cinemas - with the exception of activities necessary for the preparation of artistic events such as rehearsals and exercises, phonographic and audiovisual recordings and events transmitted by means of direct distance communication - without the participation of the public.
+    Hotels - with the exception of guests on a business trip, athletes, medical staff as well as patients and their carers.
+    Trade fairs and events - only in the on-line form.
+    Weddings, communions and consoles
+    Theme parks
+    Gyms, fitness clubs and water parks
+    Discos and nightclubs"" UPDATE: On april 28th 2021 it was announced the ending or relaxing of several policies. With that Starting May 15th 2021 Outdoor restaurants may reopen and May 29th 2021 indoor restaurants may reopen",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Paid lodgings (e.g. hotels; motels),,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Paid lodgings (e.g. hotels; motels)"") is closed/locked down","",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3dXSAKUMuiD4qaC,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:40:47Z
+R_3dSQgsMBCVVUzPKDn,1429446Dn,update,End of Policy,,"","Poland
+November 27th 2020
+
+""
+    Gastronomy - only ""take-away"" and ""take-away"" activities.
+
+    Hairdressing and beauty salons - functioning in the sanitary regime - at least 1.5 m distance between stands and no more than 1 person per 1 service stand, except for the service. 
+
+Activities suspended
+
+    Cultural events and cinemas - with the exception of activities necessary for the preparation of artistic events such as rehearsals and exercises, phonographic and audiovisual recordings and events transmitted by means of direct distance communication - without the participation of the public.
+    Hotels - with the exception of guests on a business trip, athletes, medical staff as well as patients and their carers.
+    Trade fairs and events - only in the on-line form.
+    Weddings, communions and consoles
+    Theme parks
+    Gyms, fitness clubs and water parks
+    Discos and nightclubs"" UPDATE: On april 28th 2021 it was announced the ending or relaxing of several policies. With that Starting May 15th 2021 Outdoor restaurants may reopen and May 29th 2021 indoor restaurants may reopen",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Other Businesses,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Other Businesses"") is closed/locked down","",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3dXSAKUMuiD4qaC,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:40:47Z
+R_1kMNcNHl1jwDFKuFh,1737128Fh,update,Change of Policy,Relaxing,Volume of policy relaxing,"Poland
+May 15th 2021
+
+""Outdoor gastronomy (in the open air) - open restaurant gardens:
+
+    activities in a strict sanitary regime - incl. safe distance between the tables and the limit of people per table"" UPDATE: Whereas on may 4th 2021 it was outdoors only, on May 29th 2021 indoor restaurants may operate at 50% the premises size",2021-04-28,2021-05-29,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restriction and Regulation of Businesses,Restaurants,,"",,,,,,"","","","","","","","","","","",,Non-Essential Businesses,"This type of business  (""Restaurants"") is allowed to open with conditions",Other condition not specified above (please provide detail in the text entry),Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_b93h8hiOuCLcGSq,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:44:01Z
 R_3COr5OI575xrRnmEt,515679Et,new_entry,,,"","Poland
 March 13th 2020
 Restaurants are limited to Take-away or Delivery only
@@ -6266,6 +6564,14 @@ February 24th 2021
 R_1PS3k4O1uH24mGAEa,5232751Ea,update,Change of Policy,Strengthening,timing of policy strengthening,"Poland
 November 4th 2020
 ""Closing of cultural institutions: theaters, cinemas, museums, art galleries, community centers, music centers - from November 7 to November 29; "" UPDATE: The policy is once again being extended until April 25th 2021",2021-04-14,2021-04-19,2021-04-25,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Government Services,Other public facilities,,"",,,,,,"","","","","","","","","","","",,Non-Essential Government Services,This service is no longer provided by the government,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Ministry/Department of Health,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_33rQCWXdNgEebME ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1rALHtNKI59GHxD,NA ; http://web.archive.org/web/20210417070705/https://www.gov.pl/web/koronawirus/Do-25kwietnia-przedluzamy-zasady-bezpieczenstwa-z-wyjatkami,2022-07-07,2022-07-07T12:51:16Z
+R_1M3RStWBjsjn0jYEu,868936Eu,update,End of Policy,,"","Poland
+January 28th 2021
+Museums and art galleries may reopen following strict sanitary protocols UPDATE: On april 28th 2021 it was announced that several policies would be ending or relaxing, by May 15th 2021 all cultural themed buildings will be reopened",2021-04-28,2021-05-01,2021-05-15,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Government Services,Public museums/galleries,,"",,,,,,"","","","","","","","","","","",,Non-Essential Government Services,This service provided by the government is provided with conditions attached,Restriction  of number of people allowed to access this service,Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1n2Ro0acRnC1v8Z ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3n8BAHXXt4w5N5S,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:35:00Z
+R_0MWWWTBw8eFqVHPEu,5731889Eu,update,End of Policy,,"","Poland
+March 11th 2021
+The following are suspended in Mazowieckie and Lubuskie...
+
+theaters, museums, art galleries UPDATE: On April 28th 2021 it was decided to relax some policies. On May 15th 2021 theaters and other cultural sites will be allowed to reopen.",2021-04-28,2021-05-01,2021-05-15,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restriction and Regulation of Government Services,Public museums/galleries,,"",,,,,,"","","","","","","","","","","",,Non-Essential Government Services,This service is no longer provided by the government,"",No,Poland,"One or more countries, but not all countries",,,,,,All (Travelers + Residents),No special population targeted,,,Mandatory with Fines,"National Government,Provincial/State Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_31Zcl5prgKR9zjV ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1BR6JwW05FimM7s,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T10:57:30Z
 R_2aXNaeqAhzYDgr5NA,9880408,new_entry,,,"","Prime Minister Mateusz Morawiecki decided on Tuesday March 10 to cancel all mass events in the country, among other preventive measures undertaken to contain the virus. A mass gathering is defined as at least 1000 people at locations other than buildings, or at least 500 people inside a building.",2020-03-10,2020-03-10,,,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,,,"",,,,,,"","","","","","","","","","","",,,,"",,Poland,,,,,,,All Residents (Citizen Residents + Foreign Residents),,,,Mandatory with Legal Penalties (Jail Time),National Government,45.1984914949445,40.5619000313546,35.6569632402241,100,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1Hhumi3Z62X6OiS,https://polandin.com/47055103/amidst-coronavirus-situation-all-mass-events-cancelled-pm,2020-03-28,2020-03-28T13:19:18Z
 R_1guNKZ6Dy3NuJdhAq,7408031,new_entry,,,"",On March 10th 2020 the Polish government announced that mass events are cancelled with no clear definition of mass provided,2020-03-10,2020-03-10,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,All/Unspecified mass gatherings restricted,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory (Unspecified/Implied),National Government,45.1984914949445,40.5619000313546,35.6569632402241,100,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_qWKxpSLePOQmN2x,https://www.usnews.com/news/world/articles/2020-03-10/poland-cancels-all-mass-events-due-to-coronavirus-pm-says,2021-08-24,2021-08-24T14:56:02Z
 R_1IzwjQMsnH84LsVAq,7987210,new_entry,,,"","Poland
@@ -6686,6 +6992,100 @@ November 27th 2020
 R_1KjRBPNxErfYJftAt,4583341,update,Change of Policy,Strengthening,timing of policy strengthening,"Poland
 November 4th 2020
 ""Churches: 1 person / 15m2 - from November 7 to November 29 "" UPDATE: The policy is once again being extended until April 25th 2021",2021-04-14,2021-04-19,2021-04-25,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,Attendance at religious services restricted (e.g. mosque/church closings),,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_xyMlcMKRGAtv60h ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2fwwjcH2TMHg6EJ,NA ; http://web.archive.org/web/20210417070705/https://www.gov.pl/web/koronawirus/Do-25kwietnia-przedluzamy-zasady-bezpieczenstwa-z-wyjatkami,2022-07-07,2022-07-07T12:51:14Z
+R_2dGxxo4H2uSJR1vAp,6754966,new_entry,,,"","Poland
+May 1st 2021
+""Sport - practicing sport in outdoor sports facilities :
+
+    limit - max. 50 people
+
+Sport - practicing sports in indoor sports facilities and swimming pools :
+
+    for organized groups of children and youth
+    max. 50 percent occupancy of the facility""",2021-04-28,2021-05-01,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,All Recreational or commercial events allowed to occur with conditions,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3r2QD9ObYgshHOi,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T10:25:59Z
+R_2QAN9n1v1gAIn61Ap,2603029,update,End of Policy,,"","Poland
+March 25th 2021
+Sporting events are allowed to occur but must have no audience UPDATE: Barring any changes in the corona infections, it was decided on April 28th 2021 to start relaxing some policies, sport facilities will allowed to be reopened starting May 1st 2021",2021-04-28,2021-05-01,2021-05-01,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,All Recreational or commercial events allowed to occur with conditions,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_XHYMIXuGY3oClpL ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1o4E64qpcudoBJn,NA ; http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T10:39:21Z
+R_2BbV4rHIHRjsRVtAz,80345,update,End of Policy,,"","Poland
+December 17th 2020
+
+Ski slopes are closed
+ UPDATE: On April 28th 2021 it was announced that several facilities would be allowed to reopen. Starting May 1st 2021 ski slopes may reopen",2021-04-28,2021-05-01,2021-05-01,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,Cancellation of a recreational or commercial event,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1N4ShVPwlCih84E ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_6M43zd0ddkvitH3,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:38:21Z
+R_3lyr03slvtdjqBPAt,9683771,update,End of Policy,,"","Poland
+November 27th 2020
+""Religious worship:
+
+    limiting the number of people in churches - maximum 1 person per 15m 2 ;
+    an obligation to keep a minimum distance of 1.5 m from other people and cover the nose and mouth."" UPDATE: On April 28th 2021 it was announced relaxing or ending of several policies. On May 4th 2021 Religious worships will be allowed to open",2021-04-28,2021-05-01,2021-05-04,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,Attendance at religious services restricted (e.g. mosque/church closings),,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_OwepXqKkLE0isRb ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1jWcqM3fYMDNv8h,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:47:19Z
+R_2P5KCricN0WYJbrAt,2453536,new_entry,,,"","Poland
+May 4th 2021
+""Religious worship - services with a limit of people:
+
+    limit of 1 person per 15 m2 in temples
+    recommendation for holding ceremonies in the open air""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,Attendance at religious services restricted (e.g. mosque/church closings),,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2zp6rf02yqAeHMC,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T13:42:39Z
+R_1KyeySV2kUmUo4HAq,4879325,new_entry,,,"","Poland
+May 15th 2021
+
+""Special events outside - the possibility of organizing, among others weddings and communions:
+
+    limit up to 25 people
+    in a strict sanitary regime - incl. a safe distance between the tables and the limit of people per table (regulations are the same as in the case of external gastronomy)""
+
+Vaccinated are an exception",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,All/Unspecified mass gatherings restricted,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All (Travelers + Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_7VE6pSncKiScrqK,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-15,2022-07-15T09:57:57Z
+R_1la7GUvtDxQuU2WBq,2065889,update,End of Policy,,"","Poland
+November 27th 2020
+""
+    Assemblies and meetings:
+
+    a maximum of 5 people may participate in the assembly, and the distance between the assemblies must not be less than 100 m;
+    events organized at home - with the participation of a maximum of 5 people (this limit does not include the person inviting to the party and people who live or manage with this person).
+"" UPDATE: On April 28th 2021 it was announced that the restrictions on public gatherings would be loosened. On May 15th 2021 restrictions for special events will be loosened with May 29th 2021 being the deadline for all events",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,Events at private residencies restricted,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_24uOINR2mARcDjy ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_28zVMQvcKrEavDa,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:44:23Z
+R_1la7GUvtDxQuU2WDy,2065889,update,End of Policy,,"","Poland
+November 27th 2020
+""
+    Assemblies and meetings:
+
+    a maximum of 5 people may participate in the assembly, and the distance between the assemblies must not be less than 100 m;
+    events organized at home - with the participation of a maximum of 5 people (this limit does not include the person inviting to the party and people who live or manage with this person).
+"" UPDATE: On April 28th 2021 it was announced that the restrictions on public gatherings would be loosened. On May 15th 2021 restrictions for special events will be loosened with May 29th 2021 being the deadline for all events",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,Other mass gatherings not specified above restricted,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_24uOINR2mARcDjy ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_28zVMQvcKrEavDa,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:44:23Z
+R_ZpXb11pvsGCQJfHAp,6754966,update,Change of Policy,Relaxing,Volume of policy relaxing,"Poland
+May 1st 2021
+""Sport - practicing sport in outdoor sports facilities :
+
+    limit - max. 50 people
+
+Sport - practicing sports in indoor sports facilities and swimming pools :
+
+    for organized groups of children and youth
+    max. 50 percent occupancy of the facility"" UPDATE: On May 1st 2021 it was only allowed for 50 people.
+On May 15th 2021 it will chance to 25% of audience size",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,All Recreational or commercial events allowed to occur with conditions,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_4UREYgTR0woMWQC,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:27:47Z
+R_32XvNdnPLuaJWCxAp,6754966,update,Change of Policy,Relaxing,Volume of policy relaxing,"Poland
+May 1st 2021
+""Sport - practicing sport in outdoor sports facilities :
+
+    limit - max. 50 people
+
+Sport - practicing sports in indoor sports facilities and swimming pools :
+
+    for organized groups of children and youth
+    max. 50 percent occupancy of the facility"" UPDATE: On may 15th 2021 the policy was updated to allow for 50% occupancy.
+On May 29th 2021 it will be allowed that..
+""Sport - doing sports in indoor sports facilities and swimming pools:
+
+    facilities accessible to all
+    max occupancy up to 50 percent (with audience)
+
+Sport - practicing sports in gyms, fitness clubs, solariums:
+
+    limit of 1 person per 15m2
+    operating in a strict sanitary regime""",2021-04-28,2021-05-29,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,All Recreational or commercial events allowed to occur with conditions,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_40aXVHkgIvKvTWS,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:30:46Z
+R_WDtJ7JlOII0sPkZAq,4879325,update,Change of Policy,Relaxing,Volume of policy relaxing,"Poland
+May 15th 2021
+
+""Special events outside - the possibility of organizing, among others weddings and communions:
+
+    limit up to 25 people
+    in a strict sanitary regime - incl. a safe distance between the tables and the limit of people per table (regulations are the same as in the case of external gastronomy)"" UPDATE: On May 15th 2021 it was allowed for up to 25 people to attain special events.
+On May 29th 2021 it will be raised to 50 people",2021-04-28,2021-05-29,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Restrictions of Mass Gatherings,All/Unspecified mass gatherings restricted,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All (Travelers + Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1Y519qmAOpjGFlI,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:48:37Z
 R_3fdDrLjtLIZsqfmGdDi,5917276GdDi,new_entry,,,"","Poland
 March 14th 2020
 A set of guidelines establishing the recommended ways a business should operate if not fully closed.
@@ -6743,17 +7143,17 @@ R_11Zx890DIdvp8z5Fl,8324230,new_entry,,,"","Poland
 March 24th 2020
 ""The number of people on a bus is equal to half the number of seats
 
-Collective public transport is still operational. However, on the bus, tram or subway, only half of the seats may be occupied. If there are 70 seats in a vehicle, a maximum of 35 people can be on board. """,2020-03-24,2020-03-24,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Social Distancing,Restrictions on ridership of subways and trams,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,National Government,55.1483435710268,51.8927779803515,48.0550492719231,34,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2dhkOZMrUq0Er4y,http://web.archive.org/web/20200325090729/https://www.gov.pl/web/koronawirus/wprowadzamy-nowe-zasady-bezpieczenstwa-w-zwiazku-z-koronawirusem,2022-04-19,2022-04-19T12:10:26Z
+Collective public transport is still operational. However, on the bus, tram or subway, only half of the seats may be occupied. If there are 70 seats in a vehicle, a maximum of 35 people can be on board. """,2020-03-24,2020-03-24,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Social Distancing,Restrictions on ridership of subways and trams,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,National Government,55.1483435710268,51.8927779803515,48.0550492719231,34,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2dhkOZMrUq0Er4y,http://web.archive.org/web/20200325090729/https://www.gov.pl/web/koronawirus/wprowadzamy-nowe-zasady-bezpieczenstwa-w-zwiazku-z-koronawirusem,2022-04-19,2022-04-19T12:10:26Z
 R_11Zx890DIdvp8z5Fm,8324230,new_entry,,,"","Poland
 March 24th 2020
 ""The number of people on a bus is equal to half the number of seats
 
-Collective public transport is still operational. However, on the bus, tram or subway, only half of the seats may be occupied. If there are 70 seats in a vehicle, a maximum of 35 people can be on board. """,2020-03-24,2020-03-24,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Social Distancing,Restrictions on ridership of trains,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,National Government,55.1483435710268,51.8927779803515,48.0550492719231,34,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2dhkOZMrUq0Er4y,http://web.archive.org/web/20200325090729/https://www.gov.pl/web/koronawirus/wprowadzamy-nowe-zasady-bezpieczenstwa-w-zwiazku-z-koronawirusem,2022-04-19,2022-04-19T12:10:26Z
+Collective public transport is still operational. However, on the bus, tram or subway, only half of the seats may be occupied. If there are 70 seats in a vehicle, a maximum of 35 people can be on board. """,2020-03-24,2020-03-24,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Social Distancing,Restrictions on ridership of trains,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,National Government,55.1483435710268,51.8927779803515,48.0550492719231,34,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2dhkOZMrUq0Er4y,http://web.archive.org/web/20200325090729/https://www.gov.pl/web/koronawirus/wprowadzamy-nowe-zasady-bezpieczenstwa-w-zwiazku-z-koronawirusem,2022-04-19,2022-04-19T12:10:26Z
 R_11Zx890DIdvp8z5Fk,8324230,new_entry,,,"","Poland
 March 24th 2020
 ""The number of people on a bus is equal to half the number of seats
 
-Collective public transport is still operational. However, on the bus, tram or subway, only half of the seats may be occupied. If there are 70 seats in a vehicle, a maximum of 35 people can be on board. """,2020-03-24,2020-03-24,2022-07-15,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Social Distancing,Restrictions on ridership of buses,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,National Government,55.1483435710268,51.8927779803515,48.0550492719231,34,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2dhkOZMrUq0Er4y,http://web.archive.org/web/20200325090729/https://www.gov.pl/web/koronawirus/wprowadzamy-nowe-zasady-bezpieczenstwa-w-zwiazku-z-koronawirusem,2022-04-19,2022-04-19T12:10:26Z
+Collective public transport is still operational. However, on the bus, tram or subway, only half of the seats may be occupied. If there are 70 seats in a vehicle, a maximum of 35 people can be on board. """,2020-03-24,2020-03-24,2022-07-21,The policy has an unlimited time span (e.g. recommendation to wash one's hands; passing of a legal bill),Poland,POL,PL,National,1,,,,Social Distancing,Restrictions on ridership of buses,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,National Government,55.1483435710268,51.8927779803515,48.0550492719231,34,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2dhkOZMrUq0Er4y,http://web.archive.org/web/20200325090729/https://www.gov.pl/web/koronawirus/wprowadzamy-nowe-zasady-bezpieczenstwa-w-zwiazku-z-koronawirusem,2022-04-19,2022-04-19T12:10:26Z
 R_1d5F1as4013kxkBEaDi,1674242EaDi,new_entry,,,"","Poland
 March 31st 2020
 ""
@@ -9164,3 +9564,319 @@ Activities suspended
     West Pomeranian,
     Lesser Poland.
 ",2021-04-20,2021-04-26,2021-04-26,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Personal Grooming Businesses (e.g. hair salons),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_BFhKi2bpsRQLB17,NA ; http://web.archive.org/web/20210422070151/https://www.gov.pl/web/koronawirus/od-26-kwietnia-lagodzimy-obostrzenia-w-11-wojewodztwach-otwarte-salony-fryzjerskie-i-czesciowy-powrot-dzieci-do-szkol,2022-07-08,2022-07-08T10:57:14Z
+R_2ZUZQUGceEQ1k85BdDi,8606024BdDi,update,End of Policy,,"","Poland
+February 12th 2021
+
+New conditions for business'
+
+""Hotels - available to everyone while maintaining the sanitary regime (50% of available rooms, meals only served in rooms, at guests' request. Hotel restaurants - closed)."" UPDATE: On April 28th 2021 it was announced that several policies would be relaxing or ending, on May 8th 2021 hotels will be opening back up to the general audience",2022-04-28,2021-05-01,2021-05-08,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1NCwyrb6eINSWGT ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2CZoinAyG3DLwsG,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:31:54Z
+R_2ZUZQUGceEQ1k85BdMa,8606024BdMa,update,End of Policy,,"","Poland
+February 12th 2021
+
+New conditions for business'
+
+""Hotels - available to everyone while maintaining the sanitary regime (50% of available rooms, meals only served in rooms, at guests' request. Hotel restaurants - closed)."" UPDATE: On April 28th 2021 it was announced that several policies would be relaxing or ending, on May 8th 2021 hotels will be opening back up to the general audience",2022-04-28,2021-05-01,2021-05-08,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1NCwyrb6eINSWGT ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2CZoinAyG3DLwsG,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:31:54Z
+R_1M3RStWBjsjn0jYEuDi,868936EuDi,update,End of Policy,,"","Poland
+January 28th 2021
+Museums and art galleries may reopen following strict sanitary protocols UPDATE: On april 28th 2021 it was announced that several policies would be ending or relaxing, by May 15th 2021 all cultural themed buildings will be reopened",2021-04-28,2021-05-01,2021-05-15,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Public museums/galleries,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1n2Ro0acRnC1v8Z ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3n8BAHXXt4w5N5S,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:35:00Z
+R_1M3RStWBjsjn0jYEuMa,868936EuMa,update,End of Policy,,"","Poland
+January 28th 2021
+Museums and art galleries may reopen following strict sanitary protocols UPDATE: On april 28th 2021 it was announced that several policies would be ending or relaxing, by May 15th 2021 all cultural themed buildings will be reopened",2021-04-28,2021-05-01,2021-05-15,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Public museums/galleries,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1n2Ro0acRnC1v8Z ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3n8BAHXXt4w5N5S,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:35:00Z
+R_ULmqBdUz8xqIKxHBdDi,8756340BdDi,update,End of Policy,,"","Poland
+February 12th 2021
+""Cinemas, theaters, operas and concert halls reopened - a maximum of 50% of the seats may be occupied during cultural events. Masks are obligatory. Prohibition of consumption. "" UPDATE: On april 28th 2021 it was announced that several policies would be ending or relaxing, by May 15th 2021 all cultural themed buildings will be reopened",2021-04-28,2021-05-01,2021-05-15,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_231yuWrtTNfBbuG ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_PAMGdR7pQIKsMYV,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:35:05Z
+R_ULmqBdUz8xqIKxHBdMa,8756340BdMa,update,End of Policy,,"","Poland
+February 12th 2021
+""Cinemas, theaters, operas and concert halls reopened - a maximum of 50% of the seats may be occupied during cultural events. Masks are obligatory. Prohibition of consumption. "" UPDATE: On april 28th 2021 it was announced that several policies would be ending or relaxing, by May 15th 2021 all cultural themed buildings will be reopened",2021-04-28,2021-05-01,2021-05-15,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_231yuWrtTNfBbuG ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_PAMGdR7pQIKsMYV,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:35:05Z
+R_r1mC7vJJIQsG0FzEuDi,3967679EuDi,new_entry,,,"","Poland 
+May 4th 2021
+
+""Culture - open art galleries and museums :
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Public museums/galleries,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3GoxXfhYrmWJvAu,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T10:34:14Z
+R_r1mC7vJJIQsG0FzEuMa,3967679EuMa,new_entry,,,"","Poland 
+May 4th 2021
+
+""Culture - open art galleries and museums :
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Public museums/galleries,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3GoxXfhYrmWJvAu,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T10:34:14Z
+R_1GNfm2ITB2vA1TlGaDi,1623102GaDi,new_entry,,,"","Poland
+May 4th 2021
+""Trade - open construction and furniture stores, shopping malls
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Shopping Centers,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1rqCApMHGzReEae,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T10:49:26Z
+R_1GNfm2ITB2vA1TlGaMa,1623102GaMa,new_entry,,,"","Poland
+May 4th 2021
+""Trade - open construction and furniture stores, shopping malls
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Shopping Centers,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1rqCApMHGzReEae,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T10:49:26Z
+R_1GNfm2ITB2vA1TlBdDi,1623102BdDi,new_entry,,,"","Poland
+May 4th 2021
+""Trade - open construction and furniture stores, shopping malls
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1rqCApMHGzReEae,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T10:49:26Z
+R_1GNfm2ITB2vA1TlBdMa,1623102BdMa,new_entry,,,"","Poland
+May 4th 2021
+""Trade - open construction and furniture stores, shopping malls
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Commercial Businesses,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1rqCApMHGzReEae,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T10:49:26Z
+R_1o0VhqxV9a4AKlsEmDi,1123105EmDi,new_entry,,,"","Poland
+May 4th 2021
+
+""Education - primary schools :
+
+    full-time education for grades 1-3 of primary school
+    strict sanitary regime - incl. airing the rooms during breaks and disinfecting facilities at weekends""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,Teachers,Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_ahfADtCC9FRAjwB,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T13:46:46Z
+R_1o0VhqxV9a4AKlsEmMa,1123105EmMa,new_entry,,,"","Poland
+May 4th 2021
+
+""Education - primary schools :
+
+    full-time education for grades 1-3 of primary school
+    strict sanitary regime - incl. airing the rooms during breaks and disinfecting facilities at weekends""",2021-04-28,2021-05-04,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,Teachers,Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_ahfADtCC9FRAjwB,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T13:46:46Z
+R_2UgbuLck2CnlFwhHc,9918792,update,End of Policy,,"","Poland
+February 24th 2021
+
+Mask mandate are now masks only.
+Headscarves or helmets no longer count. UPDATE: On April 28th 2021 it was announced several policies would be ending. On May 15th 2021 Wearing a mask outdoors will be optional",2021-04-28,2021-05-05,2021-05-15,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks in all public spaces/everywhere,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_OvBfBdbi2woZU6l ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1FqwcoLk7J3XCB0,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:49:56Z
+R_33C6d0WYx9umJkxEdDi,3988993EdDi,new_entry,,,"","Poland
+May 8th 2021
+""Hotels - open to guests:
+
+    max 50 percent occupancy of the facility
+    closed restaurants and wellness & spa area""",2021-04-28,2021-05-08,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Paid lodgings (e.g. hotels; motels),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_AtiOAKbpyWkvzJ7,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T14:10:47Z
+R_33C6d0WYx9umJkxEdMa,3988993EdMa,new_entry,,,"","Poland
+May 8th 2021
+""Hotels - open to guests:
+
+    max 50 percent occupancy of the facility
+    closed restaurants and wellness & spa area""",2021-04-28,2021-05-08,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Paid lodgings (e.g. hotels; motels),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_AtiOAKbpyWkvzJ7,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T14:10:47Z
+R_8GoIdqBo7Nm9WohFhDi,1737128FhDi,new_entry,,,"","Poland
+May 15th 2021
+
+""Outdoor gastronomy (in the open air) - open restaurant gardens:
+
+    activities in a strict sanitary regime - incl. safe distance between the tables and the limit of people per table""",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Restaurants,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3KU7CAMmoFWhZmg,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T14:14:25Z
+R_8GoIdqBo7Nm9WohFhMa,1737128FhMa,new_entry,,,"","Poland
+May 15th 2021
+
+""Outdoor gastronomy (in the open air) - open restaurant gardens:
+
+    activities in a strict sanitary regime - incl. safe distance between the tables and the limit of people per table""",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Restaurants,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3KU7CAMmoFWhZmg,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-12,2022-07-12T14:14:25Z
+R_29rWHjJ4IYdBO71EmDi,3345060EmDi,new_entry,,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,Teachers,Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_291ifi1TWhqAj5I,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:23:32Z
+R_29rWHjJ4IYdBO71EmMa,3345060EmMa,new_entry,,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,Teachers,Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_291ifi1TWhqAj5I,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:23:32Z
+R_29rWHjJ4IYdBO71FwDi,3345060FwDi,new_entry,,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Secondary Schools (generally for children ages 10 to 18),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,Teachers,Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_291ifi1TWhqAj5I,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:23:32Z
+R_29rWHjJ4IYdBO71FwMa,3345060FwMa,new_entry,,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Secondary Schools (generally for children ages 10 to 18),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,Teachers,Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_291ifi1TWhqAj5I,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:23:32Z
+R_3dSQgsMBCVVUzPKFhMa,1429446FhMa,update,End of Policy,,"","Poland
+November 27th 2020
+
+""
+    Gastronomy - only ""take-away"" and ""take-away"" activities.
+
+    Hairdressing and beauty salons - functioning in the sanitary regime - at least 1.5 m distance between stands and no more than 1 person per 1 service stand, except for the service. 
+
+Activities suspended
+
+    Cultural events and cinemas - with the exception of activities necessary for the preparation of artistic events such as rehearsals and exercises, phonographic and audiovisual recordings and events transmitted by means of direct distance communication - without the participation of the public.
+    Hotels - with the exception of guests on a business trip, athletes, medical staff as well as patients and their carers.
+    Trade fairs and events - only in the on-line form.
+    Weddings, communions and consoles
+    Theme parks
+    Gyms, fitness clubs and water parks
+    Discos and nightclubs"" UPDATE: On april 28th 2021 it was announced the ending or relaxing of several policies. With that Starting May 15th 2021 Outdoor restaurants may reopen and May 29th 2021 indoor restaurants may reopen",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Restaurants,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3dXSAKUMuiD4qaC,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:40:47Z
+R_3dSQgsMBCVVUzPKAuMa,1429446AuMa,update,End of Policy,,"","Poland
+November 27th 2020
+
+""
+    Gastronomy - only ""take-away"" and ""take-away"" activities.
+
+    Hairdressing and beauty salons - functioning in the sanitary regime - at least 1.5 m distance between stands and no more than 1 person per 1 service stand, except for the service. 
+
+Activities suspended
+
+    Cultural events and cinemas - with the exception of activities necessary for the preparation of artistic events such as rehearsals and exercises, phonographic and audiovisual recordings and events transmitted by means of direct distance communication - without the participation of the public.
+    Hotels - with the exception of guests on a business trip, athletes, medical staff as well as patients and their carers.
+    Trade fairs and events - only in the on-line form.
+    Weddings, communions and consoles
+    Theme parks
+    Gyms, fitness clubs and water parks
+    Discos and nightclubs"" UPDATE: On april 28th 2021 it was announced the ending or relaxing of several policies. With that Starting May 15th 2021 Outdoor restaurants may reopen and May 29th 2021 indoor restaurants may reopen",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Bars,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3dXSAKUMuiD4qaC,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:40:47Z
+R_3dSQgsMBCVVUzPKEgDi,1429446EgDi,update,End of Policy,,"","Poland
+November 27th 2020
+
+""
+    Gastronomy - only ""take-away"" and ""take-away"" activities.
+
+    Hairdressing and beauty salons - functioning in the sanitary regime - at least 1.5 m distance between stands and no more than 1 person per 1 service stand, except for the service. 
+
+Activities suspended
+
+    Cultural events and cinemas - with the exception of activities necessary for the preparation of artistic events such as rehearsals and exercises, phonographic and audiovisual recordings and events transmitted by means of direct distance communication - without the participation of the public.
+    Hotels - with the exception of guests on a business trip, athletes, medical staff as well as patients and their carers.
+    Trade fairs and events - only in the on-line form.
+    Weddings, communions and consoles
+    Theme parks
+    Gyms, fitness clubs and water parks
+    Discos and nightclubs"" UPDATE: On april 28th 2021 it was announced the ending or relaxing of several policies. With that Starting May 15th 2021 Outdoor restaurants may reopen and May 29th 2021 indoor restaurants may reopen",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Personal Grooming Businesses (e.g. hair salons),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3dXSAKUMuiD4qaC,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:40:47Z
+R_3dSQgsMBCVVUzPKEgMa,1429446EgMa,update,End of Policy,,"","Poland
+November 27th 2020
+
+""
+    Gastronomy - only ""take-away"" and ""take-away"" activities.
+
+    Hairdressing and beauty salons - functioning in the sanitary regime - at least 1.5 m distance between stands and no more than 1 person per 1 service stand, except for the service. 
+
+Activities suspended
+
+    Cultural events and cinemas - with the exception of activities necessary for the preparation of artistic events such as rehearsals and exercises, phonographic and audiovisual recordings and events transmitted by means of direct distance communication - without the participation of the public.
+    Hotels - with the exception of guests on a business trip, athletes, medical staff as well as patients and their carers.
+    Trade fairs and events - only in the on-line form.
+    Weddings, communions and consoles
+    Theme parks
+    Gyms, fitness clubs and water parks
+    Discos and nightclubs"" UPDATE: On april 28th 2021 it was announced the ending or relaxing of several policies. With that Starting May 15th 2021 Outdoor restaurants may reopen and May 29th 2021 indoor restaurants may reopen",2021-04-28,2021-05-15,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Personal Grooming Businesses (e.g. hair salons),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3oyDA8SrE3Rzk3n ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_3dXSAKUMuiD4qaC,NA ; web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-11,2022-07-11T11:40:47Z
+R_tMz62PF7OPUicIpEuDi,3967679EuDi,update,Change of Policy,Relaxing,Volume of policy relaxing,"Poland 
+May 4th 2021
+
+""Culture - open art galleries and museums :
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime"" UPDATE: Whereas prior the policy was 1 person per 15m2, on May 15th 2021, it will be half occupancy",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Public museums/galleries,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_eVat1VLXoSVFqUC,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:08:10Z
+R_tMz62PF7OPUicIpEuMa,3967679EuMa,update,Change of Policy,Relaxing,Volume of policy relaxing,"Poland 
+May 4th 2021
+
+""Culture - open art galleries and museums :
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime"" UPDATE: Whereas prior the policy was 1 person per 15m2, on May 15th 2021, it will be half occupancy",2021-04-28,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Public museums/galleries,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_eVat1VLXoSVFqUC,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:08:10Z
+R_1KkAfLR5uDT2rgcFl,8546165,update,Change of Policy,Both Strengthening and Relaxing,Volume of policy relaxing ; timing of policy strengthening,"Poland
+November 27th 2020
+
+""
+    Public transport - restrictions on the number of people in public transport:
+
+    50% of the number of seats either
+    30% of the total number of seats and standing positions, while leaving at least 50% of the seats unoccupied in the vehicle.
+"" UPDATE: Whereas prior the total could be 50% seating or 30% seating and standing, as of May 12th 2021, it will be allowed for public transport to seat 100% or a 50/50 split of standing sitting",2021-05-12,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Restrictions on ridership of subways and trams,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2rYrAFUdDrz2ZJQ ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_9Mubgm6Dd4jkA0x,NA ; http://web.archive.org/web/20210513083827/https://www.gov.pl/web/koronawirus/przypominamy-majowy-harmonogram-lagodzenia-obostrzen,2022-07-15,2022-07-15T09:40:48Z
+R_1KkAfLR5uDT2rgcFm,8546165,update,Change of Policy,Both Strengthening and Relaxing,Volume of policy relaxing ; timing of policy strengthening,"Poland
+November 27th 2020
+
+""
+    Public transport - restrictions on the number of people in public transport:
+
+    50% of the number of seats either
+    30% of the total number of seats and standing positions, while leaving at least 50% of the seats unoccupied in the vehicle.
+"" UPDATE: Whereas prior the total could be 50% seating or 30% seating and standing, as of May 12th 2021, it will be allowed for public transport to seat 100% or a 50/50 split of standing sitting",2021-05-12,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Restrictions on ridership of trains,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2rYrAFUdDrz2ZJQ ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_9Mubgm6Dd4jkA0x,NA ; http://web.archive.org/web/20210513083827/https://www.gov.pl/web/koronawirus/przypominamy-majowy-harmonogram-lagodzenia-obostrzen,2022-07-15,2022-07-15T09:40:48Z
+R_1KkAfLR5uDT2rgcFk,8546165,update,Change of Policy,Both Strengthening and Relaxing,Volume of policy relaxing ; timing of policy strengthening,"Poland
+November 27th 2020
+
+""
+    Public transport - restrictions on the number of people in public transport:
+
+    50% of the number of seats either
+    30% of the total number of seats and standing positions, while leaving at least 50% of the seats unoccupied in the vehicle.
+"" UPDATE: Whereas prior the total could be 50% seating or 30% seating and standing, as of May 12th 2021, it will be allowed for public transport to seat 100% or a 50/50 split of standing sitting",2021-05-12,2021-05-15,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Restrictions on ridership of buses,,"",,,,,,"","","","","","","","","","","",,,,"",Yes,Poland,"One or more countries, but not all countries",,,,,,All Residents (Citizen Residents + Foreign Residents),No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_2rYrAFUdDrz2ZJQ ; https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_9Mubgm6Dd4jkA0x,NA ; http://web.archive.org/web/20210513083827/https://www.gov.pl/web/koronawirus/przypominamy-majowy-harmonogram-lagodzenia-obostrzen,2022-07-15,2022-07-15T09:40:48Z
+R_1GTFtOq9WaNqbs9EuDi,3967679EuDi,update,Change of Policy,Relaxing,Volume of policy relaxing,"Poland 
+May 4th 2021
+
+""Culture - open art galleries and museums :
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime"" UPDATE: The policy was originally 50% for culture events on May 15th 2021, on May 29th 2021 it will be 50% for the facility",2021-04-28,2021-05-29,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Public museums/galleries,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1HWnG15mQHyBXHU,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:10:47Z
+R_1GTFtOq9WaNqbs9EuMa,3967679EuMa,update,Change of Policy,Relaxing,Volume of policy relaxing,"Poland 
+May 4th 2021
+
+""Culture - open art galleries and museums :
+
+    limit of 1 person per 15 m2
+    operating in a strict sanitary regime"" UPDATE: The policy was originally 50% for culture events on May 15th 2021, on May 29th 2021 it will be 50% for the facility",2021-04-28,2021-05-29,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Public museums/galleries,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1HWnG15mQHyBXHU,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:10:47Z
+R_1q9YwZXr4JIBhPGEmDi,3345060EmDi,update,End of Policy,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends"" UPDATE: On May 29th 2021 the policy will come to an end...
+
+""Education - primary and secondary schools:
+
+    full-time learning for all students
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-29,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,Teachers,Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1EUvvhphQGf3YcS,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:30:31Z
+R_1q9YwZXr4JIBhPGEmMa,3345060EmMa,update,End of Policy,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends"" UPDATE: On May 29th 2021 the policy will come to an end...
+
+""Education - primary and secondary schools:
+
+    full-time learning for all students
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-29,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Primary Schools (generally for children ages 10 and below),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,Teachers,Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1EUvvhphQGf3YcS,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:30:31Z
+R_1q9YwZXr4JIBhPGFwDi,3345060FwDi,update,End of Policy,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends"" UPDATE: On May 29th 2021 the policy will come to an end...
+
+""Education - primary and secondary schools:
+
+    full-time learning for all students
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-29,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Secondary Schools (generally for children ages 10 to 18),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,Teachers,Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1EUvvhphQGf3YcS,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:30:31Z
+R_1q9YwZXr4JIBhPGFwMa,3345060FwMa,update,End of Policy,,"","Poland
+May 15th 2021
+""Education - primary and secondary schools:
+
+    hybrid learning for grades 4-8 of primary schools
+    hybrid learning for grades 1-4 of secondary schools
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends"" UPDATE: On May 29th 2021 the policy will come to an end...
+
+""Education - primary and secondary schools:
+
+    full-time learning for all students
+    strict sanitary regime: airing the rooms during breaks, disinfecting facilities at weekends""",2021-04-28,2021-05-29,2021-05-29,The policy has a clear end date,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Secondary Schools (generally for children ages 10 to 18),,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,Teachers,Teachers,,,Mandatory with Fines,"National Government,Ministry/Department of Education,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_1EUvvhphQGf3YcS,http://web.archive.org/web/20210428120725/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:30:31Z
+R_1kMNcNHl1jwDFKuFhDi,1737128FhDi,update,Change of Policy,Relaxing,Volume of policy relaxing,"Poland
+May 15th 2021
+
+""Outdoor gastronomy (in the open air) - open restaurant gardens:
+
+    activities in a strict sanitary regime - incl. safe distance between the tables and the limit of people per table"" UPDATE: Whereas on may 4th 2021 it was outdoors only, on May 29th 2021 indoor restaurants may operate at 50% the premises size",2021-04-28,2021-05-29,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Keeping a distance of at least 6 feet or 1.5 meters apart at Restaurants,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_b93h8hiOuCLcGSq,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:44:01Z
+R_1kMNcNHl1jwDFKuFhMa,1737128FhMa,update,Change of Policy,Relaxing,Volume of policy relaxing,"Poland
+May 15th 2021
+
+""Outdoor gastronomy (in the open air) - open restaurant gardens:
+
+    activities in a strict sanitary regime - incl. safe distance between the tables and the limit of people per table"" UPDATE: Whereas on may 4th 2021 it was outdoors only, on May 29th 2021 indoor restaurants may operate at 50% the premises size",2021-04-28,2021-05-29,,The policy’s end date is unknown or unreported,Poland,POL,PL,National,1,,,,Social Distancing,Wearing Masks inside Restaurants,,"",,,,,,"","","","","","","","","","","",,,,,Yes,Poland,"One or more countries, but not all countries",,,,,,"",No special population targeted,,,Mandatory with Fines,"National Government,Police",,,,,https://tummgmt.eu.qualtrics.com/Q/File.php?F=F_b93h8hiOuCLcGSq,http://web.archive.org/web/20210430084117/https://www.gov.pl/web/koronawirus/w-maju-lagodniejsze-zasady-bezpieczenstwa--jesli-utrzyma-sie-niski-wskaznik-zakazen-sprawdz-harmonogram-zmian,2022-07-13,2022-07-13T11:44:01Z
