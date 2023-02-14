@@ -55,7 +55,7 @@ library(readr)
 library(here)
 library(lubridate)
 library(googlesheets4)
-
+library(data.table)
 
 capwords <- function(s, strict = FALSE) {
   cap <- function(s) paste(toupper(substring(s, 1, 1)),
@@ -81,7 +81,7 @@ greedyAssign <- function(a,b,d){
 
  
 
-library(data.table)
+
 # ----------------------------------
 # 0) load data data 
 # ----------------------------------
